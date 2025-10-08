@@ -2,9 +2,15 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./accessibility.css";
+
 import Navbar from "@/components/navbar";
 import NavbarMobile from "@/components/navbar-mb";
 import Footer from "@/components/footer";
+import { AccessibilityProvider } from "@/contexts/AccessibilityContext";
+import AccessibilityWidget from "@/components/shared/AccessibilityWidget";
+import ColorBlindnessFilters from "@/components/ColorBlindnessFilters";
+import CookiesBanner from "@/components/shared/CookiesBanner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,9 +49,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSansHebrew.variable} antialiased`}
       >
-        <NavbarMobile />
-        <Navbar />
-        {children}
+        <AccessibilityProvider>
+          <ColorBlindnessFilters />
+          <NavbarMobile />
+          <Navbar />
+          {children}
+          <CookiesBanner/>
+          <AccessibilityWidget />
+        </AccessibilityProvider>
         <Footer />
       </body>
     </html>

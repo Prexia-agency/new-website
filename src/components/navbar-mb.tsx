@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { HyperText } from '@/components/magicui/hyper-text';
 
 export default function NavbarMobile() {
   return (
@@ -25,29 +24,15 @@ export default function NavbarMobile() {
           <div className="flex items-center gap-5">
             <Link 
               href="/"
-              className="text-gray-800 hover:text-gray-600 transition-colors duration-200"
+              className="text-gray-800 hover:text-gray-600 transition-colors duration-200 font-medium text-[10px]"
             >
-              <HyperText
-                className="font-medium text-[10px] py-0"
-                duration={600}
-                animateOnHover={true}
-                as="span"
-              >
-                בית
-              </HyperText>
+              בית
             </Link>
             <Link 
               href="/pricing"
-              className="text-gray-800 hover:text-gray-600 transition-colors duration-200"
+              className="text-gray-800 hover:text-gray-600 transition-colors duration-200 font-medium text-[10px]"
             >
-              <HyperText
-                className="font-medium text-[10px] py-0"
-                duration={600}
-                animateOnHover={true}
-                as="span"
-              >
-                מחירון
-              </HyperText>
+              מחירון
             </Link>
           </div>
 
@@ -56,14 +41,9 @@ export default function NavbarMobile() {
             href="/contact"
             className="bg-gray-900 hover:bg-gray-800 text-white px-4 py-0.5 rounded-full font-medium text-[10px] transition-all duration-200 hover:shadow-lg hover:scale-105 flex items-center gap-3"
           >
-            <HyperText
-              className="font-medium text-[9px] py-0 text-white"
-              duration={600}
-              animateOnHover={true}
-              as="span"
-            >
+            <span className="font-medium text-[9px] text-white">
               צור קשר
-            </HyperText>
+            </span>
             <svg
               width="12"
               height="12"

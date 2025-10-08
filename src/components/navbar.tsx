@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { HyperText } from '@/components/magicui/hyper-text';
 
 export default function Navbar() {
   return (
@@ -25,45 +24,26 @@ export default function Navbar() {
           <div className="flex items-center gap-8">
             <Link 
               href="/"
-              className="text-gray-800 hover:text-gray-600 transition-colors duration-200"
+              className="text-gray-800 hover:text-gray-600 transition-colors duration-200 font-medium text-sm"
             >
-              <HyperText
-                className="font-medium text-sm py-0"
-                duration={600}
-                animateOnHover={true}
-                as="span"
-              >
-                עמוד הבית
-              </HyperText>
+              עמוד הבית
             </Link>
             <Link 
               href="/pricing"
-              className="text-gray-800 hover:text-gray-600 transition-colors duration-200"
+              className="text-gray-800 hover:text-gray-600 transition-colors duration-200 font-medium text-sm"
             >
-              <HyperText
-                className="font-medium text-sm py-0"
-                duration={600}
-                animateOnHover={true}
-                as="span"
-              >
-                המחירון שלנו
-              </HyperText>
+              המחירון שלנו
             </Link>
           </div>
 
           {/* Contact Button */}
           <Link
             href="/contact"
-            className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-1 rounded-full font-medium text-sm transition-all duration-200 hover:shadow-xl flex items-center gap-2"
+            className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-3 rounded-full font-medium text-sm transition-all duration-200 hover:shadow-xl flex items-center gap-2"
           >
-            <HyperText
-              className="font-medium text-xs text-white"
-              duration={600}
-              animateOnHover={true}
-              as="span"
-            >
+            <span className="font-medium text-xs text-white">
               דבר איתנו
-            </HyperText>
+            </span>
             <svg
               width="16"
               height="16"

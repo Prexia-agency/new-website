@@ -5,6 +5,7 @@ import SecondSectionMobile from "@/components/second-section-mobile";
 import Stack from "@/components/stack";
 import BentoGrid from "@/components/bento-grid";
 import Sites from "@/components/sites";
+import Portfolio from "@/components/portfolio";
 import FAQ from "@/components/faq";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <SecondSectionMobile />
       <SecondSection />
       <Sites />
+      <Portfolio />
       <FAQ/>
     </div>
   );

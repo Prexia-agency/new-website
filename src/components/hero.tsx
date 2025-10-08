@@ -9,8 +9,17 @@ import Link from 'next/link';
 import TitleAnimation from '@/components/shared/title-animation';
 
 const titleItems = [
-  { value: 'בניית' },
-  { value: 'אתרים', className: 'gradient-text' },
+  { 
+    value: 'בניית',
+    useWordRotate: true,
+    rotateWords: ['בניית', 'מיתוג', 'עיצוב'],
+    rotateDuration: 3000
+  },
+  { 
+    value: 'אתרים', 
+    useAurora: true,
+    auroraColors: ['#FF6A00', '#FF00A8', '#8B00FF', '#007BFF', '#00D4FF']
+  },
   { value: 'לעסקים' },
   { value: '–' },
   { value: 'שמוכרים' },
@@ -69,12 +78,12 @@ export default function Hero() {
         <div className="flex flex-row-reverse gap-4" dir="rtl">
           <Link 
             href="/contact"
-            className="bg-white hover:bg-gray-100 text-black px-6 py-3 rounded-full font-bold text-md transition-all duration-200 hover:shadow-xl flex items-center gap-2"
+            className="bg-white hover:bg-gray-100 text-black px-6 py-2 rounded-full font-bold text-[14px] transition-all duration-200 hover:shadow-xl flex items-center gap-2"
           >
             בוא נתחיל
             <svg
-              width="20"
-              height="20"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -88,7 +97,7 @@ export default function Hero() {
           </Link>
           <Link 
             href="/pricing"
-            className="bg-transparent hover:bg-white/10 text-white border-2 border-white px-8 py-3 rounded-full font-semibold text-md transition-all duration-200 hover:shadow-xl"
+            className="bg-transparent hover:bg-white/10 text-white border-2 border-white px-5 py-3 rounded-full font-semibold text-[14px] transition-all duration-200 hover:shadow-xl"
           >
             המחירים
           </Link>

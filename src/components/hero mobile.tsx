@@ -9,8 +9,17 @@ import Link from 'next/link';
 import TitleAnimation from '@/components/shared/title-animation';
 
 const titleItems = [
-  { value: 'בניית' },
-  { value: 'אתרים', className: 'gradient-text' },
+  { 
+    value: 'בניית',
+    useWordRotate: true,
+    rotateWords: ['בניית', 'מיתוג', 'עיצוב'],
+    rotateDuration: 3000
+  },
+  { 
+    value: 'אתרים', 
+    useAurora: true,
+    auroraColors: ['#FF6A00', '#FF00A8', '#8B00FF', '#007BFF', '#00D4FF']
+  },
   { value: 'לעסקים' },
   { value: 'שמוכרים' },
   { value: 'באמת' },
