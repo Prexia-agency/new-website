@@ -54,15 +54,21 @@ const items = [
   },
 ];
 
-const SiteItem = ({ icon: Icon, title, description }: { icon: any, title: string, description: string }) => {
-  const iconRef = useRef<any>(null);
+type IconComponent = React.ForwardRefExoticComponent<React.RefAttributes<{ playHoverAnimation?: () => void; playLeaveAnimation?: () => void }>>;
+
+const SiteItem = ({ icon: Icon, title, description }: { icon: IconComponent, title: string, description: string }) => {
+  const iconRef = useRef<{ playHoverAnimation?: () => void; playLeaveAnimation?: () => void }>(null);
 
   const handleMouseEnter = () => {
-    iconRef.current?.playHoverAnimation();
+    if (iconRef.current?.playHoverAnimation) {
+      iconRef.current.playHoverAnimation();
+    }
   };
 
   const handleMouseLeave = () => {
-    iconRef.current?.playLeaveAnimation();
+    if (iconRef.current?.playLeaveAnimation) {
+      iconRef.current.playLeaveAnimation();
+    }
   };
 
   return (

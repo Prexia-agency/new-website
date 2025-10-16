@@ -26,8 +26,8 @@ import { isAnalyticsEnabled } from './cookieConsent';
 
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
-    dataLayer?: any[];
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
   }
 }
 
@@ -49,8 +49,8 @@ export const useGoogleAnalytics = (measurementId: string) => {
     window.dataLayer = window.dataLayer || [];
     
     // Define gtag function
-    window.gtag = function gtag() {
-      window.dataLayer?.push(arguments);
+    window.gtag = function gtag(...args: unknown[]) {
+      window.dataLayer?.push(args);
     };
 
     // Set initial timestamp
@@ -102,7 +102,7 @@ export const useGoogleAnalytics = (measurementId: string) => {
  * Track a custom event in Google Analytics
  * This will only track if analytics is enabled
  */
-export const trackEvent = (eventName: string, eventParams?: Record<string, any>) => {
+export const trackEvent = (eventName: string, eventParams?: Record<string, unknown>) => {
   if (!isAnalyticsEnabled()) {
     console.log('[GA] Event tracking skipped - analytics disabled');
     return;
