@@ -28,8 +28,8 @@ const notoSansHebrew = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "AK Agency",
-  description: "Digital marketing agency specializing in innovative solutions",
+  title: "סוכנות אתרים",
+  description: "סוכנות אתרים בונה ומעצבת אתרים שמותאמים לצרכים של העסק שלך עם עיצוב מקצועי, חווית משתמש מתקדמת ו - SEO שמביא תוצאות",
 };
 
 export const viewport = {

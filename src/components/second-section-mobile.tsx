@@ -50,7 +50,7 @@ export default function SecondSectionMobile() {
               alt="iPhone 14 Pro Max showcase"
               width={250}
               height={500}
-              className="w-full max-w-xs h-70"
+              className="w-[180px] sm:w-[220px] h-auto"
               priority
             />
             {/* Animation overlay positioned on the iPhone screen */}
@@ -71,7 +71,7 @@ export default function SecondSectionMobile() {
               alt="iPad Pro showcase"
               width={300}
               height={200}
-              className="w-full max-w-sm h-70"
+              className="w-[230px] sm:w-[270px] h-auto"
               priority
             />
             {/* Animation overlay positioned on the iPad screen */}
@@ -92,7 +92,7 @@ export default function SecondSectionMobile() {
               alt="Laptop showcase"
               width={250}
               height={100}
-              className="w-full max-w-md h-45"
+              className="w-[260px] sm:w-[300px] h-auto"
               priority
             />
             {/* Animation overlay positioned on the laptop screen */}

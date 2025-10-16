@@ -60,7 +60,7 @@ export default function HeroMobile() {
           controls={titleControls}
         />
         <motion.p
-          className="text-[11px] sm:text-base md:text-lg text-white/95 mb-3 max-w-xs sm:max-w-sm md:max-w-lg leading-relaxed font-normal"
+          className="text-[12px] sm:text-base md:text-lg text-white/95 mb-3 max-w-xs sm:max-w-sm md:max-w-lg leading-relaxed font-normal"
           initial="initial"
           animate={descriptionControls}
           variants={descriptionVariants}
@@ -91,7 +91,7 @@ export default function HeroMobile() {
           </Link>
           <Link 
             href="/pricing"
-            className="bg-transparent hover:bg-white/20 text-white border-2 border-white px-3 py-1.5 rounded-[12px] font-semibold text-[11px] transition-all duration-200 hover:shadow-xl"
+            className="bg-transparent hover:bg-white/20 text-white border-2 border-white px-4 py-2 rounded-[12px] font-semibold text-[11px] transition-all duration-200 hover:shadow-xl"
           >
             המחירים
           </Link>
