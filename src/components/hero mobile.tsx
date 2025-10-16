@@ -70,13 +70,13 @@ export default function HeroMobile() {
           variants={descriptionVariants}
           dir="rtl"
         >
-          אנחנו בונים ומעצבים אתרים שמותאמים בדיוק לצרכים של העסק שלך – עם עיצוב מקצועי, חוויית משתמש מתקדמת ו־SEO שמביא תוצאות
+          אנחנו בסוכנות אתרים בונים ומעצבים אתרים שמותאמים בדיוק לצרכים של העסק שלך עם עיצוב מקצועי, חוויית משתמש מתקדמת ו- SEO שמביא תוצאות
         </motion.p>
          {/* Hero Buttons */}
         <div className="flex flex-row-reverse gap-4" dir="rtl">
           <Link 
             href="/contact"
-            className="bg-white hover:bg-gray-400 text-black px-3 py-1.5 rounded-full font-bold text-[11px] transition-all duration-200 hover:shadow-xl flex items-center gap-1"
+            className="bg-white hover:bg-white/90 text-black px-3 py-1.5 rounded-[12px] font-bold text-[11px] transition-all duration-200 hover:shadow-xl flex items-center gap-1"
           >
             בוא נתחיל
             <svg
@@ -95,7 +95,7 @@ export default function HeroMobile() {
           </Link>
           <Link 
             href="/pricing"
-            className="bg-transparent hover:bg-white/10 text-white border-2 border-white px-3 py-1.5 rounded-full font-semibold text-[11px] transition-all duration-200 hover:shadow-xl"
+            className="bg-transparent hover:bg-white/20 text-white border-2 border-white px-3 py-1.5 rounded-[12px] font-semibold text-[11px] transition-all duration-200 hover:shadow-xl"
           >
             המחירים
           </Link>

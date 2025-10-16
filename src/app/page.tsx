@@ -7,10 +7,12 @@ import BentoGrid from "@/components/bento-grid";
 import Sites from "@/components/sites";
 import Portfolio from "@/components/portfolio";
 import FAQ from "@/components/faq";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 export default function Home() {
   return (
     <div className="overflow-x-hidden">
+      <GoogleAnalytics />
       <HeroMobile />
       <Hero />
        <Stack />

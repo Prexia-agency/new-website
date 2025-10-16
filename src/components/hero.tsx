@@ -21,7 +21,6 @@ const titleItems = [
     auroraColors: ['#FF6A00', '#FF00A8', '#8B00FF', '#007BFF', '#00D4FF']
   },
   { value: 'לעסקים' },
-  { value: '–' },
   { value: 'שמוכרים' },
   { value: 'באמת' },
 ];
@@ -71,14 +70,14 @@ export default function Hero() {
           variants={descriptionVariants}
           dir="rtl"
         >
-          אנחנו בונים ומעצבים אתרים שמותאמים בדיוק לצרכים של העסק שלך – עם עיצוב מקצועי, חוויית משתמש מתקדמת ו־SEO שמביא תוצאות
+          אנחנו בסוכנות אתרים בונים ומעצבים אתרים שמותאמים בדיוק לצרכים של העסק שלך עם עיצוב מקצועי, חוויית משתמש מתקדמת ו- SEO שמביא תוצאות
         </motion.p>
         
         {/* Hero Buttons */}
         <div className="flex flex-row-reverse gap-4" dir="rtl">
           <Link 
             href="/contact"
-            className="bg-white hover:bg-gray-100 text-black px-6 py-2 rounded-full font-bold text-[14px] transition-all duration-200 hover:shadow-xl flex items-center gap-2"
+            className="bg-white hover:bg-gray-100 text-black px-6 py-2 rounded-[12px] font-bold text-[14px] transition-all duration-200 hover:shadow-xl flex items-center gap-2"
           >
             בוא נתחיל
             <svg
@@ -97,7 +96,7 @@ export default function Hero() {
           </Link>
           <Link 
             href="/pricing"
-            className="bg-transparent hover:bg-white/10 text-white border-2 border-white px-5 py-3 rounded-full font-semibold text-[14px] transition-all duration-200 hover:shadow-xl"
+            className="bg-transparent hover:bg-white/10 text-white border-2 border-white px-5 py-3 rounded-[14px] font-semibold text-[14px] transition-all duration-200 hover:shadow-xl"
           >
             המחירים
           </Link>

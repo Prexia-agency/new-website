@@ -2,12 +2,20 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import Ballpit from '@/components/ballpit';
+import CookiePreferencesModal from '@/components/shared/CookiePreferencesModal';
 
 export default function Footer() {
+  const [showCookieModal, setShowCookieModal] = useState(false);
+
   return (
-    <footer className="relative bg-black/90 text-white py-16 lg:py-12 sm:py-10 overflow-hidden rounded-t-4xl" dir="rtl">
+    <>
+      <CookiePreferencesModal 
+        isOpen={showCookieModal} 
+        onClose={() => setShowCookieModal(false)} 
+      />
+      <footer className="relative bg-black/90 text-white py-16 lg:py-12 sm:py-10 overflow-hidden rounded-t-4xl" dir="rtl">
       {/* Ballpit Animation Background */}
       <div className="absolute inset-0 opacity-30">
         <Ballpit 
@@ -37,20 +45,6 @@ export default function Footer() {
             <p className="text-sm text-gray-300 leading-relaxed mb-6 max-w-md lg:text-base">
               אנחנו בונים ומעצבים אתרים שמותאמים בדיוק לצרכים של העסק שלך – עם עיצוב מקצועי, חוויית משתמש מתקדמת ו־SEO שמביא תוצאות
             </p>
-            <div className="flex gap-4">
-              <Link 
-                href="/contact"
-                className="bg-white hover:bg-gray-100 text-black px-4 py-2 rounded-full font-bold text-xs transition-all duration-200 hover:shadow-xl lg:px-6 lg:py-3 lg:text-sm"
-              >
-                בוא נתחיל
-              </Link>
-              <Link 
-                href="/pricing"
-                className="bg-transparent hover:bg-white/10 text-white border-2 border-white px-4 py-2 rounded-full font-semibold text-xs transition-all duration-200 hover:shadow-xl lg:px-6 lg:py-3 lg:text-sm"
-              >
-                המחירים
-              </Link>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -67,11 +61,6 @@ export default function Footer() {
               <li>
                 <Link href="/pricing" className="text-sm text-gray-300 hover:text-white transition-colors duration-200 lg:text-base">
                   המחירים שלנו
-                </Link>
-              </li>
-              <li>
-                <Link href="/portfolio" className="text-sm text-gray-300 hover:text-white transition-colors duration-200 lg:text-base">
-                  פורטפוליו
                 </Link>
               </li>
               <li>
@@ -92,8 +81,8 @@ export default function Footer() {
                 <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <a href="mailto:info@akagency.co.il" className="text-sm text-gray-300 hover:text-white transition-colors duration-200 lg:text-base">
-                  info@akagency.co.il
+                <a href="mailto:contact@atarym.com" className="text-sm text-gray-300 hover:text-white transition-colors duration-200 lg:text-base">
+                  contact@atarym.com
                 </a>
               </div>
               <div className="flex items-center gap-3">
@@ -141,21 +130,25 @@ export default function Footer() {
         {/* Bottom Section */}
         <div className="border-t border-white/70 mt-12 pt-8 flex flex-col lg:flex-row justify-between items-center gap-4">
           <div className="text-white/70 text-xs lg:text-sm">
-            © 2024 AK Agency. כל הזכויות שמורות.
+            כל הזכויות שמורות לסוכנות אתרים 2025 © 
           </div>
           <div className="flex gap-4 text-xs lg:gap-6 lg:text-sm">
-            <Link href="/privacy" className="text-white/70 hover:text-white transition-colors duration-200">
+            <Link href="/privacy" className="text-white/80 hover:underline transition-colors duration-200">
               מדיניות פרטיות
             </Link>
-            <Link href="/terms" className="text-white/70 hover:text-white transition-colors duration-200">
+            <Link href="/terms" className="text-white/80 hover:underline transition-colors duration-200">
               תנאי שימוש
             </Link>
-            <Link href="/cookies" className="text-white/70 hover:text-white transition-colors duration-200">
-              מדיניות עוגיות
-            </Link>
+            <button 
+              onClick={() => setShowCookieModal(true)}
+              className="text-white/80 hover:underline transition-colors duration-200"
+            >
+              הגדרות עוגיות
+            </button>
           </div>
         </div>
       </div>
     </footer>
+    </>
   );
 }

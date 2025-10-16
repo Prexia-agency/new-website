@@ -6,6 +6,7 @@ import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
 
 import TitleAnimation from '@/components/shared/title-animation';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 const titleItems = [
   { value: 'בואו' },
@@ -43,6 +44,7 @@ export default function ContactPage() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   useEffect(() => {
     if (isContentInView) {
@@ -73,6 +75,7 @@ export default function ContactPage() {
         message: '',
         projectType: ''
       });
+      setAcceptedTerms(false);
     }, 2000);
   };
 
@@ -80,6 +83,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen pt-20 pb-12 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16" style={{ backgroundColor: '#F8F8FF' }}>
+      <GoogleAnalytics />
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header Section */}
         <div className="text-center mb-8 sm:mb-10 lg:mb-12" ref={contentRef} dir="rtl">
@@ -110,7 +114,7 @@ export default function ContactPage() {
             variants={formVariants}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 xl:p-10 border border-gray-100">
+            <div className="bg-white rounded-[24px] shadow-lg p-4 sm:p-6 lg:p-8 xl:p-10 border-1 border-gray-100">
               <h2 className="text-lg font-bold font-noto-hebrew text-gray-900 mb-4 sm:text-xl lg:text-2xl">
                 ספרו לנו על הפרויקט שלכם
               </h2>
@@ -128,7 +132,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-[16px] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
                       placeholder="השם שלכם"
                     />
                   </div>
@@ -142,7 +146,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-[16px] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -159,7 +163,7 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-[16px] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
                       placeholder="050-123-4567"
                     />
                   </div>
@@ -172,7 +176,7 @@ export default function ContactPage() {
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-[16px] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
                       placeholder="שם העסק או החברה"
                     />
                   </div>
@@ -187,7 +191,7 @@ export default function ContactPage() {
                     name="projectType"
                     value={formData.projectType}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-[16px] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
                   >
                     <option value="">בחרו סוג פרויקט</option>
                     <option value="basic">חבילת בסיס - אתר תדמית פשוט</option>
@@ -208,17 +212,39 @@ export default function ContactPage() {
                     onChange={handleInputChange}
                     required
                     rows={5}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none text-[11px] sm:text-sm sm:px-4 sm:py-3"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-[16px] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none text-[11px] sm:text-sm sm:px-4 sm:py-3"
                     placeholder="תארו את הפרויקט שלכם, מטרות, דרישות מיוחדות ולוח זמנים רצוי..."
                   />
+                </div>
+
+                {/* Terms and Privacy Checkbox */}
+                <div className="flex items-start gap-3">
+                  <input
+                    type="checkbox"
+                    id="acceptTerms"
+                    checked={acceptedTerms}
+                    onChange={(e) => setAcceptedTerms(e.target.checked)}
+                    required
+                    className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
+                  />
+                  <label htmlFor="acceptTerms" className="text-[11px] sm:text-sm text-gray-700 leading-relaxed cursor-pointer">
+                    בשליחת ההודעה אני מאשר/ת שקראתי והבנתי את{' '}
+                    <Link href="/privacy" className="text-blue-600 hover:text-blue-800 underline font-medium">
+                      מדיניות הפרטיות
+                    </Link>
+                    {' '}ואת{' '}
+                    <Link href="/terms" className="text-blue-600 hover:text-blue-800 underline font-medium">
+                      תנאי השימוש
+                    </Link>
+                  </label>
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full gradient-bg text-white px-4 py-2 rounded-xl font-bold text-sm transition-all duration-300 shadow-lg hover:shadow-xl sm:px-6 sm:py-3 sm:text-base lg:px-8 lg:py-4 lg:text-lg ${
-                    isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:opacity-90'
+                  disabled={isSubmitting || !acceptedTerms}
+                  className={`w-full gradient-bg text-white px-4 py-2 rounded-[8.5px] font-semibold text-[14px] transition-all duration-300 shadow-lg hover:shadow-xl sm:px-4 sm:py-2.5 sm:text-[19px] ${
+                    isSubmitting || !acceptedTerms ? 'opacity-40 cursor-not-allowed' : 'hover:opacity-90'
                   }`}
                 >
                   {isSubmitting ? 'שולח...' : 'שלחו הודעה'}

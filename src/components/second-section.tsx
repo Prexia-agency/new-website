@@ -48,13 +48,13 @@ export default function SecondSection() {
             <Image
               src="/images/Device 14PM.png"
               alt="iPhone 14 Pro Max showcase"
-              width={250}
-              height={500}
-              className="w-full max-w-xs h-70"
+              width={200}
+              height={450}
+              className="w-full max-w-xs h-70 pt-10"
               priority
             />
             {/* Animation overlay positioned on the iPhone screen */}
-            <div className="absolute inset-0 flex items-center justify-center" style={{
+            <div className="absolute inset-0 flex items-center justify-center pt-10 pl-1" style={{
               top: '20%',
               left: '20%', 
               right: '20%',

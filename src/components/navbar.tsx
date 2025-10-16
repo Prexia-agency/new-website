@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import DrawLink from './DrawLink';
 
 export default function Navbar() {
   return (
@@ -7,7 +8,7 @@ export default function Navbar() {
       className="hidden lg:block fixed top-6 left-1/2 transform -translate-x-1/2 z-50"
       dir="rtl"
     >
-      <div className="bg-white/95 backdrop-blur-md rounded-full border border-gray-300/90 shadow-lg px-6 py-1">
+      <div className="bg-white/95 backdrop-blur-md rounded-full border border-gray-300/90 shadow-lg px-2 py-0">
         <div className="flex items-center justify-between gap-8">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
@@ -22,18 +23,18 @@ export default function Navbar() {
 
           {/* Navigation Links */}
           <div className="flex items-center gap-8">
-            <Link 
+            <DrawLink 
               href="/"
               className="text-gray-800 hover:text-gray-600 transition-colors duration-200 font-medium text-sm"
             >
               עמוד הבית
-            </Link>
-            <Link 
+            </DrawLink>
+            <DrawLink 
               href="/pricing"
               className="text-gray-800 hover:text-gray-600 transition-colors duration-200 font-medium text-sm"
             >
               המחירון שלנו
-            </Link>
+            </DrawLink>
           </div>
 
           {/* Contact Button */}

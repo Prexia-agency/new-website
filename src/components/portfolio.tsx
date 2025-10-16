@@ -13,22 +13,20 @@ export default function Portfolio() {
   const portfolioItems = [
     {
       id: 1,
-      title: "קיניגמאה מולטי אתר תדמית",
-      description: "תיאור הפרויקט הראשון",
+      title: "קיניגמאה אתר תדמית",
+      description: "החברה עוסקת בייצוא ביטחוני ברמה בינלאומית, תוך עמידה מלאה ברגולציות ובאישורי הייצוא של משרד הביטחון הישראלי. במסגרת פעילותה, פיתחנו עבורה מיתוג מקיף מאפס ויצרנו אתר יוקרתי ומורכב שכלל למעלה מעשרה עמודים, מיני-אינטראקציות, אלמנטים תלת-ממדיים אינטראקטיביים ושילובים מדויקים של גוונים שונים של זהב. האתגר המשמעותי ביותר היה בצד השרת, שם נדרשנו להקים מערכת חסימת גישה למדינות שאינן עומדות בתקנות הייצוא הביטחוני" ,
       image: "/images/P-KINIGMA.png"
     },
     {
       id: 2,
-      title: "פרויקט 2",
-      description: "תיאור הפרויקט השני",
-      image: "/placeholder-image.jpg"
+      title: " EvidenceLine אתר תדמית",
+      description: "חברת EVIDENCELINE מתמחה במתן חוות דעת מקצועיות בתיקים אזרחיים באמצעות צוותי מומחים בעלי ניסיון רב בתחומם. עבור החברה פיתחנו אתר תדמיתי המשדר אמינות, מומחיות וסמכות מקצועית, עם דגש על חוויית משתמש נקייה וברורה שמאפשרת ללקוחות להכיר את צוות המומחים וליצור קשר ישיר לקבלת ייעוץ." ,      image: "/images/ED.png"
     },
     {
       id: 3,
-      title: "פרויקט 3",
-      description: "תיאור הפרויקט השלישי",
-      image: "/placeholder-image.jpg"
-    },
+      title: "הגן של שגית - אתר תדמית, הרשמה וניהול",
+      description: "גן מפעיל אתר תדמיתי ייחודי הכולל בנוסף גם מערכת הרשמה באתר להורים דרך טופס רישום, מיד לאחר שהורה ממלא את הטופס, כל הנתונים נשמרים אוטומטית ומופיעים ישירות בטבלת Airtable של הגן, שם הגננת יכולה לראות ולעדכן את כל הנרשמים בזמן אמת. בנוסף, פותחה מערכת קישורים ייחודיים – כל הורה מקבל מהגננת לינק אישי, ורק באמצעותו ניתן להתחיל את תהליך הרישום באתר, מה שמבטיח בקרה מלאה על הגישה וההרשמה.",
+      image: "/images/sagit.png"    },
     {
       id: 4,
       title: "פרויקט 4",
@@ -60,28 +58,28 @@ export default function Portfolio() {
                     <div className="relative flex h-fit w-full max-w-2xl flex-col gap-2 overflow-hidden rounded-lg border p-4 backdrop-blur-md bg-white">
                       {/* Header Section */}
                       <div className="flex flex-row justify-between tracking-tight">
-                        <div className="text-sm text-gray-500">פרויקט חדש</div>
+                        <div className="text-[10px] md:text-sm text-gray-500">פרויקט חדש</div>
                         <div className="flex items-center space-x-2 space-x-reverse">
                           <div className="text-right">
-                            <div className="flex items-center font-semibold whitespace-nowrap">
-                              AK Agency
+                            <div className="flex items-center text-xs md:text-base font-semibold whitespace-nowrap">
+                              סוכנות אתרים
                             </div>
                             <div className="flex items-center space-x-1">
-                              <span className="text-sm text-gray-500">@akagency</span>
+                              <span className="text-[10px] md:text-sm text-gray-500">סוכנות_אתרים@</span>
                             </div>
                           </div>
                           <img
                             src="/images/LOGO-AK.png"
                             alt="AK Agency Logo"
-                            className="w-12 h-12 rounded-full object-cover"
+                            className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover"
                           />
                         </div>
                       </div>
 
                       {/* Project Title */}
                       <div className="leading-normal tracking-tighter break-words">
-                        <h3 className="text-lg font-semibold mb-2 text-right">{item.title}</h3>
-                        <p className="text-sm text-gray-600 text-right">{item.description}</p>
+                        <h3 className="gradient-text text-sm md:text-lg font-semibold text- mb-2 text-right pr-2">{item.title}</h3>
+                        <p className="text-[11px] md:text-base text-gray-900 font-normal font-noto-hebrew text-right pr-3 pl-3 pb-3">{item.description}</p>
                       </div>
 
                       {/* Project Image */}
@@ -89,7 +87,7 @@ export default function Portfolio() {
                         <img
                           src={item.image}
                           alt={item.title}
-                          className="w-full aspect-video rounded-xl border shadow-sm object-cover"
+                          className="w-full max-h-[420px] rounded-xl border shadow-sm object-contain"
                         />
                       </div>
                     </div>

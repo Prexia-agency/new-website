@@ -6,6 +6,8 @@ import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
 
 import TitleAnimation from '@/components/shared/title-animation';
+import AnimatedCalculator from '@/components/AnimatedCalculator';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 const titleItems = [
   { value: 'מחירון' },
@@ -27,7 +29,7 @@ const pricingData = [
       'הטמעה וזמינות למשך שנה',
       'תמיכה טכנית למשך 3 חודשים'
     ],
-    price: '6,000–4,000 ₪',
+    price: '10,000 - 6,000 ₪',
     period: 'פרויקט מלא',
     popular: false
   },
@@ -46,26 +48,26 @@ const pricingData = [
       'אופטימיזציה לביצועים',
       'תמיכה בתוספת תשלום'
     ],
-    price: '2,800–5,000 ₪',
+    price: '30,000 - 10,000 ₪',
     period: 'לדף',
     popular: true
   },
   {
     id: 3,
-    title: 'פרויקטים מורכבים',
+    title: 'פרויקטים מורכבים + מיתוג',
     subtitle: 'אינטגרציות ופיתוח מתקדם',
     description: 'פתרונות טכנולוגיים מתקדמים למערכות עסקיות מורכבות',
     features: [
       'חיבור ל-API חיצוניים',
       'אינטגרציות CRM ומערכות תשלום',
-      'דאטה בזמן אמת',
+      'מיתוג ושיווק מאפס כולל יצירת לוגו ותוכן שיווקי',
       'עיצובי תלת־ממד חדשניים',
       'אופטימיזציה מורכבת',
       'תסריטים של Spline/React Three Fiber',
       'מערכות ניהול מותאמות',
       'תמיכה ותחזוקה מלאה'
     ],
-    price: '8,000–35,000 ₪',
+    price: '80,000 - 30,000 ₪',
     period: 'לדף',
     popular: false
   }
@@ -95,18 +97,22 @@ export default function PricingPage() {
 
   return (
     <div className="min-h-screen pt-32 pb-30 lg:pt-30 lg:pb-36 sm:pt-24 sm:pb-12" style={{ backgroundColor: '#F8F8FF' }}>
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      <GoogleAnalytics />
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header Section */}
-        <div className="text-center mb-16 lg:mb-12 sm:mb-10" ref={contentRef} dir="rtl">
-          <TitleAnimation
-            tag="h1"
-            className=" text-3xl sm:text-4xl md:text-5xl font-bold font-noto-hebrew text-gray-900 mb-6"
-            items={titleItems}
-            animationName="second"
-            controls={titleControls}
-          />
+        <div className="text-center mb-16 lg:mb-6 sm:mb-10" ref={contentRef} dir="rtl">
+          <div className="flex flex-col items-center justify-center gap-6 mb-6">
+            <AnimatedCalculator />
+            <TitleAnimation
+              tag="h1"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold font-noto-hebrew text-gray-900"
+              items={titleItems}
+              animationName="second"
+              controls={titleControls}
+            />
+          </div>
           <motion.p
-            className="text-[11px] text-gray-700 max-w-3xl mx-auto leading-relaxed lg:text-base sm:text-sm"
+            className="text-[11px] pb-8 text-gray-700 max-w-3xl mx-auto leading-relaxed lg:text-base sm:text-sm"
             initial="initial"
             animate={descriptionControls}
             variants={descriptionVariants}
@@ -120,7 +126,7 @@ export default function PricingPage() {
           {pricingData.map((plan, index) => (
             <motion.div
               key={plan.id}
-              className={`relative bg-white rounded-2xl shadow-lg transition-all duration-300 p-4 sm:p-6 lg:p-8 border-2 min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] flex flex-col ${
+              className={`relative bg-white rounded-[24px] shadow-lg transition-all duration-300 p-4 sm:p-6 lg:p-8 border-2 min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] flex flex-col ${
                 plan.popular ? 'border-blue-500 ring-2 ring-blue-100' : 'border-gray-200 hover:border-gray-300'
               }`}
               initial="initial"
@@ -185,13 +191,32 @@ export default function PricingPage() {
               {/* CTA Button */}
               <Link 
                 href="/contact"
-                className={`w-full px-4 py-3 rounded-xl font-bold text-[12px] transition-all duration-300 text-center block sm:px-6 sm:py-4 sm:text-sm ${
+                className={`w-full px-4 py-1.5 rounded-[8.5px] font-semibold text-[13px] transition-all duration-300 text-center block sm:px-4 sm:py-2.5 sm:text-[15px] group ${
                   plan.popular 
-                    ? 'gradient-bg text-white shadow-lg hover:shadow-xl opacity-95 hover:opacity-60' 
-                    : 'bg-black hover:bg-gray-700 text-white hover:shadow-lg'
+                    ? 'gradient-bg text-white shadow-lg hover:shadow-xl opacity-95 hover:opacity-90' 
+                    : 'bg-black text-white hover:shadow-lg'
                 }`}
               >
-                {plan.popular ? 'בואו נתחיל' : 'בואו נתחיל'}
+                <span className="flex items-center justify-center gap-2">
+                  <span>{plan.popular ? 'בואו נתחיל' : 'בואו נתחיל'}</span>
+                  <svg 
+                    className="w-5 h-5 sm:w-6 sm:h-6" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    strokeWidth={2.5}
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  >
+                    {/* Chevron/Triangle - always visible, pointing left */}
+                    <path d="M15 18l-6-6 6-6" />
+                    {/* Arrow line - slides in and fades in on hover */}
+                    <path 
+                      d="M9 12h10" 
+                      className="transition-all duration-300 ease-out opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
+                    />
+                  </svg>
+                </span>
               </Link>
             </motion.div>
           ))}

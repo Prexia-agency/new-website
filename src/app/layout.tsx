@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import "./accessibility.css";
-
 import Navbar from "@/components/navbar";
 import NavbarMobile from "@/components/navbar-mb";
 import Footer from "@/components/footer";
@@ -54,10 +53,10 @@ export default function RootLayout({
           <NavbarMobile />
           <Navbar />
           {children}
-          <CookiesBanner/>
           <AccessibilityWidget />
         </AccessibilityProvider>
         <Footer />
+        <CookiesBanner />
       </body>
     </html>
   );
