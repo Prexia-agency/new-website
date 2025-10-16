@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, AnimationControls } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import React from 'react';
 import { AuroraText } from '@/components/ui/aurora-text';
 import { WordRotate } from '@/components/ui/word-rotate';
@@ -17,19 +17,20 @@ interface TitleItem {
 }
 
 interface TitleAnimationProps {
-  tag: keyof JSX.IntrinsicElements;
+  tag: keyof React.JSX.IntrinsicElements;
   className: string;
   items: TitleItem[];
   animationName: string;
-  controls: AnimationControls;
+  controls: ReturnType<typeof useAnimation>;
 }
 
 const TitleAnimation: React.FC<TitleAnimationProps> = ({
-  tag: Tag,
+  tag,
   className,
   items,
   controls,
 }) => {
+  const Tag = tag as React.ElementType;
   const containerVariants = {
     initial: {},
     animate: {
@@ -46,7 +47,7 @@ const TitleAnimation: React.FC<TitleAnimationProps> = ({
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   };
@@ -74,7 +75,7 @@ const TitleAnimation: React.FC<TitleAnimationProps> = ({
                     initial: { opacity: 0, y: 20 },
                     animate: { opacity: 1, y: 0 },
                     exit: { opacity: 0, y: -20 },
-                    transition: { duration: 0.3, ease: "easeOut" },
+                    transition: { duration: 0.3, ease: "easeOut" as const },
                   }}
                 />
               </motion.span>
