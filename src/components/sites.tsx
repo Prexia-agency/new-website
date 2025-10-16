@@ -95,7 +95,7 @@ const SiteItem = ({ icon: Icon, title, description }: { icon: IconComponent, tit
 const Sites = () => (
   <section className="bg-white py-20 lg:py-16 sm:py-12">
     <div className="max-w-6xl mx-auto px-6 lg:px-8">
-      <h2 className="max-w-[700px] text-4xl font-bold font-noto-hebrew text-gray-900 leading-snug lg:max-w-[650px] lg:text-[34px] sm:text-2xl" dir="rtl">
+      <h2 className="max-w-[700px] text-xl font-bold font-noto-hebrew text-gray-900 leading-snug lg:max-w-[650px] lg:text-[34px] sm:text-[19px]" dir="rtl">
         סוגי אתרים שאנחנו בונים עבורכם:
       </h2>
       <ul className="mt-16 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:mt-14 lg:gap-8 sm:mt-10 sm:gap-10" dir="rtl">
