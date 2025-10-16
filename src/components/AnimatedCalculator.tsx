@@ -52,7 +52,7 @@ export default function AnimatedCalculator() {
     tl.to({}, { duration: 0.5 })
 
     // Animate through each sequence
-    buttonSequences.forEach((sequence, index) => {
+    buttonSequences.forEach((sequence) => {
       // Press buttons in sequence
       sequence.buttons.forEach((btnId, btnIndex) => {
         pressButton(btnId, tl)

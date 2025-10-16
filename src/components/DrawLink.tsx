@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 interface DrawLinkProps {
@@ -26,7 +26,6 @@ let nextIndex = 0;
 export default function DrawLink({ href, children, className = '' }: DrawLinkProps) {
   const boxRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
   const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -34,8 +33,6 @@ export default function DrawLink({ href, children, className = '' }: DrawLinkPro
     if (!box) return;
 
     const handleMouseEnter = () => {
-      setIsHovered(true);
-      
       // Pick random SVG variant and replace {ID} with unique ID
       const uniqueId = `grad-${gradientIdCounter++}`;
       const svgHTML = svgVariants[nextIndex].replace(/{ID}/g, uniqueId);
@@ -85,8 +82,6 @@ export default function DrawLink({ href, children, className = '' }: DrawLinkPro
     };
 
     const handleMouseLeave = () => {
-      setIsHovered(false);
-      
       const path = pathRef.current;
       if (!path) return;
       
