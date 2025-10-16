@@ -139,6 +139,9 @@ export default function Footer() {
             <Link href="/terms" className="text-white/80 hover:underline transition-colors duration-200">
               תנאי שימוש
             </Link>
+            <Link href="/accessibility" className="text-white/80 hover:underline transition-colors duration-200">
+              הצהרת נגישות
+            </Link>
             <button 
               onClick={() => setShowCookieModal(true)}
               className="text-white/80 hover:underline transition-colors duration-200"
