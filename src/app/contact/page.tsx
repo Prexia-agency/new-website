@@ -283,7 +283,7 @@ export default function ContactPage() {
                     צ&apos;אט איתנו בוואטסאפ
                   </h3>
                   <p className="text-gray-600 text-xs leading-relaxed sm:text-sm">
-                    מעדיפים לדבר ישירות? אנחנו כאן בשבילכם 24/7
+                    מעדיפים לדבר ישירות? אנחנו כאן בשבילכם 
                   </p>
                 </div>
 

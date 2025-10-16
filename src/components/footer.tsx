@@ -16,8 +16,8 @@ export default function Footer() {
         onClose={() => setShowCookieModal(false)} 
       />
       <footer className="relative bg-black/100 text-white py-16 lg:py-12 sm:py-10 overflow-hidden rounded-t-4xl" dir="rtl">
-      {/* Ballpit Animation Background */}
-      <div className="absolute inset-0 opacity-50">
+      {/* Ballpit Animation Background (hidden on mobile) */}
+      <div className="absolute inset-0 opacity-50 hidden md:block" aria-hidden="true">
         <Ballpit 
           className="w-full h-full"
           followCursor={true}
