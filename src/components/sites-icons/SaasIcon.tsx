@@ -56,7 +56,7 @@ const SaasIcon = forwardRef<IconHandle>((props, ref) => {
         tl.fromTo(bar,
           { scaleY: 0, transformOrigin: 'bottom center' },
           {
-            scaleY: [0, 1.8, 1.5, 1.6, 1.5],
+            scaleY: [0, 1.8, 1.5, 1.6, 1.5] as unknown as number,
             duration: 0.8,
             ease: 'power2.out'
           },
