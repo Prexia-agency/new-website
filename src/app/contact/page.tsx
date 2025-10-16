@@ -280,7 +280,7 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <h3 className="text-lg font-bold font-noto-hebrew text-gray-900 mb-2 sm:text-xl">
-                    צ'אט איתנו בוואטסאפ
+                    צ&apos;אט איתנו בוואטסאפ
                   </h3>
                   <p className="text-gray-600 text-xs leading-relaxed sm:text-sm">
                     מעדיפים לדבר ישירות? אנחנו כאן בשבילכם 24/7
@@ -309,7 +309,7 @@ export default function ContactPage() {
                     <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
                     </svg>
-                    התחילו צ'אט
+                    התחילו צ&apos;אט
                   </div>
                 </div>
 

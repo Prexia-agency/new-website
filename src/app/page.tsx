@@ -3,7 +3,6 @@ import HeroMobile from "@/components/hero mobile";
 import SecondSection from "@/components/second-section";
 import SecondSectionMobile from "@/components/second-section-mobile";
 import Stack from "@/components/stack";
-import BentoGrid from "@/components/bento-grid";
 import Sites from "@/components/sites";
 import Portfolio from "@/components/portfolio";
 import FAQ from "@/components/faq";
