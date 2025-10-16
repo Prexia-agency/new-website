@@ -15,11 +15,7 @@ const titleItems = [
     rotateWords: ['בניית', 'מיתוג', 'עיצוב'],
     rotateDuration: 3000
   },
-  { 
-    value: 'אתרים', 
-    useAurora: true,
-    auroraColors: ['#FF6A00', '#FF00A8', '#8B00FF', '#007BFF', '#00D4FF']
-  },
+  { value: 'אתרים', className: 'gradient-text' },
   { value: 'לעסקים' },
   { value: 'שמוכרים' },
   { value: 'באמת' },

@@ -35,9 +35,9 @@ export default function AccessibilityWidget() {
     }
   }, [isOpen])
 
-  // Click outside to close
+  // Click outside to close (with touch support)
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       if (isOpen && panelRef.current && !panelRef.current.contains(e.target as Node) && 
           !toggleRef.current?.contains(e.target as Node)) {
         setIsOpen(false)
@@ -45,10 +45,27 @@ export default function AccessibilityWidget() {
     }
 
     if (isOpen) {
+      // Prevent body scroll when panel is open
+      document.body.style.overflow = 'hidden'
+      
       document.addEventListener('mousedown', handleClickOutside)
-      return () => document.removeEventListener('mousedown', handleClickOutside)
+      document.addEventListener('touchstart', handleClickOutside)
+      return () => {
+        document.body.style.overflow = ''
+        document.removeEventListener('mousedown', handleClickOutside)
+        document.removeEventListener('touchstart', handleClickOutside)
+      }
     }
   }, [isOpen])
+  
+  // Safety mechanism: ensure modal doesn't block on page load
+  useEffect(() => {
+    // Ensure widget starts closed on mount
+    setIsOpen(false)
+    
+    // Clear any stuck states
+    document.body.style.overflow = ''
+  }, [])
 
   return (
     <>
