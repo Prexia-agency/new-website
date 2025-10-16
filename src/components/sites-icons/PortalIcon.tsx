@@ -3,7 +3,12 @@
 import { useRef, useImperativeHandle, forwardRef } from 'react'
 import { gsap } from 'gsap'
 
-const PortalIcon = forwardRef((props, ref) => {
+export interface IconHandle {
+  playHoverAnimation: () => void;
+  playLeaveAnimation: () => void;
+}
+
+const PortalIcon = forwardRef<IconHandle>((props, ref) => {
   const page1Ref = useRef<SVGRectElement>(null)
   const page2Ref = useRef<SVGRectElement>(null)
   const article1Ref = useRef<SVGRectElement>(null)

@@ -3,7 +3,12 @@
 import { useRef, useImperativeHandle, forwardRef } from 'react'
 import { gsap } from 'gsap'
 
-const EcommerceIcon = forwardRef((props, ref) => {
+export interface IconHandle {
+  playHoverAnimation: () => void;
+  playLeaveAnimation: () => void;
+}
+
+const EcommerceIcon = forwardRef<IconHandle>((props, ref) => {
   const cartRef = useRef<SVGPathElement>(null)
   const wheel1Ref = useRef<SVGCircleElement>(null)
   const wheel2Ref = useRef<SVGCircleElement>(null)

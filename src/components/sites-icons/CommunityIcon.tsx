@@ -3,7 +3,12 @@
 import { useRef, useImperativeHandle, forwardRef } from 'react'
 import { gsap } from 'gsap'
 
-const CommunityIcon = forwardRef((props, ref) => {
+export interface IconHandle {
+  playHoverAnimation: () => void;
+  playLeaveAnimation: () => void;
+}
+
+const CommunityIcon = forwardRef<IconHandle>((props, ref) => {
   const person1Ref = useRef<SVGCircleElement>(null)
   const person2Ref = useRef<SVGCircleElement>(null)
   const person3Ref = useRef<SVGCircleElement>(null)

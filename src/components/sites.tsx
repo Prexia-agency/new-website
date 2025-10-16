@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useRef } from 'react';
-import PortfolioIcon from './sites-icons/PortfolioIcon';
+import PortfolioIcon, { type IconHandle } from './sites-icons/PortfolioIcon';
 import BlogIcon from './sites-icons/BlogIcon';
 import EcommerceIcon from './sites-icons/EcommerceIcon';
 import PortalIcon from './sites-icons/PortalIcon';
@@ -54,10 +54,10 @@ const items = [
   },
 ];
 
-type IconComponent = React.ForwardRefExoticComponent<React.RefAttributes<{ playHoverAnimation?: () => void; playLeaveAnimation?: () => void }>>;
+type IconComponent = React.ForwardRefExoticComponent<React.RefAttributes<IconHandle>>;
 
 const SiteItem = ({ icon: Icon, title, description }: { icon: IconComponent, title: string, description: string }) => {
-  const iconRef = useRef<{ playHoverAnimation?: () => void; playLeaveAnimation?: () => void }>(null);
+  const iconRef = useRef<IconHandle>(null);
 
   const handleMouseEnter = () => {
     if (iconRef.current?.playHoverAnimation) {

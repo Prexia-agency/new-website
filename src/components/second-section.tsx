@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import PathDrawing from './draw';
-import { motion, useAnimation } from 'framer-motion';
+import { useAnimation } from 'framer-motion';
 import PathDrawingLp from './draw_Laptop';
 import TitleAnimation from '@/components/shared/title-animation';
 import { useInView } from 'react-intersection-observer';

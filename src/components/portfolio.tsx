@@ -62,6 +62,7 @@ export default function Portfolio() {
                               <span className="text-[10px] md:text-sm text-gray-500">סוכנות_אתרים@</span>
                             </div>
                           </div>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src="/images/LOGO-AK.png"
                             alt="AK Agency Logo"
@@ -78,6 +79,7 @@ export default function Portfolio() {
 
                       {/* Project Image */}
                       <div className="flex flex-1 items-center justify-center">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={item.image}
                           alt={item.title}

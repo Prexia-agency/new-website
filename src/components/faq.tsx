@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useAnimation } from 'framer-motion';
+import { useAnimation } from 'framer-motion';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/accordion';

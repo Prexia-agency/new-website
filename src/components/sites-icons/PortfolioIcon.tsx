@@ -3,7 +3,12 @@
 import { useRef, useImperativeHandle, forwardRef } from 'react'
 import { gsap } from 'gsap'
 
-const PortfolioIcon = forwardRef((props, ref) => {
+export interface IconHandle {
+  playHoverAnimation: () => void;
+  playLeaveAnimation: () => void;
+}
+
+const PortfolioIcon = forwardRef<IconHandle>((props, ref) => {
   const frameRef = useRef<SVGRectElement>(null)
   const image1Ref = useRef<SVGRectElement>(null)
   const image2Ref = useRef<SVGRectElement>(null)
