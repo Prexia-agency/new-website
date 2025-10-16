@@ -2,12 +2,25 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Ballpit from '@/components/ballpit';
 import CookiePreferencesModal from '@/components/shared/CookiePreferencesModal';
 
 export default function Footer() {
   const [showCookieModal, setShowCookieModal] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia('(min-width: 768px)');
+    const update = () => setIsDesktop(mql.matches);
+    update();
+    if (mql.addEventListener) mql.addEventListener('change', update);
+    else mql.addListener(update);
+    return () => {
+      if (mql.removeEventListener) mql.removeEventListener('change', update);
+      else mql.removeListener(update);
+    };
+  }, []);
 
   return (
     <>
@@ -16,17 +29,19 @@ export default function Footer() {
         onClose={() => setShowCookieModal(false)} 
       />
       <footer className="relative bg-black/100 text-white py-16 lg:py-12 sm:py-10 overflow-hidden rounded-t-4xl" dir="rtl">
-      {/* Ballpit Animation Background (hidden on mobile) */}
-      <div className="absolute inset-0 opacity-50 hidden md:block" aria-hidden="true">
-        <Ballpit 
-          className="w-full h-full"
-          followCursor={true}
-          count={50}
-          colors={[0xFF6A00, 0xFF00A8, 0x8B00FF, 0x007BFF, 0x00D4FF]}
-          gravity={0.2}
-          maxVelocity={0.1}
-        />
-      </div>
+      {/* Ballpit Animation Background (render desktop only) */}
+      {isDesktop && (
+        <div className="absolute inset-0 opacity-50" aria-hidden="true">
+          <Ballpit 
+            className="w-full h-full"
+            followCursor={true}
+            count={50}
+            colors={[0xFF6A00, 0xFF00A8, 0x8B00FF, 0x007BFF, 0x00D4FF]}
+            gravity={0.2}
+            maxVelocity={0.1}
+          />
+        </div>
+      )}
       
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8">
