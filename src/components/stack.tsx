@@ -9,7 +9,7 @@ import ImagePlaceholder from '@/components/shared/image-placeholder';
 import TitleAnimation from '@/components/shared/title-animation';
 
 const titleItems = [
-  { value: 'טכנולוגיה' },
+  { value: 'סביבת פיתוח' },
   { value: 'שמציבה' },
   { value: 'את' },
   { value: 'העסק', className: 'gradient-text' },
@@ -66,7 +66,9 @@ export default function Stack() {
             animate={descriptionControls}
             variants={descriptionVariants}
           >
-          טכנולוגיה שהיא הסטנדרט הגבוה בתעשייה, עם קוד נקי ומדויק שמבטיח יציבות וביצועים לאורך זמן. בעידן שבו ניתן להקים אתר בסיסי בקלות באמצעות AI, אנחנו מספקים נוכחות דיגיטלית מקצועית וגמישה לצמיחה – פתרון שמעניק לעסק שלך יתרון ברור ומשמעותי.
+            לא עוד אתר מתבנית. מערכת ייעודית שנבנית עבורך .
+אנחנו משתמשים בטכנולוגיה שמובילה את עולם הפיתוח, עם שליטה מלאה בביצועים, אבטחה ויכולת צמיחה אמיתית.
+אתר קל משקל, מותאם לגוגל, ונבנה בדיוק לצרכים שלך, לא לצרכים של הפלטפורמה.
           </motion.p>
         </div>
         <div

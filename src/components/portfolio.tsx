@@ -91,8 +91,22 @@ export default function Portfolio() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-4 lg:left-2" />
-            <CarouselNext className="-right-4 lg:right-2" />
+            <CarouselPrevious 
+              className="h-12 w-12 left-8 lg:left-20 border-2 border-transparent bg-origin-border"
+              style={{
+                backgroundImage: 'linear-gradient(white, white), linear-gradient(90deg, #FF6A00 15%, #FF00A8 25%, #8B00FF 50%, #007BFF 75%, #00D4FF 100%)',
+                backgroundOrigin: 'border-box',
+                backgroundClip: 'padding-box, border-box'
+              }}
+            />
+            <CarouselNext 
+              className="h-12 w-12 right-8 lg:right-20 border-2 border-transparent bg-origin-border"
+              style={{
+                backgroundImage: 'linear-gradient(white, white), linear-gradient(90deg, #FF6A00 15%, #FF00A8 25%, #8B00FF 50%, #007BFF 75%, #00D4FF 100%)',
+                backgroundOrigin: 'border-box',
+                backgroundClip: 'padding-box, border-box'
+              }}
+            />
           </Carousel>
         </div>
       </div>

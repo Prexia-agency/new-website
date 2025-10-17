@@ -10,16 +10,17 @@ import TitleAnimation from '@/components/shared/title-animation';
 
 const titleItems = [
   { 
-    value: 'בניית',
+    value: 'עיצוב',
     useWordRotate: true,
-    rotateWords: ['בניית', 'מיתוג', 'עיצוב'],
+    rotateWords: ['עיצוב', 'מיתוג', 'תכנון'],
     rotateDuration: 3000
   },
-  { value: 'אתרים', className: 'gradient-text' },
-  { value: 'לעסקים' },
-  { value: 'שמוכרים' },
-  { value: 'באמת' },
+  { value: 'מדויק.', },
+  { value: 'חוויה חכמה.' },
+  { value: ' אתר', className: 'gradient-text' },
+  { value: ' שמביא תוצאות' },
 ];
+
 
 const descriptionVariants = {
   initial: { opacity: 0 },
