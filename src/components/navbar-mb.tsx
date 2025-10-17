@@ -39,7 +39,7 @@ export default function NavbarMobile() {
           {/* Contact Button */}
           <Link
             href="/contact"
-            className="bg-gray-900 hover:bg-gray-800 text-white px-4 py-0.5 rounded-[14px] font-medium text-[10px] transition-all duration-200 hover:shadow-lg flex items-center gap-3"
+            className="gradient-bg hover:opacity-90 text-white px-4 py-0.5 rounded-[14px] font-medium text-[10px] transition-all duration-200 hover:shadow-lg flex items-center gap-3"
           >
             <span className="font-medium text-[9px] text-white">
               צור קשר

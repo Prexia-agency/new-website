@@ -40,7 +40,7 @@ export default function Navbar() {
           {/* Contact Button */}
           <Link
             href="/contact"
-            className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-3 rounded-full font-medium text-sm transition-all duration-200 hover:shadow-xl flex items-center gap-2"
+            className="gradient-bg hover:opacity-90 text-white px-5 py-3 rounded-full font-medium text-sm transition-all duration-200 hover:shadow-xl flex items-center gap-2"
           >
             <span className="font-medium text-xs text-white">
               דבר איתנו
