@@ -42,6 +42,7 @@ export default function Portfolio() {
               align: "start",
               loop: true,
               direction: "ltr",
+              dragFree: false,
             }}
             className="w-full"
           >
@@ -91,16 +92,16 @@ export default function Portfolio() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious 
-              className="h-12 w-12 left-8 lg:left-20 border-2 border-transparent bg-origin-border"
+            <CarouselPrevious
+              className="h-10 w-10 md:h-12 md:w-12 -left-6 md:left-8 lg:left-20 border-2 border-transparent bg-origin-border !top-1/2 !-translate-y-1/2"
               style={{
                 backgroundImage: 'linear-gradient(white, white), linear-gradient(90deg, #FF6A00 15%, #FF00A8 25%, #8B00FF 50%, #007BFF 75%, #00D4FF 100%)',
                 backgroundOrigin: 'border-box',
                 backgroundClip: 'padding-box, border-box'
               }}
             />
-            <CarouselNext 
-              className="h-12 w-12 right-8 lg:right-20 border-2 border-transparent bg-origin-border"
+            <CarouselNext
+              className="h-10 w-10 md:h-12 md:w-12 -right-6 md:right-8 lg:right-20 border-2 border-transparent bg-origin-border !top-1/2 !-translate-y-1/2"
               style={{
                 backgroundImage: 'linear-gradient(white, white), linear-gradient(90deg, #FF6A00 15%, #FF00A8 25%, #8B00FF 50%, #007BFF 75%, #00D4FF 100%)',
                 backgroundOrigin: 'border-box',

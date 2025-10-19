@@ -83,7 +83,7 @@ export default function Stack() {
           >
             {/* Negative offset for adjusting extra space in Rive animation needed for animation */}
             {isWrapperInView && (
-              <div className="absolute -top-[25px] -bottom-[65px] -right-[0px] -left-[0px]">
+              <div className="absolute -top-[25px] -bottom-[65px] -right-[0px] -left-[0px] pointer-events-none md:pointer-events-auto">
                 <RiveComponent width={592} height={626} />
               </div>
             )}

@@ -267,7 +267,7 @@ export default function ContactPage() {
               rel="noopener noreferrer"
               className="block"
             >
-              <div className="bg-white rounded-2xl shadow-lg p-4 border-2 border-green-200 hover:border-green-300 group cursor-pointer sm:p-6 lg:p-8">
+              <div className="relative bg-white rounded-2xl shadow-lg p-4 border-2 border-green-200 hover:border-green-300 group cursor-pointer sm:p-6 lg:p-8">
                 {/* WhatsApp Header */}
                 <div className="text-center mb-4 sm:mb-6">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-3 group-hover:bg-green-200 transition-colors duration-300 sm:w-16 sm:h-16 sm:mb-4">
@@ -313,9 +313,9 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Decorative Element */}
-                <div className="absolute top-4 left-4 w-8 h-8 bg-green-100 rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
-                <div className="absolute bottom-4 right-4 w-6 h-6 bg-green-200 rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                {/* Decorative Element - Hidden on mobile */}
+                <div className="hidden lg:block absolute top-4 left-4 w-8 h-8 bg-green-100 rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
+                <div className="hidden lg:block absolute bottom-4 right-4 w-6 h-6 bg-green-200 rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
               </div>
             </Link>
           </motion.div>

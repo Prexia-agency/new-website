@@ -27,10 +27,9 @@ const pricingData = [
       'אופטימיזציה למנועי חיפוש (SEO בסיסי)',
       'תשתית ניהול תוכן',
       'הטמעה וזמינות למשך שנה',
-      'תמיכה טכנית למשך 3 חודשים'
+      'תמיכה בתוספת תשלום'
     ],
     price: '10,000 - 6,000 ₪',
-    period: 'פרויקט מלא',
     popular: false
   },
   {
@@ -49,7 +48,6 @@ const pricingData = [
       'תמיכה בתוספת תשלום'
     ],
     price: '30,000 - 10,000 ₪',
-    period: 'לדף',
     popular: true
   },
   {
@@ -62,13 +60,13 @@ const pricingData = [
       'אינטגרציות CRM ומערכות תשלום',
       'מיתוג ושיווק מאפס כולל יצירת לוגו ותוכן שיווקי',
       'עיצובי תלת־ממד חדשניים',
+      '  אלמנטים ויזואלים ב - GSAP',
       'אופטימיזציה מורכבת',
       'תסריטים של Spline/React Three Fiber',
       'מערכות ניהול מותאמות',
       'תמיכה ותחזוקה מלאה'
     ],
-    price: '80,000 - 30,000 ₪',
-    period: 'לדף',
+    price: 'דברו איתנו',
     popular: false
   }
 ];
@@ -180,7 +178,7 @@ export default function PricingPage() {
                   <p className="text-gray-500 text-[11px] sm:text-sm">
                     {plan.period}
                   </p>
-                  {plan.id === 2 || plan.id === 3 ? (
+                  {plan.id === 2 || plan.id === 1 ? (
                     <p className="text-[10px] text-gray-400 mt-1 leading-relaxed sm:text-xs sm:mt-2">
                       המחיר הסופי נקבע לפי מורכבות הפרויקט וכמות העבודה הנדרשת
                     </p>

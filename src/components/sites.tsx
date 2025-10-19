@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import PortfolioIcon, { type IconHandle } from './sites-icons/PortfolioIcon';
 import BlogIcon from './sites-icons/BlogIcon';
 import EcommerceIcon from './sites-icons/EcommerceIcon';
@@ -58,21 +58,67 @@ type IconComponent = React.ForwardRefExoticComponent<React.RefAttributes<IconHan
 
 const SiteItem = ({ icon: Icon, title, description }: { icon: IconComponent, title: string, description: string }) => {
   const iconRef = useRef<IconHandle>(null);
+  const itemRef = useRef<HTMLLIElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  // Detect if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Intersection Observer for scroll-based animation on mobile
+  useEffect(() => {
+    if (!isMobile || !itemRef.current || hasAnimated) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            if (iconRef.current?.playHoverAnimation) {
+              iconRef.current.playHoverAnimation();
+              setHasAnimated(true);
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of the item is visible
+        rootMargin: '0px'
+      }
+    );
+
+    observer.observe(itemRef.current);
+
+    return () => {
+      if (itemRef.current) {
+        observer.unobserve(itemRef.current);
+      }
+    };
+  }, [isMobile, hasAnimated]);
 
   const handleMouseEnter = () => {
-    if (iconRef.current?.playHoverAnimation) {
+    if (!isMobile && iconRef.current?.playHoverAnimation) {
       iconRef.current.playHoverAnimation();
     }
   };
 
   const handleMouseLeave = () => {
-    if (iconRef.current?.playLeaveAnimation) {
+    if (!isMobile && iconRef.current?.playLeaveAnimation) {
       iconRef.current.playLeaveAnimation();
     }
   };
 
   return (
     <li 
+      ref={itemRef}
       className="flex items-start" 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
