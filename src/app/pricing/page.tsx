@@ -175,9 +175,6 @@ export default function PricingPage() {
                   <p className="text-lg font-bold gradient-text mb-1 sm:text-2xl lg:text-3xl">
                     {plan.price}
                   </p>
-                  <p className="text-gray-500 text-[11px] sm:text-sm">
-                    {plan.period}
-                  </p>
                   {plan.id === 2 || plan.id === 1 ? (
                     <p className="text-[10px] text-gray-400 mt-1 leading-relaxed sm:text-xs sm:mt-2">
                       המחיר הסופי נקבע לפי מורכבות הפרויקט וכמות העבודה הנדרשת
