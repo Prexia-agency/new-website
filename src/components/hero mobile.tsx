@@ -67,7 +67,7 @@ export default function HeroMobile() {
           variants={descriptionVariants}
           dir="rtl"
         >
-          אנחנו בונים ומעצבים אתרים שמותאמים בדיוק לצרכים של העסק שלך עם עיצוב מקצועי, חוויית משתמש מתקדמת ו- SEO שמביא תוצאות
+לא עוד אתרים מתבניות, אלא אתרים שנכתבים שורה אחרי שורה בקוד, כדי להעניק מהירות, עומק ו - SEO שמתחיל בארכיטקטורה. 
         </motion.p>
          {/* Hero Buttons */}
         <div className="flex flex-row-reverse gap-4" dir="rtl">

@@ -21,7 +21,7 @@ const faqData = [
   {
     id: 'item-2',
     question: 'האם ניתן לשלב באתר אלמנטים תלת־ממדיים ואנימציות מותאמות אישית לפי הצרכים שלי?',
-    answer: 'לא עוד אתרים מתבנית, לא עוד אתרים '
+    answer: 'בהחלט! אנחנו מתמחים בשילוב אנימציות תלת-ממדיות מתקדמות, מיקרו-אינטראקציות ואלמנטים ויזואליים מותאמים אישית באמצעות טכנולוגיות כמו Spline, React Three Fiber ו-GSAP. כל אלמנט נבנה בקוד מלא ומותאם בדיוק לצרכים ולמותג שלכם.'
   },
   {
     id: 'item-3',
@@ -60,8 +60,28 @@ export default function FAQ() {
     }
   }, [isContentInView, titleControls]);
 
+  // Generate FAQ Schema for Google Rich Results
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <section className="bg-white py-20 pb-32 lg:py-16 lg:pb-24 sm:py-12 sm:pb-16">
+      {/* FAQ Schema - Makes FAQs appear in Google as Rich Snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-12" ref={contentRef}>
           <TitleAnimation
