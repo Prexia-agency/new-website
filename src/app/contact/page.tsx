@@ -360,10 +360,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting || !acceptedTerms}
-                  style={{ 
-                    transition: 'opacity 5000ms cubic-bezier(0.4, 0, 0.2, 1)'
-                  }}
-                  className={`w-full gradient-bg text-white px-4 py-1.5 rounded-[8.5px] font-semibold text-[13px] shadow-lg sm:px-4 sm:py-2.5 sm:text-[16px] relative ${
+                  className={`w-full gradient-bg text-white px-4 py-1.5 rounded-[8.5px] font-semibold text-[13px] shadow-lg sm:px-4 sm:py-2.5 sm:text-[16px] relative transition-opacity duration-300 ${
                     isSubmitting || !acceptedTerms ? 'opacity-40 cursor-not-allowed' : 'hover:opacity-80'
                   }`}
                 >
