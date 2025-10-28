@@ -1,13 +1,64 @@
+'use client'
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function NavbarMobile() {
+  const [isOverDark, setIsOverDark] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
+
+  useEffect(() => {
+    if (!isHomePage) {
+      setIsOverDark(false);
+      return;
+    }
+
+    const handleScroll = () => {
+      const navbar = document.querySelector('nav.lg\\:hidden');
+      if (!navbar) return;
+
+      const navbarRect = navbar.getBoundingClientRect();
+      const navbarCenter = navbarRect.top + navbarRect.height / 2;
+
+      // Check if navbar is over Hero or Stack sections (mobile versions)
+      const heroSection = document.querySelector('.lg\\:hidden[data-section="hero"]');
+      const stackSection = document.querySelector('[data-section="stack"]');
+
+      let overDark = false;
+
+      if (heroSection) {
+        const heroRect = heroSection.getBoundingClientRect();
+        if (navbarCenter >= heroRect.top && navbarCenter <= heroRect.bottom) {
+          overDark = true;
+        }
+      }
+
+      if (stackSection) {
+        const stackRect = stackSection.getBoundingClientRect();
+        if (navbarCenter >= stackRect.top && navbarCenter <= stackRect.bottom) {
+          overDark = true;
+        }
+      }
+
+      setIsOverDark(overDark);
+    };
+
+    handleScroll(); // Check initial position
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHomePage]);
+
+  const textColor = isOverDark ? 'text-white hover:text-gray-200' : 'text-gray-800 hover:text-gray-600';
+
   return (
     <nav 
       className="lg:hidden fixed top-3 left-1/2 transform -translate-x-1/2 z-50 py-3"
       dir="rtl"
     >
-      <div className="bg-white/95 backdrop-blur-md rounded-full border border-gray-300/90 shadow-lg px-9 py-0.5">
+      <div className="bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-2xl px-9 py-0.5">
         <div className="flex items-center justify-between gap-6">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 ml-0">
@@ -24,13 +75,13 @@ export default function NavbarMobile() {
           <div className="flex items-center gap-5">
             <Link 
               href="/"
-              className="text-gray-800 hover:text-gray-600 transition-colors duration-200 font-medium text-[10px]"
+              className={`${textColor} transition-colors duration-300 font-medium text-[10px]`}
             >
               בית
             </Link>
             <Link 
               href="/pricing"
-              className="text-gray-800 hover:text-gray-600 transition-colors duration-200 font-medium text-[10px]"
+              className={`${textColor} transition-colors duration-300 font-medium text-[10px]`}
             >
               מחירון
             </Link>

@@ -4,9 +4,11 @@ import { motion, useAnimation } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
+import { z } from 'zod';
 
 import TitleAnimation from '@/components/shared/title-animation';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+import { contactSchema, type ContactFormData } from '@/lib/validations/contact';
 
 const titleItems = [
   { value: 'בואו' },
@@ -34,7 +36,7 @@ export default function ContactPage() {
   const titleControls = useAnimation();
   const descriptionControls = useAnimation();
   
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     phone: '',
@@ -43,6 +45,8 @@ export default function ContactPage() {
     projectType: ''
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
 
@@ -52,31 +56,107 @@ export default function ContactPage() {
     }
   }, [isContentInView, titleControls, descriptionControls]);
 
+  const validateField = (fieldName: keyof ContactFormData, value: unknown) => {
+    try {
+      const fieldSchema = contactSchema.shape[fieldName];
+      fieldSchema.parse(value);
+      return null;
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return error.issues[0]?.message || 'שגיאה בערך';
+      }
+      return null;
+    }
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    const fieldName = name as keyof ContactFormData;
+    
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+
+    // Real-time validation for touched fields
+    if (touched[name]) {
+      const error = validateField(fieldName, value);
+      setErrors((prev) => ({
+        ...prev,
+        [name]: error || ''
+      }));
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    const fieldName = name as keyof ContactFormData;
+    
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    
+    const error = validateField(fieldName, value);
+    setErrors((prev) => ({
+      ...prev,
+      [name]: error || ''
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate entire form with Zod
+    const validationResult = contactSchema.safeParse(formData);
+    
+    if (!validationResult.success) {
+      const newErrors: Record<string, string> = {};
+      const newTouched: Record<string, boolean> = {};
+      
+      validationResult.error.issues.forEach((issue) => {
+        const field = issue.path[0] as string;
+        newErrors[field] = issue.message;
+        newTouched[field] = true;
+      });
+      
+      setErrors(newErrors);
+      setTouched(newTouched);
+      alert('נא למלא את כל השדות הנדרשים בצורה תקינה');
+      return;
+    }
+
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      alert('הודעתך נשלחה בהצלחה! נחזור אליך בהקדם.');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        message: '',
-        projectType: ''
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(validationResult.data),
       });
-      setAcceptedTerms(false);
-    }, 2000);
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('הודעתך נשלחה בהצלחה! נחזור אליך בהקדם. אימייל אישור נשלח לכתובת שהזנת.');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          message: '',
+          projectType: ''
+        });
+        setErrors({});
+        setTouched({});
+        setAcceptedTerms(false);
+      } else {
+        alert('אירעה שגיאה בשליחת ההודעה. אנא נסה שוב או פנה אלינו בוואטסאפ.');
+      }
+    } catch (error) {
+      alert('אירעה שגיאה בשליחת ההודעה. אנא נסה שוב או פנה אלינו בוואטסאפ.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const whatsappUrl = "https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים";
@@ -131,10 +211,17 @@ export default function ContactPage() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      required
-                      className="w-full px-3 py-2 border border-gray-300 rounded-[16px] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
+                      onBlur={handleBlur}
+                      className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                        touched.name && errors.name
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'border-gray-300 focus:ring-blue-500'
+                      }`}
                       placeholder="השם שלכם"
                     />
+                    {touched.name && errors.name && (
+                      <p className="text-red-500 text-[10px] sm:text-xs mt-1">{errors.name}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-[12px] font-medium text-gray-700 mb-1 sm:text-sm sm:mb-2">
@@ -145,10 +232,17 @@ export default function ContactPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      required
-                      className="w-full px-3 py-2 border border-gray-300 rounded-[16px] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
+                      onBlur={handleBlur}
+                      className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                        touched.email && errors.email
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'border-gray-300 focus:ring-blue-500'
+                      }`}
                       placeholder="your@email.com"
                     />
+                    {touched.email && errors.email && (
+                      <p className="text-red-500 text-[10px] sm:text-xs mt-1">{errors.email}</p>
+                    )}
                   </div>
                 </div>
 
@@ -161,11 +255,19 @@ export default function ContactPage() {
                     <input
                       type="tel"
                       name="phone"
-                      value={formData.phone}
+                      value={formData.phone || ''}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-[16px] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
+                      onBlur={handleBlur}
+                      className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                        touched.phone && errors.phone
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'border-gray-300 focus:ring-blue-500'
+                      }`}
                       placeholder="050-123-4567"
                     />
+                    {touched.phone && errors.phone && (
+                      <p className="text-red-500 text-[10px] sm:text-xs mt-1">{errors.phone}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-[12px] font-medium text-gray-700 mb-1 sm:text-sm sm:mb-2">
@@ -174,11 +276,19 @@ export default function ContactPage() {
                     <input
                       type="text"
                       name="company"
-                      value={formData.company}
+                      value={formData.company || ''}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-[16px] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
+                      onBlur={handleBlur}
+                      className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                        touched.company && errors.company
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'border-gray-300 focus:ring-blue-500'
+                      }`}
                       placeholder="שם העסק או החברה"
                     />
+                    {touched.company && errors.company && (
+                      <p className="text-red-500 text-[10px] sm:text-xs mt-1">{errors.company}</p>
+                    )}
                   </div>
                 </div>
 
@@ -210,11 +320,18 @@ export default function ContactPage() {
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    required
+                    onBlur={handleBlur}
                     rows={5}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-[16px] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none text-[11px] sm:text-sm sm:px-4 sm:py-3"
+                    className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 resize-none text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                      touched.message && errors.message
+                        ? 'border-red-500 focus:ring-red-500'
+                        : 'border-gray-300 focus:ring-blue-500'
+                    }`}
                     placeholder="תארו את הפרויקט שלכם, מטרות, דרישות מיוחדות ולוח זמנים רצוי..."
                   />
+                  {touched.message && errors.message && (
+                    <p className="text-red-500 text-[10px] sm:text-xs mt-1">{errors.message}</p>
+                  )}
                 </div>
 
                 {/* Terms and Privacy Checkbox */}
@@ -243,11 +360,50 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting || !acceptedTerms}
-                  className={`w-full gradient-bg text-white px-4 py-2 rounded-[8.5px] font-semibold text-[14px] transition-all duration-300 shadow-lg hover:shadow-xl sm:px-4 sm:py-2.5 sm:text-[19px] ${
-                    isSubmitting || !acceptedTerms ? 'opacity-40 cursor-not-allowed' : 'hover:opacity-90'
+                  style={{ 
+                    transition: 'opacity 5000ms cubic-bezier(0.4, 0, 0.2, 1)'
+                  }}
+                  className={`w-full gradient-bg text-white px-4 py-1.5 rounded-[8.5px] font-semibold text-[13px] shadow-lg sm:px-4 sm:py-2.5 sm:text-[16px] relative ${
+                    isSubmitting || !acceptedTerms ? 'opacity-40 cursor-not-allowed' : 'hover:opacity-80'
                   }`}
                 >
-                  {isSubmitting ? 'שולח...' : 'שלחו הודעה'}
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <svg
+                        className="animate-spin h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      <span>שולח...</span>
+                    </span>
+                  ) : (
+                    <span className="flex items-center justify-center gap-2">
+                      <span>שלח הודעה</span>
+                      <svg
+                        className="h-4 w-4 sm:h-5 sm:w-5 rotate-180"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+                      </svg>
+                    </span>
+                  )}
                 </button>
               </form>
             </div>

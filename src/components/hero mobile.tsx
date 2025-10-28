@@ -39,7 +39,7 @@ export default function HeroMobile() {
   }, [isContentInView, titleControls, descriptionControls]);
 
   return (
-    <section className="lg:hidden relative w-full h-screen overflow-hidden" dir="rtl">
+    <section className="lg:hidden relative w-full h-screen overflow-hidden" dir="rtl" data-section="hero">
       {/* Full screen Spline animation */}
       <div className="bg-black absolute inset-0 w-full h-full pt-15">
         <Spline 

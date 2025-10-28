@@ -50,7 +50,7 @@ export default function Stack() {
   }, [isContentInView, titleControls, descriptionControls, rive, isIllustrationInView]);
 
   return (
-    <section className="bg-black pt-19 pb-72 sm:pt-47 lg:pt-78 lg:pb-58 sm:pb-50" ref={wrapperRef} dir="rtl">
+    <section className="bg-black pt-19 pb-72 sm:pt-47 lg:pt-78 lg:pb-58 sm:pb-50" ref={wrapperRef} dir="rtl" data-section="stack">
       <div className="max-w-6xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-8">
         <div className="lg:col-span-6 order-1 lg:order-1" ref={contentRef}>
           <TitleAnimation

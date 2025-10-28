@@ -38,7 +38,7 @@ export default function Hero() {
   }, [isContentInView, titleControls, descriptionControls]);
 
   return (
-    <section className="hidden lg:block relative w-full h-screen overflow-hidden" dir="rtl">
+    <section className="hidden lg:block relative w-full h-screen overflow-hidden" dir="rtl" data-section="hero">
       {/* Full screen Spline animation */}
       <div className="bg-black absolute inset-0 w-full h-full pt-65">
         <Spline 
