@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     const businessEmailResult = await resend.emails.send({
       from: fromEmail,
       to: [toEmail],
-      subject: `הודעה חדשה מאתר AK Agency - ${name}`,
+      subject: `הודעה חדשה מאתרים - ${name}`,
       html: `
         <div dir="rtl">
           <h2>הודעה חדשה מטופס יצירת קשר</h2>
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
           <p style="white-space: pre-wrap;">${message}</p>
           
           <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;" />
-          <p style="color: #6b7280; font-size: 14px;">נשלח מטופס יצירת קשר באתר AK Agency</p>
+          <p style="color: #6b7280; font-size: 14px;">נשלח מטופס יצירת קשר באתרים</p>
         </div>
       `,
     });
@@ -166,7 +166,7 @@ export async function POST(request: NextRequest) {
         <body>
           <div class="container">
             <div class="header">
-              <h1>✨ AK Agency</h1>
+              <h1>✨ אתרים atarym</h1>
             </div>
             
             <div class="content">
@@ -211,14 +211,14 @@ export async function POST(request: NextRequest) {
             </div>
 
             <div class="footer">
-              <p><strong>AK Agency</strong></p>
+              <p><strong> אתרים atarym</strong></p>
               <p>פיתוח אתרים וחוויות דיגיטליות מתקדמות</p>
               <div class="contact-info">
                 <p>📧 <a href="mailto:${fromEmail}">${fromEmail}</a></p>
                 <p>📱 <a href="https://wa.me/972505322336">050-532-2336</a></p>
               </div>
               <p style="margin-top: 20px; font-size: 12px;">
-                אימייל זה נשלח כתגובה אוטומטית לפנייתך באתר AK Agency
+                אימייל זה נשלח כתגובה אוטומטית לפנייתך באתר אתרים atarym
               </p>
             </div>
           </div>
