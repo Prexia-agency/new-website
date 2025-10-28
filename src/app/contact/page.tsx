@@ -360,8 +360,11 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting || !acceptedTerms}
-                  className={`w-full gradient-bg text-white px-4 py-1.5 rounded-[8.5px] font-semibold text-[13px] shadow-lg sm:px-4 sm:py-2.5 sm:text-[16px] relative transition-opacity duration-800 ${
-                    isSubmitting || !acceptedTerms ? 'opacity-40 cursor-not-allowed' : 'hover:scale-[1.01] duration-900'
+                  style={{
+                    transition: 'opacity 800ms ease-in-out, transform 900ms ease-in-out'
+                  }}
+                  className={`w-full gradient-bg text-white px-4 py-1.5 rounded-[8.5px] font-semibold text-[13px] shadow-lg sm:px-4 sm:py-2.5 sm:text-[16px] relative ${
+                    isSubmitting || !acceptedTerms ? 'opacity-40 cursor-not-allowed' : 'hover:scale-[1.01]'
                   }`}
                 >
                   {isSubmitting ? (
@@ -420,7 +423,7 @@ export default function ContactPage() {
               rel="noopener noreferrer"
               className="block"
             >
-              <div className="relative bg-white rounded-2xl shadow-lg p-4 border-2 border-green-200 hover:border-green-300 group cursor-pointer sm:p-6 lg:p-8">
+              <div className="relative bg-white rounded-2xl shadow-lg p-4 border-2 border-green-200 hover:border-green-300 transition-colors duration-300 group cursor-pointer sm:p-6 lg:p-8">
                 {/* WhatsApp Header */}
                 <div className="text-center mb-4 sm:mb-6">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-3 group-hover:bg-green-200 transition-colors duration-300 sm:w-16 sm:h-16 sm:mb-4">
