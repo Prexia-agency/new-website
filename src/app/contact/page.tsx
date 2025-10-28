@@ -162,7 +162,7 @@ export default function ContactPage() {
   const whatsappUrl = "https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים";
 
   return (
-    <div className="min-h-screen pt-20 pb-12 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16" style={{ backgroundColor: '#F8F8FF' }}>
+    <div className="min-h-screen pt-30 pb-12 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16" style={{ backgroundColor: '#F8F8FF' }}>
       <GoogleAnalytics />
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header Section */}
@@ -365,6 +365,7 @@ export default function ContactPage() {
                   }
                   .submit-button:not(:disabled):hover {
                     transform: translateZ(0) scale(1.01) !important;
+                    opacity: 0.75;
                   }
                 `}</style>
                 <button
