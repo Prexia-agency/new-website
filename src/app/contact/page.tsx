@@ -357,14 +357,21 @@ export default function ContactPage() {
                 </div>
 
                 {/* Submit Button */}
+                <style jsx>{`
+                  .submit-button {
+                    transform: translateZ(0) scale(1);
+                    will-change: transform, opacity;
+                    transition: transform 700ms cubic-bezier(0.4, 0, 0.2, 1), opacity 800ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+                  }
+                  .submit-button:not(:disabled):hover {
+                    transform: translateZ(0) scale(1.01) !important;
+                  }
+                `}</style>
                 <button
                   type="submit"
                   disabled={isSubmitting || !acceptedTerms}
-                  style={{
-                    transition: 'opacity 800ms ease-in-out, transform 900ms ease-in-out'
-                  }}
-                  className={`w-full gradient-bg text-white px-4 py-1.5 rounded-[8.5px] font-semibold text-[13px] shadow-lg sm:px-4 sm:py-2.5 sm:text-[16px] relative ${
-                    isSubmitting || !acceptedTerms ? 'opacity-40 cursor-not-allowed' : 'hover:scale-[1.01]'
+                  className={`submit-button w-full gradient-bg text-white px-4 py-1.5 rounded-[8.5px] font-semibold text-[13px] shadow-lg sm:px-4 sm:py-2.5 sm:text-[16px] relative ${
+                    isSubmitting || !acceptedTerms ? 'opacity-40 cursor-not-allowed' : ''
                   }`}
                 >
                   {isSubmitting ? (
