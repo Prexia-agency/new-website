@@ -36,7 +36,7 @@ export default function ContactPage() {
   const titleControls = useAnimation();
   const descriptionControls = useAnimation();
   
-  const [formData, setFormData] = useState<ContactFormData>({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
@@ -56,6 +56,23 @@ export default function ContactPage() {
     }
   }, [isContentInView, titleControls, descriptionControls]);
 
+  const formatPhoneNumber = (value: string) => {
+    // Remove all non-digit characters
+    const numbers = value.replace(/\D/g, '');
+    
+    // Format based on length
+    if (numbers.length <= 3) {
+      return numbers;
+    } else if (numbers.length <= 6) {
+      return `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
+    } else if (numbers.length <= 10) {
+      return `${numbers.slice(0, 3)}-${numbers.slice(3, 6)}-${numbers.slice(6, 10)}`;
+    } else {
+      // Limit to 10 digits
+      return `${numbers.slice(0, 3)}-${numbers.slice(3, 6)}-${numbers.slice(6, 10)}`;
+    }
+  };
+
   const validateField = (fieldName: keyof ContactFormData, value: unknown) => {
     try {
       const fieldSchema = contactSchema.shape[fieldName];
@@ -73,14 +90,17 @@ export default function ContactPage() {
     const { name, value } = e.target;
     const fieldName = name as keyof ContactFormData;
     
+    // Format phone number with dashes as user types
+    const finalValue = name === 'phone' ? formatPhoneNumber(value) : value;
+    
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: finalValue
     }));
 
     // Real-time validation for touched fields
     if (touched[name]) {
-      const error = validateField(fieldName, value);
+      const error = validateField(fieldName, finalValue);
       setErrors((prev) => ({
         ...prev,
         [name]: error || ''
@@ -162,7 +182,7 @@ export default function ContactPage() {
   const whatsappUrl = "https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים";
 
   return (
-    <div className="min-h-screen pt-30 pb-12 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16" style={{ backgroundColor: '#F8F8FF' }}>
+    <div className="min-h-screen pt-0 pb-12 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16" style={{ backgroundColor: '#F8F8FF' }}>
       <GoogleAnalytics />
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header Section */}
@@ -204,7 +224,7 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                   <div>
                     <label className="block text-[12px] font-medium text-gray-700 mb-1 sm:text-sm sm:mb-2">
-                      שם מלא *
+                      שם מלא <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -225,7 +245,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <label className="block text-[12px] font-medium text-gray-700 mb-1 sm:text-sm sm:mb-2">
-                      אימייל *
+                      אימייל <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="email"
@@ -233,6 +253,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleInputChange}
                       onBlur={handleBlur}
+                      dir="ltr"
                       className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
                         touched.email && errors.email
                           ? 'border-red-500 focus:ring-red-500'
@@ -246,29 +267,8 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Phone and Company Row */}
+                {/* Company and Phone Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-                  <div>
-                    <label className="block text-[12px] font-medium text-gray-700 mb-1 sm:text-sm sm:mb-2">
-                      טלפון
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone || ''}
-                      onChange={handleInputChange}
-                      onBlur={handleBlur}
-                      className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
-                        touched.phone && errors.phone
-                          ? 'border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:ring-blue-500'
-                      }`}
-                      placeholder="050-123-4567"
-                    />
-                    {touched.phone && errors.phone && (
-                      <p className="text-red-500 text-[10px] sm:text-xs mt-1">{errors.phone}</p>
-                    )}
-                  </div>
                   <div>
                     <label className="block text-[12px] font-medium text-gray-700 mb-1 sm:text-sm sm:mb-2">
                       שם החברה
@@ -290,18 +290,44 @@ export default function ContactPage() {
                       <p className="text-red-500 text-[10px] sm:text-xs mt-1">{errors.company}</p>
                     )}
                   </div>
+                  <div>
+                    <label className="block text-[12px] font-medium text-gray-700 mb-1 sm:text-sm sm:mb-2">
+                      טלפון <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                        touched.phone && errors.phone
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'border-gray-300 focus:ring-blue-500'
+                      }`}
+                      placeholder="050-123-4567"
+                    />
+                    {touched.phone && errors.phone && (
+                      <p className="text-red-500 text-[10px] sm:text-xs mt-1">{errors.phone}</p>
+                    )}
+                  </div>
                 </div>
 
                 {/* Project Type */}
                 <div>
                   <label className="block text-[12px] sm:text-sm font-medium text-gray-700 mb-2">
-                    סוג הפרויקט
+                    סוג הפרויקט <span className="text-red-500">*</span>
                   </label>
                   <select
                     name="projectType"
                     value={formData.projectType}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-[16px] focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3"
+                    onBlur={handleBlur}
+                    className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                      touched.projectType && errors.projectType
+                        ? 'border-red-500 focus:ring-red-500'
+                        : 'border-gray-300 focus:ring-blue-500'
+                    }`}
                   >
                     <option value="">בחרו סוג פרויקט</option>
                     <option value="basic">חבילת בסיס - אתר תדמית פשוט</option>
@@ -309,12 +335,15 @@ export default function ContactPage() {
                     <option value="complex">פרויקטים מורכבים - אינטגרציות ופיתוח מתקדם</option>
                     <option value="other">אחר</option>
                   </select>
+                  {touched.projectType && errors.projectType && (
+                    <p className="text-red-500 text-[10px] sm:text-xs mt-1">{errors.projectType}</p>
+                  )}
                 </div>
 
                 {/* Message */}
                 <div>
                   <label className="block text-[12px] sm:text-sm font-medium text-gray-700 mb-2">
-                    ספרו לנו על הפרויקט *
+                    ספרו לנו על הפרויקט <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     name="message"

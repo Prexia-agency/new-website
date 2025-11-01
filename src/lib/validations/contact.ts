@@ -23,11 +23,10 @@ export const contactSchema = z.object({
 
   phone: z
     .string()
-    .optional()
-    .transform((val) => val?.trim())
+    .min(1, 'מספר טלפון הוא שדה חובה')
+    .trim()
     .refine(
       (val) => {
-        if (!val || val === '') return true;
         const cleanPhone = val.replace(/[\s-]/g, '');
         // Israeli phone formats: 05X-XXX-XXXX, 0X-XXX-XXXX, +972-XX-XXX-XXXX
         const phoneRegex = /^(?:\+972|0)?(?:5[0-9]|[2-4]|[8-9]|7[0-9])[0-9]{7}$/;
@@ -56,9 +55,12 @@ export const contactSchema = z.object({
     .trim(),
 
   projectType: z
-    .enum(['basic', 'advanced', 'complex', 'other'])
-    .optional()
-    .or(z.literal('')),
+    .string()
+    .min(1, 'נא לבחור סוג פרויקט')
+    .refine(
+      (val) => ['basic', 'advanced', 'complex', 'other'].includes(val),
+      { message: 'נא לבחור סוג פרויקט תקין' }
+    ),
 });
 
 // Export the TypeScript type inferred from the schema

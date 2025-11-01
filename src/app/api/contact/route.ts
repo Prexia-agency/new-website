@@ -43,9 +43,9 @@ export async function POST(request: NextRequest) {
           <h3>פרטי השולח:</h3>
           <p><strong>שם:</strong> ${name}</p>
           <p><strong>אימייל:</strong> ${email}</p>
-          ${phone ? `<p><strong>טלפון:</strong> ${phone}</p>` : ''}
+          <p><strong>טלפון:</strong> ${phone}</p>
           ${company ? `<p><strong>חברה:</strong> ${company}</p>` : ''}
-          ${projectType ? `<p><strong>סוג פרויקט:</strong> ${getProjectTypeLabel(projectType)}</p>` : ''}
+          <p><strong>סוג פרויקט:</strong> ${getProjectTypeLabel(projectType)}</p>
           
           <h3>הודעה:</h3>
           <p style="white-space: pre-wrap;">${message}</p>
@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
               box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
             .header {
-              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              background: linear-gradient(135deg, #FF6A00 0%, #FF00A8 25%, #8B00FF 50%, #007BFF 75%, #00D4FF 100%);
               padding: 40px 20px;
               text-align: center;
               color: white;
@@ -117,14 +117,14 @@ export async function POST(request: NextRequest) {
             }
             .info-box {
               background-color: #f8f8ff;
-              border-right: 4px solid #667eea;
+              border-right: 4px solid #8B00FF;
               padding: 20px;
               border-radius: 8px;
               margin: 30px 0;
             }
             .info-box h3 {
               margin: 0 0 15px 0;
-              color: #667eea;
+              color: #8B00FF;
               font-size: 18px;
             }
             .info-item {
@@ -137,7 +137,7 @@ export async function POST(request: NextRequest) {
             }
             .cta-button {
               display: inline-block;
-              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              background: linear-gradient(135deg, #FF6A00 0%, #FF00A8 25%, #8B00FF 50%, #007BFF 75%, #00D4FF 100%);
               color: white;
               padding: 14px 32px;
               border-radius: 8px;
@@ -158,7 +158,7 @@ export async function POST(request: NextRequest) {
               margin-top: 20px;
             }
             .contact-info a {
-              color: #667eea;
+              color: #8B00FF;
               text-decoration: none;
             }
           </style>
@@ -186,21 +186,17 @@ export async function POST(request: NextRequest) {
                 <div class="info-item">
                   <span class="info-label">אימייל:</span> ${email}
                 </div>
-                ${phone ? `
                 <div class="info-item">
                   <span class="info-label">טלפון:</span> ${phone}
                 </div>
-                ` : ''}
                 ${company ? `
                 <div class="info-item">
                   <span class="info-label">חברה:</span> ${company}
                 </div>
                 ` : ''}
-                ${projectType ? `
                 <div class="info-item">
                   <span class="info-label">סוג פרויקט:</span> ${getProjectTypeLabel(projectType)}
                 </div>
-                ` : ''}
               </div>
 
               <div class="message">

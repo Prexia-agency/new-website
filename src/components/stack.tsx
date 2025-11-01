@@ -50,18 +50,18 @@ export default function Stack() {
   }, [isContentInView, titleControls, descriptionControls, rive, isIllustrationInView]);
 
   return (
-    <section className="bg-black pt-19 pb-72 sm:pt-47 lg:pt-78 lg:pb-58 sm:pb-50" ref={wrapperRef} dir="rtl" data-section="stack">
+    <section className="bg-black pt-19 pb-72 sm:pt-24 lg:pt-39 lg:pb-58 sm:pb-50" ref={wrapperRef} dir="rtl" data-section="stack">
       <div className="max-w-6xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-8">
         <div className="lg:col-span-6 order-1 lg:order-1" ref={contentRef}>
           <TitleAnimation
             tag="h2"
-            className="font-noto-hebrew text-2xl tracking-[-1.12px] text-white font-black leading-snug lg:text-[42px] max-w-[586px] md:max-w-[470px] md:text-4xl sm:text-3xl text-black"
+            className="font-noto-hebrew text-2xl tracking-[-1.12px] text-white font-black leading-snug lg:text-[48px] max-w-[586px] md:max-w-[470px] md:text-4xl sm:text-3xl text-black"
             items={titleItems}
             animationName="second"
             controls={titleControls}
           />
           <motion.p
-            className="mt-5 max-w-[410px] text-[11.5px] md:mt-3 md:max-w-[470px] sm:mt-2.5 sm:text-base leading-relaxed text-white/80"
+            className="mt-5 max-w-[410px] text-[11.5px] md:mt-3 md:max-w-[470px] sm:mt-2.5 sm:text-base leading-relaxed text-[#8c929d]"
             initial="initial"
             animate={descriptionControls}
             variants={descriptionVariants}

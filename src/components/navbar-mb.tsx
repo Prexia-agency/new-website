@@ -2,115 +2,158 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 export default function NavbarMobile() {
-  const [isOverDark, setIsOverDark] = useState(false);
-  const pathname = usePathname();
-  const isHomePage = pathname === '/';
+  const navRef = useRef<HTMLElement>(null);
+  const hamburgerRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLDivElement>(null);
+  const linksRef = useRef<(HTMLAnchorElement | null)[]>([]);
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
-    if (!isHomePage) {
-      setIsOverDark(false);
-      return;
+    // Initialize the timeline in a paused state to prevent auto-play on mount
+    tlRef.current = gsap.timeline({ 
+      defaults: { duration: 1, ease: 'expo.inOut' },
+      paused: true
+    });
+
+    if (navRef.current && closeRef.current && hamburgerRef.current) {
+      tlRef.current
+        .to(hamburgerRef.current, { opacity: 0, pointerEvents: 'none' }, 0)
+        .to(navRef.current, { 
+          right: 0,
+          borderWidth: '1px',
+          borderStyle: 'solid',
+          borderImage: 'linear-gradient(135deg, rgba(255, 106, 0, 0.2) 0%, rgba(139, 0, 255, 0.2) 50%, rgba(0, 212, 255, 0.2) 100%) 1',
+          borderRadius: '12px'
+        }, 0)
+        .to(navRef.current, { 
+          height: '100vh', 
+          top: 0, 
+          transform: 'translateY(0)',
+          borderWidth: '0px',
+          borderRadius: '0px'
+        }, '-=.1')
+        .to(linksRef.current.filter(Boolean), { 
+          opacity: 1, 
+          pointerEvents: 'all', 
+          stagger: 0.2 
+        }, '-=.8')
+        .to(closeRef.current, { opacity: 1, pointerEvents: 'all' }, '-=.8');
     }
+  }, []);
 
-    const handleScroll = () => {
-      const navbar = document.querySelector('nav.lg\\:hidden');
-      if (!navbar) return;
-
-      const navbarRect = navbar.getBoundingClientRect();
-      const navbarCenter = navbarRect.top + navbarRect.height / 2;
-
-      // Check if navbar is over Hero or Stack sections (mobile versions)
-      const heroSection = document.querySelector('.lg\\:hidden[data-section="hero"]');
-      const stackSection = document.querySelector('[data-section="stack"]');
-
-      let overDark = false;
-
-      if (heroSection) {
-        const heroRect = heroSection.getBoundingClientRect();
-        if (navbarCenter >= heroRect.top && navbarCenter <= heroRect.bottom) {
-          overDark = true;
-        }
+  const handleOpen = () => {
+    if (tlRef.current) {
+      if (tlRef.current.reversed()) {
+        tlRef.current.play();
+      } else {
+        tlRef.current.restart();
       }
+    }
+  };
 
-      if (stackSection) {
-        const stackRect = stackSection.getBoundingClientRect();
-        if (navbarCenter >= stackRect.top && navbarCenter <= stackRect.bottom) {
-          overDark = true;
-        }
-      }
-
-      setIsOverDark(overDark);
-    };
-
-    handleScroll(); // Check initial position
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isHomePage]);
-
-  const textColor = isOverDark ? 'text-white hover:text-gray-200' : 'text-gray-800 hover:text-gray-600';
+  const handleClose = () => {
+    if (tlRef.current) {
+      tlRef.current.reverse();
+    }
+  };
 
   return (
-    <nav 
-      className="lg:hidden fixed top-3 left-1/2 transform -translate-x-1/2 z-50 py-3"
-      dir="rtl"
-    >
-      <div className="bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-2xl px-9 py-0.5">
-        <div className="flex items-center justify-between gap-6">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0 ml-0">
+    <>
+      {/* Mobile Navbar Bar with Backdrop Blur */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md border-b border-white/10">
+        <div className="flex items-center justify-between px-5 py-3">
+          {/* Logo on Left Side */}
+          <Link href="/" className="flex-shrink-0">
             <Image
               src="/images/LOGO-AK.png"
               alt="AK Agency Logo"
-              width={32}
-              height={32}
-              className="w-8 h-8"
+              width={48}
+              height={48}
+              className="w-12 h-12"
             />
           </Link>
 
-          {/* Navigation Links */}
-          <div className="flex items-center gap-5">
+          {/* Menu Button Container - holds both hamburger and close */}
+          <div className="relative w-[18px] h-[18px]">
+            {/* Hamburger Menu Button with Gradient */}
+            <div 
+              ref={hamburgerRef}
+              onClick={handleOpen}
+              className="cursor-pointer w-[18px] h-[12px] absolute top-[3px]"
+            >
+              <div className="relative w-full h-full">
+                <div className="absolute w-[18px] h-[2.4px] gradient-bg rounded"></div>
+                <div className="absolute w-[18px] h-[2.4px] gradient-bg rounded top-[5.4px]"></div>
+                <div className="absolute w-[18px] h-[2.4px] gradient-bg rounded top-[10.8px]"></div>
+              </div>
+            </div>
+
+            {/* Close Button - Takes place of hamburger when menu is open */}
+            <div 
+              ref={closeRef}
+              onClick={handleClose}
+              className="cursor-pointer w-[18px] h-[18px] opacity-0 pointer-events-none absolute top-0"
+            >
+              <div className="relative w-full h-full">
+                <div 
+                  className="absolute w-[18px] h-[2.4px] gradient-bg rounded transition-colors duration-500"
+                  style={{ transform: 'rotate(-45deg)', top: '50%', left: '0', marginTop: '-1.2px' }}
+                ></div>
+                <div 
+                  className="absolute w-[18px] h-[2.4px] gradient-bg rounded transition-colors duration-500"
+                  style={{ transform: 'rotate(45deg)', top: '50%', left: '0', marginTop: '-1.2px' }}
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Full Screen Menu */}
+      <nav 
+        ref={navRef}
+        className="lg:hidden fixed w-full h-[30px] bg-white flex justify-center items-center z-40"
+        style={{ right: '-200vw', top: '50%', transform: 'translateY(-50%)' }}
+        dir="rtl"
+      >
+        {/* Navigation Links */}
+        <ul className="list-none">
+          <li className="my-[50px]">
             <Link 
               href="/"
-              className={`${textColor} transition-colors duration-300 font-medium text-[10px]`}
+              ref={(el) => { linksRef.current[0] = el; }}
+              onClick={handleClose}
+              className="text-black text-3xl font-medium relative opacity-0 pointer-events-none inline-block after:content-[''] after:w-full after:absolute after:h-[3px] after:rounded-[5px] after:bg-black after:bottom-[-10px] after:left-0 after:origin-left after:transition-transform after:duration-500 after:ease-out after:scale-x-0 hover:after:scale-x-100"
             >
               בית
             </Link>
+          </li>
+          <li className="my-[50px]">
             <Link 
               href="/pricing"
-              className={`${textColor} transition-colors duration-300 font-medium text-[10px]`}
+              ref={(el) => { linksRef.current[1] = el; }}
+              onClick={handleClose}
+              className="text-black text-3xl font-medium relative opacity-0 pointer-events-none inline-block after:content-[''] after:w-full after:absolute after:h-[3px] after:rounded-[5px] after:bg-black after:bottom-[-10px] after:left-0 after:origin-left after:transition-transform after:duration-500 after:ease-out after:scale-x-0 hover:after:scale-x-100"
             >
               מחירון
             </Link>
-          </div>
-
-          {/* Contact Button */}
-          <Link
-            href="/contact"
-            className="gradient-bg hover:opacity-90 text-white px-4 py-0.5 rounded-[14px] font-medium text-[10px] transition-all duration-200 hover:shadow-lg flex items-center gap-3"
-          >
-            <span className="font-medium text-[9px] text-white">
-              צור קשר
-            </span>
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="flex-shrink-0"
+          </li>
+          <li className="my-[50px]">
+            <Link 
+              href="/contact"
+              ref={(el) => { linksRef.current[2] = el; }}
+              onClick={handleClose}
+              className="gradient-text text-3xl font-medium relative opacity-0 pointer-events-none inline-block after:content-[''] after:w-full after:absolute after:h-[3px] after:rounded-[5px] after:bg-gradient-to-r after:from-[#FF6A00] after:via-[#8B00FF] after:to-[#00D4FF] after:bottom-[-10px] after:left-0 after:origin-left after:transition-transform after:duration-500 after:ease-out after:scale-x-0 hover:after:scale-x-100"
             >
-              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-            </svg>
-          </Link>
-        </div>
-      </div>
-    </nav>
+              צור קשר
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </>
   );
 }

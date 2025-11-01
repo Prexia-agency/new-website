@@ -3,13 +3,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import DrawLink from './DrawLink';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import { gsap } from 'gsap';
 
 export default function Navbar() {
   const [isOverDark, setIsOverDark] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === '/';
+  const iconRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     if (!isHomePage) {
@@ -54,13 +56,38 @@ export default function Navbar() {
 
   const textColor = isOverDark ? 'text-white hover:text-gray-200' : 'text-gray-800 hover:text-gray-600';
 
+  const handleIconHover = () => {
+    if (!iconRef.current) return;
+    
+    const tl = gsap.timeline();
+    
+    // Slide out to the left
+    tl.to(iconRef.current, {
+      x: -30,
+      opacity: 0,
+      duration: 0.3,
+      ease: 'power2.in',
+    })
+    // Instantly move to the right
+    .set(iconRef.current, {
+      x: 30,
+    })
+    // Slide in from the right
+    .to(iconRef.current, {
+      x: 0,
+      opacity: 1,
+      duration: 0.3,
+      ease: 'power2.out',
+    });
+  };
+
   return (
     <nav 
-      className="hidden lg:block fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-[500px]"
+      className="hidden lg:block fixed top-0 left-0 right-0 z-50"
       dir="rtl"
     >
-      <div className="bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-2xl py-0 pl-2 pr-2 w-full">
-        <div className="flex items-center justify-between gap-4">
+      <div className="w-full bg-transparent backdrop-blur-md border-b border-white/10">
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-4 py-3 px-6">
           {/* Logo - Far Right */}
           <Link href="/" className="flex-shrink-0 pr-2">
             <Image
@@ -89,14 +116,33 @@ export default function Navbar() {
           </div>
 
           {/* Contact Button - Far Left */}
+          <style jsx global>{`
+            .navbar-contact-button {
+              transform: translateZ(0) scale(1);
+              will-change: transform, opacity;
+              transition: transform 700ms cubic-bezier(0.4, 0, 0.2, 1), opacity 800ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+            }
+            
+            .navbar-contact-button:hover {
+              transform: translateZ(0) scale(1.02) !important;
+              opacity: 0.85;
+            }
+          `}</style>
           <Link
             href="/contact"
-            className="gradient-bg hover:opacity-90 text-white px-5 py-3 rounded-full font-medium text-sm transition-all duration-200 hover:shadow-xl flex items-center gap-2 flex-shrink-0"
+            className="navbar-contact-button gradient-bg text-white px-5 py-3 rounded-[10px] font-semibold text-[10px] shadow-xl flex items-center gap-2 flex-shrink-0"
+            style={{ 
+              backdropFilter: 'blur(10px)',
+              border: '1px solid transparent',
+              backgroundClip: 'padding-box',
+            }}
+            onMouseEnter={handleIconHover}
           >
-            <span className="font-medium text-xs text-white">
+            <span className="font-semibold text-[14px] text-white">
               דבר איתנו
             </span>
             <svg
+              ref={iconRef}
               width="16"
               height="16"
               viewBox="0 0 24 24"
