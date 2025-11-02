@@ -31,7 +31,7 @@ declare global {
   }
 }
 
-export const useGoogleAnalytics = (measurementId: string) => {
+export const useGoogleAnalytics = (measurementId: string, adsId?: string) => {
   useEffect(() => {
     // Check if analytics is enabled
     if (!isAnalyticsEnabled()) {
@@ -60,6 +60,12 @@ export const useGoogleAnalytics = (measurementId: string) => {
     window.gtag('config', measurementId, {
       page_path: window.location.pathname,
     });
+
+    // Configure Google Ads if provided
+    if (adsId) {
+      window.gtag('config', adsId);
+      console.log('[GA] Google Ads configured with ID:', adsId);
+    }
 
     // Load GA script
     const script = document.createElement('script');
@@ -95,7 +101,7 @@ export const useGoogleAnalytics = (measurementId: string) => {
     return () => {
       window.removeEventListener('cookiePreferencesChanged', handlePreferencesChanged);
     };
-  }, [measurementId]);
+  }, [measurementId, adsId]);
 };
 
 /**
