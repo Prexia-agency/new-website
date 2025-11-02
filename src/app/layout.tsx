@@ -160,14 +160,20 @@ export default function RootLayout({
           }}
         />
 
-        {/* Google Ads Conversion Tracking */}
+        {/* Google tag (gtag.js) */}
         <Script
-          id="google-ads-config"
+          src="https://www.googletagmanager.com/gtag/js?id=G-QDWLLBCVS8"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics-config"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-QDWLLBCVS8');
               gtag('config', 'AW-17674126648');
             `,
           }}

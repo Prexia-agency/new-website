@@ -188,8 +188,8 @@ export default function ContactPage() {
   const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     
-    // Declare gtag function type
-    const gtag = (window as any).gtag;
+    // Type-safe access to gtag
+    const gtag = typeof window !== 'undefined' ? (window as Window & { gtag?: (...args: unknown[]) => void }).gtag : undefined;
     
     if (typeof gtag !== 'undefined') {
       const callback = function () {
