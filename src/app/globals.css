@@ -188,6 +188,14 @@ html, body {
   background-blend-mode: screen;
 }
 
+/* Text gradient matching contact button gradient */
+.gradient-text-contact {
+  background: linear-gradient(135deg, #FF6A00 0%, #8B00FF 50%, #00D4FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* Fallback utilities to mirror source design tokens */
 .bg-gray-9 { background-color: #0f0f10; }
 .border-gray-8 { border-color: #2a2a2f; }

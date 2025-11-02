@@ -21,7 +21,7 @@ const titleItemsLine1 = [
 ];
 
 const titleItemsLine2 = [
-  { value: 'אתר', className: 'gradient-text' },
+  { value: 'אתר', className: 'gradient-text-contact' },
   { value: ' שמביא תוצאות' },
 ];
 

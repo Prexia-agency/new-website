@@ -17,17 +17,17 @@ const titleItems = [
 
 const formVariants = {
   initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 1.3 } },
 };
 
 const whatsappVariants = {
   initial: { opacity: 0, x: 30 },
-  animate: { opacity: 1, x: 0 },
+  animate: { opacity: 1, x: 0, transition: { duration: 0.6, delay: 1.5 } },
 };
 
 const descriptionVariants = {
   initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2 } },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 1.2 } },
 };
 
 export default function ContactPage() {
@@ -52,7 +52,10 @@ export default function ContactPage() {
 
   useEffect(() => {
     if (isContentInView) {
-      titleControls.start('animate').then(() => descriptionControls.start('animate'));
+      // Delay animations to avoid conflict with navbar animation
+      setTimeout(() => {
+        titleControls.start('animate').then(() => descriptionControls.start('animate'));
+      }, 1000);
     }
   }, [isContentInView, titleControls, descriptionControls]);
 
@@ -182,7 +185,7 @@ export default function ContactPage() {
   const whatsappUrl = "https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים";
 
   return (
-    <div className="min-h-screen pt-0 pb-12 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16" style={{ backgroundColor: '#F8F8FF' }}>
+    <div className="min-h-screen pt-24 pb-12 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16" style={{ backgroundColor: '#F8F8FF' }}>
       <GoogleAnalytics />
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header Section */}

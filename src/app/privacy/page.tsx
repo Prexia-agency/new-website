@@ -5,7 +5,7 @@ import { AuroraText } from '@/components/ui/aurora-text';
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-[#F8F8FF] text-white py-20 px-6 md:px-12 lg:px-24" dir="rtl">
+    <div className="min-h-screen bg-[#F8F8FF] text-white pt-24 pb-12 px-6 sm:pt-24 sm:pb-12 md:px-12 lg:pt-28 lg:pb-16 lg:px-24" dir="rtl">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div

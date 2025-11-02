@@ -20,7 +20,7 @@ const titleItemsLine1 = [
 ];
 
 const titleItemsLine2 = [
-  { value: 'אתר', className: 'gradient-text' },
+  { value: 'אתר', className: 'gradient-text-contact' },
   { value: ' שמביא תוצאות' },
 ];
 
@@ -59,14 +59,14 @@ export default function HeroMobile() {
         <div className="flex flex-col items-center">
           <TitleAnimation
             tag="h1"
-            className="font-noto-hebrew text-3xl sm:text-4xl md:text-5xl font-black text-white mb-1 leading-tight tracking-tight max-w-sm sm:max-w-2xl"
+            className="font-noto-hebrew text-[40px] lg:text-6xl font-black text-white mb-1 leading-tight tracking-tight max-w-sm lg:max-w-2xl"
             items={titleItemsLine1}
             animationName="second"
             controls={titleControls}
           />
           <TitleAnimation
             tag="h1"
-            className="font-noto-hebrew text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 leading-tight tracking-tight max-w-sm sm:max-w-2xl"
+            className="font-noto-hebrew text-[40px] lg:text-6xl font-black text-white mb-4 leading-tight tracking-tight max-w-sm lg:max-w-2xl"
             items={titleItemsLine2}
             animationName="second"
             controls={titleControls}
@@ -74,10 +74,10 @@ export default function HeroMobile() {
         </div>
         
         {/* Divider Line */}
-        <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent mb-3 opacity-50"></div>
+        <div className="w-46 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent mb-3 opacity-80"></div>
         
         <motion.p
-          className="text-[12px] sm:text-base md:text-lg text-white/95 mb-3 max-w-xs sm:max-w-sm md:max-w-lg leading-relaxed font-normal"
+          className="text-sm lg:text-[18px] text-white/95 mb-8 lg:mb-3 max-w-sm lg:max-w-2xl leading-relaxed font-normal"
           initial="initial"
           animate={descriptionControls}
           variants={descriptionVariants}
@@ -100,7 +100,7 @@ export default function HeroMobile() {
         <div className="flex flex-row-reverse gap-4" dir="rtl">
           <Link 
             href="/contact"
-            className="hero-mobile-button-link text-black px-3 py-1.5 rounded-[12px] border-2 border-gray-100/10 shadow-xl font-bold text-[11px] flex items-center gap-1 group"
+            className="hero-mobile-button-link text-black px-4 py-2 lg:px-3 lg:py-1.5 rounded-[12px] border-2 border-gray-100/10 shadow-xl font-bold text-[14px] lg:text-[11px] flex items-center gap-1 group"
             style={{ 
               background: 'linear-gradient(176.87deg, rgb(255, 255, 255) 8.56%, rgb(186, 23, 154) 85.04%)',
               backdropFilter: 'blur(10px)',
@@ -108,15 +108,15 @@ export default function HeroMobile() {
           >
             בוא נתחיל
             <svg
-              width="14"
-              height="14"
+              width="18"
+              height="18"
+              className="flex-shrink-0 lg:w-[14px] lg:h-[14px]"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="flex-shrink-0"
             >
               {/* Chevron/Triangle - always visible, pointing left */}
               <path d="m15 18-6-6 6-6"/>
@@ -129,7 +129,7 @@ export default function HeroMobile() {
           </Link>
           <Link 
             href="/pricing"
-            className="hero-mobile-button-link text-black border-2 border-white/30 px-4 py-2 rounded-[12px] font-semibold text-[11px] shadow-xl flex items-center gap-1"
+            className="hero-mobile-button-link text-black border-2 border-white/30 px-5 py-2.5 lg:px-4 lg:py-2 rounded-[12px] font-semibold text-[14px] lg:text-[11px] shadow-xl flex items-center gap-1"
             style={{ 
               background: 'linear-gradient(176.87deg, rgba(255, 255, 255, 0.88) 8.56%, rgb(255, 255, 255) 85.04%)',
               backdropFilter: 'blur(10px)',
@@ -137,12 +137,12 @@ export default function HeroMobile() {
           >
             <span>המחירים</span>
             <svg
-              width="14"
-              height="14"
+              width="18"
+              height="18"
+              className="flex-shrink-0 lg:w-[14px] lg:h-[14px]"
               viewBox="0 0 14 14"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="flex-shrink-0"
             >
               <g
                 fill="none"

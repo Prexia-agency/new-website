@@ -26,12 +26,25 @@ export default function Navbar() {
       const navbarRect = navbar.getBoundingClientRect();
       const navbarCenter = navbarRect.top + navbarRect.height / 2;
 
-      // Check if navbar is over Hero or Stack sections
+      // Check if navbar is over Hero, Stack, or GSAP card sections (dark backgrounds)
       const heroSection = document.querySelector('.hidden.lg\\:block[data-section="hero"]');
       const stackSection = document.querySelector('[data-section="stack"]');
+      const gsapCard = document.querySelector('.bg-\\[\\#0e100f\\]');
+      const sitesSection = document.querySelector('section.bg-white');
 
       let overDark = false;
 
+      // Check if over sites section (white background) - should use dark text
+      if (sitesSection) {
+        const sitesRect = sitesSection.getBoundingClientRect();
+        if (navbarCenter >= sitesRect.top && navbarCenter <= sitesRect.bottom) {
+          overDark = false; // Explicitly set to false for white background
+          setIsOverDark(overDark);
+          return;
+        }
+      }
+
+      // Check if over dark sections (Hero, Stack, or GSAP card)
       if (heroSection) {
         const heroRect = heroSection.getBoundingClientRect();
         if (navbarCenter >= heroRect.top && navbarCenter <= heroRect.bottom) {
@@ -42,6 +55,13 @@ export default function Navbar() {
       if (stackSection) {
         const stackRect = stackSection.getBoundingClientRect();
         if (navbarCenter >= stackRect.top && navbarCenter <= stackRect.bottom) {
+          overDark = true;
+        }
+      }
+
+      if (gsapCard) {
+        const gsapRect = gsapCard.getBoundingClientRect();
+        if (navbarCenter >= gsapRect.top && navbarCenter <= gsapRect.bottom) {
           overDark = true;
         }
       }

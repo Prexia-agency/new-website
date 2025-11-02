@@ -139,7 +139,7 @@ const SiteItem = ({ icon: Icon, title, description }: { icon: IconComponent, tit
 };
 
 const Sites = () => (
-  <section className="bg-white py-20 lg:py-16 sm:py-12">
+  <section className="bg-white py-40 lg:py-35 sm:py-25">
     <div className="max-w-6xl mx-auto px-6 lg:px-8">
       <h2 className="max-w-[700px] text-xl font-bold font-noto-hebrew text-gray-900 leading-snug lg:max-w-[650px] lg:text-[34px] sm:text-[19px]" dir="rtl">
         סוגי אתרים שאנחנו בונים עבורכם:

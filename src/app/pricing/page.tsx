@@ -73,7 +73,7 @@ const pricingData = [
 
 const descriptionVariants = {
   initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2 } },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 1.2 } },
 };
 
 const cardVariants = {
@@ -89,12 +89,15 @@ export default function PricingPage() {
 
   useEffect(() => {
     if (isContentInView) {
-      titleControls.start('animate').then(() => descriptionControls.start('animate'));
+      // Delay animations to avoid conflict with navbar animation
+      setTimeout(() => {
+        titleControls.start('animate').then(() => descriptionControls.start('animate'));
+      }, 1000);
     }
   }, [isContentInView, titleControls, descriptionControls]);
 
   return (
-    <div className="min-h-screen pt-32 pb-30 lg:pt-30 lg:pb-36 sm:pt-24 sm:pb-12" style={{ backgroundColor: '#F8F8FF' }}>
+    <div className="min-h-screen pt-24 pb-12 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16" style={{ backgroundColor: '#F8F8FF' }}>
       <GoogleAnalytics />
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header Section */}
@@ -130,7 +133,7 @@ export default function PricingPage() {
               initial="initial"
               animate={areCardsInView ? "animate" : "initial"}
               variants={cardVariants}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: 1.3 + (index * 0.1) }}
             >
               {/* Popular Badge */}
               {plan.popular && (

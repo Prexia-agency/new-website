@@ -1,8 +1,7 @@
 import { Metadata } from "next";
 import Hero from "@/components/hero";
 import HeroMobile from "@/components/hero mobile";
-import SecondSection from "@/components/second-section";
-import SecondSectionMobile from "@/components/second-section-mobile";
+import SecondSectionGsap from "@/components/second-section-gsap";
 import Stack from "@/components/stack";
 import Sites from "@/components/sites";
 import Portfolio from "@/components/portfolio";
@@ -56,8 +55,7 @@ export default function Home() {
       <HeroMobile />
       <Hero />
        <Stack />
-      <SecondSectionMobile />
-      <SecondSection />
+      <SecondSectionGsap />
       <Sites />
       <Portfolio />
       <FAQ/>
