@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { AuroraText } from '@/components/ui/aurora-text';
 
 export default function TermsPage() {
   return (
@@ -14,10 +13,8 @@ export default function TermsPage() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h1 className="font-noto-hebrew text-5xl lg:text-6xl font-black mb-4 mt-15">
-            <AuroraText colors={['#FF6A00', '#FF00A8', '#8B00FF', '#007BFF', '#00D4FF']} speed={1.2}>
+          <h1 className="font-noto-hebrew text-5xl lg:text-6xl font-black mb-4 mt-15 gradient-text-contact">
               תנאי שימוש
-            </AuroraText>
           </h1>
         </motion.div>
 
@@ -130,7 +127,8 @@ export default function TermsPage() {
               </p>
               <p>
                 האתר משתמש בקובצי קוקיז ובכלי ניתוח (כגון Google Analytics) לצרכים סטטיסטיים ושיווקיים בכפוף להסכמת המשתמש.
-המשתמש רשאי לבקש לעיין, לתקן או למחוק את המידע שנשמר עליו באמצעות פנייה לכתובת: contact@atarym.com
+המשתמש רשאי לבקש לעיין, לתקן או למחוק את המידע שנשמר עליו באמצעות פנייה לכתובת: info@contact.atarym.com
+
 .
 למידע נוסף ראה מדיניות הפרטיות שלנו.
               </p>
@@ -203,7 +201,7 @@ export default function TermsPage() {
             <div className="text-black/80 leading-relaxed space-y-3">
               <p>ניתן לפנות לחברה בכל עניין הנוגע לשירות, למדיניות הפרטיות או לתנאי השימוש באחת מהדרכים הבאות:</p>
               <ul className="list-none text-black/80 space-y-2 mr-4">
-                <li>📧 contact@atarym.com</li>
+                <li>📧 info@contact.atarym.com</li>
                 <li>📞 050-5322336</li>
                 <li>📝 טופס יצירת קשר באתר.</li>
               </ul>

@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion';
-import { AuroraText } from '@/components/ui/aurora-text';
 
 export default function AccessibilityStatement() {
   return (
@@ -14,10 +13,8 @@ export default function AccessibilityStatement() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h1 className="font-noto-hebrew text-5xl lg:text-6xl font-black mb-4 mt-15">
-            <AuroraText colors={['#FF6A00', '#FF00A8', '#8B00FF', '#007BFF', '#00D4FF']} speed={1.2}>
+          <h1 className="font-noto-hebrew text-5xl lg:text-6xl font-black mb-4 mt-15 gradient-text-contact">
               הצהרת נגישות
-            </AuroraText>
           </h1>
           <p className="text-xl text-gray-600">
             התחייבותנו לנגישות עבור כלל הציבור
@@ -117,7 +114,7 @@ export default function AccessibilityStatement() {
                   <span className="text-3xl">📧</span>
                   <div>
                     <div className="font-semibold text-gray-800">דוא&quot;ל</div>
-                    <div className="text-peaceful-dawn font-medium">contact@atarym.com</div>
+                    <div className="text-peaceful-dawn font-medium">info@contact.atarym.com</div>
                   </div>
                 </div>
                 

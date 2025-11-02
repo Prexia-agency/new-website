@@ -28,8 +28,8 @@ export async function POST(request: NextRequest) {
 
     const { name, email, phone, company, message, projectType } = validationResult.data;
 
-    const fromEmail = process.env.RESEND_FROM_EMAIL || 'contact@atarym.com';
-    const toEmail = process.env.RESEND_TO_EMAIL || 'atarymwebsite@gmail.com';
+    const fromEmail = process.env.RESEND_FROM_EMAIL || '';
+    const toEmail = process.env.RESEND_TO_EMAIL || '';
 
     // Email to business
     const businessEmailResult = await resend.emails.send({

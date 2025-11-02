@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { AuroraText } from '@/components/ui/aurora-text';
 
 export default function PrivacyPage() {
   return (
@@ -14,10 +13,8 @@ export default function PrivacyPage() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h1 className="font-noto-hebrew text-5xl lg:text-6xl font-black mb-4 mt-15">
-            <AuroraText colors={['#FF6A00', '#FF00A8', '#8B00FF', '#007BFF', '#00D4FF']} speed={1.2}>
+          <h1 className="font-noto-hebrew text-5xl lg:text-6xl font-black mb-4 mt-15 gradient-text-contact">
               מדיניות פרטיות
-            </AuroraText>
           </h1>
           <p className="text-black/70 text-sm">
             עודכנה לאחרונה: 25 בספטמבר 2025
@@ -197,7 +194,8 @@ export default function PrivacyPage() {
               <ul className="list-disc list-inside text-black/80 space-y-1 mr-4">
                 <li>לחיצה על הקישור &quot;להסרה&quot; בכל הודעת מייל</li>
                 <li>שליחת תגובה עם המילה STOP (ל-SMS/וואטסאפ)</li>
-                <li>פנייה לכתובת contact@atarym.com</li>
+                <li>פנייה לכתובת info@contact.atarym.com
+                </li>
               </ul>
             </div>
           </section>
@@ -214,7 +212,8 @@ export default function PrivacyPage() {
                 <li>לבטל את הסכמתך בכל עת</li>
                 <li>להגיש תלונה לרשות המוסמכת</li>
               </ul>
-              <p>לפנייה בנושא זכויות פרטיות: contact@atarym.com</p>
+              <p>לפנייה בנושא זכויות פרטיות: info@contact.atarym.com
+              </p>
               <p>טלפון: 050-5322336</p>
             </div>
           </section>
@@ -223,7 +222,8 @@ export default function PrivacyPage() {
           <section className="space-y-4">
             <h2 className="text-2xl font-bold text-black">12. דיווח על פגיעה בפרטיות</h2>
             <p className="text-black/80">
-              אם אתה סבור שפרטיותך נפגעה, פנה אלינו מיד לכתובת: contact@atarym.com
+              אם אתה סבור שפרטיותך נפגעה, פנה אלינו מיד לכתובת: info@contact.atarym.com
+
             </p>
             <p className="text-black/80">
               ציין את פרטי האירוע, ואנו נבדוק ונטפל בהתאם לחוק.
