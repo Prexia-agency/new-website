@@ -184,6 +184,30 @@ export default function ContactPage() {
 
   const whatsappUrl = "https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים";
 
+  // Google Ads conversion tracking for WhatsApp button
+  const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    
+    // Declare gtag function type
+    const gtag = (window as any).gtag;
+    
+    if (typeof gtag !== 'undefined') {
+      const callback = function () {
+        window.location.href = whatsappUrl;
+      };
+      
+      gtag('event', 'conversion', {
+        'send_to': 'AW-17674126648/-Y64CPTwtrgbELiK1-tB',
+        'value': 1.0,
+        'currency': 'ILS',
+        'event_callback': callback
+      });
+    } else {
+      // Fallback if gtag is not loaded
+      window.location.href = whatsappUrl;
+    }
+  };
+
   return (
     <div className="min-h-screen pt-24 pb-12 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16" style={{ backgroundColor: '#F8F8FF' }}>
       <GoogleAnalytics />
@@ -458,10 +482,12 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Link
+              id="whatsapp-button"
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="block"
+              onClick={handleWhatsAppClick}
             >
               <div className="relative bg-white rounded-2xl shadow-lg p-4 border-2 border-green-200 hover:border-green-300 transition-colors duration-300 group cursor-pointer sm:p-6 lg:p-8">
                 {/* WhatsApp Header */}

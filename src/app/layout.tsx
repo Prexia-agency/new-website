@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
 import "./accessibility.css";
 import Navbar from "@/components/navbar";
@@ -159,6 +160,19 @@ export default function RootLayout({
           }}
         />
 
+        {/* Google Ads Conversion Tracking */}
+        <Script
+          id="google-ads-config"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('config', 'AW-17674126648');
+            `,
+          }}
+        />
+        
         <AccessibilityProvider>
           <ColorBlindnessFilters />
           <NavbarMobile />
