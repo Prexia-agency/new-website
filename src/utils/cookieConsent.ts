@@ -64,6 +64,19 @@ export const acceptAllCookies = (): void => {
     analytics: true,
     timestamp: new Date().toISOString(),
   });
+  
+  // Update Google Consent Mode
+  if (typeof window !== 'undefined') {
+    const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+    if (gtag) {
+      gtag('consent', 'update', {
+        ad_storage: 'granted',
+        analytics_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+      });
+    }
+  }
 };
 
 /**
@@ -75,6 +88,19 @@ export const rejectAllCookies = (): void => {
     analytics: false,
     timestamp: new Date().toISOString(),
   });
+  
+  // Ensure consent stays denied
+  if (typeof window !== 'undefined') {
+    const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+    if (gtag) {
+      gtag('consent', 'update', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+      });
+    }
+  }
 };
 
 /**

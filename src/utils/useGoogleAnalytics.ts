@@ -50,6 +50,14 @@ export const useGoogleAnalytics = (measurementId: string, adsId?: string) => {
         window.dataLayer?.push(args);
       };
 
+      // Update consent mode to granted
+      window.gtag('consent', 'update', {
+        ad_storage: 'granted',
+        analytics_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+      });
+
       window.gtag('js', new Date());
       window.gtag('config', measurementId, { page_path: window.location.pathname });
       if (adsId) {
