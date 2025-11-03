@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { z } from 'zod';
 
 import TitleAnimation from '@/components/shared/title-animation';
-import GoogleAnalytics from '@/components/GoogleAnalytics';
 import { contactSchema, type ContactFormData } from '@/lib/validations/contact';
 
 const titleItems = [
@@ -185,32 +184,23 @@ export default function ContactPage() {
   const whatsappUrl = "https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים";
 
   // Google Ads conversion tracking for WhatsApp button
-  const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    
+  const handleWhatsAppClick = () => {
     // Type-safe access to gtag
     const gtag = typeof window !== 'undefined' ? (window as Window & { gtag?: (...args: unknown[]) => void }).gtag : undefined;
     
     if (typeof gtag !== 'undefined') {
-      const callback = function () {
-        window.location.href = whatsappUrl;
-      };
-      
       gtag('event', 'conversion', {
         'send_to': 'AW-17674126648/-Y64CPTwtrgbELiK1-tB',
         'value': 1.0,
         'currency': 'ILS',
-        'event_callback': callback
       });
-    } else {
-      // Fallback if gtag is not loaded
-      window.location.href = whatsappUrl;
     }
+    // Let the link naturally open WhatsApp in new tab (target="_blank")
+    // No preventDefault() - avoids race condition with conversion tracking
   };
 
   return (
     <div className="min-h-screen pt-24 pb-12 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16" style={{ backgroundColor: '#F8F8FF' }}>
-      <GoogleAnalytics />
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header Section */}
         <div className="text-center mb-8 sm:mb-10 lg:mb-12" ref={contentRef} dir="rtl">

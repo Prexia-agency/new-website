@@ -10,6 +10,7 @@ import { AccessibilityProvider } from "@/contexts/AccessibilityContext";
 import AccessibilityWidget from "@/components/shared/AccessibilityWidget";
 import ColorBlindnessFilters from "@/components/ColorBlindnessFilters";
 import CookiesBanner from "@/components/shared/CookiesBanner";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -159,6 +160,8 @@ export default function RootLayout({
           }}
         />
 
+        <GoogleAnalytics />
+        
         <AccessibilityProvider>
           <ColorBlindnessFilters />
           <NavbarMobile />
