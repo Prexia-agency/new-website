@@ -184,19 +184,28 @@ export default function ContactPage() {
   const whatsappUrl = "https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים";
 
   // Google Ads conversion tracking for WhatsApp button
-  const handleWhatsAppClick = () => {
+  const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    
     // Type-safe access to gtag
     const gtag = typeof window !== 'undefined' ? (window as Window & { gtag?: (...args: unknown[]) => void }).gtag : undefined;
     
     if (typeof gtag !== 'undefined') {
+      // Fire the conversion event
       gtag('event', 'conversion', {
         'send_to': 'AW-17674126648/-Y64CPTwtrgbELiK1-tB',
         'value': 1.0,
         'currency': 'ILS',
       });
+      
+      // Wait 300ms for gtag to send the request, then open WhatsApp
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      }, 300);
+    } else {
+      // Fallback if gtag is not loaded - open WhatsApp immediately
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     }
-    // Let the link naturally open WhatsApp in new tab (target="_blank")
-    // No preventDefault() - avoids race condition with conversion tracking
   };
 
   return (
