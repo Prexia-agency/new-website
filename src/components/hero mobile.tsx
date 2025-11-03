@@ -44,7 +44,7 @@ export default function HeroMobile() {
   return (
     <section className="lg:hidden relative w-full h-screen overflow-hidden" dir="rtl" data-section="hero">
       {/* Full screen Spline animation */}
-      <div className="bg-black absolute inset-0 w-full h-full pt-15">
+      <div className="bg-black absolute inset-0 w-full h-full pt-25">
         <Spline 
           scene="/animations/s-mobile.spline"
           className="w-full h-full scale-100"
@@ -55,7 +55,7 @@ export default function HeroMobile() {
       </div>
       
       {/* Hero Content */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-start text-center px-4 pt-30 sm:pt-45" ref={contentRef}>
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-start text-center px-4 pt-20 sm:pt-45" ref={contentRef}>
         <div className="flex flex-col items-center">
           <TitleAnimation
             tag="h1"
