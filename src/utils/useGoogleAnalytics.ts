@@ -33,66 +33,51 @@ declare global {
 
 export const useGoogleAnalytics = (measurementId: string, adsId?: string) => {
   useEffect(() => {
-    // Check if analytics is enabled
-    if (!isAnalyticsEnabled()) {
-      console.log('[GA] Analytics disabled by user preferences');
-      return;
-    }
+    let initialized = typeof window !== 'undefined' && !!window.gtag;
 
-    // Check if GA is already loaded
-    if (window.gtag) {
-      console.log('[GA] Already loaded');
-      return;
-    }
+    const init = () => {
+      if (initialized) {
+        // If GA already present, ensure Ads is configured too
+        if (adsId && window.gtag) {
+          window.gtag('config', adsId);
+        }
+        return;
+      }
 
-    // Initialize dataLayer
-    window.dataLayer = window.dataLayer || [];
-    
-    // Define gtag function
-    window.gtag = function gtag(...args: unknown[]) {
-      window.dataLayer?.push(args);
+      // Initialize dataLayer and gtag
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag(...args: unknown[]) {
+        window.dataLayer?.push(args);
+      };
+
+      window.gtag('js', new Date());
+      window.gtag('config', measurementId, { page_path: window.location.pathname });
+      if (adsId) {
+        window.gtag('config', adsId);
+        console.log('[GA] Google Ads configured with ID:', adsId);
+      }
+
+      const script = document.createElement('script');
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+      script.async = true;
+      document.head.appendChild(script);
+
+      initialized = true;
+      console.log('[GA] Initialized with ID:', measurementId);
     };
 
-    // Set initial timestamp
-    window.gtag('js', new Date());
-    
-    // Configure GA
-    window.gtag('config', measurementId, {
-      page_path: window.location.pathname,
-    });
-
-    // Configure Google Ads if provided
-    if (adsId) {
-      window.gtag('config', adsId);
-      console.log('[GA] Google Ads configured with ID:', adsId);
+    // Initialize immediately if user already allowed analytics
+    if (isAnalyticsEnabled()) {
+      init();
+    } else {
+      console.log('[GA] Analytics disabled by user preferences');
     }
 
-    // Load GA script
-    const script = document.createElement('script');
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
-    script.async = true;
-    document.head.appendChild(script);
-
-    console.log('[GA] Initialized with ID:', measurementId);
-
-    // Listen for cookie preference changes
+    // Always listen for consent changes and init when enabled
     const handlePreferencesChanged = (event: Event) => {
-      const customEvent = event as CustomEvent;
-      const preferences = customEvent.detail;
-      
-      if (!preferences.analytics && window.gtag) {
-        // User disabled analytics - disable GA
-        window.gtag('config', measurementId, {
-          'anonymize_ip': true,
-          'send_page_view': false
-        });
-        console.log('[GA] Analytics disabled by user');
-      } else if (preferences.analytics && window.gtag) {
-        // User enabled analytics - re-enable GA
-        window.gtag('config', measurementId, {
-          page_path: window.location.pathname,
-        });
-        console.log('[GA] Analytics enabled by user');
+      const { detail } = event as CustomEvent<{ analytics: boolean }>;
+      if (detail?.analytics) {
+        init();
       }
     };
 
