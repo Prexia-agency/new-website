@@ -44,7 +44,7 @@ export default function HeroMobile() {
   return (
     <section className="lg:hidden relative w-full h-screen overflow-hidden" dir="rtl" data-section="hero">
       {/* Full screen Spline animation */}
-      <div className="bg-black absolute inset-0 w-full h-full pt-25">
+      <div className="bg-black absolute inset-0 w-full h-full pt-35">
         <Spline 
           scene="/animations/s-mobile.spline"
           className="w-full h-full scale-100"
@@ -100,7 +100,7 @@ export default function HeroMobile() {
         <div className="flex flex-row-reverse gap-4" dir="rtl">
           <Link 
             href="/contact"
-            className="hero-mobile-button-link text-black px-4 py-2 lg:px-3 lg:py-1.5 rounded-[12px] border-2 border-gray-100/10 shadow-xl font-bold text-[14px] lg:text-[11px] flex items-center gap-1 group"
+            className="hero-mobile-button-link text-black px-3 py-1 lg:px-3 lg:py-1.5 rounded-[12px] border-2 border-gray-100/10 shadow-xl font-bold text-[12px] lg:text-[11px] flex items-center gap-1 group"
             style={{ 
               background: 'linear-gradient(176.87deg, rgb(255, 255, 255) 8.56%, rgb(186, 23, 154) 85.04%)',
               backdropFilter: 'blur(10px)',
@@ -129,7 +129,7 @@ export default function HeroMobile() {
           </Link>
           <Link 
             href="/pricing"
-            className="hero-mobile-button-link text-black border-2 border-white/30 px-5 py-2.5 lg:px-4 lg:py-2 rounded-[12px] font-semibold text-[14px] lg:text-[11px] shadow-xl flex items-center gap-1"
+            className="hero-mobile-button-link text-black border-2 border-white/30 px-5 py-2.5 lg:px-4 lg:py-2 rounded-[12px] font-semibold text-[12px] lg:text-[11px] shadow-xl flex items-center gap-1"
             style={{ 
               background: 'linear-gradient(176.87deg, rgba(255, 255, 255, 0.88) 8.56%, rgb(255, 255, 255) 85.04%)',
               backdropFilter: 'blur(10px)',
