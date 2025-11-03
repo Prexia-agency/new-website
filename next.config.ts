@@ -12,14 +12,14 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               // Allow scripts from self, Google domains, and CDNs for Rive/Spline
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://unpkg.com https://cdn.jsdelivr.net",
-              // Allow styles
-              "style-src 'self' 'unsafe-inline'",
+              // Allow styles (including Google Fonts stylesheets)
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               // Allow images from self, data URIs, Google domains, and CDNs
-              "img-src 'self' data: https: https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net",
-              // Allow fonts
-              "font-src 'self' data:",
+              "img-src 'self' data: blob: https: https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net",
+              // Allow fonts (including Google Fonts and CDN-hosted fonts)
+              "font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net",
               // Allow connections to Google Analytics, Ads endpoints, and CDNs for WASM files
-              "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://region1.google-analytics.com https://region1.analytics.google.com https://www.googleadservices.com https://unpkg.com https://cdn.jsdelivr.net",
+              "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://region1.google-analytics.com https://region1.analytics.google.com https://www.googleadservices.com https://unpkg.com https://cdn.jsdelivr.net https://fonts.gstatic.com",
               // Allow frames from trusted sources
               "frame-src 'self'",
               // Allow objects
