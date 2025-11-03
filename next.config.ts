@@ -10,16 +10,16 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              // Allow scripts from self and Google domains
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
+              // Allow scripts from self, Google domains, and CDNs for Rive/Spline
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://unpkg.com https://cdn.jsdelivr.net",
               // Allow styles
               "style-src 'self' 'unsafe-inline'",
-              // Allow images from self, data URIs, and Google domains
+              // Allow images from self, data URIs, Google domains, and CDNs
               "img-src 'self' data: https: https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net",
               // Allow fonts
               "font-src 'self' data:",
-              // Allow connections to Google Analytics and Ads endpoints
-              "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://region1.google-analytics.com https://region1.analytics.google.com https://www.googleadservices.com",
+              // Allow connections to Google Analytics, Ads endpoints, and CDNs for WASM files
+              "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://region1.google-analytics.com https://region1.analytics.google.com https://www.googleadservices.com https://unpkg.com https://cdn.jsdelivr.net",
               // Allow frames from trusted sources
               "frame-src 'self'",
               // Allow objects
