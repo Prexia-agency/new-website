@@ -480,7 +480,7 @@ export default function ContactPage() {
             variants={whatsappVariants}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Link
+            <a
               id="whatsapp-button"
               href={whatsappUrl}
               target="_blank"
@@ -538,7 +538,7 @@ export default function ContactPage() {
                 <div className="hidden lg:block absolute top-4 left-4 w-8 h-8 bg-green-100 rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
                 <div className="hidden lg:block absolute bottom-4 right-4 w-6 h-6 bg-green-200 rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
               </div>
-            </Link>
+            </a>
           </motion.div>
         </div>
       </div>
