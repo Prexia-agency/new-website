@@ -55,7 +55,7 @@ export default function Stack() {
         <div className="lg:col-span-6 order-1 lg:order-1" ref={contentRef}>
           <TitleAnimation
             tag="h2"
-            className="font-noto-hebrew text-[40px] tracking-[-1.12px] text-white font-black leading-snug lg:text-[48px] max-w-[586px] md:max-w-[470px] md:text-4xl sm:text-3xl text-black"
+            className="font-noto-hebrew text-[32px] tracking-[-1.12px] text-white font-black leading-snug lg:text-[48px] max-w-[586px] md:max-w-[470px] md:text-4xl sm:text-3xl text-black"
             items={titleItems}
             animationName="second"
             controls={titleControls}

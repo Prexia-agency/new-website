@@ -308,7 +308,7 @@ export default function SecondSectionGsap() {
       >
         <div
           ref={cardRef}
-          className="bg-[#0e100f] py-40 min-h-screen flex flex-col items-center justify-center w-full rounded-t-[60px] shadow-2xl fixed top-19 lg:top-28 left-0 right-0"
+          className="bg-[#0e100f] py-30 min-h-screen flex flex-col items-center justify-center w-full rounded-t-[60px] shadow-2xl fixed top-19 lg:top-28 left-0 right-0"
           style={{
             transform: mounted ? undefined : 'translateY(100%)',
             opacity: mounted ? undefined : 0,
@@ -316,15 +316,15 @@ export default function SecondSectionGsap() {
           }}
         >
           <div className="max-w-6xl mx-auto px-8 w-full">
-          <div className="text-center mb-16" dir="rtl" ref={contentRef}>
+          <div className="text-center mb-1" dir="rtl" ref={contentRef}>
             <TitleAnimation
               tag="h2"
-              className="text-[50px] lg:text-6xl font-bold font-noto-hebrew text-[#fffce1] mb-6"
+              className="text-[38px] lg:text-6xl font-bold font-noto-hebrew text-[#fffce1] mb-6"
               items={titleItems}
               animationName="second-gsap"
               controls={titleControls}
             />
-            <p className="text-sm lg:text-[18px] text-[#fffce1]/90 max-w-sm lg:max-w-2xl mx-auto">
+            <p className="text-[11px] lg:text-[18px] text-[#fffce1]/90 max-w-sm lg:max-w-2xl mx-auto">
               הלקוחות שלך גולשים היום בעיקר מהמובייל, אבל עדיין צריכים אתר שנראה מצוין גם על מסך מחשב. אצלנו כל אתר מקבל עיצוב מותאם אישית לכל פלטפורמה – כדי להבטיח חוויית משתמש חלקה, מהירה ומדויקת בכל גודל מסך
             </p>
           </div>

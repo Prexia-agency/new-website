@@ -55,7 +55,7 @@ export default function HeroMobile() {
       </div>
       
       {/* Hero Content */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-start text-center px-4 pt-20 sm:pt-45" ref={contentRef}>
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-start text-center px-4 pt-20 sm:pt-35" ref={contentRef}>
         <div className="flex flex-col items-center">
           <TitleAnimation
             tag="h1"
