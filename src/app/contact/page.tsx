@@ -185,11 +185,35 @@ export default function ContactPage() {
 
   const whatsappUrl = "https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים";
 
-  // Google Ads conversion tracking for WhatsApp button via GTM event
+  // Helper: send a gtag event with event_callback to delay navigation (if gtag available)
+  const gtagSendEvent = (url: string, openFn: () => void) => {
+    const gtag = typeof window !== 'undefined' ? (window as Window & { gtag?: (...args: unknown[]) => void }).gtag : undefined;
+    if (typeof gtag !== 'undefined') {
+      try {
+        gtag('event', 'whatsapp_click', {
+          event_callback: openFn,
+          event_timeout: 2000,
+          value: 1.0,
+          currency: 'ILS',
+        } as unknown as Record<string, unknown>);
+        return true;
+      } catch {
+        // fall through to manual timeout
+      }
+    }
+    return false;
+  };
+
+  // Google Ads conversion tracking for WhatsApp button via GTM event + gtag callback
   const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     
     if (isAnalyticsEnabled()) {
+      const openChat = () => {
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      };
+
+      // Fire GTM conversion event
       try {
         sendGTMEvent({
           event: 'whatsapp_conversion',
@@ -197,13 +221,15 @@ export default function ContactPage() {
           currency: 'ILS',
           location: 'contact_page',
         } as unknown as Record<string, unknown>);
-      } catch (err) {
-        // ignore and proceed to open chat
+      } catch {
+        // ignore
       }
-      // Give GTM a brief moment to dispatch tags
-      setTimeout(() => {
-        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      }, 500);
+
+      // Attempt to use gtag event with callback to control navigation timing
+      const usedGtagCallback = gtagSendEvent(whatsappUrl, openChat);
+
+      // Fallback: ensure navigation even if callback isn't invoked
+      setTimeout(openChat, usedGtagCallback ? 1200 : 600);
     } else {
       // No analytics consent: open WhatsApp without tracking
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
