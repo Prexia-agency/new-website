@@ -4,6 +4,8 @@ import { motion, useAnimation } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
+import { sendGTMEvent } from '@next/third-parties/google';
+import { isAnalyticsEnabled } from '@/utils/cookieConsent';
 import { z } from 'zod';
 
 import TitleAnimation from '@/components/shared/title-animation';
@@ -183,27 +185,27 @@ export default function ContactPage() {
 
   const whatsappUrl = "https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים";
 
-  // Google Ads conversion tracking for WhatsApp button
+  // Google Ads conversion tracking for WhatsApp button via GTM event
   const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     
-    // Type-safe access to gtag
-    const gtag = typeof window !== 'undefined' ? (window as Window & { gtag?: (...args: unknown[]) => void }).gtag : undefined;
-    
-    if (typeof gtag !== 'undefined') {
-      // Fire the conversion event
-      gtag('event', 'conversion', {
-        'send_to': 'AW-17674126648/-Y64CPTwtrgbELiK1-tB',
-        'value': 1.0,
-        'currency': 'ILS',
-      });
-      
-      // Wait 300ms for gtag to send the request, then open WhatsApp
+    if (isAnalyticsEnabled()) {
+      try {
+        sendGTMEvent({
+          event: 'whatsapp_conversion',
+          value: 1,
+          currency: 'ILS',
+          location: 'contact_page',
+        } as unknown as Record<string, unknown>);
+      } catch (err) {
+        // ignore and proceed to open chat
+      }
+      // Give GTM a brief moment to dispatch tags
       setTimeout(() => {
         window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
       }, 300);
     } else {
-      // Fallback if gtag is not loaded - open WhatsApp immediately
+      // No analytics consent: open WhatsApp without tracking
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     }
   };

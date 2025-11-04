@@ -66,12 +66,14 @@ export const useGoogleAnalytics = (measurementId: string, adsId?: string) => {
       }
 
       const script = document.createElement('script');
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+      // Prefer Ads ID for initial gtag load when available, else GA4 ID
+      const initialId = adsId || measurementId;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${initialId}`;
       script.async = true;
       document.head.appendChild(script);
 
       initialized = true;
-      console.log('[GA] Initialized with ID:', measurementId);
+      console.log('[GA] Initialized with ID:', initialId);
     };
 
     // Initialize immediately if user already allowed analytics
