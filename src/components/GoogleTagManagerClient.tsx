@@ -31,6 +31,29 @@ export default function GoogleTagManagerClient() {
     return () => window.removeEventListener('cookiePreferencesChanged', handleConsentChange);
   }, []);
 
+  // After consent is enabled and GTM/gtag is present, update consent mode to granted
+  useEffect(() => {
+    if (!enabled) return;
+    let attempts = 0;
+    const timer = setInterval(() => {
+      const gtag = (window as Window & { gtag?: (...a: unknown[]) => void }).gtag;
+      if (gtag) {
+        gtag('consent', 'update', {
+          ad_storage: 'granted',
+          analytics_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted',
+        });
+        console.log('[GTM] Consent updated to granted via gtag');
+        clearInterval(timer);
+      } else if (++attempts > 20) {
+        clearInterval(timer);
+        console.warn('[GTM] gtag not detected after consent; skipping consent update');
+      }
+    }, 100);
+    return () => clearInterval(timer);
+  }, [enabled]);
+
   if (!gtmId || !enabled) {
     return null;
   }

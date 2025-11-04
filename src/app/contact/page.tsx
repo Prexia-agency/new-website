@@ -203,7 +203,7 @@ export default function ContactPage() {
       // Give GTM a brief moment to dispatch tags
       setTimeout(() => {
         window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      }, 300);
+      }, 500);
     } else {
       // No analytics consent: open WhatsApp without tracking
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
