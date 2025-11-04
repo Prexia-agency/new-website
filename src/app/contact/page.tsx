@@ -4,7 +4,6 @@ import { motion, useAnimation } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
-import { sendGTMEvent } from '@next/third-parties/google';
 import { isAnalyticsEnabled } from '@/utils/cookieConsent';
 import { z } from 'zod';
 
@@ -213,19 +212,7 @@ export default function ContactPage() {
         window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
       };
 
-      // Fire GTM conversion event
-      try {
-        sendGTMEvent({
-          event: 'whatsapp_conversion',
-          value: 1,
-          currency: 'ILS',
-          location: 'contact_page',
-        } as unknown as Record<string, unknown>);
-      } catch {
-        // ignore
-      }
-
-      // Attempt to use gtag event with callback to control navigation timing
+      // Fire only whatsapp_click via gtag with callback to control navigation timing
       const usedGtagCallback = gtagSendEvent(whatsappUrl, openChat);
 
       // Fallback: ensure navigation even if callback isn't invoked
