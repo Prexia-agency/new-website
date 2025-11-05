@@ -33,7 +33,15 @@ declare global {
 
 export const useGoogleAnalytics = (measurementId: string, adsId?: string) => {
   useEffect(() => {
-    let initialized = typeof window !== 'undefined' && !!window.gtag;
+    // Check if GA script is actually loaded, not just if gtag exists
+    // (gtag exists from consent script, but GA script might not be loaded)
+    const isScriptLoaded = () => {
+      if (typeof window === 'undefined') return false;
+      const scripts = document.querySelectorAll('script[src*="googletagmanager.com/gtag/js"]');
+      return scripts.length > 0;
+    };
+
+    let initialized = isScriptLoaded();
 
     const init = () => {
       if (initialized) {
@@ -44,11 +52,19 @@ export const useGoogleAnalytics = (measurementId: string, adsId?: string) => {
         return;
       }
 
-      // Initialize dataLayer and gtag
+      // Validate measurementId before proceeding
+      if (!measurementId) {
+        console.warn('[GA] Measurement ID is missing. Cannot initialize Google Analytics.');
+        return;
+      }
+
+      // Initialize dataLayer and gtag (might already exist from consent script)
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function gtag(...args: unknown[]) {
-        window.dataLayer?.push(args);
-      };
+      if (!window.gtag) {
+        window.gtag = function gtag(...args: unknown[]) {
+          window.dataLayer?.push(args);
+        };
+      }
 
       // Update consent mode to granted
       window.gtag('consent', 'update', {

@@ -11,6 +11,14 @@ export default function GoogleAnalytics() {
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID as string;
   const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID as string;
   
+  // Only initialize if measurementId is available
+  if (!measurementId) {
+    if (typeof window !== 'undefined') {
+      console.warn('[GA] NEXT_PUBLIC_GA_MEASUREMENT_ID environment variable is not set.');
+    }
+    return null;
+  }
+  
   // This hook will only load GA/Ads if analytics cookies are accepted
   useGoogleAnalytics(measurementId, adsId);
   
