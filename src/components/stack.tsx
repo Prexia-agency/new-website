@@ -73,6 +73,7 @@ export default function Stack() {
         </div>
         <div
           className="relative lg:col-span-6 flex items-center justify-center order-2 lg:order-2 py-2"
+          role="img"
           aria-label="Technology Stack Animation"
           ref={illustrationRef}
         >

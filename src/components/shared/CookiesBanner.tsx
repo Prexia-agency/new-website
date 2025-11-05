@@ -12,26 +12,14 @@ export default function CookiesBanner() {
   useEffect(() => {
     // Check if user has already made a choice about cookies
     if (!hasUserMadeChoice()) {
-      // Function to show banner after delay
-      const showBannerWithDelay = () => {
-        setTimeout(() => {
-          setShowBanner(true);
-          // Trigger animation after mounting
-          requestAnimationFrame(() => {
-            setIsVisible(true);
-          });
-        }, 6000); // 6 seconds delay
-      };
+      const timer = setTimeout(() => {
+        setShowBanner(true);
+        requestAnimationFrame(() => {
+          setIsVisible(true);
+        });
+      }, 6000); // 6 seconds delay
 
-      // Wait for page to fully load
-      if (document.readyState === 'complete') {
-        // Page already loaded
-        showBannerWithDelay();
-      } else {
-        // Wait for page to load
-        window.addEventListener('load', showBannerWithDelay);
-        return () => window.removeEventListener('load', showBannerWithDelay);
-      }
+      return () => clearTimeout(timer);
     }
   }, []);
 
