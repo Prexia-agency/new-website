@@ -186,6 +186,9 @@ export default function ContactPage() {
   // Simple WhatsApp click handler - opens link directly
   const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    window.dataLayer?.push({
+      event: 'whatsapp_click',
+    });
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
