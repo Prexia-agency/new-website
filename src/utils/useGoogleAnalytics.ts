@@ -22,7 +22,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { isAnalyticsEnabled } from './cookieConsent';
+import { isAnalyticsEnabled, ensureConsentModeUpdated } from './cookieConsent';
 
 declare global {
   interface Window {
@@ -31,7 +31,7 @@ declare global {
   }
 }
 
-export const useGoogleAnalytics = (measurementId: string, adsId?: string) => {
+export const useGoogleAnalytics = (measurementId: string) => {
   useEffect(() => {
     // Check if GA script is actually loaded, not just if gtag exists
     // (gtag exists from consent script, but GA script might not be loaded)
@@ -45,10 +45,6 @@ export const useGoogleAnalytics = (measurementId: string, adsId?: string) => {
 
     const init = () => {
       if (initialized) {
-        // If GA already present, ensure Ads is configured too
-        if (adsId && window.gtag) {
-          window.gtag('config', adsId);
-        }
         return;
       }
 
@@ -66,30 +62,20 @@ export const useGoogleAnalytics = (measurementId: string, adsId?: string) => {
         };
       }
 
-      // Update consent mode to granted
-      window.gtag('consent', 'update', {
-        ad_storage: 'granted',
-        analytics_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted',
-      });
+      // Ensure consent mode is updated before initializing GA
+      // This uses the centralized consent utility for consistency
+      ensureConsentModeUpdated();
 
       window.gtag('js', new Date());
       window.gtag('config', measurementId, { page_path: window.location.pathname });
-      if (adsId) {
-        window.gtag('config', adsId);
-        console.log('[GA] Google Ads configured with ID:', adsId);
-      }
 
       const script = document.createElement('script');
-      // Prefer Ads ID for initial gtag load when available, else GA4 ID
-      const initialId = adsId || measurementId;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${initialId}`;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
       script.async = true;
       document.head.appendChild(script);
 
       initialized = true;
-      console.log('[GA] Initialized with ID:', initialId);
+      console.log('[GA] Initialized with ID:', measurementId);
     };
 
     // Initialize immediately if user already allowed analytics
@@ -112,7 +98,7 @@ export const useGoogleAnalytics = (measurementId: string, adsId?: string) => {
     return () => {
       window.removeEventListener('cookiePreferencesChanged', handlePreferencesChanged);
     };
-  }, [measurementId, adsId]);
+  }, [measurementId]);
 };
 
 /**

@@ -11,6 +11,7 @@ import AccessibilityWidget from "@/components/shared/AccessibilityWidget";
 import ColorBlindnessFilters from "@/components/ColorBlindnessFilters";
 import CookiesBanner from "@/components/shared/CookiesBanner";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import GoogleTagManagerClient from "@/components/GoogleTagManagerClient";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -179,6 +180,7 @@ export default function RootLayout({
         />
 
         <GoogleAnalytics />
+        <GoogleTagManagerClient />
         
         <AccessibilityProvider>
           <ColorBlindnessFilters />

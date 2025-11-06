@@ -4,7 +4,6 @@ import { motion, useAnimation } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
-import { isAnalyticsEnabled } from '@/utils/cookieConsent';
 import { z } from 'zod';
 
 import TitleAnimation from '@/components/shared/title-animation';
@@ -184,43 +183,10 @@ export default function ContactPage() {
 
   const whatsappUrl = "https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים";
 
-  // Helper: send a gtag event with event_callback to delay navigation (if gtag available)
-  const gtagSendEvent = (url: string, openFn: () => void) => {
-    const gtag = typeof window !== 'undefined' ? (window as Window & { gtag?: (...args: unknown[]) => void }).gtag : undefined;
-    if (typeof gtag !== 'undefined') {
-      try {
-        gtag('event', 'whatsapp_click', {
-          event_callback: openFn,
-          event_timeout: 2000,
-          value: 1.0,
-          currency: 'ILS',
-        } as unknown as Record<string, unknown>);
-        return true;
-      } catch {
-        // fall through to manual timeout
-      }
-    }
-    return false;
-  };
-
-  // Google Ads conversion tracking for WhatsApp button via GTM event + gtag callback
+  // Simple WhatsApp click handler - opens link directly
   const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    
-    if (isAnalyticsEnabled()) {
-      const openChat = () => {
-        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      };
-
-      // Fire only whatsapp_click via gtag with callback to control navigation timing
-      const usedGtagCallback = gtagSendEvent(whatsappUrl, openChat);
-
-      // Fallback: ensure navigation even if callback isn't invoked
-      setTimeout(openChat, usedGtagCallback ? 1200 : 600);
-    } else {
-      // No analytics consent: open WhatsApp without tracking
-      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-    }
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (

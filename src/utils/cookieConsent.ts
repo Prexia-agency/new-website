@@ -56,6 +56,38 @@ export const saveCookiePreferences = (preferences: CookiePreferences): void => {
 };
 
 /**
+ * Centralized function to update Google Consent Mode
+ * This is the single source of truth for consent updates
+ * @param granted - Whether to grant or deny consent
+ */
+export const updateGoogleConsentMode = (granted: boolean): void => {
+  if (typeof window === 'undefined') return;
+  
+  const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+  if (!gtag) {
+    // gtag might not be initialized yet, retry after a short delay
+    setTimeout(() => updateGoogleConsentMode(granted), 100);
+    return;
+  }
+
+  if (granted) {
+    gtag('consent', 'update', {
+      ad_storage: 'granted',
+      analytics_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+    });
+  } else {
+    gtag('consent', 'update', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    });
+  }
+};
+
+/**
  * Accept all cookies
  */
 export const acceptAllCookies = (): void => {
@@ -65,18 +97,8 @@ export const acceptAllCookies = (): void => {
     timestamp: new Date().toISOString(),
   });
   
-  // Update Google Consent Mode
-  if (typeof window !== 'undefined') {
-    const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
-    if (gtag) {
-      gtag('consent', 'update', {
-        ad_storage: 'granted',
-        analytics_storage: 'granted',
-        ad_user_data: 'granted',
-        ad_personalization: 'granted',
-      });
-    }
-  }
+  // Update Google Consent Mode using centralized function
+  updateGoogleConsentMode(true);
 };
 
 /**
@@ -89,18 +111,8 @@ export const rejectAllCookies = (): void => {
     timestamp: new Date().toISOString(),
   });
   
-  // Ensure consent stays denied
-  if (typeof window !== 'undefined') {
-    const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
-    if (gtag) {
-      gtag('consent', 'update', {
-        ad_storage: 'denied',
-        analytics_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-      });
-    }
-  }
+  // Update Google Consent Mode using centralized function
+  updateGoogleConsentMode(false);
 };
 
 /**
@@ -125,5 +137,16 @@ export const clearCookiePreferences = (): void => {
   if (typeof window === 'undefined') return;
   localStorage.removeItem(COOKIE_CONSENT_KEY);
   window.dispatchEvent(new Event('cookiePreferencesCleared'));
+};
+
+/**
+ * Ensure consent mode is updated based on current preferences
+ * Call this before initializing tracking scripts to ensure consent is properly set
+ */
+export const ensureConsentModeUpdated = (): void => {
+  const preferences = getCookiePreferences();
+  if (preferences) {
+    updateGoogleConsentMode(preferences.analytics);
+  }
 };
 
