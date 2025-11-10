@@ -286,12 +286,20 @@ export default function Hero() {
           variants={buttonVariants}
         >
           <Link 
-            href="/contact"
-            className="hero-button-link text-black px-6 py-2 rounded-[12px] border-2 border-gray-100/10 shadow-xl font-bold text-[14px] flex items-center gap-2 group"
+            id="whatsapp-button"
+            href="https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-button-link text-black px-6 py-2 rounded-[12px] border-2 border-gray-100/10 shadow-xl font-semibold text-[15px] flex items-center gap-2 group"
             style={{ 
               cursor: hasMouseMoved ? 'pointer' : 'none',
-              background: 'linear-gradient(176.87deg, rgb(255, 255, 255) 8.56%, rgb(186, 23, 154) 85.04%)',
+              background: 'linear-gradient(22.87deg, rgb(254, 198, 252) 8.56%, rgb(223, 61, 190) 85.04%)',
               backdropFilter: 'blur(10px)',
+            }}
+            onClick={(e) => {
+              window.dataLayer?.push({
+                event: 'whatsapp_click',
+              });
             }}
           >
             בוא נתחיל

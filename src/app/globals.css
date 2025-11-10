@@ -80,8 +80,9 @@
 
 /* הסתרה בפיירפוקס */
 html, body {
-  scrollbar-width: none;
+  scrollbar-width: thin;
 }
+
 
 :root {
   --radius: 0.625rem;

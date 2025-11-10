@@ -99,11 +99,19 @@ export default function HeroMobile() {
         `}</style>
         <div className="flex flex-row-reverse gap-4" dir="rtl">
           <Link 
-            href="/contact"
+            id="whatsapp-button"
+            href="https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים"
+            target="_blank"
+            rel="noopener noreferrer"
             className="hero-mobile-button-link text-black px-3 py-1 lg:px-3 lg:py-1.5 rounded-[12px] border-2 border-gray-100/10 shadow-xl font-bold text-[12px] lg:text-[11px] flex items-center gap-1 group"
             style={{ 
-              background: 'linear-gradient(176.87deg, rgb(255, 255, 255) 8.56%, rgb(186, 23, 154) 85.04%)',
+              background: 'linear-gradient(22.87deg, rgb(254, 198, 252) 8.56%, rgb(223, 61, 190) 85.04%)',
               backdropFilter: 'blur(10px)',
+            }}
+            onClick={(e) => {
+              window.dataLayer?.push({
+                event: 'whatsapp_click',
+              });
             }}
           >
             בוא נתחיל
