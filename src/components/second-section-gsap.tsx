@@ -308,7 +308,7 @@ export default function SecondSectionGsap() {
       >
         <div
           ref={cardRef}
-          className="bg-[#0e100f] py-30 min-h-screen flex flex-col items-center justify-center w-full rounded-t-[60px] shadow-2xl fixed top-19 lg:top-28 left-0 right-0"
+          className="bg-[#0e100f] py-30 min-h-screen flex flex-col items-center justify-center w-full rounded-t-[10px] shadow-2xl fixed top-19 lg:top-28 left-0 right-0"
           style={{
             transform: mounted ? undefined : 'translateY(100%)',
             opacity: mounted ? undefined : 0,
