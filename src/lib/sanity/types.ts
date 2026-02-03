@@ -1,3 +1,4 @@
+import type { PortableTextBlock } from "@portabletext/react";
 import type { SanityImageSource } from "@sanity/image-url";
 
 export type PostListItem = {
@@ -11,7 +12,7 @@ export type PostListItem = {
 };
 
 export type Post = PostListItem & {
-  body?: unknown;
+  body?: PortableTextBlock[];
   seo?: {
     metaTitle?: string;
     metaDescription?: string;

@@ -126,7 +126,7 @@ const BlogPostPage = async (props: PageProps) => {
 
         <div className="text-white max-w-none pl-4">
           <PortableText
-            value={(post.body as unknown[]) || []}
+            value={post.body || []}
             components={{
               block: {
                 normal: ({ children }) => (
