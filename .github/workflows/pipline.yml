@@ -26,7 +26,7 @@ jobs:
 
   validate:
     name: Validate
-    uses: Prexia-agency/workflow-templates/.github/workflows/validate.yml@v2.1.3
+    uses: Prexia-agency/workflow-templates/.github/workflows/validate.yml@v2.1.4
     with:
       run-sonar: true
     secrets:
@@ -89,7 +89,7 @@ jobs:
     name: Test Preview
     needs: wait-vercel-preview
     if: github.event_name == 'pull_request'
-    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.3
+    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.4
     with:
       deployment-url: ${{ needs.wait-vercel-preview.outputs.url }}
       environment: preview
@@ -164,7 +164,7 @@ jobs:
     name: Test Production
     needs: wait-vercel-production
     if: github.ref == 'refs/heads/main'
-    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.3
+    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.4
     with:
       deployment-url: ${{ needs.wait-vercel-production.outputs.url }}
       environment: production
