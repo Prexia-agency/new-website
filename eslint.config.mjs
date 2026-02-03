@@ -23,6 +23,17 @@ export default [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 
   {
+    settings: {
+      // Make jsx-a11y treat Next components like DOM elements
+      // so rules like anchor-* and alt-text actually apply.
+      "jsx-a11y": {
+        components: {
+          Link: "a",
+          Image: "img",
+        },
+      },
+    },
+
     plugins: {
       security,
       import: importPlugin,
@@ -66,6 +77,17 @@ export default [
         elements: ["img"],
         img: ["Image"],
       }],
+
+      // Enforce non-empty alt text (ESLint/ jsx-a11y allow alt="" for decorative images).
+      // If you truly want to ban blank alt entirely, this is the simplest enforceable rule.
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "JSXAttribute[name.name='alt'][value.value='']",
+          message:
+            "alt must not be empty. Provide meaningful alt text, or (if decorative) remove it from the accessibility tree and ensure the parent control has an accessible name.",
+        },
+      ],
       "jsx-a11y/anchor-has-content": "error",
       "jsx-a11y/anchor-is-valid": "error",
       "jsx-a11y/aria-activedescendant-has-tabindex": "error",
