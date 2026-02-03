@@ -19,9 +19,9 @@ env:
   PRODUCTION_URL: https://new-website-theta-sooty.vercel.app/
 
 jobs:
-  # ============================================
+  # ===========================================
   # STAGE 1: Validate (Security + Quality + Build)
-  # ============================================
+  # ===========================================
 
   validate:
     name: Validate
@@ -96,7 +96,7 @@ jobs:
       enforce-performance: false
 
   # ============================================
-  # STAGE 4: Update PR Comment
+  # STAGE 4: Update the PR Comments
   # ============================================
 
   update-pr:
