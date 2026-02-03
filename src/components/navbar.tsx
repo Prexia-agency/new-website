@@ -1,16 +1,17 @@
-'use client'
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import DrawLink from './DrawLink';
-import { useEffect, useState, useRef } from 'react';
-import { usePathname } from 'next/navigation';
-import { gsap } from 'gsap';
+import { gsap } from "gsap";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState, useRef } from "react";
+
+import DrawLink from "./DrawLink";
 
 export default function Navbar() {
   const [isOverDark, setIsOverDark] = useState(false);
   const pathname = usePathname();
-  const isHomePage = pathname === '/';
+  const isHomePage = pathname === "/";
   const iconRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
@@ -20,17 +21,19 @@ export default function Navbar() {
     }
 
     const handleScroll = () => {
-      const navbar = document.querySelector('nav.hidden.lg\\:block');
+      const navbar = document.querySelector("nav.hidden.lg\\:block");
       if (!navbar) return;
 
       const navbarRect = navbar.getBoundingClientRect();
       const navbarCenter = navbarRect.top + navbarRect.height / 2;
 
       // Check if navbar is over Hero, Stack, or GSAP card sections (dark backgrounds)
-      const heroSection = document.querySelector('.hidden.lg\\:block[data-section="hero"]');
+      const heroSection = document.querySelector(
+        '.hidden.lg\\:block[data-section="hero"]',
+      );
       const stackSection = document.querySelector('[data-section="stack"]');
-      const gsapCard = document.querySelector('.bg-\\[\\#0e100f\\]');
-      const sitesSection = document.querySelector('section.bg-white');
+      const gsapCard = document.querySelector(".bg-\\[\\#0e100f\\]");
+      const sitesSection = document.querySelector("section.bg-white");
 
       let overDark = false;
 
@@ -70,49 +73,47 @@ export default function Navbar() {
     };
 
     handleScroll(); // Check initial position
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
 
-  const textColor = isOverDark ? 'text-white hover:text-gray-200' : 'text-gray-800 hover:text-gray-600';
+  const textColor = isOverDark
+    ? "text-white hover:text-gray-200"
+    : "text-gray-800 hover:text-gray-600";
 
   const handleIconHover = () => {
     if (!iconRef.current) return;
-    
+
     const tl = gsap.timeline();
-    
+
     // Slide out to the left
     tl.to(iconRef.current, {
       x: -30,
       opacity: 0,
       duration: 0.3,
-      ease: 'power2.in',
+      ease: "power2.in",
     })
-    // Instantly move to the right
-    .set(iconRef.current, {
-      x: 30,
-    })
-    // Slide in from the right
-    .to(iconRef.current, {
-      x: 0,
-      opacity: 1,
-      duration: 0.3,
-      ease: 'power2.out',
-    });
+      // Instantly move to the right
+      .set(iconRef.current, {
+        x: 30,
+      })
+      // Slide in from the right
+      .to(iconRef.current, {
+        x: 0,
+        opacity: 1,
+        duration: 0.3,
+        ease: "power2.out",
+      });
   };
 
   return (
-    <nav 
-      className="hidden lg:block fixed top-0 left-0 right-0 z-50"
-      dir="rtl"
-    >
+    <nav className="hidden lg:block fixed top-0 left-0 right-0 z-50" dir="rtl">
       <div className="w-full bg-transparent backdrop-blur-md border-b border-white/10">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-4 py-3 px-6">
           {/* Logo - Far Right */}
           <Link href="/" className="flex-shrink-0 pr-2">
             <Image
               src="/images/320 Logo.png"
-              alt="Prexia Agency Logo"
               width={320}
               height={320}
               className="w-24 h-24"
@@ -121,13 +122,13 @@ export default function Navbar() {
 
           {/* Navigation Links - Center */}
           <div className="flex items-center gap-12 flex-grow justify-center">
-            <DrawLink 
+            <DrawLink
               href="/"
               className={`${textColor} transition-colors duration-300 font-medium text-sm`}
             >
               עמוד הבית
             </DrawLink>
-            <DrawLink 
+            <DrawLink
               href="/pricing"
               className={`${textColor} transition-colors duration-300 font-medium text-sm`}
             >
@@ -140,9 +141,11 @@ export default function Navbar() {
             .navbar-contact-button {
               transform: translateZ(0) scale(1);
               will-change: transform, opacity;
-              transition: transform 700ms cubic-bezier(0.4, 0, 0.2, 1), opacity 800ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+              transition:
+                transform 700ms cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 800ms cubic-bezier(0.4, 0, 0.2, 1) !important;
             }
-            
+
             .navbar-contact-button:hover {
               transform: translateZ(0) scale(1.02) !important;
               opacity: 0.85;
@@ -151,10 +154,10 @@ export default function Navbar() {
           <Link
             href="/contact"
             className="navbar-contact-button gradient-bg text-white px-5 py-3 rounded-[10px] font-semibold text-[10px] shadow-xl flex items-center gap-2 flex-shrink-0"
-            style={{ 
-              backdropFilter: 'blur(10px)',
-              border: '1px solid transparent',
-              backgroundClip: 'padding-box',
+            style={{
+              backdropFilter: "blur(10px)",
+              border: "1px solid transparent",
+              backgroundClip: "padding-box",
             }}
             onMouseEnter={handleIconHover}
           >
