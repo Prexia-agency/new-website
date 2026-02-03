@@ -27,7 +27,7 @@ jobs:
     name: Validate
     uses: Prexia-agency/workflow-templates/.github/workflows/validate.yml@v2.1.1
     with:
-      run-sonar: ${{ secrets.SONARCLOUD != '' }}
+      run-sonar: true
     secrets:
       GITGUARDIAN: ${{ secrets.GITGUARDIAN }}
       SONARCLOUD: ${{ secrets.SONARCLOUD }}
