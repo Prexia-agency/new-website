@@ -30,7 +30,6 @@ jobs:
     with:
       run-sonar: true
     secrets:
-      GITGUARDIAN: ${{ secrets.GITGUARDIAN }}
       SONARCLOUD: ${{ secrets.SONARCLOUD }}
 
   # ============================================
