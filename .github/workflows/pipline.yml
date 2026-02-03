@@ -16,7 +16,7 @@ permissions:
   issues: write
 
 env:
-  PRODUCTION_URL: https://your-domain.com
+  PRODUCTION_URL: https://https://new-website-theta-sooty.vercel.app/
 
 jobs:
   # ============================================
@@ -25,7 +25,7 @@ jobs:
 
   validate:
     name: Validate
-    uses: Prexia-agency/workflows-templates/.github/workflows/validate.yml@v2.0.0
+    uses: Prexia-agency/workflows-templates/.github/workflows/validate.yml@v2.1.0
     secrets:
       GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -87,7 +87,7 @@ jobs:
     name: Test Preview
     needs: wait-vercel-preview
     if: github.event_name == 'pull_request'
-    uses: Prexia-agency/workflows-templates/.github/workflows/test-deploy.yml@v2.0.0
+    uses: Prexia-agency/workflows-templates/.github/workflows/test-deploy.yml@v2.1.0
     with:
       deployment-url: ${{ needs.wait-vercel-preview.outputs.url }}
       environment: preview
