@@ -111,19 +111,13 @@ const Navbar = () => {
       <div className="w-full bg-transparent backdrop-blur-md border-b border-white/10">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-4 py-3 px-6">
           {/* Logo - Far Right */}
-          <Link
-            href="/"
-            aria-label="Prexia Agency Logo"
-            className="flex-shrink-0 pr-2"
-          >
+          <Link href="/" aria-label="עמוד הבית" className="flex-shrink-0 pr-2">
             <Image
               src="/images/320 Logo.png"
               width={320}
               height={32}
               className="w-24 h-24"
-              alt=""
-              aria-hidden="false"
-              role="presentation"
+              alt="לוגו PREXIA"
             />
           </Link>
 
