@@ -1,8 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, MotionProps } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+
+import { cn } from "@/lib/utils";
 
 type CharacterSet = string[] | readonly string[];
 
@@ -31,7 +32,7 @@ const DEFAULT_CHARACTER_SET = Object.freeze(
 
 const getRandomInt = (max: number): number => Math.floor(Math.random() * max);
 
-export function HyperText({
+export const HyperText = ({
   children,
   className,
   duration = 800,
@@ -41,7 +42,7 @@ export function HyperText({
   animateOnHover = true,
   characterSet = DEFAULT_CHARACTER_SET,
   ...props
-}: HyperTextProps) {
+}: HyperTextProps) => {
   const MotionComponent = motion.create(Component, {
     forwardMotionProps: true,
   });
@@ -143,4 +144,4 @@ export function HyperText({
       </AnimatePresence>
     </MotionComponent>
   );
-}
+};

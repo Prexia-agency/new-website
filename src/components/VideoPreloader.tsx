@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { useEffect, useRef } from "react";
+
 import styles from "./VideoPreloader.module.css";
 
 type VideoPreloaderProps = {
@@ -10,11 +11,11 @@ type VideoPreloaderProps = {
   onExitComplete: () => void;
 };
 
-export default function VideoPreloader({
+const VideoPreloader = ({
   exiting,
   onVideoEnd,
   onExitComplete,
-}: VideoPreloaderProps) {
+}: VideoPreloaderProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
@@ -65,8 +66,8 @@ export default function VideoPreloader({
       const zoomCenterY = 50; // percentage (50 = center)
 
       // Set transform origin for the zoom effect
-      tl.set(overlay, { 
-        transformOrigin: `${zoomCenterX}% ${zoomCenterY}%` 
+      tl.set(overlay, {
+        transformOrigin: `${zoomCenterX}% ${zoomCenterY}%`,
       });
 
       // Phase 0: Expand video container and remove border radius (0s - 0.5s)
@@ -82,7 +83,7 @@ export default function VideoPreloader({
             duration: 0.5,
             ease: "power2.out",
           },
-          0
+          0,
         );
       }
 
@@ -95,7 +96,7 @@ export default function VideoPreloader({
           duration: 1.0,
           ease: "power1.in",
         },
-        0.3
+        0.3,
       );
 
       // Phase 2: Fade out video near end of zoom (1.0s - 1.3s)
@@ -107,7 +108,7 @@ export default function VideoPreloader({
             duration: 0.3,
             ease: "power1.in",
           },
-          0.4
+          0.4,
         );
       }
 
@@ -120,7 +121,7 @@ export default function VideoPreloader({
           duration: 0.4,
           ease: "power1.inOut",
         },
-        0.4
+        0.4,
       );
 
       // Phase 4: Fade out the entire overlay to reveal the page (1.4s - 1.8s)
@@ -131,7 +132,7 @@ export default function VideoPreloader({
           duration: 0.4,
           ease: "power1.in",
         },
-        1.4
+        1.4,
       );
     }, overlay);
 
@@ -150,15 +151,17 @@ export default function VideoPreloader({
           <video
             ref={videoRef}
             src="/pre.mp4"
-            muted
-            autoPlay
-            playsInline
             preload="auto"
             className={styles.video}
             aria-hidden="true"
+            muted
+            autoPlay
+            playsInline
           />
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default VideoPreloader;

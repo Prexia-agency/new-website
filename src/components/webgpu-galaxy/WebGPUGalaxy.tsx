@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three/webgpu';
-import { pass } from 'three/tsl';
-import { bloom } from 'three/addons/tsl/display/BloomNode.js';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { GalaxySimulation } from './galaxy';
-import { GalaxyUI, type GalaxyConfig } from './ui';
+import React, { useEffect, useRef, useState } from "react";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { bloom } from "three/addons/tsl/display/BloomNode.js";
+import { pass } from "three/tsl";
+import * as THREE from "three/webgpu";
+
+import { GalaxySimulation } from "./galaxy";
+import { GalaxyUI, type GalaxyConfig } from "./ui";
 
 export interface WebGPUGalaxyProps {
   className?: string;
@@ -29,22 +30,22 @@ const defaultConfig: GalaxyConfig = {
   randomness: 1.8,
   particleSize: 0.06,
   starBrightness: 0.3,
-  denseStarColor: '#1885ff',
-  sparseStarColor: '#ffb28a',
+  denseStarColor: "#1885ff",
+  sparseStarColor: "#ffb28a",
   bloomStrength: 0.2,
   bloomRadius: 0.2,
   bloomThreshold: 0.1,
   cloudCount: 5000,
   cloudSize: 3,
   cloudOpacity: 0.02,
-  cloudTintColor: '#ffdace'
+  cloudTintColor: "#ffdace",
 };
 
 export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
-  className = '',
+  className = "",
   showUI = true,
   showInfo = true,
-  config: userConfig = {}
+  config: userConfig = {},
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const rendererRef = useRef<any>(null);
@@ -55,10 +56,12 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
   const uiRef = useRef<GalaxyUI | null>(null);
   const animationFrameRef = useRef<number>(0);
   const lastFrameTimeRef = useRef<number>(performance.now());
-  
+
   const [fps, setFps] = useState(60);
   const [starCount, setStarCount] = useState(defaultConfig.starCount);
-  const [isWebGPUSupported, setIsWebGPUSupported] = useState<boolean | null>(null);
+  const [isWebGPUSupported, setIsWebGPUSupported] = useState<boolean | null>(
+    null,
+  );
   const [error, setError] = useState<string | null>(null);
 
   // Memoize config to prevent re-renders
@@ -71,9 +74,12 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
 
   // Update galaxy rotation speed when it changes (for hover effect)
   useEffect(() => {
-    if (galaxySimulationRef.current && userConfig?.rotationSpeed !== undefined) {
-      galaxySimulationRef.current.updateUniforms({ 
-        rotationSpeed: userConfig.rotationSpeed 
+    if (
+      galaxySimulationRef.current &&
+      userConfig?.rotationSpeed !== undefined
+    ) {
+      galaxySimulationRef.current.updateUniforms({
+        rotationSpeed: userConfig.rotationSpeed,
       });
     }
   }, [userConfig?.rotationSpeed]);
@@ -100,7 +106,9 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
         // Check WebGPU support
         if (!navigator.gpu) {
           setIsWebGPUSupported(false);
-          setError('WebGPU is not supported in your browser. Please use Chrome 113+ or Edge 113+');
+          setError(
+            "WebGPU is not supported in your browser. Please use Chrome 113+ or Edge 113+",
+          );
           return;
         }
 
@@ -114,30 +122,34 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
         // Camera setup
         const camera = new THREE.PerspectiveCamera(
           60,
-          containerRef.current!.clientWidth / containerRef.current!.clientHeight,
+          containerRef.current!.clientWidth /
+            containerRef.current!.clientHeight,
           0.1,
-          1000
+          1000,
         );
         camera.position.set(0, 12, 17);
         camera.lookAt(0, 0, 0);
         cameraRef.current = camera;
 
         // Renderer setup
-        const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL: false });
+        const renderer = new THREE.WebGPURenderer({
+          antialias: true,
+          forceWebGL: false,
+        });
         const width = containerRef.current!.clientWidth;
         const height = containerRef.current!.clientHeight;
         renderer.setSize(width, height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        
+
         // Make sure canvas is visible and positioned correctly
-        renderer.domElement.style.display = 'block';
-        renderer.domElement.style.position = 'absolute';
-        renderer.domElement.style.top = '0';
-        renderer.domElement.style.left = '0';
-        renderer.domElement.style.width = '100%';
-        renderer.domElement.style.height = '100%';
-        renderer.domElement.style.zIndex = '1';
-        
+        renderer.domElement.style.display = "block";
+        renderer.domElement.style.position = "absolute";
+        renderer.domElement.style.top = "0";
+        renderer.domElement.style.left = "0";
+        renderer.domElement.style.width = "100%";
+        renderer.domElement.style.height = "100%";
+        renderer.domElement.style.zIndex = "1";
+
         containerRef.current!.appendChild(renderer.domElement);
         rendererRef.current = renderer;
 
@@ -152,23 +164,27 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
         controlsRef.current = controls;
 
         // Mouse tracking
-        const handleMouseDown = () => { mousePressed = true; };
-        const handleMouseUp = () => { mousePressed = false; };
+        const handleMouseDown = () => {
+          mousePressed = true;
+        };
+        const handleMouseUp = () => {
+          mousePressed = false;
+        };
         const handleMouseMove = (event: MouseEvent) => {
           const rect = containerRef.current?.getBoundingClientRect();
           if (!rect) return;
 
           const mouse = new THREE.Vector2(
             ((event.clientX - rect.left) / rect.width) * 2 - 1,
-            -((event.clientY - rect.top) / rect.height) * 2 + 1
+            -((event.clientY - rect.top) / rect.height) * 2 + 1,
           );
           raycaster.setFromCamera(mouse, camera);
           raycaster.ray.intersectPlane(intersectionPlane, mouse3D);
         };
 
-        window.addEventListener('mousedown', handleMouseDown);
-        window.addEventListener('mouseup', handleMouseUp);
-        renderer.domElement.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener("mousedown", handleMouseDown);
+        window.addEventListener("mouseup", handleMouseUp);
+        renderer.domElement.addEventListener("mousemove", handleMouseMove);
 
         // Create starry background
         createStarryBackground(scene);
@@ -179,23 +195,32 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
           const textureLoader = new THREE.TextureLoader();
           cloudTexture = await new Promise<THREE.Texture>((resolve, reject) => {
             textureLoader.load(
-              '/textures/cloud.png',
+              "/textures/cloud.png",
               resolve,
               undefined,
-              (error) => {
-                console.warn('Cloud texture failed to load, continuing without it:', error);
+              (_error) => {
+                console.warn(
+                  "Cloud texture failed to load, continuing without it:",
+                  error,
+                );
                 reject(error);
-              }
+              },
             );
           });
         } catch (error) {
-          console.warn('Cloud texture not available, galaxy will work without it');
+          console.warn(
+            "Cloud texture not available, galaxy will work without it",
+          );
         }
 
         if (!mounted) return;
 
         // Create galaxy simulation
-        const galaxySimulation = new GalaxySimulation(scene, config, cloudTexture);
+        const galaxySimulation = new GalaxySimulation(
+          scene,
+          config,
+          cloudTexture,
+        );
         galaxySimulation.createGalaxySystem();
         galaxySimulation.createClouds();
         galaxySimulationRef.current = galaxySimulation;
@@ -223,7 +248,8 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
         // Setup UI
         if (showUI && mounted) {
           const ui = new GalaxyUI(config, {
-            onUniformChange: (key, value) => galaxySimulation.updateUniforms({ [key]: value }),
+            onUniformChange: (key, value) =>
+              galaxySimulation.updateUniforms({ [key]: value }),
 
             onBloomChange: (property, value) => {
               if (bloomPassNode) bloomPassNode[property].value = value;
@@ -248,7 +274,7 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
               galaxySimulation.updateUniforms(config);
               galaxySimulation.createClouds();
               galaxySimulation.regenerate();
-            }
+            },
           });
           ui.setBloomNode(bloomPassNode);
           uiRef.current = ui;
@@ -261,20 +287,28 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
           animationFrameRef.current = requestAnimationFrame(animate);
 
           const currentTime = performance.now();
-          const deltaTime = Math.min((currentTime - lastFrameTimeRef.current) / 1000, 0.033);
+          const deltaTime = Math.min(
+            (currentTime - lastFrameTimeRef.current) / 1000,
+            0.033,
+          );
           lastFrameTimeRef.current = currentTime;
 
           // Update controls
           controls.update();
 
           // Update galaxy
-          await galaxySimulation.update(renderer, deltaTime, mouse3D, mousePressed);
+          await galaxySimulation.update(
+            renderer,
+            deltaTime,
+            mouse3D,
+            mousePressed,
+          );
 
           // Render - temporarily disable post-processing for debugging
           // if (postProcessing) {
           //   postProcessing.render();
           // } else {
-            renderer.render(scene, camera);
+          renderer.render(scene, camera);
           // }
 
           // Update FPS
@@ -292,32 +326,36 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
         };
 
         animate();
-
       } catch (err: any) {
-        console.error('Failed to initialize WebGPU Galaxy:', err);
-        setError(err.message || 'Failed to initialize WebGPU Galaxy');
+        console.error("Failed to initialize WebGPU Galaxy:", err);
+        setError(err.message || "Failed to initialize WebGPU Galaxy");
         setIsWebGPUSupported(false);
       }
     };
 
     // Handle resize
     const handleResize = () => {
-      if (!containerRef.current || !cameraRef.current || !rendererRef.current) return;
+      if (!containerRef.current || !cameraRef.current || !rendererRef.current)
+        return;
 
-      cameraRef.current.aspect = containerRef.current.clientWidth / containerRef.current.clientHeight;
+      cameraRef.current.aspect =
+        containerRef.current.clientWidth / containerRef.current.clientHeight;
       cameraRef.current.updateProjectionMatrix();
-      rendererRef.current.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+      rendererRef.current.setSize(
+        containerRef.current.clientWidth,
+        containerRef.current.clientHeight,
+      );
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     initScene();
 
     // Cleanup
     return () => {
       mounted = false;
-      window.removeEventListener('resize', handleResize);
-      
+      window.removeEventListener("resize", handleResize);
+
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
@@ -381,15 +419,21 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
       }
     }
 
-    starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-    starGeometry.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+    starGeometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(starPositions, 3),
+    );
+    starGeometry.setAttribute(
+      "color",
+      new THREE.BufferAttribute(starColors, 3),
+    );
 
     const starMaterial = new THREE.PointsMaterial({
       size: 0.3,
       vertexColors: true,
       transparent: true,
       opacity: 0.8,
-      sizeAttenuation: true
+      sizeAttenuation: true,
     });
 
     const stars = new THREE.Points(starGeometry, starMaterial);
@@ -402,9 +446,12 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
     return (
       <div className={`flex items-center justify-center ${className}`}>
         <div className="text-center p-8 bg-red-500/10 border border-red-500/30 rounded-lg max-w-md">
-          <h3 className="text-xl font-semibold text-red-400 mb-2">WebGPU Not Supported</h3>
+          <h3 className="text-xl font-semibold text-red-400 mb-2">
+            WebGPU Not Supported
+          </h3>
           <p className="text-sm text-red-300">
-            {error || 'Your browser does not support WebGPU. Please use Chrome 113+, Edge 113+, or another compatible browser.'}
+            {error ||
+              "Your browser does not support WebGPU. Please use Chrome 113+, Edge 113+, or another compatible browser."}
           </p>
         </div>
       </div>
@@ -412,22 +459,42 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
   }
 
   return (
-    <div className={`relative ${className}`} style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <div 
-        ref={containerRef} 
-        className="w-full h-full" 
-        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+    <div
+      className={`relative ${className}`}
+      style={{ position: "relative", width: "100%", height: "100%" }}
+    >
+      <div
+        ref={containerRef}
+        className="w-full h-full"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+        }}
       />
-      
+
       {showInfo && (
-        <div className="absolute top-5 left-5 bg-black/80 px-5 py-4 rounded-lg text-sm leading-relaxed pointer-events-none border border-blue-500/30" style={{ zIndex: 1000 }}>
+        <div
+          className="absolute top-5 left-5 bg-black/80 px-5 py-4 rounded-lg text-sm leading-relaxed pointer-events-none border border-blue-500/30"
+          style={{ zIndex: 1000 }}
+        >
           <h1 className="text-xl mb-2.5 text-blue-300 drop-shadow-[0_0_10px_rgba(136,187,255,0.5)]">
             🌌 GPU Galaxy Simulation
           </h1>
-          <div>FPS: <span className="text-green-400 font-bold">{fps}</span></div>
-          <div>Stars: <span className="text-white font-bold">{starCount.toLocaleString()}</span></div>
+          <div>
+            FPS: <span className="text-green-400 font-bold">{fps}</span>
+          </div>
+          <div>
+            Stars:{" "}
+            <span className="text-white font-bold">
+              {starCount.toLocaleString()}
+            </span>
+          </div>
           <div className="mt-2.5 opacity-70 text-xs text-blue-200">
-            🖱️ Drag to interact with galaxy<br />
+            🖱️ Drag to interact with galaxy
+            <br />
             🎮 Use right panel controls
           </div>
         </div>
@@ -437,4 +504,3 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
 };
 
 export default WebGPUGalaxy;
-

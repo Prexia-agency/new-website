@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
-import { motion, useAnimation } from 'framer-motion';
-import React from 'react';
-import { AuroraText } from '@/components/ui/aurora-text';
-import { WordRotate } from '@/components/ui/word-rotate';
+import { motion, useAnimation } from "framer-motion";
+import React from "react";
+
+import { AuroraText } from "@/components/ui/aurora-text";
+import { WordRotate } from "@/components/ui/word-rotate";
 
 interface TitleItem {
   value: string;
@@ -65,10 +66,10 @@ const TitleAnimation: React.FC<TitleAnimationProps> = ({
               <motion.span
                 variants={itemVariants}
                 className="inline-flex items-center mr-2"
-                style={{ verticalAlign: 'baseline' }}
+                style={{ verticalAlign: "baseline" }}
               >
-                <WordRotate 
-                  words={item.rotateWords || [item.value]} 
+                <WordRotate
+                  words={item.rotateWords || [item.value]}
                   duration={item.rotateDuration || 3000}
                   className="inline-block align-baseline"
                   motionProps={{
@@ -82,8 +83,10 @@ const TitleAnimation: React.FC<TitleAnimationProps> = ({
             ) : (
               <motion.span
                 variants={itemVariants}
-                style={{ color: item.className ? 'inherit' : (item.color || 'inherit') }}
-                className={`inline-block mr-2 ${item.useAurora ? '' : item.className || ''}`}
+                style={{
+                  color: item.className ? "inherit" : item.color || "inherit",
+                }}
+                className={`inline-block mr-2 ${item.useAurora ? "" : item.className || ""}`}
               >
                 {item.useAurora ? (
                   <AuroraText colors={item.auroraColors} speed={1.2}>

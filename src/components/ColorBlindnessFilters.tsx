@@ -1,7 +1,7 @@
-export default function ColorBlindnessFilters() {
+const ColorBlindnessFilters = () => {
   return (
-    <svg 
-      style={{ position: 'absolute', width: 0, height: 0 }} 
+    <svg
+      style={{ position: "absolute", width: 0, height: 0 }}
       aria-hidden="true"
       focusable="false"
     >
@@ -16,7 +16,7 @@ export default function ColorBlindnessFilters() {
                     0 0 0 1 0"
           />
         </filter>
-        
+
         {/* Deuteranopia Filter (Green-blind) */}
         <filter id="deuteranopia-filter">
           <feColorMatrix
@@ -27,7 +27,7 @@ export default function ColorBlindnessFilters() {
                     0 0 0 1 0"
           />
         </filter>
-        
+
         {/* Tritanopia Filter (Blue-blind) */}
         <filter id="tritanopia-filter">
           <feColorMatrix
@@ -40,5 +40,7 @@ export default function ColorBlindnessFilters() {
         </filter>
       </defs>
     </svg>
-  )
-} 
+  );
+};
+
+export default ColorBlindnessFilters;

@@ -20,6 +20,19 @@ const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({ baseDirectory: __dirname });
 
 export default [
+  {
+    ignores: [
+      "**/node_modules/**",
+      "**/.next/**",
+      "**/out/**",
+      "**/build/**",
+      "**/dist/**",
+      "sanity-studio/**",
+      "src/components/webgpu-galaxy/**",
+      "src/app/api/**", // Backend logic per .cursorrules
+    ],
+  },
+
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 
   {

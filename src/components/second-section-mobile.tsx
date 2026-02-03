@@ -1,28 +1,33 @@
-"use client"
+"use client";
 
-import Image from 'next/image';
-import PathDrawing from './draw';
-import { useAnimation } from 'framer-motion';
-import PathDrawingLp1 from './draw_Laptop1';
-import TitleAnimation from '@/components/shared/title-animation';
-import { useInView } from 'react-intersection-observer';
-import { useEffect } from 'react';
+import { useAnimation } from "framer-motion";
+import Image from "next/image";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+
+import TitleAnimation from "@/components/shared/title-animation";
+
+import PathDrawing from "./draw";
+import PathDrawingLp1 from "./draw_Laptop1";
 
 const titleItems = [
-  { value: 'אתרים' },
-  { value: 'שנראים' },
-  { value: 'מושלם', className: 'gradient-text' },
-  { value: 'בכל' },
-  { value: 'מסך' },
+  { value: "אתרים" },
+  { value: "שנראים" },
+  { value: "מושלם", className: "gradient-text" },
+  { value: "בכל" },
+  { value: "מסך" },
 ];
 
-export default function SecondSectionMobile() {
-  const [contentRef, isContentInView] = useInView({ triggerOnce: true, threshold: 0.8 });
+const SecondSectionMobile = () => {
+  const [contentRef, isContentInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.8,
+  });
   const titleControls = useAnimation();
 
   useEffect(() => {
     if (isContentInView) {
-      titleControls.start('animate');
+      titleControls.start("animate");
     }
   }, [isContentInView, titleControls]);
 
@@ -39,10 +44,15 @@ export default function SecondSectionMobile() {
             controls={titleControls}
           />
           <p className="text-[11px] sm:text-base md:text-lg text-gray-700 mb-3 max-w-[260px] sm:max-w-[350px] md:max-w-xs leading-relaxed font-normal mx-auto">
-            הלקוחות שלך גולשים היום בעיקר מהמובייל, אבל עדיין צריכים אתר שנראה מצוין גם על מסך מחשב. אצלנו כל אתר מקבל עיצוב מותאם אישית לכל פלטפורמה – כדי להבטיח חוויית משתמש חלקה, מהירה ומדויקת בכל גודל מסך
+            הלקוחות שלך גולשים היום בעיקר מהמובייל, אבל עדיין צריכים אתר שנראה
+            מצוין גם על מסך מחשב. אצלנו כל אתר מקבל עיצוב מותאם אישית לכל
+            פלטפורמה – כדי להבטיח חוויית משתמש חלקה, מהירה ומדויקת בכל גודל מסך
           </p>
         </div>
-        <div className="flex flex-col gap-6 items-center justify-center" dir="rtl">
+        <div
+          className="flex flex-col gap-6 items-center justify-center"
+          dir="rtl"
+        >
           {/* iPhone 14 Pro Max with animation */}
           <div className="flex justify-center relative">
             <Image
@@ -54,16 +64,19 @@ export default function SecondSectionMobile() {
               priority
             />
             {/* Animation overlay positioned on the iPhone screen */}
-            <div className="absolute inset-0 flex items-center justify-center" style={{
-              top: '20%',
-              left: '20%', 
-              right: '20%',
-              bottom: '24%'
-            }}>
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                top: "20%",
+                left: "20%",
+                right: "20%",
+                bottom: "24%",
+              }}
+            >
               <PathDrawing />
             </div>
           </div>
-          
+
           {/* iPad Pro image with animation */}
           <div className="flex justify-center relative">
             <Image
@@ -75,16 +88,19 @@ export default function SecondSectionMobile() {
               priority
             />
             {/* Animation overlay positioned on the iPad screen */}
-            <div className="absolute inset-0 flex items-center justify-center" style={{
-              top: '20%',
-              left: '20%', 
-              right: '20%',
-              bottom: '25%'
-            }}>
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                top: "20%",
+                left: "20%",
+                right: "20%",
+                bottom: "25%",
+              }}
+            >
               <PathDrawing />
             </div>
           </div>
-          
+
           {/* Laptop image with animation */}
           <div className="flex justify-center relative">
             <Image
@@ -96,12 +112,15 @@ export default function SecondSectionMobile() {
               priority
             />
             {/* Animation overlay positioned on the laptop screen */}
-            <div className="absolute inset-0 flex items-center justify-center" style={{
-              top: '20%',
-              left: '20%', 
-              right: '20%',
-              bottom: '24%'
-            }}>
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                top: "20%",
+                left: "20%",
+                right: "20%",
+                bottom: "24%",
+              }}
+            >
               <PathDrawingLp1 />
             </div>
           </div>
@@ -109,4 +128,6 @@ export default function SecondSectionMobile() {
       </div>
     </section>
   );
-}
+};
+
+export default SecondSectionMobile;

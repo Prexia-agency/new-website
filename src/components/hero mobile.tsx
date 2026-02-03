@@ -1,61 +1,72 @@
-'use client';
+"use client";
 
-import { motion, useAnimation } from 'framer-motion';
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
-import Spline from '@splinetool/react-spline';
-import Link from 'next/link';
+import Spline from "@splinetool/react-spline";
+import { motion, useAnimation } from "framer-motion";
+import Link from "next/link";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
-import TitleAnimation from '@/components/shared/title-animation';
+import TitleAnimation from "@/components/shared/title-animation";
 
 const titleItemsLine1 = [
-  { 
-    value: 'עיצוב',
+  {
+    value: "עיצוב",
     useWordRotate: true,
-    rotateWords: ['עיצוב', 'מיתוג', 'תכנון'],
-    rotateDuration: 3000
+    rotateWords: ["עיצוב", "מיתוג", "תכנון"],
+    rotateDuration: 3000,
   },
-  { value: 'מדויק.', },
-  { value: 'חוויה חכמה.' },
+  { value: "מדויק." },
+  { value: "חוויה חכמה." },
 ];
 
 const titleItemsLine2 = [
-  { value: 'אתר', className: 'gradient-text-contact' },
-  { value: ' שמביא תוצאות' },
+  { value: "אתר", className: "gradient-text-contact" },
+  { value: " שמביא תוצאות" },
 ];
-
 
 const descriptionVariants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.3 } },
 };
 
-export default function HeroMobile() {
-  const [contentRef, isContentInView] = useInView({ triggerOnce: true, threshold: 0.8 });
+const HeroMobile = () => {
+  const [contentRef, isContentInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.8,
+  });
   const titleControls = useAnimation();
   const descriptionControls = useAnimation();
 
   useEffect(() => {
     if (isContentInView) {
-      titleControls.start('animate').then(() => descriptionControls.start('animate'));
+      titleControls
+        .start("animate")
+        .then(() => descriptionControls.start("animate"));
     }
   }, [isContentInView, titleControls, descriptionControls]);
 
   return (
-    <section className="lg:hidden relative w-full h-screen overflow-hidden" dir="rtl" data-section="hero">
+    <section
+      className="lg:hidden relative w-full h-screen overflow-hidden"
+      dir="rtl"
+      data-section="hero"
+    >
       {/* Full screen Spline animation */}
       <div className="bg-black absolute inset-0 w-full h-full pt-35">
-        <Spline 
+        <Spline
           scene="/animations/s-mobile.spline"
           className="w-full h-full scale-100"
           style={{
-            transformOrigin: 'center center'
+            transformOrigin: "center center",
           }}
         />
       </div>
-      
+
       {/* Hero Content */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-start text-center px-4 pt-20 sm:pt-35" ref={contentRef}>
+      <div
+        className="absolute inset-0 z-10 flex flex-col items-center justify-start text-center px-4 pt-20 sm:pt-35"
+        ref={contentRef}
+      >
         <div className="flex flex-col items-center">
           <TitleAnimation
             tag="h1"
@@ -72,10 +83,10 @@ export default function HeroMobile() {
             controls={titleControls}
           />
         </div>
-        
+
         {/* Divider Line */}
         <div className="w-46 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent mb-3 opacity-80"></div>
-        
+
         <motion.p
           className="text-sm lg:text-[18px] text-white/95 mb-8 lg:mb-3 max-w-sm lg:max-w-2xl leading-relaxed font-normal"
           initial="initial"
@@ -83,14 +94,17 @@ export default function HeroMobile() {
           variants={descriptionVariants}
           dir="rtl"
         >
-לא עוד אתרים מתבניות, אלא אתרים שנכתבים שורה אחרי שורה בקוד, כדי להעניק מהירות, עומק ו - SEO שמתחיל בארכיטקטורה. 
+          לא עוד אתרים מתבניות, אלא אתרים שנכתבים שורה אחרי שורה בקוד, כדי
+          להעניק מהירות, עומק ו - SEO שמתחיל בארכיטקטורה.
         </motion.p>
-         {/* Hero Buttons */}
+        {/* Hero Buttons */}
         <style jsx>{`
           :global(.hero-mobile-button-link) {
             transform: translateZ(0) scale(1);
             will-change: transform, opacity;
-            transition: transform 700ms cubic-bezier(0.4, 0, 0.2, 1), opacity 800ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+            transition:
+              transform 700ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 800ms cubic-bezier(0.4, 0, 0.2, 1) !important;
           }
           :global(.hero-mobile-button-link:hover) {
             transform: translateZ(0) scale(1.01) !important;
@@ -98,19 +112,20 @@ export default function HeroMobile() {
           }
         `}</style>
         <div className="flex flex-row-reverse gap-4" dir="rtl">
-          <Link 
+          <Link
             id="whatsapp-button"
             href="https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים"
             target="_blank"
             rel="noopener noreferrer"
             className="hero-mobile-button-link text-black px-3 py-1 lg:px-3 lg:py-1.5 rounded-[12px] border-2 border-gray-100/10 shadow-xl font-bold text-[12px] lg:text-[11px] flex items-center gap-1 group"
-            style={{ 
-              background: 'linear-gradient(22.87deg, rgb(254, 198, 252) 8.56%, rgb(223, 61, 190) 85.04%)',
-              backdropFilter: 'blur(10px)',
+            style={{
+              background:
+                "linear-gradient(22.87deg, rgb(254, 198, 252) 8.56%, rgb(223, 61, 190) 85.04%)",
+              backdropFilter: "blur(10px)",
             }}
-            onClick={(e) => {
+            onClick={() => {
               window.dataLayer?.push({
-                event: 'whatsapp_click',
+                event: "whatsapp_click",
               });
             }}
           >
@@ -127,20 +142,21 @@ export default function HeroMobile() {
               strokeLinejoin="round"
             >
               {/* Chevron/Triangle - always visible, pointing left */}
-              <path d="m15 18-6-6 6-6"/>
+              <path d="m15 18-6-6 6-6" />
               {/* Arrow line - slides in and fades in on hover */}
-              <path 
-                d="M9 12h10" 
+              <path
+                d="M9 12h10"
                 className="transition-all duration-300 ease-out opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
               />
             </svg>
           </Link>
-          <Link 
+          <Link
             href="/pricing"
             className="hero-mobile-button-link text-black border-2 border-white/30 px-5 py-2.5 lg:px-4 lg:py-2 rounded-[12px] font-semibold text-[12px] lg:text-[11px] shadow-xl flex items-center gap-1"
-            style={{ 
-              background: 'linear-gradient(176.87deg, rgba(255, 255, 255, 0.88) 8.56%, rgb(255, 255, 255) 85.04%)',
-              backdropFilter: 'blur(10px)',
+            style={{
+              background:
+                "linear-gradient(176.87deg, rgba(255, 255, 255, 0.88) 8.56%, rgb(255, 255, 255) 85.04%)",
+              backdropFilter: "blur(10px)",
             }}
           >
             <span>המחירים</span>
@@ -163,8 +179,10 @@ export default function HeroMobile() {
               </g>
             </svg>
           </Link>
-      </div>
+        </div>
       </div>
     </section>
   );
-}
+};
+
+export default HeroMobile;

@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import styles from './projectItem.module.css';
-import { motion, type Variants, useInView } from 'framer-motion';
-import { useState, useRef } from 'react';
+import { motion, type Variants, useInView } from "framer-motion";
+import { useState, useRef } from "react";
+
+import styles from "./projectItem.module.css";
 
 export type FeaturedProject = {
   title1: string;
@@ -14,7 +15,7 @@ export type FeaturedProject = {
 const anim: Variants = {
   initial: { width: 0 },
   open: {
-    width: 'auto',
+    width: "auto",
     transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] as const },
   },
   closed: { width: 0 },
@@ -28,7 +29,7 @@ const borderAnim: Variants = {
   },
 };
 
-export default function ProjectItem({ project }: { project: FeaturedProject }) {
+const ProjectItem = ({ project }: { project: FeaturedProject }) => {
   const [isActive, setIsActive] = useState(false);
   const { title1, title2, src } = project;
   const ref = useRef(null);
@@ -38,15 +39,22 @@ export default function ProjectItem({ project }: { project: FeaturedProject }) {
     <div
       ref={ref}
       className={styles.project}
+      role="button"
+      tabIndex={0}
       onMouseEnter={() => setIsActive(true)}
       onMouseLeave={() => setIsActive(false)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          setIsActive(!isActive);
+        }
+      }}
     >
       {/* Animated border top */}
       <motion.div
         className={styles.borderTop}
         variants={borderAnim}
         initial="initial"
-        animate={isInView ? 'animate' : 'initial'}
+        animate={isInView ? "animate" : "initial"}
       />
 
       <p>{title1}</p>
@@ -55,14 +63,18 @@ export default function ProjectItem({ project }: { project: FeaturedProject }) {
         className={styles.imgContainer}
         variants={anim}
         initial="initial"
-        animate={isActive ? 'open' : 'closed'}
+        animate={isActive ? "open" : "closed"}
       >
-        <img className={styles.img} src={`/images/${src}`} alt={`${title1} ${title2}`} />
+        <img
+          className={styles.img}
+          src={`/images/${src}`}
+          alt={`${title1} ${title2}`}
+        />
       </motion.div>
 
       <p>{title2}</p>
     </div>
   );
-}
+};
 
-
+export default ProjectItem;

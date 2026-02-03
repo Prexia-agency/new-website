@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { useRef, useImperativeHandle, forwardRef } from 'react'
-import { gsap } from 'gsap'
+import { gsap } from "gsap";
+import { useRef, useImperativeHandle, forwardRef } from "react";
 
 export interface IconHandle {
   playHoverAnimation: () => void;
@@ -9,135 +9,162 @@ export interface IconHandle {
 }
 
 const CommunityIcon = forwardRef<IconHandle>((props, ref) => {
-  const person1Ref = useRef<SVGCircleElement>(null)
-  const person2Ref = useRef<SVGCircleElement>(null)
-  const person3Ref = useRef<SVGCircleElement>(null)
-  const body1Ref = useRef<SVGPathElement>(null)
-  const body2Ref = useRef<SVGPathElement>(null)
-  const body3Ref = useRef<SVGPathElement>(null)
-  const chat1Ref = useRef<SVGPathElement>(null)
-  const chat2Ref = useRef<SVGPathElement>(null)
-  const chat3Ref = useRef<SVGPathElement>(null)
-  const heartRef = useRef<SVGPathElement>(null)
-  const connectionRef = useRef<SVGPathElement>(null)
+  const person1Ref = useRef<SVGCircleElement>(null);
+  const person2Ref = useRef<SVGCircleElement>(null);
+  const person3Ref = useRef<SVGCircleElement>(null);
+  const body1Ref = useRef<SVGPathElement>(null);
+  const body2Ref = useRef<SVGPathElement>(null);
+  const body3Ref = useRef<SVGPathElement>(null);
+  const chat1Ref = useRef<SVGPathElement>(null);
+  const chat2Ref = useRef<SVGPathElement>(null);
+  const chat3Ref = useRef<SVGPathElement>(null);
+  const heartRef = useRef<SVGPathElement>(null);
+  const connectionRef = useRef<SVGPathElement>(null);
 
   useImperativeHandle(ref, () => ({
     playHoverAnimation: () => {
-      const people = [person1Ref.current, person2Ref.current, person3Ref.current]
-      const bodies = [body1Ref.current, body2Ref.current, body3Ref.current]
-      const chats = [chat1Ref.current, chat2Ref.current, chat3Ref.current]
-      const heart = heartRef.current
-      const connection = connectionRef.current
-      const tl = gsap.timeline()
-      
+      const people = [
+        person1Ref.current,
+        person2Ref.current,
+        person3Ref.current,
+      ];
+      const bodies = [body1Ref.current, body2Ref.current, body3Ref.current];
+      const chats = [chat1Ref.current, chat2Ref.current, chat3Ref.current];
+      const heart = heartRef.current;
+      const connection = connectionRef.current;
+      const tl = gsap.timeline();
+
       // Connection lines appear between people
-      tl.fromTo(connection,
+      tl.fromTo(
+        connection,
         { strokeDashoffset: 100, opacity: 0 },
         {
           strokeDashoffset: 0,
           opacity: 0.5,
           duration: 0.6,
-          ease: 'power2.out'
+          ease: "power2.out",
         },
-        0
-      )
-      
+        0,
+      );
+
       // People light up and bob up in wave (reduced movement to avoid cropping)
       people.forEach((person, index) => {
-        tl.to(person, {
-          y: -2,
-          scale: 1.1,
-          stroke: '#00D4FF',
-          strokeWidth: 2,
-          filter: 'drop-shadow(0 0 8px rgba(0, 212, 255, 0.4))',
-          duration: 0.4,
-          ease: 'power2.out'
-        }, 0.2 + index * 0.15)
-        
-        tl.to(bodies[index], {
-          y: -2,
-          stroke: '#00D4FF',
-          strokeWidth: 2,
-          duration: 0.4,
-          ease: 'power2.out'
-        }, 0.2 + index * 0.15)
-      })
-      
+        tl.to(
+          person,
+          {
+            y: -2,
+            scale: 1.1,
+            stroke: "#00D4FF",
+            strokeWidth: 2,
+            filter: "drop-shadow(0 0 8px rgba(0, 212, 255, 0.4))",
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          0.2 + index * 0.15,
+        );
+
+        tl.to(
+          bodies[index],
+          {
+            y: -2,
+            stroke: "#00D4FF",
+            strokeWidth: 2,
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          0.2 + index * 0.15,
+        );
+      });
+
       // Chat bubbles pop up in sequence
       chats.forEach((chat, index) => {
-        tl.fromTo(chat,
+        tl.fromTo(
+          chat,
           { scale: 0, opacity: 0, y: 5 },
           {
             scale: 1,
             opacity: 1,
             y: 0,
             duration: 0.3,
-            ease: 'back.out(2)',
-            transformOrigin: 'bottom center'
+            ease: "back.out(2)",
+            transformOrigin: "bottom center",
           },
-          0.5 + index * 0.2
+          0.5 + index * 0.2,
         )
-        // Chat bubbles fade out
-        .to(chat, {
-          y: -3,
-          opacity: 0,
-          duration: 0.3,
-          ease: 'power2.in'
-        }, '+=0.2')
-      })
-      
+          // Chat bubbles fade out
+          .to(
+            chat,
+            {
+              y: -3,
+              opacity: 0,
+              duration: 0.3,
+              ease: "power2.in",
+            },
+            "+=0.2",
+          );
+      });
+
       // Heart appears and grows (reduced movement to avoid cropping)
-      tl.fromTo(heart,
+      tl.fromTo(
+        heart,
         { scale: 0, opacity: 0, rotation: -45 },
         {
           scale: 1.1,
           opacity: 1,
           rotation: 0,
           duration: 0.5,
-          ease: 'back.out(2)',
-          transformOrigin: 'center center'
+          ease: "back.out(2)",
+          transformOrigin: "center center",
         },
-        1.4
+        1.4,
       )
-      .to(heart, {
-        scale: 1.3,
-        duration: 0.2,
-        ease: 'power2.inOut',
-        yoyo: true,
-        repeat: 1
-      })
-      .to(heart, {
-        y: 0,
-        opacity: 0,
-        duration: 0.4,
-        ease: 'power2.in'
-      })
+        .to(heart, {
+          scale: 1.3,
+          duration: 0.2,
+          ease: "power2.inOut",
+          yoyo: true,
+          repeat: 1,
+        })
+        .to(heart, {
+          y: 0,
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.in",
+        });
     },
     playLeaveAnimation: () => {
-      const people = [person1Ref.current, person2Ref.current, person3Ref.current]
-      const bodies = [body1Ref.current, body2Ref.current, body3Ref.current]
-      const connection = connectionRef.current
-      const tl = gsap.timeline()
-      
+      const people = [
+        person1Ref.current,
+        person2Ref.current,
+        person3Ref.current,
+      ];
+      const bodies = [body1Ref.current, body2Ref.current, body3Ref.current];
+      const connection = connectionRef.current;
+      const tl = gsap.timeline();
+
       tl.to([...people, ...bodies], {
         y: 0,
         scale: 1,
-        stroke: 'url(#communityGradient)',
+        stroke: "url(#communityGradient)",
         strokeWidth: 1.5,
-        filter: 'drop-shadow(0 0 0px rgba(0, 212, 255, 0))',
+        filter: "drop-shadow(0 0 0px rgba(0, 212, 255, 0))",
         duration: 0.4,
-        ease: 'power2.in',
-        stagger: 0.05
-      })
-      
-      tl.to(connection, {
-        strokeDashoffset: 100,
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.in'
-      }, 0)
-    }
-  }))
+        ease: "power2.in",
+        stagger: 0.05,
+      });
+
+      tl.to(
+        connection,
+        {
+          strokeDashoffset: 100,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in",
+        },
+        0,
+      );
+    },
+  }));
 
   return (
     <svg
@@ -149,7 +176,13 @@ const CommunityIcon = forwardRef<IconHandle>((props, ref) => {
       className="flex-shrink-0"
     >
       <defs>
-        <linearGradient id="communityGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient
+          id="communityGradient"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="100%"
+        >
           <stop offset="0%" stopColor="#00D4FF" />
           <stop offset="50%" stopColor="#007BFF" />
           <stop offset="100%" stopColor="#8B00FF" />
@@ -253,9 +286,9 @@ const CommunityIcon = forwardRef<IconHandle>((props, ref) => {
         opacity="0"
       />
     </svg>
-  )
-})
+  );
+});
 
-CommunityIcon.displayName = 'CommunityIcon'
+CommunityIcon.displayName = "CommunityIcon";
 
-export default CommunityIcon
+export default CommunityIcon;

@@ -1,13 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+
 import VideoPreloader from "./VideoPreloader";
 
-export default function PreloaderGate({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const PreloaderGate = ({ children }: { children: React.ReactNode }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [shouldExit, setShouldExit] = useState(false);
 
@@ -41,5 +38,6 @@ export default function PreloaderGate({
       {children}
     </>
   );
-}
+};
 
+export default PreloaderGate;

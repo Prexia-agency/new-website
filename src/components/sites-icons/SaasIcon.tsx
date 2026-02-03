@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { useRef, useImperativeHandle, forwardRef } from 'react'
-import { gsap } from 'gsap'
+import { gsap } from "gsap";
+import { useRef, useImperativeHandle, forwardRef } from "react";
 
 export interface IconHandle {
   playHoverAnimation: () => void;
@@ -9,139 +9,161 @@ export interface IconHandle {
 }
 
 const SaasIcon = forwardRef<IconHandle>((props, ref) => {
-  const windowRef = useRef<SVGRectElement>(null)
-  const bar1Ref = useRef<SVGRectElement>(null)
-  const bar2Ref = useRef<SVGRectElement>(null)
-  const bar3Ref = useRef<SVGRectElement>(null)
-  const graph1Ref = useRef<SVGPathElement>(null)
-  const graph2Ref = useRef<SVGPathElement>(null)
-  const dot1Ref = useRef<SVGCircleElement>(null)
-  const dot2Ref = useRef<SVGCircleElement>(null)
-  const dot3Ref = useRef<SVGCircleElement>(null)
-  const notifRef = useRef<SVGCircleElement>(null)
+  const windowRef = useRef<SVGRectElement>(null);
+  const bar1Ref = useRef<SVGRectElement>(null);
+  const bar2Ref = useRef<SVGRectElement>(null);
+  const bar3Ref = useRef<SVGRectElement>(null);
+  const graph1Ref = useRef<SVGPathElement>(null);
+  const graph2Ref = useRef<SVGPathElement>(null);
+  const dot1Ref = useRef<SVGCircleElement>(null);
+  const dot2Ref = useRef<SVGCircleElement>(null);
+  const dot3Ref = useRef<SVGCircleElement>(null);
+  const notifRef = useRef<SVGCircleElement>(null);
 
   useImperativeHandle(ref, () => ({
     playHoverAnimation: () => {
-      const windowEl = windowRef.current
-      const bars = [bar1Ref.current, bar2Ref.current, bar3Ref.current]
-      const graphs = [graph1Ref.current, graph2Ref.current]
-      const dots = [dot1Ref.current, dot2Ref.current, dot3Ref.current]
-      const notif = notifRef.current
-      const tl = gsap.timeline()
-      
+      const windowEl = windowRef.current;
+      const bars = [bar1Ref.current, bar2Ref.current, bar3Ref.current];
+      const graphs = [graph1Ref.current, graph2Ref.current];
+      const dots = [dot1Ref.current, dot2Ref.current, dot3Ref.current];
+      const notif = notifRef.current;
+      const tl = gsap.timeline();
+
       // Window glows and scales
       tl.to(windowEl, {
-        stroke: '#8B00FF',
+        stroke: "#8B00FF",
         strokeWidth: 2.5,
         scale: 1.05,
-        filter: 'drop-shadow(0 0 12px rgba(139, 0, 255, 0.4))',
+        filter: "drop-shadow(0 0 12px rgba(139, 0, 255, 0.4))",
         duration: 0.4,
-        ease: 'power2.out',
-        transformOrigin: 'center center'
-      })
-      
+        ease: "power2.out",
+        transformOrigin: "center center",
+      });
+
       // Top bar dots pulse
-      tl.to(dots, {
-        scale: 1.5,
-        opacity: 1,
-        duration: 0.3,
-        stagger: 0.1,
-        ease: 'power2.out',
-        yoyo: true,
-        repeat: 1
-      }, 0.2)
-      
+      tl.to(
+        dots,
+        {
+          scale: 1.5,
+          opacity: 1,
+          duration: 0.3,
+          stagger: 0.1,
+          ease: "power2.out",
+          yoyo: true,
+          repeat: 1,
+        },
+        0.2,
+      );
+
       // Data bars grow with stagger effect
       bars.forEach((bar, index) => {
-        tl.fromTo(bar,
-          { scaleY: 0, transformOrigin: 'bottom center' },
+        tl.fromTo(
+          bar,
+          { scaleY: 0, transformOrigin: "bottom center" },
           {
             scaleY: [0, 1.8, 1.5, 1.6, 1.5] as unknown as number,
             duration: 0.8,
-            ease: 'power2.out'
+            ease: "power2.out",
           },
-          0.3 + index * 0.15
-        )
-      })
-      
+          0.3 + index * 0.15,
+        );
+      });
+
       // Graph lines draw in
       graphs.forEach((graph, index) => {
-        tl.fromTo(graph,
+        tl.fromTo(
+          graph,
           { strokeDashoffset: 50, opacity: 0 },
           {
             strokeDashoffset: 0,
             opacity: 1,
             duration: 0.6,
-            ease: 'power2.out'
+            ease: "power2.out",
           },
-          0.6 + index * 0.2
-        )
-      })
-      
+          0.6 + index * 0.2,
+        );
+      });
+
       // Notification badge pops in
-      tl.fromTo(notif,
+      tl.fromTo(
+        notif,
         { scale: 0, opacity: 0 },
         {
           scale: 1,
           opacity: 1,
           duration: 0.3,
-          ease: 'back.out(2.5)',
-          transformOrigin: 'center center'
+          ease: "back.out(2.5)",
+          transformOrigin: "center center",
         },
-        1.2
-      )
-      .to(notif, {
+        1.2,
+      ).to(notif, {
         scale: 1.2,
         duration: 0.2,
-        ease: 'power2.inOut',
+        ease: "power2.inOut",
         yoyo: true,
-        repeat: 2
-      })
+        repeat: 2,
+      });
     },
     playLeaveAnimation: () => {
-      const windowEl = windowRef.current
-      const bars = [bar1Ref.current, bar2Ref.current, bar3Ref.current]
-      const graphs = [graph1Ref.current, graph2Ref.current]
-      const dots = [dot1Ref.current, dot2Ref.current, dot3Ref.current]
-      const notif = notifRef.current
-      const tl = gsap.timeline()
-      
+      const windowEl = windowRef.current;
+      const bars = [bar1Ref.current, bar2Ref.current, bar3Ref.current];
+      const graphs = [graph1Ref.current, graph2Ref.current];
+      const dots = [dot1Ref.current, dot2Ref.current, dot3Ref.current];
+      const notif = notifRef.current;
+      const tl = gsap.timeline();
+
       tl.to(windowEl, {
-        stroke: 'url(#saasGradient)',
+        stroke: "url(#saasGradient)",
         strokeWidth: 2,
         scale: 1,
-        filter: 'drop-shadow(0 0 0px rgba(139, 0, 255, 0))',
+        filter: "drop-shadow(0 0 0px rgba(139, 0, 255, 0))",
         duration: 0.4,
-        ease: 'power2.in'
-      })
-      
-      tl.to(bars, {
-        scaleY: 1,
-        duration: 0.3,
-        ease: 'power2.in',
-        stagger: 0.05
-      }, 0)
-      
-      tl.to(graphs, {
-        strokeDashoffset: 50,
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.in'
-      }, 0)
-      
-      tl.to(dots, {
-        scale: 1,
-        duration: 0.2
-      }, 0)
-      
-      tl.to(notif, {
-        scale: 0,
-        opacity: 0,
-        duration: 0.2,
-        ease: 'power2.in'
-      }, 0)
-    }
-  }))
+        ease: "power2.in",
+      });
+
+      tl.to(
+        bars,
+        {
+          scaleY: 1,
+          duration: 0.3,
+          ease: "power2.in",
+          stagger: 0.05,
+        },
+        0,
+      );
+
+      tl.to(
+        graphs,
+        {
+          strokeDashoffset: 50,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in",
+        },
+        0,
+      );
+
+      tl.to(
+        dots,
+        {
+          scale: 1,
+          duration: 0.2,
+        },
+        0,
+      );
+
+      tl.to(
+        notif,
+        {
+          scale: 0,
+          opacity: 0,
+          duration: 0.2,
+          ease: "power2.in",
+        },
+        0,
+      );
+    },
+  }));
 
   return (
     <svg
@@ -241,9 +263,9 @@ const SaasIcon = forwardRef<IconHandle>((props, ref) => {
         opacity="0"
       />
     </svg>
-  )
-})
+  );
+});
 
-SaasIcon.displayName = 'SaasIcon'
+SaasIcon.displayName = "SaasIcon";
 
-export default SaasIcon
+export default SaasIcon;

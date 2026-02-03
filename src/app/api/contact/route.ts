@@ -1,6 +1,7 @@
-import { Resend } from 'resend';
-import { NextRequest, NextResponse } from 'next/server';
-import { contactSchema } from '@/lib/validations/contact';
+import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
+
+import { contactSchema } from "@/lib/validations/contact";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -10,26 +11,27 @@ export async function POST(request: NextRequest) {
 
     // Validate using Zod schema
     const validationResult = contactSchema.safeParse(body);
-    
+
     if (!validationResult.success) {
       const errors = validationResult.error.issues.map((issue) => ({
-        field: issue.path.join('.'),
+        field: issue.path.join("."),
         message: issue.message,
       }));
-      
+
       return NextResponse.json(
-        { 
-          error: 'Validation failed',
-          details: errors 
+        {
+          error: "Validation failed",
+          details: errors,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    const { name, email, phone, company, message, projectType } = validationResult.data;
+    const { name, email, phone, company, message, projectType } =
+      validationResult.data;
 
-    const fromEmail = process.env.RESEND_FROM_EMAIL || '';
-    const toEmail = process.env.RESEND_TO_EMAIL || '';
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "";
+    const toEmail = process.env.RESEND_TO_EMAIL || "";
 
     // Email to business
     const businessEmailResult = await resend.emails.send({
@@ -44,7 +46,7 @@ export async function POST(request: NextRequest) {
           <p><strong>שם:</strong> ${name}</p>
           <p><strong>אימייל:</strong> ${email}</p>
           <p><strong>טלפון:</strong> ${phone}</p>
-          ${company ? `<p><strong>חברה:</strong> ${company}</p>` : ''}
+          ${company ? `<p><strong>חברה:</strong> ${company}</p>` : ""}
           <p><strong>סוג פרויקט:</strong> ${getProjectTypeLabel(projectType)}</p>
           
           <h3>הודעה:</h3>
@@ -58,8 +60,8 @@ export async function POST(request: NextRequest) {
 
     if (businessEmailResult.error) {
       return NextResponse.json(
-        { error: 'Failed to send notification email' },
-        { status: 500 }
+        { error: "Failed to send notification email" },
+        { status: 500 },
       );
     }
 
@@ -67,7 +69,7 @@ export async function POST(request: NextRequest) {
     const userEmailResult = await resend.emails.send({
       from: fromEmail,
       to: [email],
-      subject: 'תודה שפנית אלינו',
+      subject: "תודה שפנית אלינו",
       html: `
         <!DOCTYPE html>
         <html dir="rtl" lang="he">
@@ -189,11 +191,15 @@ export async function POST(request: NextRequest) {
                 <div class="info-item">
                   <span class="info-label">טלפון:</span> ${phone}
                 </div>
-                ${company ? `
+                ${
+                  company
+                    ? `
                 <div class="info-item">
                   <span class="info-label">חברה:</span> ${company}
                 </div>
-                ` : ''}
+                `
+                    : ""
+                }
                 <div class="info-item">
                   <span class="info-label">סוג פרויקט:</span> ${getProjectTypeLabel(projectType)}
                 </div>
@@ -225,34 +231,32 @@ export async function POST(request: NextRequest) {
 
     if (userEmailResult.error) {
       return NextResponse.json(
-        { error: 'Failed to send confirmation email' },
-        { status: 500 }
+        { error: "Failed to send confirmation email" },
+        { status: 500 },
       );
     }
 
     return NextResponse.json(
-      { 
+      {
         success: true,
-        message: 'Emails sent successfully'
+        message: "Emails sent successfully",
       },
-      { status: 200 }
+      { status: 200 },
     );
-
   } catch (error) {
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+      { error: "Internal server error" },
+      { status: 500 },
     );
   }
 }
 
 function getProjectTypeLabel(projectType: string): string {
   const labels: { [key: string]: string } = {
-    'basic': 'חבילת בסיס - אתר תדמית פשוט',
-    'advanced': 'חבילת מתקדמים - אנימציות ותלת־ממד',
-    'complex': 'פרויקטים מורכבים - אינטגרציות ופיתוח מתקדם',
-    'other': 'אחר'
+    basic: "חבילת בסיס - אתר תדמית פשוט",
+    advanced: "חבילת מתקדמים - אנימציות ותלת־ממד",
+    complex: "פרויקטים מורכבים - אינטגרציות ופיתוח מתקדם",
+    other: "אחר",
   };
   return labels[projectType] || projectType;
 }
-

@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
 import Prism from "prismjs";
+import { useEffect, useMemo, useRef } from "react";
+
 import styles from "./CodeBlock.module.css";
 
 type SupportedLanguage =
@@ -87,7 +88,7 @@ async function ensurePrismLanguage(lang: SupportedLanguage): Promise<void> {
   }
 }
 
-export default function CodeBlock({ code, language, filename }: CodeBlockProps) {
+const CodeBlock = ({ code, language, filename }: CodeBlockProps) => {
   const codeRef = useRef<HTMLElement | null>(null);
   const lang = useMemo(() => normalizeLanguage(language), [language]);
 
@@ -118,7 +119,10 @@ export default function CodeBlock({ code, language, filename }: CodeBlockProps) 
   }, [code, lang]);
 
   return (
-    <section className={`my-10 rounded-xl overflow-hidden ${styles.root}`} dir="ltr">
+    <section
+      className={`my-10 rounded-xl overflow-hidden ${styles.root}`}
+      dir="ltr"
+    >
       {filename ? (
         <div className={`px-4 py-2 text-xs font-mono ${styles.header}`}>
           {filename}
@@ -126,15 +130,12 @@ export default function CodeBlock({ code, language, filename }: CodeBlockProps) 
       ) : null}
 
       <pre className={`p-4 text-sm font-mono leading-6 ${styles.pre}`}>
-        <code
-          ref={codeRef}
-          className={`language-${lang} ${styles.code}`}
-        >
+        <code ref={codeRef} className={`language-${lang} ${styles.code}`}>
           {code}
         </code>
       </pre>
     </section>
   );
-}
+};
 
-
+export default CodeBlock;

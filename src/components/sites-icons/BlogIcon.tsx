@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { useRef, useImperativeHandle, forwardRef } from 'react'
-import { gsap } from 'gsap'
+import { gsap } from "gsap";
+import { useRef, useImperativeHandle, forwardRef } from "react";
 
 export interface IconHandle {
   playHoverAnimation: () => void;
@@ -9,97 +9,121 @@ export interface IconHandle {
 }
 
 const BlogIcon = forwardRef<IconHandle>((props, ref) => {
-  const phoneRef = useRef<SVGRectElement>(null)
-  const message1Ref = useRef<SVGRectElement>(null)
-  const message2Ref = useRef<SVGRectElement>(null)
-  const message3Ref = useRef<SVGRectElement>(null)
-  const dot1Ref = useRef<SVGCircleElement>(null)
-  const dot2Ref = useRef<SVGCircleElement>(null)
-  const dot3Ref = useRef<SVGCircleElement>(null)
+  const phoneRef = useRef<SVGRectElement>(null);
+  const message1Ref = useRef<SVGRectElement>(null);
+  const message2Ref = useRef<SVGRectElement>(null);
+  const message3Ref = useRef<SVGRectElement>(null);
+  const dot1Ref = useRef<SVGCircleElement>(null);
+  const dot2Ref = useRef<SVGCircleElement>(null);
+  const dot3Ref = useRef<SVGCircleElement>(null);
 
   useImperativeHandle(ref, () => ({
     playHoverAnimation: () => {
-      const phone = phoneRef.current
-      const messages = [message1Ref.current, message2Ref.current, message3Ref.current]
-      const dots = [dot1Ref.current, dot2Ref.current, dot3Ref.current]
-      const tl = gsap.timeline()
-      
+      const phone = phoneRef.current;
+      const messages = [
+        message1Ref.current,
+        message2Ref.current,
+        message3Ref.current,
+      ];
+      const dots = [dot1Ref.current, dot2Ref.current, dot3Ref.current];
+      const tl = gsap.timeline();
+
       // Phone lifts up and glows (reduced movement to avoid cropping)
       tl.to(phone, {
         y: -1,
         scale: 1.03,
-        stroke: '#8B00FF',
+        stroke: "#8B00FF",
         strokeWidth: 2.5,
-        filter: 'drop-shadow(0 6px 12px rgba(139, 0, 255, 0.3))',
+        filter: "drop-shadow(0 6px 12px rgba(139, 0, 255, 0.3))",
         duration: 0.4,
-        ease: 'power2.out',
-        transformOrigin: 'center center'
-      })
-      
+        ease: "power2.out",
+        transformOrigin: "center center",
+      });
+
       // Messages appear one by one like a conversation
       messages.forEach((message, index) => {
         // Message slides in from right and fades in
-        tl.fromTo(message,
+        tl.fromTo(
+          message,
           { x: 10, opacity: 0, scale: 0.8 },
           {
             x: 0,
             opacity: 1,
             scale: 1,
             duration: 0.4,
-            ease: 'back.out(1.5)',
-            transformOrigin: 'center center'
+            ease: "back.out(1.5)",
+            transformOrigin: "center center",
           },
-          0.3 + index * 0.25
-        )
-        
+          0.3 + index * 0.25,
+        );
+
         // Typing dots appear briefly before each message
         if (index < dots.length) {
-          tl.to(dots.slice(0, index + 1), {
-            opacity: 1,
-            scale: 1,
-            duration: 0.2,
-            stagger: 0.1,
-            ease: 'power2.out'
-          }, 0.2 + index * 0.25)
-          .to(dots.slice(0, index + 1), {
-            opacity: 0,
-            duration: 0.2,
-          }, 0.35 + index * 0.25)
+          tl.to(
+            dots.slice(0, index + 1),
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.2,
+              stagger: 0.1,
+              ease: "power2.out",
+            },
+            0.2 + index * 0.25,
+          ).to(
+            dots.slice(0, index + 1),
+            {
+              opacity: 0,
+              duration: 0.2,
+            },
+            0.35 + index * 0.25,
+          );
         }
-      })
+      });
     },
     playLeaveAnimation: () => {
-      const phone = phoneRef.current
-      const messages = [message1Ref.current, message2Ref.current, message3Ref.current]
-      const dots = [dot1Ref.current, dot2Ref.current, dot3Ref.current]
-      const tl = gsap.timeline()
-      
+      const phone = phoneRef.current;
+      const messages = [
+        message1Ref.current,
+        message2Ref.current,
+        message3Ref.current,
+      ];
+      const dots = [dot1Ref.current, dot2Ref.current, dot3Ref.current];
+      const tl = gsap.timeline();
+
       tl.to(phone, {
         y: 0,
         scale: 1,
-        stroke: 'url(#blogGradient)',
+        stroke: "url(#blogGradient)",
         strokeWidth: 2,
-        filter: 'drop-shadow(0 0 0px rgba(139, 0, 255, 0))',
+        filter: "drop-shadow(0 0 0px rgba(139, 0, 255, 0))",
         duration: 0.4,
-        ease: 'power2.in'
-      })
-      
-      tl.to(messages, {
-        x: 10,
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.3,
-        stagger: 0.05,
-        ease: 'power2.in'
-      }, 0)
-      
-      tl.to(dots, {
-        opacity: 0,
-        scale: 0,
-        duration: 0.2
-      }, 0)
-    }
-  }))
+        ease: "power2.in",
+      });
+
+      tl.to(
+        messages,
+        {
+          x: 10,
+          opacity: 0,
+          scale: 0.8,
+          duration: 0.3,
+          stagger: 0.05,
+          ease: "power2.in",
+        },
+        0,
+      );
+
+      tl.to(
+        dots,
+        {
+          opacity: 0,
+          scale: 0,
+          duration: 0.2,
+        },
+        0,
+      );
+    },
+  }));
 
   return (
     <svg
@@ -132,7 +156,15 @@ const BlogIcon = forwardRef<IconHandle>((props, ref) => {
       />
 
       {/* Screen top bar */}
-      <line x1="13" y1="8" x2="27" y2="8" stroke="url(#blogGradient)" strokeWidth="1" opacity="0.5" />
+      <line
+        x1="13"
+        y1="8"
+        x2="27"
+        y2="8"
+        stroke="url(#blogGradient)"
+        strokeWidth="1"
+        opacity="0.5"
+      />
 
       {/* Message Bubbles */}
       <rect
@@ -167,13 +199,34 @@ const BlogIcon = forwardRef<IconHandle>((props, ref) => {
       />
 
       {/* Typing dots (appear before messages) */}
-      <circle ref={dot1Ref} cx="15" cy="30" r="0.8" fill="url(#blogGradient)" opacity="0" />
-      <circle ref={dot2Ref} cx="17.5" cy="30" r="0.8" fill="url(#blogGradient)" opacity="0" />
-      <circle ref={dot3Ref} cx="20" cy="30" r="0.8" fill="url(#blogGradient)" opacity="0" />
+      <circle
+        ref={dot1Ref}
+        cx="15"
+        cy="30"
+        r="0.8"
+        fill="url(#blogGradient)"
+        opacity="0"
+      />
+      <circle
+        ref={dot2Ref}
+        cx="17.5"
+        cy="30"
+        r="0.8"
+        fill="url(#blogGradient)"
+        opacity="0"
+      />
+      <circle
+        ref={dot3Ref}
+        cx="20"
+        cy="30"
+        r="0.8"
+        fill="url(#blogGradient)"
+        opacity="0"
+      />
     </svg>
-  )
-})
+  );
+});
 
-BlogIcon.displayName = 'BlogIcon'
+BlogIcon.displayName = "BlogIcon";
 
-export default BlogIcon
+export default BlogIcon;

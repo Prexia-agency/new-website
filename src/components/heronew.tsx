@@ -1,8 +1,7 @@
-export default function HeroNew() {
+const HeroNew = () => {
   return (
-    <div className="w-screen h-screen bg-white">
-      {/* Your content here */}
-    </div>
+    <div className="w-screen h-screen bg-white">{/* Your content here */}</div>
   );
-}
+};
 
+export default HeroNew;

@@ -9,13 +9,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  compiler: {
+    removeConsole:
+      process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
+  },
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: "/:path*",
         headers: [
           {
-            key: 'Content-Security-Policy',
+            key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
               // Allow scripts from self, Google domains, and CDNs for Rive/Spline
@@ -31,7 +35,7 @@ const nextConfig: NextConfig = {
               // Allow connections to Google Analytics, Ads endpoints, and CDNs for WASM files
               "connect-src 'self' https://j855mcyw.api.sanity.io https://cdn.sanity.io https://tally.so https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://region1.google-analytics.com https://region1.analytics.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://unpkg.com https://cdn.jsdelivr.net https://fonts.gstatic.com",
               // Allow frames from trusted sources (GTM noscript)
-              "frame-src 'self' https://www.googletagmanager.com https://tally.so" ,
+              "frame-src 'self' https://www.googletagmanager.com https://tally.so",
               // Allow objects
               "object-src 'none'",
               // Base URI
@@ -40,23 +44,23 @@ const nextConfig: NextConfig = {
               "form-action 'self' https://tally.so",
               // Frame ancestors
               "frame-ancestors 'self'",
-            ].join('; '),
+            ].join("; "),
           },
           {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
           },
           {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
           },
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
+            key: "Referrer-Policy",
+            value: "origin-when-cross-origin",
           },
         ],
       },

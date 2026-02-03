@@ -1,29 +1,30 @@
-'use client';
+"use client";
 
-import clsx from 'clsx';
-import Link from 'next/link';
+import clsx from "clsx";
+import Link from "next/link";
 
 type HeroButtonProps = {
   href: string;
   children: React.ReactNode;
-  variant?: 'solid' | 'ghost';
+  variant?: "solid" | "ghost";
   className?: string;
   ariaLabel?: string;
 };
 
-export function HeroButton({
+export const HeroButton = ({
   href,
   children,
-  variant = 'solid',
+  variant = "solid",
   className,
   ariaLabel,
-}: HeroButtonProps) {
+}: HeroButtonProps) => {
   const base =
-    'inline-flex items-center justify-center rounded-full px-5 py-2 text-sm md:text-base font-noto-hebrew transition-colors duration-200';
+    "inline-flex items-center justify-center rounded-full px-5 py-2 text-sm md:text-base font-noto-hebrew transition-colors duration-200";
 
   const variants = {
-    solid: 'bg-white text-black hover:bg-white/70',
-    ghost: 'bg-[#bababa99] sm:bg-[#bababa33] border border-[#bababa99] sm:border-[#bababa33] text-white hover:bg-[#bababaaa] sm:hover:bg-[#bababa66]',
+    solid: "bg-white text-black hover:bg-white/70",
+    ghost:
+      "bg-[#bababa99] sm:bg-[#bababa33] border border-[#bababa99] sm:border-[#bababa33] text-white hover:bg-[#bababaaa] sm:hover:bg-[#bababa66]",
   } as const;
 
   return (
@@ -35,5 +36,4 @@ export function HeroButton({
       {children}
     </Link>
   );
-}
-
+};

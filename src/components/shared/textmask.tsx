@@ -1,10 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useMemo, useRef } from 'react';
-import type { ReactNode } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { gsap } from 'gsap';
-
+import { gsap } from "gsap";
+import { useEffect, useMemo, useRef } from "react";
+import type { ReactNode } from "react";
+import { useInView } from "react-intersection-observer";
 
 type MaskTextProps = {
   phrases?: ReactNode[];
@@ -15,7 +14,7 @@ type MaskTextProps = {
    * - 'lines' (default): animate each line as a whole (safe for ReactNode phrases).
    * - 'letters': animate each letter (only for string phrases; non-strings fall back to 'lines').
    */
-  split?: 'lines' | 'letters';
+  split?: "lines" | "letters";
   /** GSAP timing controls */
   duration?: number;
   stagger?: number;
@@ -23,30 +22,30 @@ type MaskTextProps = {
   delay?: number;
 };
 
-export function MaskText({
+export const MaskText = ({
   phrases = [],
   className,
   lineClassName,
   textClassName,
-  split = 'lines',
+  split = "lines",
   duration = 1.5,
   stagger = 0.09,
   delay = 0,
-}: MaskTextProps) {
+}: MaskTextProps) => {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const hasAnimatedRef = useRef(false);
 
   const [inViewRef, isInView] = useInView({
     triggerOnce: true,
-    rootMargin: '-75%',
+    rootMargin: "-75%",
   });
 
   const resolvedSplit = useMemo(() => {
-    if (split === 'letters') {
-      const hasOnlyStrings = phrases.every((p) => typeof p === 'string');
-      return hasOnlyStrings ? 'letters' : 'lines';
+    if (split === "letters") {
+      const hasOnlyStrings = phrases.every((p) => typeof p === "string");
+      return hasOnlyStrings ? "letters" : "lines";
     }
-    return 'lines';
+    return "lines";
   }, [phrases, split]);
 
   useEffect(() => {
@@ -59,47 +58,50 @@ export function MaskText({
       // Fallback: in pinned / above-the-fold contexts IntersectionObserver can be flaky.
       // If the element is currently in the viewport, animate anyway.
       const rect = rootRef.current.getBoundingClientRect();
-      const isActuallyInViewport = rect.bottom > 0 && rect.top < window.innerHeight;
+      const isActuallyInViewport =
+        rect.bottom > 0 && rect.top < window.innerHeight;
       const shouldAnimate = isInView || isActuallyInViewport;
-      
+
       if (!shouldAnimate) return;
 
       const ctx = gsap.context(() => {
-        const letters = rootRef.current?.querySelectorAll<HTMLElement>('[data-mask-letter]');
-        const lines = rootRef.current?.querySelectorAll<HTMLElement>('[data-mask-line]');
+        const letters =
+          rootRef.current?.querySelectorAll<HTMLElement>("[data-mask-letter]");
+        const lines =
+          rootRef.current?.querySelectorAll<HTMLElement>("[data-mask-line]");
 
-        if (resolvedSplit === 'letters' && letters && letters.length > 0) {
+        if (resolvedSplit === "letters" && letters && letters.length > 0) {
           gsap.fromTo(
             letters,
-            { y: '120%' },
+            { y: "120%" },
             {
-              y: '0%',
+              y: "0%",
               duration,
               delay,
-              ease: 'power3.out',
+              ease: "power3.out",
               stagger: {
                 each: Math.max(0, stagger / 10),
               },
               overwrite: true,
-            }
+            },
           );
           return;
         }
 
-        if (resolvedSplit === 'lines' && lines && lines.length > 0) {
+        if (resolvedSplit === "lines" && lines && lines.length > 0) {
           gsap.fromTo(
             lines,
-            { y: '120%' },
+            { y: "120%" },
             {
-              y: '0%',
+              y: "0%",
               duration,
               delay,
-              ease: 'power3.out',
+              ease: "power3.out",
               stagger: {
                 each: stagger,
-        },
+              },
               overwrite: true,
-            }
+            },
           );
         }
       }, rootRef);
@@ -125,21 +127,22 @@ export function MaskText({
         rootRef.current = node;
         inViewRef(node);
       }}
-      className={className ?? 'flex flex-col gap-2'}
+      className={className ?? "flex flex-col gap-2"}
     >
       {phrases.map((phrase: ReactNode, index: number) => {
-        const key = typeof phrase === 'string' ? `${index}-${phrase}` : String(index);
+        const key =
+          typeof phrase === "string" ? `${index}-${phrase}` : String(index);
 
-        if (resolvedSplit === 'letters' && typeof phrase === 'string') {
+        if (resolvedSplit === "letters" && typeof phrase === "string") {
           return (
-            <div key={key} className={lineClassName ?? 'overflow-hidden'}>
+            <div key={key} className={lineClassName ?? "overflow-hidden"}>
               <p className={textClassName}>
                 {/* WCAG: keep real text for screen readers */}
                 <span className="sr-only">{phrase}</span>
                 {/* Visual letters only */}
                 <span aria-hidden="true" className="inline-block">
-                  {phrase.split('').map((char, charIndex) => {
-                    const printableChar = char === ' ' ? '\u00A0' : char;
+                  {phrase.split("").map((char, charIndex) => {
+                    const printableChar = char === " " ? "\u00A0" : char;
                     return (
                       <span
                         // Wrapper makes the "mask" per-letter
@@ -147,8 +150,8 @@ export function MaskText({
                         className="inline-block overflow-hidden align-baseline"
                       >
                         <span
-                          data-mask-letter
                           className="inline-block will-change-transform mask-text-initial"
+                          data-mask-letter
                         >
                           {printableChar}
                         </span>
@@ -162,16 +165,16 @@ export function MaskText({
         }
 
         return (
-          <div key={key} className={lineClassName ?? 'overflow-hidden'}>
+          <div key={key} className={lineClassName ?? "overflow-hidden"}>
             <p
+              className={`${textClassName ?? ""} will-change-transform mask-text-initial`}
               data-mask-line
-              className={`${textClassName ?? ''} will-change-transform mask-text-initial`}
-          >
-            {phrase}
+            >
+              {phrase}
             </p>
-        </div>
+          </div>
         );
       })}
     </div>
   );
-}
+};

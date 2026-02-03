@@ -3,10 +3,16 @@
 import Script from "next/script";
 import { useEffect } from "react";
 
-export default function TallyForm() {
+interface WindowWithTally extends Window {
+  Tally?: {
+    loadEmbeds: () => void;
+  };
+}
+
+const TallyForm = () => {
   useEffect(() => {
-    if (typeof window !== "undefined" && (window as any).Tally) {
-      (window as any).Tally.loadEmbeds();
+    if (typeof window !== "undefined" && (window as WindowWithTally).Tally) {
+      (window as WindowWithTally).Tally?.loadEmbeds();
     }
   }, []);
 
@@ -16,8 +22,8 @@ export default function TallyForm() {
         src="https://tally.so/widgets/embed.js"
         strategy="afterInteractive"
         onLoad={() => {
-          if ((window as any).Tally) {
-            (window as any).Tally.loadEmbeds();
+          if ((window as WindowWithTally).Tally) {
+            (window as WindowWithTally).Tally?.loadEmbeds();
           }
         }}
       />
@@ -34,4 +40,6 @@ export default function TallyForm() {
       />
     </>
   );
-}
+};
+
+export default TallyForm;

@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { useRef, useImperativeHandle, forwardRef } from 'react'
-import { gsap } from 'gsap'
+import { gsap } from "gsap";
+import { useRef, useImperativeHandle, forwardRef } from "react";
 
 export interface IconHandle {
   playHoverAnimation: () => void;
@@ -9,132 +9,153 @@ export interface IconHandle {
 }
 
 const PortalIcon = forwardRef<IconHandle>((props, ref) => {
-  const page1Ref = useRef<SVGRectElement>(null)
-  const page2Ref = useRef<SVGRectElement>(null)
-  const article1Ref = useRef<SVGRectElement>(null)
-  const article2Ref = useRef<SVGRectElement>(null)
-  const article3Ref = useRef<SVGRectElement>(null)
-  const article4Ref = useRef<SVGRectElement>(null)
-  const titleRef = useRef<SVGRectElement>(null)
-  const glowRef = useRef<SVGRectElement>(null)
+  const page1Ref = useRef<SVGRectElement>(null);
+  const page2Ref = useRef<SVGRectElement>(null);
+  const article1Ref = useRef<SVGRectElement>(null);
+  const article2Ref = useRef<SVGRectElement>(null);
+  const article3Ref = useRef<SVGRectElement>(null);
+  const article4Ref = useRef<SVGRectElement>(null);
+  const titleRef = useRef<SVGRectElement>(null);
+  const glowRef = useRef<SVGRectElement>(null);
 
   useImperativeHandle(ref, () => ({
     playHoverAnimation: () => {
-      const page1 = page1Ref.current
-      const page2 = page2Ref.current
-      const articles1 = [article1Ref.current, article2Ref.current]
-      const articles2 = [article3Ref.current, article4Ref.current]
-      const title = titleRef.current
-      const glow = glowRef.current
-      const tl = gsap.timeline()
-      
+      const page1 = page1Ref.current;
+      const page2 = page2Ref.current;
+      const articles1 = [article1Ref.current, article2Ref.current];
+      const articles2 = [article3Ref.current, article4Ref.current];
+      const title = titleRef.current;
+      const glow = glowRef.current;
+      const tl = gsap.timeline();
+
       // Pages open dramatically
       tl.to(page1, {
         rotation: -8,
         x: -3,
-        stroke: '#007BFF',
+        stroke: "#007BFF",
         strokeWidth: 2.5,
-        transformOrigin: 'right center',
+        transformOrigin: "right center",
         duration: 0.5,
-        ease: 'power2.out'
+        ease: "power2.out",
       })
-      .to(page2, {
-        rotation: 8,
-        x: 3,
-        stroke: '#00D4FF',
-        strokeWidth: 2.5,
-        transformOrigin: 'left center',
-        duration: 0.5,
-        ease: 'power2.out'
-      }, 0)
-      
-      // Background glow
-      .fromTo(glow,
-        { opacity: 0, scale: 0.8 },
-        {
-          opacity: 0.3,
-          scale: 1.2,
-          duration: 0.5,
-          ease: 'power2.out'
-        },
-        0
-      )
-      
-      // Title appears on left page
-      .fromTo(title,
-        { opacity: 0, y: -5, scaleX: 0 },
-        {
-          opacity: 1,
-          y: 0,
-          scaleX: 1,
-          duration: 0.4,
-          ease: 'power2.out',
-          transformOrigin: 'left center'
-        },
-        0.3
-      )
-      
+        .to(
+          page2,
+          {
+            rotation: 8,
+            x: 3,
+            stroke: "#00D4FF",
+            strokeWidth: 2.5,
+            transformOrigin: "left center",
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          0,
+        )
+
+        // Background glow
+        .fromTo(
+          glow,
+          { opacity: 0, scale: 0.8 },
+          {
+            opacity: 0.3,
+            scale: 1.2,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          0,
+        )
+
+        // Title appears on left page
+        .fromTo(
+          title,
+          { opacity: 0, y: -5, scaleX: 0 },
+          {
+            opacity: 1,
+            y: 0,
+            scaleX: 1,
+            duration: 0.4,
+            ease: "power2.out",
+            transformOrigin: "left center",
+          },
+          0.3,
+        );
+
       // Articles load on left page
       articles1.forEach((article, index) => {
-        tl.fromTo(article,
+        tl.fromTo(
+          article,
           { opacity: 0, scaleX: 0 },
           {
             opacity: 1,
             scaleX: 1,
             duration: 0.3,
-            ease: 'power2.out',
-            transformOrigin: 'left center'
+            ease: "power2.out",
+            transformOrigin: "left center",
           },
-          0.5 + index * 0.15
-        )
-      })
-      
+          0.5 + index * 0.15,
+        );
+      });
+
       // Articles load on right page
       articles2.forEach((article, index) => {
-        tl.fromTo(article,
+        tl.fromTo(
+          article,
           { opacity: 0, scaleX: 0 },
           {
             opacity: 1,
             scaleX: 1,
             duration: 0.3,
-            ease: 'power2.out',
-            transformOrigin: 'left center'
+            ease: "power2.out",
+            transformOrigin: "left center",
           },
-          0.5 + index * 0.15
-        )
-      })
+          0.5 + index * 0.15,
+        );
+      });
     },
     playLeaveAnimation: () => {
-      const page1 = page1Ref.current
-      const page2 = page2Ref.current
-      const articles = [article1Ref.current, article2Ref.current, article3Ref.current, article4Ref.current]
-      const title = titleRef.current
-      const glow = glowRef.current
-      const tl = gsap.timeline()
-      
+      const page1 = page1Ref.current;
+      const page2 = page2Ref.current;
+      const articles = [
+        article1Ref.current,
+        article2Ref.current,
+        article3Ref.current,
+        article4Ref.current,
+      ];
+      const title = titleRef.current;
+      const glow = glowRef.current;
+      const tl = gsap.timeline();
+
       tl.to([page1, page2], {
         rotation: 0,
         x: 0,
-        stroke: 'url(#portalGradient)',
+        stroke: "url(#portalGradient)",
         strokeWidth: 2,
         duration: 0.4,
-        ease: 'power2.in'
-      })
-      
-      tl.to([...articles, title], {
-        opacity: 0,
-        scaleX: 0,
-        duration: 0.3,
-        ease: 'power2.in'
-      }, 0)
-      
-      tl.to(glow, {
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.in'
-      }, 0)
-    }
-  }))
+        ease: "power2.in",
+      });
+
+      tl.to(
+        [...articles, title],
+        {
+          opacity: 0,
+          scaleX: 0,
+          duration: 0.3,
+          ease: "power2.in",
+        },
+        0,
+      );
+
+      tl.to(
+        glow,
+        {
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in",
+        },
+        0,
+      );
+    },
+  }));
 
   return (
     <svg
@@ -247,9 +268,9 @@ const PortalIcon = forwardRef<IconHandle>((props, ref) => {
         opacity="0"
       />
     </svg>
-  )
-})
+  );
+});
 
-PortalIcon.displayName = 'PortalIcon'
+PortalIcon.displayName = "PortalIcon";
 
-export default PortalIcon
+export default PortalIcon;

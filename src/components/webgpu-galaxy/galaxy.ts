@@ -9,7 +9,6 @@
  */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import * as THREE from 'three/webgpu';
 import {
   uniform,
   instancedArray,
@@ -24,17 +23,17 @@ import {
   cos,
   uv,
   smoothstep,
-  texture
-} from 'three/tsl';
+  texture,
+} from "three/tsl";
+import * as THREE from "three/webgpu";
 
 import {
   hash,
   applyDifferentialRotation,
   applyMouseForce,
-  applySpringForce
-} from './helpers';
-
-import type { GalaxyConfig } from './ui';
+  applySpringForce,
+} from "./helpers";
+import type { GalaxyConfig } from "./ui";
 
 /**
  * Spiral Galaxy Position Generation
@@ -90,7 +89,11 @@ export class GalaxySimulation {
   private cloudInitialized = false;
   private cloudCount = 0;
 
-  constructor(scene: THREE.Scene, config: GalaxyConfig, cloudTexture: THREE.Texture | null = null) {
+  constructor(
+    scene: THREE.Scene,
+    config: GalaxyConfig,
+    cloudTexture: THREE.Texture | null = null,
+  ) {
     this.scene = scene;
     this.config = config;
     this.COUNT = config.starCount;
@@ -113,7 +116,7 @@ export class GalaxySimulation {
         mouseActive: uniform(0.0),
         mouseForce: uniform(config.mouseForce),
         mouseRadius: uniform(config.mouseRadius),
-        rotationSpeed: uniform(config.rotationSpeed)
+        rotationSpeed: uniform(config.rotationSpeed),
       },
 
       // Galaxy structure uniforms (shape, size, distribution)
@@ -123,19 +126,29 @@ export class GalaxySimulation {
         spiralTightness: uniform(config.spiralTightness),
         armCount: uniform(config.armCount),
         armWidth: uniform(config.armWidth),
-        randomness: uniform(config.randomness)
+        randomness: uniform(config.randomness),
       },
 
       // Visual appearance uniforms (colors, sizes, opacity)
       visual: {
         particleSize: uniform(config.particleSize),
         cloudSize: uniform(config.cloudSize),
-        cloudOpacity: uniform(config.cloudOpacity !== undefined ? config.cloudOpacity : 0.5),
-        starBrightness: uniform(config.starBrightness !== undefined ? config.starBrightness : 1.0),
-        denseStarColor: uniform(new THREE.Color(config.denseStarColor || '#99ccff')),
-        sparseStarColor: uniform(new THREE.Color(config.sparseStarColor || '#ffb380')),
-        cloudTintColor: uniform(new THREE.Color(config.cloudTintColor || '#6ba8cc'))
-      }
+        cloudOpacity: uniform(
+          config.cloudOpacity !== undefined ? config.cloudOpacity : 0.5,
+        ),
+        starBrightness: uniform(
+          config.starBrightness !== undefined ? config.starBrightness : 1.0,
+        ),
+        denseStarColor: uniform(
+          new THREE.Color(config.denseStarColor || "#99ccff"),
+        ),
+        sparseStarColor: uniform(
+          new THREE.Color(config.sparseStarColor || "#ffb380"),
+        ),
+        cloudTintColor: uniform(
+          new THREE.Color(config.cloudTintColor || "#6ba8cc"),
+        ),
+      },
     };
   }
 
@@ -152,10 +165,10 @@ export class GalaxySimulation {
     }
 
     // Create storage buffers for star particles
-    this.spawnPositionBuffer = instancedArray(this.COUNT, 'vec3');
-    this.originalPositionBuffer = instancedArray(this.COUNT, 'vec3');
-    this.velocityBuffer = instancedArray(this.COUNT, 'vec3');
-    this.densityFactorBuffer = instancedArray(this.COUNT, 'float');
+    this.spawnPositionBuffer = instancedArray(this.COUNT, "vec3");
+    this.originalPositionBuffer = instancedArray(this.COUNT, "vec3");
+    this.velocityBuffer = instancedArray(this.COUNT, "vec3");
+    this.densityFactorBuffer = instancedArray(this.COUNT, "float");
 
     // Initialize stars with spiral arm distribution
     this.computeInit = Fn(() => {
@@ -163,19 +176,29 @@ export class GalaxySimulation {
       const seed = idx.toFloat();
 
       // Distance from center (square root for even distribution)
-      const radius = hash(seed.add(1)).pow(0.5).mul(this.uniforms.galaxy.radius);
+      const radius = hash(seed.add(1))
+        .pow(0.5)
+        .mul(this.uniforms.galaxy.radius);
       const normalizedRadius = radius.div(this.uniforms.galaxy.radius);
 
       // Choose which spiral arm this particle belongs to
-      const armIndex = hash(seed.add(2)).mul(this.uniforms.galaxy.armCount).floor();
+      const armIndex = hash(seed.add(2))
+        .mul(this.uniforms.galaxy.armCount)
+        .floor();
       const armAngle = armIndex.mul(6.28318).div(this.uniforms.galaxy.armCount);
 
       // Spiral angle based on distance (logarithmic spiral)
-      const spiralAngle = normalizedRadius.mul(this.uniforms.galaxy.spiralTightness).mul(6.28318);
+      const spiralAngle = normalizedRadius
+        .mul(this.uniforms.galaxy.spiralTightness)
+        .mul(6.28318);
 
       // Add randomness to create natural appearance
-      const angleOffset = hash(seed.add(3)).sub(0.5).mul(this.uniforms.galaxy.randomness);
-      const radiusOffset = hash(seed.add(4)).sub(0.5).mul(this.uniforms.galaxy.armWidth);
+      const angleOffset = hash(seed.add(3))
+        .sub(0.5)
+        .mul(this.uniforms.galaxy.randomness);
+      const radiusOffset = hash(seed.add(4))
+        .sub(0.5)
+        .mul(this.uniforms.galaxy.armWidth);
 
       // Final angle and radius
       const angle = armAngle.add(spiralAngle).add(angleOffset);
@@ -187,7 +210,10 @@ export class GalaxySimulation {
 
       // Vertical position: thicker at center, thinner at edges
       const thicknessFactor = float(1.0).sub(normalizedRadius).add(0.2); // 1.2 at center, 0.2 at edge
-      const y = hash(seed.add(5)).sub(0.5).mul(this.uniforms.galaxy.thickness).mul(thicknessFactor);
+      const y = hash(seed.add(5))
+        .sub(0.5)
+        .mul(this.uniforms.galaxy.thickness)
+        .mul(thicknessFactor);
 
       const position = vec3(x, y, z);
 
@@ -202,9 +228,16 @@ export class GalaxySimulation {
       this.velocityBuffer.element(idx).assign(vec3(vx, 0, vz));
 
       // Calculate density factor for coloring (0 = dense/center, 1 = sparse/edge)
-      const radialSparsity = radiusOffset.abs().div(this.uniforms.galaxy.armWidth.mul(0.5).add(0.01));
-      const angularSparsity = angleOffset.abs().div(this.uniforms.galaxy.randomness.mul(0.5).add(0.01));
-      const sparsityFactor = radialSparsity.add(angularSparsity).mul(0.5).min(1.0);
+      const radialSparsity = radiusOffset
+        .abs()
+        .div(this.uniforms.galaxy.armWidth.mul(0.5).add(0.01));
+      const angularSparsity = angleOffset
+        .abs()
+        .div(this.uniforms.galaxy.randomness.mul(0.5).add(0.01));
+      const sparsityFactor = radialSparsity
+        .add(angularSparsity)
+        .mul(0.5)
+        .min(1.0);
 
       this.densityFactorBuffer.element(idx).assign(sparsityFactor);
     })().compute(this.COUNT);
@@ -219,7 +252,7 @@ export class GalaxySimulation {
       const rotatedPos = applyDifferentialRotation(
         position,
         this.uniforms.compute.rotationSpeed,
-        this.uniforms.compute.deltaTime
+        this.uniforms.compute.deltaTime,
       );
       position.assign(rotatedPos);
 
@@ -227,7 +260,7 @@ export class GalaxySimulation {
       const rotatedOriginal = applyDifferentialRotation(
         originalPos,
         this.uniforms.compute.rotationSpeed,
-        this.uniforms.compute.deltaTime
+        this.uniforms.compute.deltaTime,
       );
       this.originalPositionBuffer.element(idx).assign(rotatedOriginal);
 
@@ -238,7 +271,7 @@ export class GalaxySimulation {
         this.uniforms.compute.mouseActive,
         this.uniforms.compute.mouseForce,
         this.uniforms.compute.mouseRadius,
-        this.uniforms.compute.deltaTime
+        this.uniforms.compute.deltaTime,
       );
       position.addAssign(mouseForce);
 
@@ -247,7 +280,7 @@ export class GalaxySimulation {
         position,
         rotatedOriginal,
         float(2.0), // Spring strength
-        this.uniforms.compute.deltaTime
+        this.uniforms.compute.deltaTime,
       );
       position.addAssign(springForce);
 
@@ -275,11 +308,16 @@ export class GalaxySimulation {
     const starColorNode = mix(
       vec3(this.uniforms.visual.denseStarColor),
       vec3(this.uniforms.visual.sparseStarColor),
-      densityFactor
+      densityFactor,
     ).mul(this.uniforms.visual.starBrightness);
 
     spriteMaterial.positionNode = starPos;
-    spriteMaterial.colorNode = vec4(starColorNode.x, starColorNode.y, starColorNode.z, float(1.0));
+    spriteMaterial.colorNode = vec4(
+      starColorNode.x,
+      starColorNode.y,
+      starColorNode.z,
+      float(1.0),
+    );
     spriteMaterial.opacityNode = circleShape;
     spriteMaterial.scaleNode = this.uniforms.visual.particleSize;
 
@@ -303,11 +341,11 @@ export class GalaxySimulation {
     const CLOUD_COUNT = this.config.cloudCount;
 
     // Create cloud particle buffers
-    const cloudPositionBuffer = instancedArray(CLOUD_COUNT, 'vec3');
-    const cloudOriginalPositionBuffer = instancedArray(CLOUD_COUNT, 'vec3');
-    const cloudColorBuffer = instancedArray(CLOUD_COUNT, 'vec3');
-    const cloudSizeBuffer = instancedArray(CLOUD_COUNT, 'float');
-    const cloudRotationBuffer = instancedArray(CLOUD_COUNT, 'float');
+    const cloudPositionBuffer = instancedArray(CLOUD_COUNT, "vec3");
+    const cloudOriginalPositionBuffer = instancedArray(CLOUD_COUNT, "vec3");
+    const cloudColorBuffer = instancedArray(CLOUD_COUNT, "vec3");
+    const cloudSizeBuffer = instancedArray(CLOUD_COUNT, "float");
+    const cloudRotationBuffer = instancedArray(CLOUD_COUNT, "float");
 
     // Initialize cloud particles
     this.cloudInit = Fn(() => {
@@ -315,19 +353,29 @@ export class GalaxySimulation {
       const seed = idx.toFloat().add(10000); // Offset seed from stars
 
       // Distance from center (power = 0.7 for more even distribution to avoid center oversaturation)
-      const radius = hash(seed.add(1)).pow(0.7).mul(this.uniforms.galaxy.radius);
+      const radius = hash(seed.add(1))
+        .pow(0.7)
+        .mul(this.uniforms.galaxy.radius);
       const normalizedRadius = radius.div(this.uniforms.galaxy.radius);
 
       // Choose spiral arm
-      const armIndex = hash(seed.add(2)).mul(this.uniforms.galaxy.armCount).floor();
+      const armIndex = hash(seed.add(2))
+        .mul(this.uniforms.galaxy.armCount)
+        .floor();
       const armAngle = armIndex.mul(6.28318).div(this.uniforms.galaxy.armCount);
 
       // Spiral angle based on distance (logarithmic spiral)
-      const spiralAngle = normalizedRadius.mul(this.uniforms.galaxy.spiralTightness).mul(6.28318);
+      const spiralAngle = normalizedRadius
+        .mul(this.uniforms.galaxy.spiralTightness)
+        .mul(6.28318);
 
       // Add randomness (same pattern as stars)
-      const angleOffset = hash(seed.add(3)).sub(0.5).mul(this.uniforms.galaxy.randomness);
-      const radiusOffset = hash(seed.add(4)).sub(0.5).mul(this.uniforms.galaxy.armWidth);
+      const angleOffset = hash(seed.add(3))
+        .sub(0.5)
+        .mul(this.uniforms.galaxy.randomness);
+      const radiusOffset = hash(seed.add(4))
+        .sub(0.5)
+        .mul(this.uniforms.galaxy.armWidth);
 
       // Final angle and radius
       const angle = armAngle.add(spiralAngle).add(angleOffset);
@@ -339,7 +387,10 @@ export class GalaxySimulation {
 
       // Vertical position: slightly thinner than stars
       const thicknessFactor = float(1.0).sub(normalizedRadius).add(0.15); // 1.15 at center, 0.15 at edge
-      const y = hash(seed.add(5)).sub(0.5).mul(this.uniforms.galaxy.thickness).mul(thicknessFactor);
+      const y = hash(seed.add(5))
+        .sub(0.5)
+        .mul(this.uniforms.galaxy.thickness)
+        .mul(thicknessFactor);
 
       const position = vec3(x, y, z);
 
@@ -349,7 +400,9 @@ export class GalaxySimulation {
 
       // Cloud color: tinted and darker towards edges
       const tintColor = vec3(this.uniforms.visual.cloudTintColor);
-      const cloudColor = tintColor.mul(float(1.0).sub(normalizedRadius.mul(0.3)));
+      const cloudColor = tintColor.mul(
+        float(1.0).sub(normalizedRadius.mul(0.3)),
+      );
       cloudColorBuffer.element(idx).assign(cloudColor);
 
       // Size variation: larger clouds in denser regions
@@ -372,7 +425,7 @@ export class GalaxySimulation {
       const rotatedPos = applyDifferentialRotation(
         position,
         this.uniforms.compute.rotationSpeed,
-        this.uniforms.compute.deltaTime
+        this.uniforms.compute.deltaTime,
       );
       position.assign(rotatedPos);
 
@@ -380,7 +433,7 @@ export class GalaxySimulation {
       const rotatedOriginal = applyDifferentialRotation(
         originalPos,
         this.uniforms.compute.rotationSpeed,
-        this.uniforms.compute.deltaTime
+        this.uniforms.compute.deltaTime,
       );
       cloudOriginalPositionBuffer.element(idx).assign(rotatedOriginal);
 
@@ -391,7 +444,7 @@ export class GalaxySimulation {
         this.uniforms.compute.mouseActive,
         this.uniforms.compute.mouseForce,
         this.uniforms.compute.mouseRadius,
-        this.uniforms.compute.deltaTime
+        this.uniforms.compute.deltaTime,
       );
       position.addAssign(mouseForce);
 
@@ -400,7 +453,7 @@ export class GalaxySimulation {
         position,
         rotatedOriginal,
         float(1.0), // Weaker spring strength
-        this.uniforms.compute.deltaTime
+        this.uniforms.compute.deltaTime,
       );
       position.addAssign(springForce);
 
@@ -422,14 +475,21 @@ export class GalaxySimulation {
     const cloudRotation = cloudRotationBuffer.toAttribute();
 
     cloudMaterial.positionNode = cloudPos;
-    cloudMaterial.colorNode = vec4(cloudColor.x, cloudColor.y, cloudColor.z, float(1.0));
+    cloudMaterial.colorNode = vec4(
+      cloudColor.x,
+      cloudColor.y,
+      cloudColor.z,
+      float(1.0),
+    );
     cloudMaterial.scaleNode = cloudSize.mul(this.uniforms.visual.cloudSize);
     cloudMaterial.rotationNode = cloudRotation;
 
     // Use texture for soft cloud appearance
     if (this.cloudTexture) {
       const cloudTextureNode = texture(this.cloudTexture, uv());
-      cloudMaterial.opacityNode = cloudTextureNode.a.mul(this.uniforms.visual.cloudOpacity);
+      cloudMaterial.opacityNode = cloudTextureNode.a.mul(
+        this.uniforms.visual.cloudOpacity,
+      );
     } else {
       cloudMaterial.opacityNode = this.uniforms.visual.cloudOpacity;
     }
@@ -491,11 +551,17 @@ export class GalaxySimulation {
     if (configUpdate.starBrightness !== undefined)
       this.uniforms.visual.starBrightness.value = configUpdate.starBrightness;
     if (configUpdate.denseStarColor !== undefined)
-      this.uniforms.visual.denseStarColor.value.set(configUpdate.denseStarColor);
+      this.uniforms.visual.denseStarColor.value.set(
+        configUpdate.denseStarColor,
+      );
     if (configUpdate.sparseStarColor !== undefined)
-      this.uniforms.visual.sparseStarColor.value.set(configUpdate.sparseStarColor);
+      this.uniforms.visual.sparseStarColor.value.set(
+        configUpdate.sparseStarColor,
+      );
     if (configUpdate.cloudTintColor !== undefined)
-      this.uniforms.visual.cloudTintColor.value.set(configUpdate.cloudTintColor);
+      this.uniforms.visual.cloudTintColor.value.set(
+        configUpdate.cloudTintColor,
+      );
 
     // Config state
     if (configUpdate.cloudCount !== undefined) {
@@ -506,7 +572,12 @@ export class GalaxySimulation {
   /**
    * Main update loop - runs compute shaders and updates uniforms
    */
-  async update(renderer: any, deltaTime: number, mouse3D: THREE.Vector3, mousePressed: boolean) {
+  async update(
+    renderer: any,
+    deltaTime: number,
+    mouse3D: THREE.Vector3,
+    mousePressed: boolean,
+  ) {
     // Initialize stars on first frame
     if (!this.initialized) {
       await renderer.computeAsync(this.computeInit);
@@ -559,4 +630,3 @@ export class GalaxySimulation {
     }
   }
 }
-

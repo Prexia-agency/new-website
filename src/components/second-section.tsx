@@ -1,28 +1,33 @@
-"use client"
+"use client";
 
-import Image from 'next/image';
-import PathDrawing from './draw';
-import { useAnimation } from 'framer-motion';
-import PathDrawingLp from './draw_Laptop';
-import TitleAnimation from '@/components/shared/title-animation';
-import { useInView } from 'react-intersection-observer';
-import { useEffect } from 'react';
+import { useAnimation } from "framer-motion";
+import Image from "next/image";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+
+import TitleAnimation from "@/components/shared/title-animation";
+
+import PathDrawing from "./draw";
+import PathDrawingLp from "./draw_Laptop";
 
 const titleItems = [
-  { value: 'אתרים' },
-  { value: 'שנראים' },
-  { value: 'מושלם', className: 'gradient-text' },
-  { value: 'בכל' },
-  { value: 'מסך' },
+  { value: "אתרים" },
+  { value: "שנראים" },
+  { value: "מושלם", className: "gradient-text" },
+  { value: "בכל" },
+  { value: "מסך" },
 ];
 
-export default function SecondSection() {
-  const [contentRef, isContentInView] = useInView({ triggerOnce: true, threshold: 0.8 });
+const SecondSection = () => {
+  const [contentRef, isContentInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.8,
+  });
   const titleControls = useAnimation();
 
   useEffect(() => {
     if (isContentInView) {
-      titleControls.start('animate');
+      titleControls.start("animate");
     }
   }, [isContentInView, titleControls]);
 
@@ -39,7 +44,9 @@ export default function SecondSection() {
             controls={titleControls}
           />
           <p className="text-[18px] text-gray-700 max-w-2xl mx-auto">
-            הלקוחות שלך גולשים היום בעיקר מהמובייל, אבל עדיין צריכים אתר שנראה מצוין גם על מסך מחשב. אצלנו כל אתר מקבל עיצוב מותאם אישית לכל פלטפורמה – כדי להבטיח חוויית משתמש חלקה, מהירה ומדויקת בכל גודל מסך
+            הלקוחות שלך גולשים היום בעיקר מהמובייל, אבל עדיין צריכים אתר שנראה
+            מצוין גם על מסך מחשב. אצלנו כל אתר מקבל עיצוב מותאם אישית לכל
+            פלטפורמה – כדי להבטיח חוויית משתמש חלקה, מהירה ומדויקת בכל גודל מסך
           </p>
         </div>
         <div className="flex gap-8 items-center justify-center" dir="rtl">
@@ -54,16 +61,19 @@ export default function SecondSection() {
               priority
             />
             {/* Animation overlay positioned on the iPhone screen */}
-            <div className="absolute inset-0 flex items-center justify-center pt-10 pl-1" style={{
-              top: '20%',
-              left: '20%', 
-              right: '20%',
-              bottom: '24%'
-            }}>
+            <div
+              className="absolute inset-0 flex items-center justify-center pt-10 pl-1"
+              style={{
+                top: "20%",
+                left: "20%",
+                right: "20%",
+                bottom: "24%",
+              }}
+            >
               <PathDrawing />
             </div>
           </div>
-          
+
           {/* Middle - iPad Pro image with animation */}
           <div className="flex justify-center relative">
             <Image
@@ -75,16 +85,19 @@ export default function SecondSection() {
               priority
             />
             {/* Animation overlay positioned on the iPad screen */}
-            <div className="absolute inset-0 flex items-center justify-center" style={{
-              top: '20%',
-              left: '20%', 
-              right: '20%',
-              bottom: '25%'
-            }}>
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                top: "20%",
+                left: "20%",
+                right: "20%",
+                bottom: "25%",
+              }}
+            >
               <PathDrawing />
             </div>
           </div>
-          
+
           {/* Left side - Laptop image with animation */}
           <div className="flex justify-center relative">
             <Image
@@ -96,12 +109,15 @@ export default function SecondSection() {
               priority
             />
             {/* Animation overlay positioned on the laptop screen */}
-            <div className="absolute inset-0 flex items-center justify-center" style={{
-              top: '20%',
-              left: '20%', 
-              right: '20%',
-              bottom: '24%'
-            }}>
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                top: "20%",
+                left: "20%",
+                right: "20%",
+                bottom: "24%",
+              }}
+            >
               <PathDrawingLp />
             </div>
           </div>
@@ -109,4 +125,6 @@ export default function SecondSection() {
       </div>
     </section>
   );
-}
+};
+
+export default SecondSection;

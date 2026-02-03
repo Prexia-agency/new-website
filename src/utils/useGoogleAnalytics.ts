@@ -1,17 +1,17 @@
 /**
  * Google Analytics Integration Hook
- * 
+ *
  * This hook handles Google Analytics initialization based on user cookie preferences.
- * 
+ *
  * Usage:
  * 1. Get your GA4 Measurement ID from Google Analytics
  * 2. Add it to your environment variables as NEXT_PUBLIC_GA_MEASUREMENT_ID
  * 3. Import and use this hook in your layout or a client component
- * 
+ *
  * Example:
  * ```tsx
  * import { useGoogleAnalytics } from '@/utils/useGoogleAnalytics';
- * 
+ *
  * function MyComponent() {
  *   useGoogleAnalytics('G-XXXXXXXXXX'); // Your GA4 Measurement ID
  *   return <div>...</div>;
@@ -19,10 +19,11 @@
  * ```
  */
 
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { isAnalyticsEnabled, ensureConsentModeUpdated } from './cookieConsent';
+import { useEffect } from "react";
+
+import { isAnalyticsEnabled, ensureConsentModeUpdated } from "./cookieConsent";
 
 declare global {
   interface Window {
@@ -36,8 +37,10 @@ export const useGoogleAnalytics = (measurementId: string) => {
     // Check if GA script is actually loaded, not just if gtag exists
     // (gtag exists from consent script, but GA script might not be loaded)
     const isScriptLoaded = () => {
-      if (typeof window === 'undefined') return false;
-      const scripts = document.querySelectorAll('script[src*="googletagmanager.com/gtag/js"]');
+      if (typeof window === "undefined") return false;
+      const scripts = document.querySelectorAll(
+        'script[src*="googletagmanager.com/gtag/js"]',
+      );
       return scripts.length > 0;
     };
 
@@ -50,7 +53,9 @@ export const useGoogleAnalytics = (measurementId: string) => {
 
       // Validate measurementId before proceeding
       if (!measurementId) {
-        console.warn('[GA] Measurement ID is missing. Cannot initialize Google Analytics.');
+        console.warn(
+          "[GA] Measurement ID is missing. Cannot initialize Google Analytics.",
+        );
         return;
       }
 
@@ -66,23 +71,27 @@ export const useGoogleAnalytics = (measurementId: string) => {
       // This uses the centralized consent utility for consistency
       ensureConsentModeUpdated();
 
-      window.gtag('js', new Date());
-      window.gtag('config', measurementId, { page_path: window.location.pathname });
+      window.gtag("js", new Date());
+      window.gtag("config", measurementId, {
+        page_path: window.location.pathname,
+      });
 
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
       script.async = true;
       document.head.appendChild(script);
 
       initialized = true;
-      console.log('[GA] Initialized with ID:', measurementId);
+      // eslint-disable-next-line no-console
+      console.log("[GA] Initialized with ID:", measurementId);
     };
 
     // Initialize immediately if user already allowed analytics
     if (isAnalyticsEnabled()) {
       init();
     } else {
-      console.log('[GA] Analytics disabled by user preferences');
+      // eslint-disable-next-line no-console
+      console.log("[GA] Analytics disabled by user preferences");
     }
 
     // Always listen for consent changes and init when enabled
@@ -93,10 +102,16 @@ export const useGoogleAnalytics = (measurementId: string) => {
       }
     };
 
-    window.addEventListener('cookiePreferencesChanged', handlePreferencesChanged);
+    window.addEventListener(
+      "cookiePreferencesChanged",
+      handlePreferencesChanged,
+    );
 
     return () => {
-      window.removeEventListener('cookiePreferencesChanged', handlePreferencesChanged);
+      window.removeEventListener(
+        "cookiePreferencesChanged",
+        handlePreferencesChanged,
+      );
     };
   }, [measurementId]);
 };
@@ -105,17 +120,22 @@ export const useGoogleAnalytics = (measurementId: string) => {
  * Track a custom event in Google Analytics
  * This will only track if analytics is enabled
  */
-export const trackEvent = (eventName: string, eventParams?: Record<string, unknown>) => {
+export const trackEvent = (
+  eventName: string,
+  eventParams?: Record<string, unknown>,
+) => {
   if (!isAnalyticsEnabled()) {
-    console.log('[GA] Event tracking skipped - analytics disabled');
+    // eslint-disable-next-line no-console
+    console.log("[GA] Event tracking skipped - analytics disabled");
     return;
   }
 
   if (window.gtag) {
-    window.gtag('event', eventName, eventParams);
-    console.log('[GA] Event tracked:', eventName, eventParams);
+    window.gtag("event", eventName, eventParams);
+    // eslint-disable-next-line no-console
+    console.log("[GA] Event tracked:", eventName, eventParams);
   } else {
-    console.warn('[GA] gtag not loaded yet');
+    console.warn("[GA] gtag not loaded yet");
   }
 };
 
@@ -127,22 +147,23 @@ export const trackEvent = (eventName: string, eventParams?: Record<string, unkno
  */
 export const trackPageView = (url: string, measurementId?: string) => {
   if (!isAnalyticsEnabled()) {
-    console.log('[GA] Page view tracking skipped - analytics disabled');
+    // eslint-disable-next-line no-console
+    console.log("[GA] Page view tracking skipped - analytics disabled");
     return;
   }
 
   const gaId = measurementId || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-  
+
   if (!gaId) {
-    console.warn('[GA] No measurement ID provided');
+    console.warn("[GA] No measurement ID provided");
     return;
   }
 
   if (window.gtag) {
-    window.gtag('config', gaId, {
+    window.gtag("config", gaId, {
       page_path: url,
     });
-    console.log('[GA] Page view tracked:', url);
+    // eslint-disable-next-line no-console
+    console.log("[GA] Page view tracked:", url);
   }
 };
-

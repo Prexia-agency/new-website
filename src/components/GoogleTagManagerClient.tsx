@@ -1,12 +1,16 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Script from 'next/script';
-import { isAnalyticsEnabled, ensureConsentModeUpdated } from '@/utils/cookieConsent';
+import Script from "next/script";
+import { useEffect, useState } from "react";
 
-export default function GoogleTagManagerClient() {
+import {
+  isAnalyticsEnabled,
+  ensureConsentModeUpdated,
+} from "@/utils/cookieConsent";
+
+const GoogleTagManagerClient = () => {
   const [enabled, setEnabled] = useState(false);
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-P8X78VSW';
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-P8X78VSW";
 
   useEffect(() => {
     // Check initial consent on component mount
@@ -18,14 +22,17 @@ export default function GoogleTagManagerClient() {
     // Listen for consent changes
     const handleConsentChange = (event: Event) => {
       const { detail } = event as CustomEvent<{ analytics: boolean }>;
-      if (typeof detail?.analytics === 'boolean') {
+      if (typeof detail?.analytics === "boolean") {
         setEnabled(detail.analytics);
       }
     };
 
-    window.addEventListener('cookiePreferencesChanged', handleConsentChange);
+    window.addEventListener("cookiePreferencesChanged", handleConsentChange);
     return () => {
-      window.removeEventListener('cookiePreferencesChanged', handleConsentChange);
+      window.removeEventListener(
+        "cookiePreferencesChanged",
+        handleConsentChange,
+      );
     };
   }, []);
 
@@ -59,13 +66,14 @@ export default function GoogleTagManagerClient() {
       <noscript>
         <iframe
           src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+          title="Google Tag Manager (noscript)"
           height="0"
           width="0"
-          style={{ display: 'none', visibility: 'hidden' }}
+          style={{ display: "none", visibility: "hidden" }}
         />
       </noscript>
     </>
   );
-}
+};
 
-
+export default GoogleTagManagerClient;

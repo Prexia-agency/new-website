@@ -1,26 +1,29 @@
-'use client';
+"use client";
 
-import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
-import { motion, useAnimation } from 'framer-motion';
-import React, { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { Alignment, Fit, Layout, useRive } from "@rive-app/react-canvas";
+import { motion, useAnimation } from "framer-motion";
+import React, { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
-import ImagePlaceholder from '@/components/shared/image-placeholder';
-import { MaskText } from '@/components/shared/textmask';
+import ImagePlaceholder from "@/components/shared/image-placeholder";
+import { MaskText } from "@/components/shared/textmask";
 
-const STATE_MACHINE_NAME = 'SM';
+const STATE_MACHINE_NAME = "SM";
 
 const descriptionVariants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.3 } },
 };
 
-export default function Stack() {
+const Stack = () => {
   const [wrapperRef, isWrapperInView] = useInView({
     triggerOnce: true,
-    rootMargin: '500px',
+    rootMargin: "500px",
   });
-  const [contentRef, isContentInView] = useInView({ triggerOnce: true, threshold: 0.8 });
+  const [contentRef, isContentInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.8,
+  });
   const [illustrationRef, isIllustrationInView] = useInView({
     triggerOnce: true,
     threshold: 0.8,
@@ -29,7 +32,7 @@ export default function Stack() {
   const descriptionControls = useAnimation();
 
   const { RiveComponent, rive } = useRive({
-    src: '/animations/stack.riv',
+    src: "/animations/stack.riv",
     autoplay: false,
     stateMachines: STATE_MACHINE_NAME,
     layout: new Layout({
@@ -40,7 +43,7 @@ export default function Stack() {
 
   useEffect(() => {
     if (isContentInView) {
-      descriptionControls.start('animate');
+      descriptionControls.start("animate");
     }
     if (isIllustrationInView && rive) rive.play();
   }, [isContentInView, descriptionControls, rive, isIllustrationInView]);
@@ -61,8 +64,8 @@ export default function Stack() {
             textClassName="font-noto-hebrew text-[32px] tracking-[-1.12px] text-white font-black leading-snug lg:text-[48px] md:text-4xl sm:text-3xl"
             phrases={[
               <>
-                סביבת פיתוח שמציבה את{' '}
-                <span className="gradient-text-contact">העסק</span>{' '}
+                סביבת פיתוח שמציבה את{" "}
+                <span className="gradient-text-contact">העסק</span>{" "}
                 <span className="gradient-text-contact">שלך</span>
               </>,
               <>בסטנדרט הגבוה ביותר</>,
@@ -74,9 +77,10 @@ export default function Stack() {
             animate={descriptionControls}
             variants={descriptionVariants}
           >
-            לא עוד אתר מתבנית. מערכת ייעודית שנבנית עבורך .
-אנחנו משתמשים בטכנולוגיה שמובילה את עולם הפיתוח, עם שליטה מלאה בביצועים, אבטחה ויכולת צמיחה אמיתית.
-אתר קל משקל, מותאם לגוגל, ונבנה בדיוק לצרכים שלך, לא לצרכים של הפלטפורמה.
+            לא עוד אתר מתבנית. מערכת ייעודית שנבנית עבורך . אנחנו משתמשים
+            בטכנולוגיה שמובילה את עולם הפיתוח, עם שליטה מלאה בביצועים, אבטחה
+            ויכולת צמיחה אמיתית. אתר קל משקל, מותאם לגוגל, ונבנה בדיוק לצרכים
+            שלך, לא לצרכים של הפלטפורמה.
           </motion.p>
         </div>
         <div
@@ -101,4 +105,6 @@ export default function Stack() {
       </div>
     </section>
   );
-}
+};
+
+export default Stack;
