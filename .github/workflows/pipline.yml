@@ -26,10 +26,11 @@ jobs:
 
   validate:
     name: Validate
-    uses: Prexia-agency/workflow-templates/.github/workflows/validate.yml@v2.1.4
+    uses: Prexia-agency/workflow-templates/.github/workflows/validate.yml@v2.1.5
     with:
       run-sonar: true
     secrets:
+      GITGUARDIAN: ${{ secrets.GITGUARDIAN }}
       SONARCLOUD: ${{ secrets.SONARCLOUD }}
 
   # ============================================
@@ -89,11 +90,11 @@ jobs:
     name: Test Preview
     needs: wait-vercel-preview
     if: github.event_name == 'pull_request'
-    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.4
+    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.5 
     with:
       deployment-url: ${{ needs.wait-vercel-preview.outputs.url }}
       environment: preview
-      enforce-performance: false
+      enforce-performance: false  
 
   # ============================================
   # STAGE 4: Update the PR Commentss
@@ -164,7 +165,7 @@ jobs:
     name: Test Production
     needs: wait-vercel-production
     if: github.ref == 'refs/heads/main'
-    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.4
+    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.5
     with:
       deployment-url: ${{ needs.wait-vercel-production.outputs.url }}
       environment: production
