@@ -1,0 +1,189 @@
+name: Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+env:
+  PRODUCTION_URL: https://your-domain.com
+
+jobs:
+  # ============================================
+  # STAGE 1: Validate (Security + Quality + Build)
+  # ============================================
+
+  validate:
+    name: Validate
+    uses: Prexia-agency/workflows-templates/.github/workflows/validate.yml@v2.0.0
+    secrets:
+      GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  # ============================================
+  # STAGE 2: Wait for Vercel Preview (PR only)
+  # ============================================
+
+  wait-vercel-preview:
+    name: Preview Deployment
+    needs: validate
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    outputs:
+      url: ${{ steps.vercel.outputs.url }}
+    steps:
+      - uses: patrickedqvist/wait-for-vercel-preview@v1.3.2
+        id: vercel
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 300
+
+      - uses: actions/github-script@v7.0.1
+        with:
+          script: |
+            const marker = '<!-- prexia-preview -->';
+            const url = '${{ steps.vercel.outputs.url }}';
+            const body = `${marker}\n## 🚀 Preview Ready\n\n**URL:** ${url}\n\n⏳ Running tests...`;
+            
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const existing = comments.find(c => c.body?.includes(marker));
+            
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+  # ============================================
+  # STAGE 3: Test Preview (PR only)
+  # ============================================
+
+  test-preview:
+    name: Test Preview
+    needs: wait-vercel-preview
+    if: github.event_name == 'pull_request'
+    uses: Prexia-agency/workflows-templates/.github/workflows/test-deploy.yml@v2.0.0
+    with:
+      deployment-url: ${{ needs.wait-vercel-preview.outputs.url }}
+      environment: preview
+      enforce-performance: false
+
+  # ============================================
+  # STAGE 4: Update PR Comment
+  # ============================================
+
+  update-pr:
+    name: Update PR
+    needs: [wait-vercel-preview, test-preview]
+    if: github.event_name == 'pull_request' && always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7.0.1
+        with:
+          script: |
+            const marker = '<!-- prexia-preview -->';
+            const url = '${{ needs.wait-vercel-preview.outputs.url }}';
+            const result = '${{ needs.test-preview.result }}';
+            const emoji = result === 'success' ? '✅' : '❌';
+            
+            const body = `${marker}\n## 📊 Preview Complete\n\n**URL:** ${url}\n\n${emoji} **Tests:** ${result}\n\n📁 See Actions for reports`;
+            
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const existing = comments.find(c => c.body?.includes(marker));
+            
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            }
+
+  # ============================================
+  # STAGE 5: Wait for Production (Main only)
+  # ============================================
+
+  wait-vercel-production:
+    name: Production Deployment
+    needs: validate
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    outputs:
+      url: ${{ steps.wait.outputs.url }}
+    steps:
+      - id: wait
+        timeout-minutes: 10
+        run: |
+          URL="${PRODUCTION_URL}"
+          for i in {1..60}; do
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" "${URL}" 2>/dev/null || echo "000")
+            [[ "${CODE}" =~ ^(200|301|302|304)$ ]] && echo "url=${URL}" >> $GITHUB_OUTPUT && exit 0
+            echo "⏳ ${i}/60 - HTTP ${CODE}"
+            sleep 10
+          done
+          exit 1
+
+  # ============================================
+  # STAGE 6: Test Production (Main only)
+  # ============================================
+
+  test-production:
+    name: Test Production
+    needs: wait-vercel-production
+    if: github.ref == 'refs/heads/main'
+    uses: Prexia-agency/workflows-templates/.github/workflows/test-deploy.yml@v2.0.0
+    with:
+      deployment-url: ${{ needs.wait-vercel-production.outputs.url }}
+      environment: production
+      enforce-performance: true
+
+  # ============================================
+  # STAGE 7: Deployment Record (Main only)
+  # ============================================
+
+  record:
+    name: Record
+    needs: [wait-vercel-production, test-production]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7.0.1
+        with:
+          script: |
+            await github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body: `## 🎉 Production Deployed\n\n**URL:** ${{ needs.wait-vercel-production.outputs.url }}\n**Commit:** ${context.sha.slice(0,7)}\n**Time:** ${new Date().toISOString()}\n\n✅ All tests passed`,
+            });
