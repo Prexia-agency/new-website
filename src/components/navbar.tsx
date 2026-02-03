@@ -8,7 +8,7 @@ import { useEffect, useState, useRef } from "react";
 
 import DrawLink from "./DrawLink";
 
-export default function Navbar() {
+const Navbar = () => {
   const [isOverDark, setIsOverDark] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
@@ -117,6 +117,7 @@ export default function Navbar() {
               width={320}
               height={320}
               className="w-24 h-24"
+              alt=""
             />
           </Link>
 
@@ -183,4 +184,6 @@ export default function Navbar() {
       </div>
     </nav>
   );
-}
+};
+
+export default Navbar;
