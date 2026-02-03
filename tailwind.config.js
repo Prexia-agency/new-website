@@ -2,10 +2,10 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -18,9 +18,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'noto-hebrew': ['var(--font-noto-hebrew)', 'system-ui', 'sans-serif'],
-        'david-libre': ['var(--font-david-libre)', 'serif'],
-        'ppeiko': ['var(--font-ppeiko)', 'Arial', 'sans-serif'],
+        "noto-hebrew": ["var(--font-noto-hebrew)", "system-ui", "sans-serif"],
+        "david-libre": ["var(--font-david-libre)", "serif"],
+        ppeiko: ["var(--font-ppeiko)", "Arial", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
@@ -61,5 +61,6 @@ module.exports = {
       },
     },
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
-}
+};
