@@ -25,14 +25,14 @@ jobs:
 
   validate:
     name: Validate
-    uses: Prexia-agency/workflow-templates/.github/workflows/validate.yml@v2.1.0
+    uses: Prexia-agency/workflow-templates/.github/workflows/validate.yml@v2.1.1
     secrets:
       GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   # ============================================
   # STAGE 2: Wait for Vercel Preview (PR only)
-  # ============================================
+  # ===========================================
 
   wait-vercel-preview:
     name: Preview Deployment
@@ -87,7 +87,7 @@ jobs:
     name: Test Preview
     needs: wait-vercel-preview
     if: github.event_name == 'pull_request'
-    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.0
+    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.1
     with:
       deployment-url: ${{ needs.wait-vercel-preview.outputs.url }}
       environment: preview
@@ -162,7 +162,7 @@ jobs:
     name: Test Production
     needs: wait-vercel-production
     if: github.ref == 'refs/heads/main'
-    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.0
+    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.1
     with:
       deployment-url: ${{ needs.wait-vercel-production.outputs.url }}
       environment: production
