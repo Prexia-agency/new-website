@@ -12,8 +12,8 @@ if (typeof window !== "undefined") {
 }
 
 const titleItems = [
-  { value: "אתרים" },
-  { value: "שנראים" },
+  { value: "תוכנות" },
+  { value: "שנראות" },
   { value: "מושלם", className: "gradient-text-contact" },
   { value: "בכל" },
   { value: "מסך" },
@@ -325,7 +325,7 @@ export default function SecondSectionGsap() {
               controls={titleControls}
             />
             <p className="text-[11px] lg:text-[18px] text-[#fffce1]/90 max-w-sm lg:max-w-2xl mx-auto">
-              הלקוחות שלך גולשים היום בעיקר מהמובייל, אבל עדיין צריכים אתר שנראה מצוין גם על מסך מחשב. אצלנו כל אתר מקבל עיצוב מותאם אישית לכל פלטפורמה – כדי להבטיח חוויית משתמש חלקה, מהירה ומדויקת בכל גודל מסך
+              הלקוחות שלך גולשים היום בעיקר מהמובייל, אבל עדיין צריכים אתר שנראה מצוין גם על מסך מחשב. אצלנו כל חלק מקבל עיצוב מותאם אישית לכל פלטפורמה – כדי להבטיח חוויית משתמש חלקה, מהירה ומדויקת בכל גודל מסך
             </p>
           </div>
 

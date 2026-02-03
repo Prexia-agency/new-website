@@ -166,7 +166,7 @@ export async function POST(request: NextRequest) {
         <body>
           <div class="container">
             <div class="header">
-              <h1>✨ אתרים atarym</h1>
+              <h1>✨ PREXIA</h1>
             </div>
             
             <div class="content">
@@ -207,14 +207,14 @@ export async function POST(request: NextRequest) {
             </div>
 
             <div class="footer">
-              <p><strong> אתרים atarym</strong></p>
-              <p>פיתוח אתרים וחוויות דיגיטליות מתקדמות</p>
+              <p><strong>PREXIA</strong></p>
+              <p>פתרונות דיגיטליים מותאמים אישית - תכנון, פיתוח ותחזוקה שוטפת</p>
               <div class="contact-info">
                 <p>📧 <a href="mailto:${fromEmail}">${fromEmail}</a></p>
                 <p>📱 <a href="https://wa.me/972505322336">050-532-2336</a></p>
               </div>
               <p style="margin-top: 20px; font-size: 12px;">
-                אימייל זה נשלח כתגובה אוטומטית לפנייתך באתר אתרים atarym
+                אימייל זה נשלח כתגובה אוטומטית לפנייתך באתר PREXIA
               </p>
             </div>
           </div>

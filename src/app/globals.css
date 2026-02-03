@@ -119,6 +119,27 @@ html, body {
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* Font utility classes (mapped to localFont variables) */
+.font-ppeiko {
+  font-family: var(--font-ppeiko), sans-serif;
+}
+
+/* Hero buttons reveal */
+@keyframes hero-btn-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-btn-fade {
+  animation: hero-btn-fade 0.6s ease-out forwards;
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -208,4 +229,65 @@ html, body {
 
 @media (min-width: 1024px) {
   .safe-paddings { padding-left: 2rem; padding-right: 2rem; }
+}
+
+/* Galaxy Card Opening Animation */
+@keyframes cardOpenFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px) scale(0.85);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px) scale(1.02);
+  }
+  80% {
+    transform: translateX(-50%) translateY(2px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+/* Hover-swap text (reusable) */
+.hover-swap {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+.hover-swap__inner {
+  display: block;
+  transform: translateY(0);
+  transition: transform var(--hover-swap-duration, 750ms)
+    var(--hover-swap-ease, cubic-bezier(0.2, 0.8, 0.2, 1));
+}
+
+.hover-swap__clone {
+  position: absolute;
+  top: 100%;
+  inset-inline-start: 0;
+  display: block;
+  transform: translateY(0);
+  transition: transform var(--hover-swap-duration, 750ms)
+    var(--hover-swap-ease, cubic-bezier(0.2, 0.8, 0.2, 1));
+}
+
+.hover-swap-trigger:hover .hover-swap__inner,
+.hover-swap-trigger:hover .hover-swap__clone,
+.hover-swap-trigger:focus-visible .hover-swap__inner,
+.hover-swap-trigger:focus-visible .hover-swap__clone {
+  transform: translateY(-110%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-swap__inner,
+  .hover-swap__clone {
+    transition: none !important;
+  }
+
+  .hover-swap__clone {
+    display: none;
+  }
 }

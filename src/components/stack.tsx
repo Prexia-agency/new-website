@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import { motion, useAnimation } from 'framer-motion';
@@ -6,30 +6,26 @@ import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import ImagePlaceholder from '@/components/shared/image-placeholder';
-import TitleAnimation from '@/components/shared/title-animation';
+import { MaskText } from '@/components/shared/textmask';
 
-const titleItems = [
-  { value: 'סביבת פיתוח' },
-  { value: 'שמציבה' },
-  { value: 'את' },
-  { value: 'העסק', className: 'gradient-text-contact' },
-  { value: 'שלך', className: 'gradient-text-contact' },
-  { value: 'בסטנדרט הגבוה ביותר' },
-];
+const STATE_MACHINE_NAME = 'SM';
 
 const descriptionVariants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.3 } },
 };
 
-const STATE_MACHINE_NAME = 'SM';
-
 export default function Stack() {
-  const [wrapperRef, isWrapperInView] = useInView({ triggerOnce: true, rootMargin: '500px' });
+  const [wrapperRef, isWrapperInView] = useInView({
+    triggerOnce: true,
+    rootMargin: '500px',
+  });
   const [contentRef, isContentInView] = useInView({ triggerOnce: true, threshold: 0.8 });
-  const [illustrationRef, isIllustrationInView] = useInView({ triggerOnce: true, threshold: 0.8 });
+  const [illustrationRef, isIllustrationInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.8,
+  });
 
-  const titleControls = useAnimation();
   const descriptionControls = useAnimation();
 
   const { RiveComponent, rive } = useRive({
@@ -44,21 +40,33 @@ export default function Stack() {
 
   useEffect(() => {
     if (isContentInView) {
-      titleControls.start('animate').then(() => descriptionControls.start('animate'));
+      descriptionControls.start('animate');
     }
     if (isIllustrationInView && rive) rive.play();
-  }, [isContentInView, titleControls, descriptionControls, rive, isIllustrationInView]);
+  }, [isContentInView, descriptionControls, rive, isIllustrationInView]);
 
   return (
-    <section className="bg-black pt-19 pb-72 sm:pt-24 lg:pt-39 lg:pb-58 sm:pb-50 relative" ref={wrapperRef} dir="rtl" data-section="stack" style={{ zIndex: 1 }}>
+    <section
+      className="bg-black pt-19 pb-72 sm:pt-24 lg:pt-39 lg:pb-58 sm:pb-50 relative"
+      ref={wrapperRef}
+      dir="rtl"
+      data-section="stack"
+      style={{ zIndex: 1 }}
+    >
       <div className="max-w-6xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-8">
         <div className="lg:col-span-6 order-1 lg:order-1" ref={contentRef}>
-          <TitleAnimation
-            tag="h2"
-            className="font-noto-hebrew text-[32px] tracking-[-1.12px] text-white font-black leading-snug lg:text-[48px] max-w-[586px] md:max-w-[470px] md:text-4xl sm:text-3xl text-black"
-            items={titleItems}
-            animationName="second"
-            controls={titleControls}
+          <MaskText
+            className="max-w-[586px] md:max-w-[470px]"
+            lineClassName="overflow-hidden"
+            textClassName="font-noto-hebrew text-[32px] tracking-[-1.12px] text-white font-black leading-snug lg:text-[48px] md:text-4xl sm:text-3xl"
+            phrases={[
+              <>
+                סביבת פיתוח שמציבה את{' '}
+                <span className="gradient-text-contact">העסק</span>{' '}
+                <span className="gradient-text-contact">שלך</span>
+              </>,
+              <>בסטנדרט הגבוה ביותר</>,
+            ]}
           />
           <motion.p
             className="mt-5 max-w-[410px] text-[12.5px] md:mt-3 md:max-w-[470px] sm:mt-2.5 sm:text-base leading-relaxed text-white"
@@ -77,9 +85,9 @@ export default function Stack() {
           aria-label="Technology Stack Animation"
           ref={illustrationRef}
         >
-          <ImagePlaceholder 
-            width={592} 
-            height={536} 
+          <ImagePlaceholder
+            width={592}
+            height={536}
             className="w-full max-w-sm md:max-w-md lg:max-w-lg"
           >
             {/* Negative offset for adjusting extra space in Rive animation needed for animation */}

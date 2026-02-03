@@ -19,6 +19,8 @@ module.exports = {
     extend: {
       fontFamily: {
         'noto-hebrew': ['var(--font-noto-hebrew)', 'system-ui', 'sans-serif'],
+        'david-libre': ['var(--font-david-libre)', 'serif'],
+        'ppeiko': ['var(--font-ppeiko)', 'Arial', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {

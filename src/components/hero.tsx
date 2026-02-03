@@ -7,29 +7,6 @@ import Spline from '@splinetool/react-spline';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 
-import TitleAnimation from '@/components/shared/title-animation';
-
-const titleItemsLine1 = [
-  { 
-    value: 'עיצוב',
-    useWordRotate: true,
-    rotateWords: ['עיצוב', 'מיתוג', 'תכנון'],
-    rotateDuration: 3000
-  },
-  { value: 'מדויק.', },
-  { value: 'חוויה חכמה.' },
-];
-
-const titleItemsLine2 = [
-  { value: 'אתר', className: 'gradient-text-contact' },
-  { value: ' שמביא תוצאות' },
-];
-
-const descriptionVariants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.3 } },
-};
-
 const dividerVariants = {
   initial: { width: 0, opacity: 0 },
   animate: { 
@@ -54,9 +31,7 @@ const buttonVariants = {
 
 export default function Hero() {
   const [contentRef, isContentInView] = useInView({ triggerOnce: true, threshold: 0.8 });
-  const titleControls = useAnimation();
   const dividerControls = useAnimation();
-  const descriptionControls = useAnimation();
   const buttonControls = useAnimation();
   const [hasMouseMoved, setHasMouseMoved] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -69,12 +44,15 @@ export default function Hero() {
 
   useEffect(() => {
     if (isContentInView) {
-      titleControls.start('animate')
-        .then(() => dividerControls.start('animate'))
-        .then(() => descriptionControls.start('animate'))
-        .then(() => buttonControls.start('animate'));
+      // Add delay to sync with text mask animation
+      // Text: 2 phrases x 0.09s stagger + 0.9s duration = ~1.08s
+      // Description: 2 phrases x 0.09s stagger + 0.9s duration = ~1.08s
+      setTimeout(() => {
+        dividerControls.start('animate')
+          .then(() => buttonControls.start('animate'));
+      }, 1600); // Delay to let mask animations complete
     }
-  }, [isContentInView, titleControls, dividerControls, descriptionControls, buttonControls]);
+  }, [isContentInView, dividerControls, buttonControls]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -216,7 +194,7 @@ export default function Hero() {
         style={{ cursor: hasMouseMoved ? 'auto' : 'none' }}
       >
         <Spline 
-          scene="/animations/robot_follow_cursor_for_landing_page.spline"
+          scene="/animations/robot_follow_cursor_for_landing_page(2).spline"
           className="w-full h-full scale-70"
           style={{
             transformOrigin: 'center center',
@@ -231,21 +209,30 @@ export default function Hero() {
         ref={contentRef}
         style={{ cursor: hasMouseMoved ? 'auto' : 'none' }}
       >
-        <div className="flex flex-col items-center">
-          <TitleAnimation
-            tag="h1"
-            className="font-noto-hebrew text-5xl lg:text-6xl xl:text-6xl 2xl:text-6xl font-black text-white mb-2 leading-tight tracking-tight max-w-6xl"
-            items={titleItemsLine1}
-            animationName="second"
-            controls={titleControls}
-          />
-          <TitleAnimation
-            tag="h1"
-            className="font-noto-hebrew text-5xl lg:text-6xl xl:text-6xl 2xl:text-6xl font-black text-white mb-8 leading-tight tracking-tight max-w-6xl"
-            items={titleItemsLine2}
-            animationName="second"
-            controls={titleControls}
-          />
+        <div className="flex flex-col items-start mb-8 w-full">
+          <div className="flex flex-col gap-2 w-full">
+            {['WE MAKE INTERFACES', 'טכנולוגיה שמביאה תוצאות'].map((phrase, index) => (
+              <div
+                key={index}
+                className={`overflow-hidden w-full ${index === 0 ? 'pl-4' : 'pr-4'}`}
+              >
+                <motion.h1
+                  custom={index}
+                  initial={{ y: '100%' }}
+                  animate={{ y: '0' }}
+                  transition={{
+                    duration: 0.7,
+                    ease: [0.33, 1, 0.68, 1],
+                    delay: 0.9 * index,
+                  }}
+                  className={`${index === 0 ? 'text-left' : 'text-right'} font-david-libre text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-white font-normal leading-tight tracking-tight pb-4`}
+                  style={{ fontFamily: 'var(--font-david-libre), serif' }}
+                >
+                  {phrase}
+                </motion.h1>
+              </div>
+            ))}
+          </div>
         </div>
         
         {/* Divider Line */}
@@ -256,15 +243,30 @@ export default function Hero() {
           variants={dividerVariants}
         ></motion.div>
         
-        <motion.p
-          className="text-md lg:text-lg xl:text-lg text-white/95 max-w-2xl leading-relaxed font-normal mb-6"
-          initial="initial"
-          animate={descriptionControls}
-          variants={descriptionVariants}
-          dir="rtl"
-        >
-לא עוד אתרים מתבניות, אלא אתרים שנכתבים שורה אחרי שורה בקוד מלא, כדי להעניק מהירות, עומק ו - SEO שמתחיל בארכיטקטורה. 
-       </motion.p>
+        <div dir="rtl" className="max-w-2xl mb-6">
+          <div className="flex flex-col items-center">
+            {[
+              'לא עוד אתרים מתבניות, אלא אתרים שנכתבים שורה אחרי שורה בקוד מלא,',
+              'כדי להעניק מהירות, עומק ו - SEO שמתחיל בארכיטקטורה.'
+            ].map((phrase, index) => (
+              <div key={index} className="overflow-hidden">
+                <motion.p
+                  custom={index}
+                  initial={{ y: '100%' }}
+                  animate={{ y: '0' }}
+                  transition={{
+                    duration: 0.9,
+                    ease: [0.33, 1, 0.68, 1],
+                    delay: 0.09 * (index + 2), // Continue after the 2 heading phrases
+                  }}
+                  className="text-md lg:text-lg xl:text-lg text-white/95 leading-relaxed font-normal text-center"
+                >
+                  {phrase}
+                </motion.p>
+              </div>
+            ))}
+          </div>
+        </div>
         
         {/* Hero Buttons */}
         <style jsx>{`
@@ -293,7 +295,7 @@ export default function Hero() {
             className="hero-button-link text-black px-6 py-2 rounded-[12px] border-2 border-gray-100/10 shadow-xl font-semibold text-[15px] flex items-center gap-2 group"
             style={{ 
               cursor: hasMouseMoved ? 'pointer' : 'none',
-              background: 'linear-gradient(22.87deg, rgb(254, 198, 252) 8.56%, rgb(223, 61, 190) 85.04%)',
+              background: 'linear-gradient(22.87deg, rgb(152, 177, 238) 8.56%, rgb(61, 96, 223) 85.04%)',
               backdropFilter: 'blur(10px)',
             }}
             onClick={(e) => {

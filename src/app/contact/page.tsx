@@ -10,8 +10,8 @@ import TitleAnimation from '@/components/shared/title-animation';
 import { contactSchema, type ContactFormData } from '@/lib/validations/contact';
 
 const titleItems = [
-  { value: 'בואו' },
-  { value: 'נתחיל', className: 'gradient-text' },
+  { value: 'talk' },
+  { value: 'Lets' }
 ];
 
 const formVariants = {
@@ -181,7 +181,7 @@ export default function ContactPage() {
     }
   };
 
-  const whatsappUrl = "https://wa.me/972505322336?text=שלום! אשמח לקבל מידע על שירותי פיתוח אתרים";
+  const whatsappUrl = "https://wa.me/972505322336?text=שלום";
 
   // Simple WhatsApp click handler - opens link directly
   const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -193,19 +193,19 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16" style={{ backgroundColor: '#F8F8FF' }}>
+    <div className="min-h-screen pt-24 pb-12 sm:pt-32 sm:pb-12 lg:pt-34 lg:pb-16 bg-black">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header Section */}
         <div className="text-center mb-8 sm:mb-10 lg:mb-12" ref={contentRef} dir="rtl">
           <TitleAnimation
             tag="h1"
-            className="text-3xl font-bold font-noto-hebrew text-gray-900 mb-4 sm:text-3xl lg:text-4xl xl:text-5xl"
+            className="text-3xl font-bold font-ppeiko text-white mb-4 sm:text-3xl lg:text-4xl xl:text-5xl"
             items={titleItems}
             animationName="second"
             controls={titleControls}
           />
           <motion.p
-            className="text-sm text-gray-700 max-w-3xl mx-auto leading-relaxed sm:text-sm lg:text-base xl:text-lg"
+            className="text-sm text-gray-300 max-w-3xl mx-auto leading-relaxed sm:text-sm lg:text-base xl:text-lg"
             initial="initial"
             animate={descriptionControls}
             variants={descriptionVariants}
@@ -224,8 +224,8 @@ export default function ContactPage() {
             variants={formVariants}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-white rounded-[24px] shadow-lg p-4 sm:p-6 lg:p-8 xl:p-10 border-1 border-gray-100">
-              <h2 className="text-lg font-bold font-noto-hebrew text-gray-900 mb-4 sm:text-xl lg:text-2xl">
+            <div className="bg-transparent p-4 sm:p-6 lg:p-8 xl:p-10">
+              <h2 className="text-lg font-bold font-noto-hebrew text-white mb-4 sm:text-xl lg:text-2xl">
                 ספרו לנו על הפרויקט שלכם
               </h2>
               
@@ -233,7 +233,7 @@ export default function ContactPage() {
                 {/* Name and Email Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                   <div>
-                    <label className="block text-[12px] font-medium text-gray-700 mb-1 sm:text-sm sm:mb-2">
+                    <label className="block text-[12px] font-medium text-white mb-1 sm:text-sm sm:mb-2">
                       שם מלא <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -242,10 +242,10 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleInputChange}
                       onBlur={handleBlur}
-                      className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                      className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-white sm:text-sm sm:px-4 sm:py-3 ${
                         touched.name && errors.name
                           ? 'border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:ring-blue-500'
+                          : 'border-white/30 focus:ring-white'
                       }`}
                       placeholder="השם שלכם"
                     />
@@ -254,7 +254,7 @@ export default function ContactPage() {
                     )}
                   </div>
                   <div>
-                    <label className="block text-[12px] font-medium text-gray-700 mb-1 sm:text-sm sm:mb-2">
+                    <label className="block text-[12px] font-medium text-white mb-1 sm:text-sm sm:mb-2">
                       אימייל <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -264,10 +264,10 @@ export default function ContactPage() {
                       onChange={handleInputChange}
                       onBlur={handleBlur}
                       dir="ltr"
-                      className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                      className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-white sm:text-sm sm:px-4 sm:py-3 ${
                         touched.email && errors.email
                           ? 'border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:ring-blue-500'
+                          : 'border-white/30 focus:ring-white'
                       }`}
                       placeholder="your@email.com"
                     />
@@ -280,7 +280,7 @@ export default function ContactPage() {
                 {/* Company and Phone Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                   <div>
-                    <label className="block text-[12px] font-medium text-gray-700 mb-1 sm:text-sm sm:mb-2">
+                    <label className="block text-[12px] font-medium text-white mb-1 sm:text-sm sm:mb-2">
                       שם החברה
                     </label>
                     <input
@@ -289,10 +289,10 @@ export default function ContactPage() {
                       value={formData.company || ''}
                       onChange={handleInputChange}
                       onBlur={handleBlur}
-                      className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                      className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-white sm:text-sm sm:px-4 sm:py-3 ${
                         touched.company && errors.company
                           ? 'border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:ring-blue-500'
+                          : 'border-white/30 focus:ring-white'
                       }`}
                       placeholder="שם העסק או החברה"
                     />
@@ -301,7 +301,7 @@ export default function ContactPage() {
                     )}
                   </div>
                   <div>
-                    <label className="block text-[12px] font-medium text-gray-700 mb-1 sm:text-sm sm:mb-2">
+                    <label className="block text-[12px] font-medium text-white mb-1 sm:text-sm sm:mb-2">
                       טלפון <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -310,10 +310,10 @@ export default function ContactPage() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       onBlur={handleBlur}
-                      className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                      className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-white sm:text-sm sm:px-4 sm:py-3 ${
                         touched.phone && errors.phone
                           ? 'border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:ring-blue-500'
+                          : 'border-white/30 focus:ring-white'
                       }`}
                       placeholder="050-123-4567"
                     />
@@ -324,8 +324,8 @@ export default function ContactPage() {
                 </div>
 
                 {/* Project Type */}
-                <div>
-                  <label className="block text-[12px] sm:text-sm font-medium text-gray-700 mb-2">
+                <div className="relative">
+                  <label className="block text-[12px] sm:text-sm font-medium text-white mb-2">
                     סוג הפרויקט <span className="text-red-500">*</span>
                   </label>
                   <select
@@ -333,18 +333,26 @@ export default function ContactPage() {
                     value={formData.projectType}
                     onChange={handleInputChange}
                     onBlur={handleBlur}
-                    className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                    className={`w-full pl-10 pr-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-white appearance-none sm:text-sm sm:pl-12 sm:pr-4 sm:py-3 ${
                       touched.projectType && errors.projectType
                         ? 'border-red-500 focus:ring-red-500'
-                        : 'border-gray-300 focus:ring-blue-500'
+                        : 'border-white/30 focus:ring-white'
                     }`}
                   >
-                    <option value="">בחרו סוג פרויקט</option>
-                    <option value="basic">חבילת בסיס - אתר תדמית פשוט</option>
-                    <option value="advanced">חבילת מתקדמים - אנימציות ותלת־ממד</option>
-                    <option value="complex">פרויקטים מורכבים - אינטגרציות ופיתוח מתקדם</option>
-                    <option value="other">אחר</option>
+                    <option value="" className="bg-black text-white">בחרו סוג פרויקט</option>
+                    <option value="website" className="bg-black text-white">אתר אינטרנט</option>
+                    <option value="mobile" className="bg-black text-white">אפליקציית נייטיב(למובייל)</option>
+                    <option value="web" className="bg-black text-white">אפליקציית ווב</option>
+                    <option value="ai" className="bg-black text-white">אוטומציה AI</option>
+                    <option value="branding" className="bg-black text-white">Branding</option>
+                    <option value="other" className="bg-black text-white">אחר</option>
                   </select>
+                  {/* Custom Arrow - positioned on the left for RTL */}
+                  <div className="pointer-events-none absolute left-3 top-[38px] sm:top-[42px] sm:left-4">
+                    <svg className="w-4 h-4 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
                   {touched.projectType && errors.projectType && (
                     <p className="text-red-500 text-[10px] sm:text-xs mt-1">{errors.projectType}</p>
                   )}
@@ -352,7 +360,7 @@ export default function ContactPage() {
 
                 {/* Message */}
                 <div>
-                  <label className="block text-[12px] sm:text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-[12px] sm:text-sm font-medium text-white mb-2">
                     ספרו לנו על הפרויקט <span className="text-red-500">*</span>
                   </label>
                   <textarea
@@ -361,10 +369,10 @@ export default function ContactPage() {
                     onChange={handleInputChange}
                     onBlur={handleBlur}
                     rows={5}
-                    className={`w-full px-3 py-2 border rounded-[16px] focus:ring-2 focus:border-transparent transition-all duration-200 resize-none text-[11px] sm:text-sm sm:px-4 sm:py-3 ${
+                    className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 resize-none text-[11px] text-white sm:text-sm sm:px-4 sm:py-3 ${
                       touched.message && errors.message
                         ? 'border-red-500 focus:ring-red-500'
-                        : 'border-gray-300 focus:ring-blue-500'
+                        : 'border-white/30 focus:ring-white'
                     }`}
                     placeholder="תארו את הפרויקט שלכם, מטרות, דרישות מיוחדות ולוח זמנים רצוי..."
                   />
@@ -381,15 +389,15 @@ export default function ContactPage() {
                     checked={acceptedTerms}
                     onChange={(e) => setAcceptedTerms(e.target.checked)}
                     required
-                    className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
+                    className="mt-1 w-4 h-4 text-white border-white/30 rounded focus:ring-white focus:ring-2 cursor-pointer bg-transparent"
                   />
-                  <label htmlFor="acceptTerms" className="text-[11px] sm:text-sm text-gray-700 leading-relaxed cursor-pointer">
+                  <label htmlFor="acceptTerms" className="text-[11px] sm:text-sm text-white/80 leading-relaxed cursor-pointer">
                     בשליחת ההודעה אני מאשר/ת שקראתי והבנתי את{' '}
-                    <Link href="/privacy" className="text-blue-600 hover:text-blue-800 underline font-medium">
+                    <Link href="/privacy" className="text-white hover:text-white/70 underline font-medium">
                       מדיניות הפרטיות
                     </Link>
                     {' '}ואת{' '}
-                    <Link href="/terms" className="text-blue-600 hover:text-blue-800 underline font-medium">
+                    <Link href="/terms" className="text-white hover:text-white/70 underline font-medium">
                       תנאי השימוש
                     </Link>
                   </label>
@@ -410,7 +418,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting || !acceptedTerms}
-                  className={`submit-button w-full gradient-bg text-white px-4 py-1.5 rounded-[8.5px] font-semibold text-[13px] shadow-lg sm:px-4 sm:py-2.5 sm:text-[16px] relative ${
+                  className={`submit-button w-full bg-white text-black px-4 py-1.5 rounded-full font-semibold text-[13px] shadow-lg sm:px-4 sm:py-2.5 sm:text-[16px] relative ${
                     isSubmitting || !acceptedTerms ? 'opacity-40 cursor-not-allowed' : ''
                   }`}
                 >
@@ -472,22 +480,22 @@ export default function ContactPage() {
               className="block"
               onClick={handleWhatsAppClick}
             >
-              <div className="relative bg-white rounded-2xl shadow-lg p-4 border-2 border-green-200 hover:border-green-300 transition-colors duration-300 group cursor-pointer sm:p-6 lg:p-8">
+              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg p-4 border-2 border-white/20 hover:border-white/30 transition-colors duration-300 group cursor-pointer sm:p-6 lg:p-8">
                 {/* WhatsApp Header */}
                 <div className="text-center mb-4 sm:mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-3 group-hover:bg-green-200 transition-colors duration-300 sm:w-16 sm:h-16 sm:mb-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-green-500/20 rounded-full mb-3 group-hover:bg-green-500/30 transition-colors duration-300 sm:w-16 sm:h-16 sm:mb-4">
                     <svg
-                      className="w-6 h-6 text-green-600 sm:w-8 sm:h-8"
+                      className="w-6 h-6 text-green-400 sm:w-8 sm:h-8"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
                     </svg>
                   </div>
-                  <h3 className="text-lg font-bold font-noto-hebrew text-gray-900 mb-2 sm:text-xl">
+                  <h3 className="text-lg font-bold font-noto-hebrew text-white mb-2 sm:text-xl">
                     צ&apos;אט איתנו בוואטסאפ
                   </h3>
-                  <p className="text-gray-600 text-xs leading-relaxed sm:text-sm">
+                  <p className="text-white/80 text-xs leading-relaxed sm:text-sm">
                     מעדיפים לדבר ישירות? אנחנו כאן בשבילכם 
                   </p>
                 </div>
@@ -495,16 +503,16 @@ export default function ContactPage() {
                 {/* Features */}
                 <div className="space-y-2 mb-4 sm:space-y-3 sm:mb-6">
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-xs text-gray-700 sm:text-sm">מענה מיידי</span>
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span className="text-xs text-white sm:text-sm">מענה מיידי</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-xs text-gray-700 sm:text-sm">ייעוץ ללא התחייבות</span>
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span className="text-xs text-white sm:text-sm">ייעוץ ללא התחייבות</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-xs text-gray-700 sm:text-sm">הצעת מחיר תוך 24 שעות</span>
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span className="text-xs text-white sm:text-sm">הצעת מחיר תוך 24 שעות</span>
                   </div>
                 </div>
 
@@ -519,8 +527,8 @@ export default function ContactPage() {
                 </div>
 
                 {/* Decorative Element - Hidden on mobile */}
-                <div className="hidden lg:block absolute top-4 left-4 w-8 h-8 bg-green-100 rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
-                <div className="hidden lg:block absolute bottom-4 right-4 w-6 h-6 bg-green-200 rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                <div className="hidden lg:block absolute top-4 left-4 w-8 h-8 bg-green-500/20 rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
+                <div className="hidden lg:block absolute bottom-4 right-4 w-6 h-6 bg-green-400/20 rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
               </div>
             </a>
           </motion.div>

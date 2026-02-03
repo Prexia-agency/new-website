@@ -1,28 +1,60 @@
 "use client"
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Lenis from '@studio-freight/lenis'
+import { gsap } from 'gsap'
+
+export let lenisInstance: Lenis | null = null
 
 export default function LenisProvider({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2, // ככל שגדול יותר, הגלילה איטית וחלקה יותר
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // תחושת ריחוף
-      wheelMultiplier: 0.7, // מפחית את כמות הגלילה בכל תזוזת גלגל (ברירת מחדל: 1)
-    })
+  const [isLoading, setIsLoading] = useState(true)
 
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
+  useEffect(() => {
+    // Force scroll to top on reload
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
     }
 
-    requestAnimationFrame(raf)
+    const lenis = new Lenis({
+      duration: 0.3,
+      easing: (t) => t,     // ❗ בלי easing
+      wheelMultiplier: 1,   // ❗ native delta
+      smoothWheel: true,
+    })
+
+    lenisInstance = lenis
+
+    const onGsapTick = (time: number) => {
+      if (!lenis.isStopped) {
+        lenis.raf(time * 1000)
+    }
+    }
+
+    gsap.ticker.add(onGsapTick)
+
+    // Hide loader after a short delay to ensure scroll happened
+    // We give it a small buffer to ensure the browser has repainted at the top
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 100)
 
     return () => {
+      gsap.ticker.remove(onGsapTick)
       lenis.destroy()
+      lenisInstance = null
+      clearTimeout(timer)
     }
   }, [])
 
-  return <>{children}</>
+  return (
+    <>
+      <div 
+        className={`fixed inset-0 bg-black z-[9999] transition-opacity duration-500 ease-out ${isLoading ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        aria-hidden="true"
+      />
+      {children}
+    </>
+  )
 }
 

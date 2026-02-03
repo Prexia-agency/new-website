@@ -1,0 +1,91 @@
+# GENERAL
+These rules apply to all generations and modifications.
+Follow them with highest priority.
+All project are hebrew projects and should be defined in the client side visability in hebrew ! and RTL !
+
+# STRUCTURE
+1. app/ is only for routing and server components (layout.tsx, page.tsx, loading.tsx, error.tsx, api/ handlers). No UI or business logic here.
+2. components/ contains all UI. shared = global UI, pages = page-specific UI. Client components start with “use client”. No data fetching/server logic here.
+2.2 always take a look at the file tree before creating files, the structure, folders, and ui must haves are already in the project!!!
+meaning do not creating anything that is already there but just needs a revision!
+2.4 if you revise and i revise after you, you do not try to move things again unless i told you to!!!
+3. hooks/ contains only React hooks. Client hooks include “use client”. No server logic here.
+4. lib/ contains all non-UI logic: utils, fetch, server, middleware. No React here.
+5. public/ = static assets only.
+6. globals.css = Tailwind imports + resets only.
+7. Design tokens live in variables.css + tailwind.config.ts.
+8. No hardcoded Tailwind values: always use tokens.
+9. File placement: UI → components, Logic → lib, Routing/server → app, Styles → CSS/tailwind config, Static → public, Hooks → hooks.
+10. Never place UI in app/, logic in components, or create new folder types.
+11. BEFORE creating any new file, component, hook, util, or route: check if it already exists. If it exists, extend or modify it instead of duplicating.
+11.1 our projects are all RTL hebrew projects unless specificlly told otherwise
+11.2 ensure usage of only local fonts(always will be in layout.tsx)
+
+# SERVER & CLIENT
+12. All app/ files are Server Components unless “use client”.
+13. Client files must not read process.env.
+14. Server-only files must include: import "server-only".
+15. Data flows server → client via props only.
+16. Client code never touches tokens, cookies, or secrets.
+17. Auth must run on the server before render; redirect if invalid.
+18. Pass session to client via props/context.
+19. Context providers = client components.
+20. API routes handle callbacks + non-auth logic only.
+21. Default to Server Component.
+21.1 ensure the logs you write are vital cause we are building production ready apps so avoid using logs console logs and so on!
+
+# SECURITY / AUTH / DATA
+22. SERVICE_ROLE_KEY = server-only.
+23. Client uses only ANON key.
+24. RLS required.
+25. Never trust userId from client.
+26. Verify session on server before any DB access.
+27. API routes verify session immediately.
+28. Validate input on server.
+29. No raw SQL concatenation.
+30. Select only required columns.
+31. Sanitize user HTML before render.
+32. Never expose server errors to client.
+33. Rate limit sensitive endpoints.
+34. Strict CORS: no wildcard on protected routes.
+35. GET endpoints are read-only.
+36. CSRF protection required for write endpoints.
+37. Validate uploads: MIME, size, user-scoped paths.
+38. Never execute uploaded files.
+39. Never store tokens in browser.
+40. Use RPC for complex logic.
+41. Edge functions for privileged actions only.
+42. Monitor quotas/logs; never log secrets.
+
+# TYPESCRIPT and STYLE 
+43. tsconfig strict mode required; no implicit any.
+44. Type all params + return values.
+45. No @ts-ignore without reason.
+46. Code must build with zero TypeScript errors.
+46.1 we have defined tokens in the tokens.css file and global.css file, ensure you always adhere to those in each UI design to retain consistency
+46.2 if i wish to apply new design or something that isnt defined in the tokens.css define it there first then use it.
+46.3 this apply to fonts sizes, padding, bg, colors and anything related
+# NAMING
+47. Components/types: PascalCase. Functions: camelCase. Constants: CONSTANT_CASE. Booleans: is/has/can.
+
+# ENV
+48. Secrets never appear in client code.
+49. env vars stored in .env.local during dev.
+
+# ACCESSIBILITY
+50. All UI must be WCAG 2.1 AA compliant:
+- semantic HTML
+- aria labels + roles
+- keyboard operability
+- color contrast
+- visible focus states
+- alt text
+- no divs as buttons
+- readable by screen readers
+- no focus traps
+- form fields labeled
+- and anything else that will make us comaptibale
+
+
+
+please only preform and code the action required from you meaning stay in scope of the task, but always explain the additions you think we should do to complete

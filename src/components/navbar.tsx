@@ -111,11 +111,11 @@ export default function Navbar() {
           {/* Logo - Far Right */}
           <Link href="/" className="flex-shrink-0 pr-2">
             <Image
-              src="/images/LOGO-AK.png"
-              alt="AK Agency Logo"
-              width={60}
-              height={60}
-              className="w-12 h-12"
+              src="/images/320 Logo.png"
+              alt="Prexia Agency Logo"
+              width={320}
+              height={320}
+              className="w-24 h-24"
             />
           </Link>
 

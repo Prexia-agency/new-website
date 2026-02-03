@@ -58,7 +58,7 @@ export const contactSchema = z.object({
     .string()
     .min(1, 'נא לבחור סוג פרויקט')
     .refine(
-      (val) => ['basic', 'advanced', 'complex', 'other'].includes(val),
+      (val) => ['website', 'mobile', 'web', 'ai', 'branding', 'other'].includes(val),
       { message: 'נא לבחור סוג פרויקט תקין' }
     ),
 });

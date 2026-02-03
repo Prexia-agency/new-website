@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useAccessibility } from '@/contexts/AccessibilityContext'
+import { lenisInstance } from './LenisProvider'
 
 export default function AccessibilityWidget() {
   const [isOpen, setIsOpen] = useState(false)
@@ -45,13 +46,32 @@ export default function AccessibilityWidget() {
     }
 
     if (isOpen) {
-      // Prevent body scroll when panel is open
+      // Prevent page scroll when panel is open (lock BOTH html+body)
+      const prevHtmlOverflow = document.documentElement.style.overflow
+      const prevBodyOverflow = document.body.style.overflow
+      document.documentElement.style.overflow = 'hidden'
       document.body.style.overflow = 'hidden'
+
+      // Allow scrolling INSIDE the panel even with Lenis installed:
+      // stop scroll events from reaching window listeners (Lenis) when they start inside the modal.
+      const stopScrollToPage = (ev: Event) => {
+        const target = ev.target as Node | null
+        if (target && panelRef.current?.contains(target)) {
+          ev.stopPropagation()
+        }
+      }
+
+      document.addEventListener('wheel', stopScrollToPage, { capture: true })
+      document.addEventListener('touchmove', stopScrollToPage, { capture: true })
       
       document.addEventListener('mousedown', handleClickOutside)
       document.addEventListener('touchstart', handleClickOutside)
       return () => {
-        document.body.style.overflow = ''
+        document.documentElement.style.overflow = prevHtmlOverflow
+        document.body.style.overflow = prevBodyOverflow
+
+        document.removeEventListener('wheel', stopScrollToPage, { capture: true } as any)
+        document.removeEventListener('touchmove', stopScrollToPage, { capture: true } as any)
         document.removeEventListener('mousedown', handleClickOutside)
         document.removeEventListener('touchstart', handleClickOutside)
       }

@@ -1,40 +1,40 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "מחירון אתרים",
-  description: "חבילות מחירים לבניית אתרים בקוד מלא - מאתרי תדמית פשוטים ועד פרויקטים מורכבים עם אנימציות תלת-ממד ואינטגרציות מתקדמות. לא עוד אתרים מתבניות, מערכת ייעודית שנבנית עבורך",
+  title: "מחירון שירותים",
+  description: "חבילות מחירים לפיתוח דיגיטלי - מאתרי תדמית פשוטים ועד פרויקטים מורכבים עם אנימציות תלת-ממד ואינטגרציות מתקדמות. פתרונות מותאמים אישית עם תמיכה שוטפת",
   keywords: [
-    "מחירון אתרים",
+    "מחירון פיתוח דיגיטלי",
     "עלות בניית אתר",
-    "חבילות אתרים",
-    "מחיר עיצוב אתר",
+    "חבילות פיתוח",
+    "מחיר עיצוב UI/UX",
     "מחיר אתר תדמית",
-    "עלות פיתוח אתר",
-    "מחיר אתר עם אנימציות",
-    "אתרים מקצועיים מחירים"
+    "עלות פיתוח אפליקציות",
+    "מחיר פתרונות דיגיטליים",
+    "שירותים מקצועיים מחירים"
   ],
   openGraph: {
-    title: "מחירון אתרים | Atarym",
-    description: "חבילות מחירים מותאמות לכל עסק - אתרים בקוד מלא ללא תבניות. מאתרי תדמית בסיסיים ועד פרויקטים מורכבים עם אנימציות",
-    url: "https://www.atarym.com/pricing",
+    title: "מחירון שירותים | PREXIA",
+    description: "חבילות מחירים מותאמות לכל עסק - פתרונות דיגיטליים מותאמים אישית. מאתרי תדמית בסיסיים ועד פרויקטים מורכבים",
+    url: "https://www.prexia.com/pricing",
     type: "website",
     images: [
       {
         url: "/images/LOGO-AK.png",
         width: 1200,
         height: 630,
-        alt: "מחירון בניית אתרים - Atarym"
+        alt: "מחירון שירותים - PREXIA"
       }
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "מחירון אתרים | Atarym",
-    description: "חבילות מחירים מותאמות לכל עסק - אתרים בקוד מלא ללא תבניות",
+    title: "מחירון שירותים | PREXIA",
+    description: "חבילות מחירים מותאמות לכל עסק - פתרונות דיגיטליים מותאמים אישית",
     images: ["/images/LOGO-AK.png"],
   },
   alternates: {
-    canonical: "https://www.atarym.com/pricing",
+    canonical: "https://www.prexia.com/pricing",
   },
 };
 
@@ -52,14 +52,14 @@ export default function PricingLayout({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Service",
-            "name": "בניית אתרים מקצועית",
+            "name": "פיתוח דיגיטלי מקצועי",
             "provider": {
               "@type": "Organization",
-              "name": "Atarym",
-              "url": "https://www.atarym.com"
+              "name": "PREXIA",
+              "url": "https://www.prexia.com"
             },
-            "url": "https://www.atarym.com/pricing",
-            "description": "שירותי בניית אתרים בקוד מלא - מאתרי תדמית פשוטים ועד פרויקטים מורכבים עם אנימציות ואינטגרציות מתקדמות",
+            "url": "https://www.prexia.com/pricing",
+            "description": "שירותי פיתוח דיגיטלי מותאמים אישית - מאתרי תדמית פשוטים ועד פרויקטים מורכבים עם אנימציות ואינטגרציות מתקדמות",
             "areaServed": {
               "@type": "Place",
               "name": "ישראל"

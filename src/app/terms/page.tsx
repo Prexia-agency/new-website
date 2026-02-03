@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-[#F8F8FF] text-white pt-24 pb-12 px-6 sm:pt-24 sm:pb-12 md:px-12 lg:pt-28 lg:pb-16 lg:px-24" dir="rtl">
+    <div className="min-h-screen bg-black text-white pt-24 pb-12 px-6 sm:pt-24 sm:pb-12 md:px-12 lg:pt-28 lg:pb-16 lg:px-24" dir="rtl">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
@@ -13,7 +13,10 @@ export default function TermsPage() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h1 className="font-noto-hebrew text-5xl lg:text-6xl font-black mb-4 mt-15 gradient-text-contact">
+          <h1 className="font-ppeiko text-5xl lg:text-6xl font-light mb-2 mt-15 text-white">
+              Terms of Use
+          </h1>
+          <h1 className="font-noto-hebrew text-5xl lg:text-6xl font-black mb-4 text-white">
               תנאי שימוש
           </h1>
         </motion.div>
@@ -27,57 +30,67 @@ export default function TermsPage() {
         >
           {/* Section 1 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">1. מטרת האתר</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">1. מטרת האתר</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
-                האתר בכתובת www.atarym.com
-                 (להלן: &quot;האתר&quot;) הוא האתר הרשמי של סוכנות אתרים (להלן: &quot;החברה&quot;),   המתמחה בעיצוב, פיתוח ובניית אתרים לעסקים וארגונים במגוון תחומים.
+                האתר בכתובת www.prexia.com (להלן: &quot;האתר&quot;) מופעל במסגרת המותג PREXIA ומיועד להציג מידע כללי אודות שירותי עיצוב, פיתוח, בנייה ותחזוקה של אתרים ומוצרים דיגיטליים.
               </p>
               <p>
-                מטרת האתר היא להציג מידע כללי על תחומי הפעילות של החברה, לאפשר יצירת קשר ראשונית, הצגת פרויקטים נבחרים, והעברת פניות לקבלת שירותי בנייה, תחזוקה או עיצוב אתרים.
+                מטרת האתר היא לאפשר היכרות עם תחומי הפעילות של PREXIA, הצגת פרויקטים נבחרים, יצירת קשר ראשונית והעברת פניות לקבלת שירותים, לרבות שירותי בנייה, תחזוקה, עיצוב וייעוץ דיגיטלי.
               </p>
               <p>
-                האתר עשוי לכלול דוגמאות, מדריכים, תכנים מקצועיים ואלמנטים אינטראקטיביים שנועדו להמחיש את סגנון העבודה של החברה. חלק מהשירותים זמינים לכלל הציבור, בעוד שירותים אחרים ניתנים ללקוחות חוזיים בלבד לאחר תיאום ואישור מול החברה.
+                האתר עשוי לכלול דוגמאות, מדריכים, תכנים מקצועיים ואלמנטים אינטראקטיביים, שנועדו להמחיש את אופן העבודה והשירותים הניתנים במסגרת המותג PREXIA. חלק מהשירותים זמינים לכלל הציבור, בעוד שירותים אחרים ניתנים ללקוחות חוזיים בלבד, לאחר תיאום ואישור מראש.
               </p>
               <p>
-                השירותים המוצגים באתר אינם מהווים התחייבות או הצעה מחייבת, אלא תיאור כללי בלבד. החברה שומרת לעצמה את הזכות לסרב למתן שירות, לפי שיקול דעתה הבלעדי.
+                השירותים והתכנים המוצגים באתר אינם מהווים התחייבות, הצעה מחייבת או ייעוץ מקצועי פרטני, אלא מידע כללי בלבד. החברה שומרת לעצמה את הזכות לסרב למתן שירות, לפי שיקול דעתה.
               </p>
               <p>
-                החברה מספקת שירותי תכנון, עיצוב, פיתוח וייעוץ בלבד; היא אינה אחראית על תכנים שהוזנו או סופקו על ידי הלקוח.
+                השירותים הניתנים במסגרת המותג PREXIA כוללים שירותי תכנון, עיצוב, פיתוח וייעוץ דיגיטלי בלבד. החברה אינה אחראית לתכנים, חומרים או נתונים שסופקו או הוזנו על ידי הלקוח.
               </p>
               <p>
-                תוכן האתר והשירותים המוזכרים בו אינם מהווים ייעוץ עסקי, שיווקי או טכנולוגי מחייב. כל הערכה, המלצה או מידע מקצועי שמופיע באתר או מועבר במסגרת השירותים נועד למטרות מידע בלבד, ואין לראות בו תחליף להתייעצות מקצועית פרטנית.
+                לצורכי התקשרות משפטית, תנאי שימוש אלה מהווים הסכם בין המשתמש לבין קיניגמאה בע״מ, החברה המפעילה את המותג PREXIA.
               </p>
             </div>
           </section>
 
           {/* Section 2 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">2. הגדרות</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">2. הגדרות</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>לצורך תנאי שימוש אלה:</p>
               <div className="space-y-3">
                 <p>
-                  <strong>&quot;האתר&quot;</strong> – האתר הרשמי של החברה בכתובת www.atarym.com
-, לרבות כל דף משנה, תת־דומיין, פלטפורמה, שירות או תוכן הכלול בו.
+                  <strong>&quot;האתר&quot;</strong> – אתר PREXIA בכתובת www.prexia.com, לרבות כל דף
+                  משנה, תת־דומיין, שירות, מערכת, תוכן או רכיב הכלולים בו.
                 </p>
                 <p>
-                  <strong>&quot;החברה&quot; / &quot;סוכנות אתרים&quot; / &quot;בעלת האתר&quot;</strong> – סוכנות אתרים(א.כ פתרונות), עסק ישראלי שמשרדיו בישראל.
+                  <strong>&quot;PREXIA&quot;</strong> – מותג טכנולוגי ותפעולי המספק שירותי עיצוב,
+                  פיתוח, בנייה, תחזוקה וייעוץ דיגיטלי, ואשר באמצעותו מופעל האתר והשירותים המוצעים
+                  בו.
                 </p>
                 <p>
-                  <strong>&quot;משתמש&quot;</strong> – כל אדם, תאגיד, רשות או גוף ממשלתי העושה שימוש כלשהו באתר, לרבות גלישה, צפייה בתוכן, מילוי טופס, בקשת שירות או כל פעולה אחרת.
+                  <strong>&quot;החברה&quot; / &quot;הישות המשפטית&quot;</strong> – קיניגמאה בע״מ, חברה
+                  הרשומה ופועלת בישראל, המשמשת כצד החוזי לצורכי תנאי שימוש אלה.
                 </p>
                 <p>
-                  <strong>&quot;שירותים&quot;</strong> – כל שירות, תוכן, ייעוץ, מסמך, מוצר דיגיטלי, עיצוב, פיתוח, ייעוץ מקצועי או כל תוצר אחר שהחברה מספקת, בין אם בחינם ובין אם בתשלום.
+                  <strong>&quot;משתמש&quot;</strong> – כל אדם, תאגיד, רשות או גוף העושה שימוש כלשהו
+                  באתר, לרבות גלישה, צפייה בתוכן, מילוי טופס, בקשת שירות או כל פעולה אחרת.
+                </p>
+                <p>
+                  <strong>&quot;שירותים&quot;</strong> – כל שירות, תוכן, מוצר דיגיטלי, תוצר, ייעוץ,
+                  עיצוב, פיתוח, תחזוקה או פעילות אחרת המוצעים או ניתנים במסגרת PREXIA, בין אם
+                  בתשלום ובין אם ללא תשלום.
                 </p>
                 <p>
                   <strong>&quot;תנאי שימוש&quot;</strong> – מסמך זה, לרבות כל חלקיו, נספחיו ועדכוניו.
                 </p>
                 <p>
-                  <strong>&quot;תוכן מוגן&quot;</strong> – כל טקסט, עיצוב, גרפיקה, קוד, וידאו, תמונה, לוגו, נתון או מידע המוגנים על פי דיני זכויות היוצרים והקניין הרוחני בישראל או בעולם.
+                  <strong>&quot;תוכן מוגן&quot;</strong> – כל טקסט, עיצוב, גרפיקה, קוד, וידאו, תמונה,
+                  לוגו, נתון או מידע המוגנים על פי דיני זכויות יוצרים וקניין רוחני בישראל או בעולם.
                 </p>
                 <p>
-                  <strong>&quot;מידע עסקי&quot;</strong> – כל מידע הקשור לפעילות העסקית, הטכנולוגית או הניהולית של החברה, שאינו נחלת הכלל.
+                  <strong>&quot;מידע עסקי&quot;</strong> – כל מידע הקשור לפעילות, לתהליכים, למערכות או
+                  לידע של PREXIA או של החברה, אשר אינו נחלת הכלל.
                 </p>
               </div>
             </div>
@@ -85,8 +98,8 @@ export default function TermsPage() {
 
           {/* Section 3 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">3. הוראות כלליות</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">3. הוראות כלליות</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 תנאי שימוש אלה מהווים הסכם מחייב בין המשתמש לבין החברה. כל שימוש באתר מהווה הסכמה מפורשת ומלאה לכל האמור בהם.
 מי שאינו מסכים לתנאים – מתבקש שלא להשתמש באתר.
@@ -111,8 +124,8 @@ export default function TermsPage() {
 
           {/* Section 4 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">4. פרטיות ואיסוף נתונים</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">4. פרטיות ואיסוף נתונים</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 החברה מכבדת את פרטיות המשתמשים ופועלת בהתאם לחוק הגנת הפרטיות, תשמ&quot;א–1981, לתקנות הגנת הפרטיות (אבטחת מידע), תשע&quot;ז–2017, ולתקנות ה-GDPR של האיחוד האירופי במידת תחולתן.
               </p>
@@ -127,7 +140,7 @@ export default function TermsPage() {
               </p>
               <p>
                 האתר משתמש בקובצי קוקיז ובכלי ניתוח (כגון Google Analytics) לצרכים סטטיסטיים ושיווקיים בכפוף להסכמת המשתמש.
-המשתמש רשאי לבקש לעיין, לתקן או למחוק את המידע שנשמר עליו באמצעות פנייה לכתובת: info@contact.atarym.com
+המשתמש רשאי לבקש לעיין, לתקן או למחוק את המידע שנשמר עליו באמצעות פנייה לכתובת: info@prexia.com
 
 .
 למידע נוסף ראה מדיניות הפרטיות שלנו.
@@ -137,8 +150,8 @@ export default function TermsPage() {
 
           {/* Section 5 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">5. קניין רוחני</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">5. קניין רוחני</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 כל זכויות הקניין הרוחני באתר ובתוכנו, לרבות עיצובים, גרפיקות, קוד מקור, תמונות, לוגו, טקסטים, סרטונים, תוכנות, מאגרי נתונים ותוצרים דיגיטליים, שייכים לסוכנות אתרים או לספקים חיצוניים שהעניקו לה רישיון שימוש.
               </p>
@@ -156,8 +169,8 @@ export default function TermsPage() {
 
           {/* Section 6 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">6. השימוש באתר</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">6. השימוש באתר</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 השימוש באתר מותר למטרות חוקיות ואישיות בלבד.
 החברה רשאית לשנות, לעדכן, להוסיף או להסיר שירותים או תכנים באתר בכל עת, לפי שיקול דעתה, וללא הודעה מוקדמת.
@@ -171,8 +184,8 @@ export default function TermsPage() {
 
           {/* Section 7 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">7. הגבלת אחריות</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">7. הגבלת אחריות</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 החברה מספקת שירותי עיצוב ופיתוח בלבד, ואינה מתחייבת לתוצאה עסקית, שיווקית או כלכלית כלשהי.
 כל שימוש בתוכן, במידע או בשירותים נעשה באחריות המשתמש בלבד.
@@ -186,8 +199,8 @@ export default function TermsPage() {
 
           {/* Section 8 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">8. זמינות האתר והפרעות</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">8. זמינות האתר והפרעות</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 החברה עושה מאמצים להבטיח שהאתר יהיה זמין ובטוח לשימוש, אך ייתכנו הפרעות עקב תקלות טכניות או תחזוקה.
 החברה רשאית להשבית את האתר או חלק ממנו בכל עת ללא הודעה מוקדמת, ואינה אחראית לנזקים עקב כך.
@@ -197,11 +210,11 @@ export default function TermsPage() {
 
           {/* Section 9 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">9. יצירת קשר</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">9. יצירת קשר</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>ניתן לפנות לחברה בכל עניין הנוגע לשירות, למדיניות הפרטיות או לתנאי השימוש באחת מהדרכים הבאות:</p>
-              <ul className="list-none text-black/80 space-y-2 mr-4">
-                <li>📧 info@contact.atarym.com</li>
+              <ul className="list-none text-white/70 text-sm sm:text-base space-y-2 mr-4">
+                <li>📧 info@prexia.com</li>
                 <li>📞 050-5322336</li>
                 <li>📝 טופס יצירת קשר באתר.</li>
               </ul>
@@ -213,10 +226,10 @@ export default function TermsPage() {
 
           {/* Section 10 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">10. שימושים אסורים</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">10. שימושים אסורים</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>חל איסור לבצע את הפעולות הבאות:</p>
-              <ul className="list-disc list-inside text-black/80 space-y-1 mr-4">
+              <ul className="list-disc list-inside text-white/70 text-sm sm:text-base space-y-1 mr-4">
                 <li>חדירה לא מורשית למערכות החברה.</li>
                 <li>עקיפת מנגנוני אבטחה.</li>
                 <li>שימוש בתוכן האתר לצרכים מסחריים ללא אישור.</li>
@@ -231,8 +244,8 @@ export default function TermsPage() {
 
           {/* Section 11 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">11. אחריות המשתמש</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">11. אחריות המשתמש</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 המשתמש אחראי באופן בלעדי לכל פעולה שביצע באתר.
 הוא מתחייב לשפות את החברה בגין כל נזק, הוצאה או תביעה שתוגש נגדה עקב פעולה שביצע בניגוד לתנאים אלה.
@@ -242,8 +255,8 @@ export default function TermsPage() {
 
           {/* Section 12 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">12. שינויים בתנאים</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">12. שינויים בתנאים</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 החברה רשאית לעדכן את תנאי השימוש מעת לעת.
 הגרסה המעודכנת תפורסם באתר ותיכנס לתוקף עם פרסומה.
@@ -254,8 +267,8 @@ export default function TermsPage() {
 
           {/* Section 13 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">13. התקשרות חוזית עם לקוחות</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">13. התקשרות חוזית עם לקוחות</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 במקרה שבו נוצר שיתוף פעולה עסקי בין הלקוח לבין החברה, תיחתם הסכמת התקשרות מפורטת בכתב.
 חוזה זה יהווה את המסמך המחייב היחיד בין הצדדים ויכלול פירוט השירותים, המחירים, לוחות הזמנים, הזכויות והחובות של שני הצדדים.
@@ -267,8 +280,8 @@ export default function TermsPage() {
 
           {/* Section 14 */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-black">14. דין וסמכות שיפוט</h2>
-            <div className="text-black/80 leading-relaxed space-y-3">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">14. דין וסמכות שיפוט</h2>
+            <div className="text-white/70 leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 תנאים אלה כפופים לדיני מדינת ישראל בלבד.
 סמכות השיפוט הבלעדית בכל מחלוקת הקשורה לתנאים אלה נתונה לבתי המשפט המוסמכים בירושלים בלבד.

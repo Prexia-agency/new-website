@@ -48,6 +48,12 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
   useEffect(() => {
     setIsHydrated(true)
     markHydrationComplete()
+
+    // Safety check: ensure body is scrollable on mount
+    if (typeof document !== 'undefined') {
+      document.documentElement.style.overflow = ''
+      document.body.style.overflow = ''
+    }
   }, [])
 
   // Load settings from localStorage - ONLY after hydration
@@ -237,17 +243,6 @@ function applySettings(settings: AccessibilitySettings) {
   const root = document.documentElement
   const body = document.body
   
-  // CRITICAL: Ensure body and html can scroll and receive touch events
-  root.style.overflow = ''
-  root.style.touchAction = ''
-  root.style.removeProperty('pointer-events')
-  
-  if (body) {
-    body.style.overflow = ''
-    body.style.touchAction = ''
-    body.style.removeProperty('pointer-events')
-  }
-
   // Font size with proper scaling
   root.setAttribute('data-font-size', settings.fontSize)
   

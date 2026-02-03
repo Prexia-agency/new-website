@@ -1,64 +1,52 @@
 "use client"
 
-import { useAnimation } from 'framer-motion';
-import React, { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/accordion';
-
-import TitleAnimation from '@/components/shared/title-animation';
-
-const titleItems = [
-  { value: 'שאלות' },
-  { value: 'נפוצות' },
-];
+import React, { useState } from 'react';
 
 const faqData = [
   {
     id: 'item-1',
-    question: 'מה מייחד את האתרים שאתם מפתחים לעומת המתחרים האחרים?',
-    answer: 'רוב האתרים בשוק נבנים על פלטפורמות סגורות כמו WordPress או Wix נוחות, אך מוגבלות בביצועים, באבטחה וביכולת להתאים את האתר בדיוק לעסק. אנחנו בוחרים בדרך אחרת. כל אתר נבנה אצלנו מאפס, מותאם לעסק, למותג ולמטרות שלך, כך שהתוצאה היא אתר שהוא נכס דיגיטלי אמיתי ולא עוד אתר מדף.'
+    question: 'מה מייחד את PREXIA לעומת חברות דיגיטל אחרות?',
+    answer: 'PREXIA מתאפיינת בשילוב בין תהליכי עבודה קפדניים ויציבים של ארגון גדול לבין הגישה השירותית והגמישה של סטודיו מומחה. אנו פועלים בסטנדרטים מקצועיים גבוהים – עם צוות מנוסה ותשתית איתנה – ומספקים ללקוחותינו פתרונות מקצה-לקצה תחת קורת גג אחת. המשמעות היא שהפרויקטים מנוהלים באחריות ובראייה ארוכת-טווח, תוך מתן יחס אישי והבנת הצרכים הייחודיים של כל לקוח.'
   },
   {
     id: 'item-2',
-    question: 'האם ניתן לשלב באתר אלמנטים תלת־ממדיים ואנימציות מותאמות אישית לפי הצרכים שלי?',
-    answer: 'בהחלט! אנחנו מתמחים בשילוב אנימציות תלת-ממדיות מתקדמות, מיקרו-אינטראקציות ואלמנטים ויזואליים מותאמים אישית באמצעות טכנולוגיות כמו Spline, React Three Fiber ו-GSAP. כל אלמנט נבנה בקוד מלא ומותאם בדיוק לצרכים ולמותג שלכם.'
+    question: 'מהו לוח הזמנים המשוער לפרויקט טיפוסי?',
+    answer: 'משך הפרויקט משתנה בהתאם להיקף ולמורכבות. לפני ההתחלה, אנו מבצעים תכנון מפורט וקובעים יחד עם הלקוח אבני דרך ריאליות. באופן כללי, פיתוח אתר תדמיתי קטן יכול לארוך מספר שבועות, בעוד שפיתוח מערכת או מוצר דיגיטלי מורכב עשוי להימשך מספר חודשים. לאורך הדרך, אנו מקפידים לעמוד בלוחות הזמנים שנקבעו ומעדכנים את הלקוח באופן שוטף בהתקדמות הפרויקט.'
   },
   {
     id: 'item-3',
-    question: 'כמה זמן לוקח בדרך כלל לסיים פרויקט אתר תדמית מלא?',
-    answer: 'בממוצע, פרויקט סטנדרטי נמשך בין שבועיים לשמונה שבועות בפרויקטים יותר מורכבים, בהתאם להיקף התוכן, מספר עמודים, מורכבות האפקטים והיקף האינטראקציות הנדרשות.'
+    question: 'האם אתם מציעים תחזוקה שוטפת לאחר השקת הפרויקט?',
+    answer: 'בהחלט. תחזוקה שוטפת והמשך ליווי נחשבים אצלנו לחלק בלתי נפרד מהשירות. לאחר ההשקה, צוות PREXIA ממשיך לוודא שהמוצר הדיגיטלי שלך מעודכן, מאובטח ומתפקד בצורה מיטבית. אנו מציעים עדכוני תוכנה, תיקוני תקלות ושיפורים לפי הצורך, וזמינים למענה שוטף לכל שאלה או בעיה. המטרה שלנו היא שהאתר או האפליקציה ימשיכו להצליח ולשרת אותך לאורך זמן.'
   },
   {
     id: 'item-4',
-    question: 'האם ניתן לעדכן את התוכן והעיצוב של האתר לאחר ההשקה באופן עצמאי?',
-    answer: 'בהחלט. האתר נבנה כך שתוכלו להוסיף, לערוך או להסיר תכנים בקלות, ולבצע התאמות עיצוב בסיסיות בבסיס הקוד הקיים.'
+    question: 'בסיום הפרויקט, למי שייכות הזכויות והתוצרים?',
+    answer: 'עם סיום הפרויקט, כל הזכויות והתוצרים עוברים לבעלותך המלאה. אנו מקפידים על מסירה מסודרת של הקוד, התכנים והמסמכים הרלוונטיים – הכל יועבר אליך בצורה מאורגנת ושקופה. בנוסף, במידת הצורך, נערוך עבורך הדרכה לגבי תפעול המערכת או האתר, כדי להבטיח מעבר חלק ולתת לך שליטה מלאה במוצר שקיבלת.'
   },
   {
     id: 'item-5',
-    question: 'אילו אפשרויות תחזוקה ותמיכה שוטפת אתם מציעים לאחר סיום הפרויקט?',
-    answer: 'אנחנו מציעים חבילת תחזוקה גמישה בעלות של 79 שח לחודש לכל הלקוחות שלנו הכוללות עדכוני תוכן, בדיקות אבטחה, גיבויים שוטפים, שיפורי ביצועים ותמיכה טכנית לכל שאלה או צורך שמתעורר.'
+    question: 'האם האתרים והאפליקציות שאתם בונים נגישים לאנשים עם מוגבלויות?',
+    answer: 'כן. אנו דואגים לפתח בהתאם לתקני הנגישות (כגון WCAG 2.1) על מנת להבטיח שהמוצר הדיגיטלי יהיה שמיש ונוח לכל משתמש. למשל, אנו משלבים טקסט אלטרנטיבי לתמונות, דואגים לניגודיות צבעים תקינה, ומאפשרים ניווט באתר באמצעות מקלדת – כך שמשתמשים עם מוגבלות יכולים לגלוש בבטחה. מחויבותנו לנגישות היא חלק מהסטנדרט האיכותי שלנו ומותאמת גם לדרישות החוק.'
   },
   {
     id: 'item-6',
-    question: 'האם ניתן להעביר את הפרויקט לאחר סיום הפיתוח ולנהל אותו אצל צוות אחר?',
-    answer: 'כן. עם סיום העבודה תוכלו לקבל את כל קבצי הקוד והגישה למערכות הדרושות, כך שכל צוות מקצועי שתבחרו יוכל להמשיך לפתח, לעדכן ולתחזק את האתר ללא מגבלות.'
+    question: 'איך אתם מתמודדים עם נושא הפרטיות וקבצי Cookies באתרי אינטרנט?',
+    answer: 'אנו מקפידים על עמידה בהנחיות פרטיות והגנת מידע. במידת הצורך, נשלב באתר הודעת Cookies המודיעה למשתמש על השימוש בקבצים אלה ומאפשרת לו בחירה בהעדפותיו. אנו משתמשים רק בקבצי Cookies הנחוצים לתפקוד האתר ובכלי ניתוח מאושרים (כגון Google Analytics במתכונת התואמת לתקנים), וזאת כדי לכבד את פרטיות המשתמשים. כמו כן, אנו מוודאים עמידה בתקנות כגון GDPR בעת הצורך עבור אתרים הפונים לקהל בינלאומי.'
   },
-   {
+  {
     id: 'item-7',
-    question: 'האם בניית האתר כוללת מנגנון COOKIES ונגישות לבעלי מוגבלויות?',
-    answer: 'כמובן! אצלנו כל החבילות כוללת כפתור נגישות באתר והתאמה לבעלי מוגבלויות, וניהול COOKIES בהסכמת המשתמש בהתאם ל GDPR האירופאי'
+    question: 'האם שילוב אנימציות באתר לא יפגע בביצועים או בחוויית המשתמש?',
+    answer: 'אנו מאמינים בשימוש מושכל באנימציות. במקרים בהם אנימציה מוסיפה לחוויית המשתמש – למשל להדגיש פעולה שבוצעה או להנחות את המשתמש – נשלב אותה באופן מתון ויעיל. אנו מקפידים שהאנימציות יהיו קלות משקל ולא יעמיסו על מהירות הטעינה. בנוסף, אנו מתחשבים בנגישות: האנימציות שאנו יוצרים מותאמות גם למשתמשים הרגישים לתנועה, וניתן לעצבן במידת הצורך. בבסיכומו של דבר, נעשה הכל כדי שהאתר יהיה דינמי ומושך, אך לעולם לא על חשבון הביצועים או הנוחות של המשתמשים.'
+  },
+  {
+    id: 'item-8',
+    question: 'לאחר בניית האתר, האם אוכל לעדכן תכנים ולנהל אותו בעצמי?',
+    answer: 'כן. אנו בונים את האתרים עם מערכת ניהול תוכן (CMS) ידידותית, כך שתוכל לעדכן טקסטים, תמונות ותכנים אחרים באופן עצמאי, ללא תלות במתכנת. בסיום הפרויקט נספק לך הדרכה בסיסית לשימוש במערכת הניהול, כדי להבטיח שתהיה בטוח ובקיא בהפעלתה. כמובן, צוות PREXIA ימשיך להיות זמין גם לאחר ההשקה לתמיכה, לייעוץ או לביצוע שינויים מורכבים יותר – בהתאם לצורך שלך.'
   }
 ];
 
 export default function FAQ() {
-  const [contentRef, isContentInView] = useInView({ triggerOnce: true, threshold: 0.8 });
-  const titleControls = useAnimation();
-
-  useEffect(() => {
-    if (isContentInView) {
-      titleControls.start('animate');
-    }
-  }, [isContentInView, titleControls]);
+  const [openItem, setOpenItem] = useState<string | null>(null);
 
   // Generate FAQ Schema for Google Rich Results
   const faqSchema = {
@@ -74,41 +62,67 @@ export default function FAQ() {
     }))
   };
 
+  const toggleItem = (id: string) => {
+    setOpenItem(openItem === id ? null : id);
+  };
+
   return (
-    <section className="bg-white py-20 pb-32 lg:py-16 lg:pb-24 sm:py-12 sm:pb-16">
+    <section className="bg-black py-20 px-6 lg:px-16 min-h-screen flex items-center" dir="rtl">
       {/* FAQ Schema - Makes FAQs appear in Google as Rich Snippets */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-12" ref={contentRef}>
-          <TitleAnimation
-            tag="h2"
-            className="with-text-highlight-red max-w-[700px] text-4xl font-normal leading-snug lg:max-w-[650px] lg:text-[32px] sm:text-2xl mx-auto font-noto-hebrew text-gray-900"
-            items={titleItems}
-            animationName="second"
-            controls={titleControls}
-          />
-        </div>
-        <div dir="rtl">
-          <Accordion type="single" collapsible className="w-full space-y-4">
-            {faqData.map((faq) => (
-              <AccordionItem key={faq.id} value={faq.id} className="border border-gray-200 rounded-lg px-6 py-4 last:border">
-                <AccordionTrigger className="text-right hover:no-underline">
-                  <span className="gradient-text font-semibold text-[12px] leading-relaxed sm:text-lg">
-                    {faq.question}
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <p className="text-gray-900 leading-relaxed text-[11px] pt-2 sm:text-sm">
-                    {faq.answer}
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+          {/* Title - Top on all screens, Right side on desktop */}
+          <div className="lg:col-span-4">
+            <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight" style={{ fontFamily: 'var(--font-ppeiko), sans-serif' }}>
+              <span className="block">Questions</span>
+              <span className="block">Answers/</span>
+            </h2>
+          </div>
+
+          {/* FAQ Items - Left side on desktop */}
+          <div className="lg:col-span-8">
+            <div className="space-y-0">
+              {faqData.map((faq, index) => (
+                <div key={faq.id} className="border-t border-white/40">
+                  <button
+                    onClick={() => toggleItem(faq.id)}
+                    className="w-full flex items-center justify-between py-4 sm:py-6 text-right group hover:opacity-80 transition-opacity"
+                  >
+                    <span className="text-white text-sm sm:text-base lg:text-lg font-light pr-4" style={{ fontFamily: 'var(--font-ppeiko), sans-serif' }}>
+                      {faq.question}
+                    </span>
+                    <span className="text-white text-xl sm:text-2xl font-light transition-all duration-1000" style={{ 
+                      transform: openItem === faq.id ? 'rotate(45deg)' : 'rotate(0deg)',
+                      display: 'inline-block',
+                      transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
+                    }}>
+                      +
+                    </span>
+                  </button>
+                  
+                  <div 
+                    className={`overflow-hidden transition-all ${openItem === faq.id ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}
+                    style={{
+                      transitionDuration: '1000ms',
+                      transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
+                    }}
+                  >
+                    <div className="pb-6 pr-4">
+                      <p className="text-white/80 text-xs sm:text-sm leading-relaxed" style={{ fontFamily: 'var(--font-ppeiko), sans-serif' }}>
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <div className="border-t border-white/40"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

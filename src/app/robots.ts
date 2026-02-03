@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://www.atarym.com'
+  const baseUrl = 'https://www.prexia.com'
   const isProduction = process.env.NODE_ENV === 'production'
   
   // Block everything in development/staging

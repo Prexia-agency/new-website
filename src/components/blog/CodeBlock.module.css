@@ -1,0 +1,70 @@
+.root {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.pre {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Minimal Prism theme (dark) scoped under this component */
+.code :global(.token.comment),
+.code :global(.token.prolog),
+.code :global(.token.doctype),
+.code :global(.token.cdata) {
+  color: #7c8798;
+}
+
+.code :global(.token.punctuation) {
+  color: #c9d1d9;
+}
+
+.code :global(.token.property),
+.code :global(.token.tag),
+.code :global(.token.boolean),
+.code :global(.token.number),
+.code :global(.token.constant),
+.code :global(.token.symbol),
+.code :global(.token.deleted) {
+  color: #ff7b72;
+}
+
+.code :global(.token.selector),
+.code :global(.token.attr-name),
+.code :global(.token.string),
+.code :global(.token.char),
+.code :global(.token.builtin),
+.code :global(.token.inserted) {
+  color: #a5d6ff;
+}
+
+.code :global(.token.operator),
+.code :global(.token.entity),
+.code :global(.token.url),
+.code :global(.token.variable) {
+  color: #d2a8ff;
+}
+
+.code :global(.token.atrule),
+.code :global(.token.attr-value),
+.code :global(.token.function),
+.code :global(.token.class-name) {
+  color: #d2a8ff;
+}
+
+.code :global(.token.keyword) {
+  color: #79c0ff;
+}
+
+.code :global(.token.regex),
+.code :global(.token.important) {
+  color: #ffa657;
+}
+
+
