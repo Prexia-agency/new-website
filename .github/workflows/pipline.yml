@@ -21,7 +21,7 @@ env:
 
 jobs:
   # ===========================================
-  # STAGE 1: Validate (Security + Quality + Build)
+  # STAGE 1: Validate (Security + Quality + Build )
   # ===========================================
 
   validate:
@@ -96,7 +96,7 @@ jobs:
       enforce-performance: false
 
   # ============================================
-  # STAGE 4: Update the PR Comments
+  # STAGE 4: Update the PR Commentss
   # ============================================
 
   update-pr:
