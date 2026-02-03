@@ -26,7 +26,7 @@ function formatDate(date?: string) {
   }
 }
 
-export default async function BlogPage() {
+const BlogPage = async () => {
   const posts = await sanityClient.fetch<PostListItem[]>(postsListQuery);
 
   return (
@@ -105,9 +105,9 @@ export default async function BlogPage() {
                             <Image
                               src={imageUrl}
                               alt={post.title ?? "Blog cover"}
-                              fill
                               className="object-cover"
                               sizes="(max-width: 768px) 100vw, 480px"
+                              fill
                             />
                           </div>
                         ) : null}
@@ -127,4 +127,6 @@ export default async function BlogPage() {
       </div>
     </main>
   );
-}
+};
+
+export default BlogPage;

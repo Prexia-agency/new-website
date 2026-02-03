@@ -1,12 +1,13 @@
+import { PortableText } from "@portabletext/react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import { PortableText } from "@portabletext/react";
+
+import CodeBlock from "@/components/blog/CodeBlock";
 import { sanityClient } from "@/lib/sanity/client";
+import { urlFor } from "@/lib/sanity/image";
 import { postBySlugQuery, postSlugsQuery } from "@/lib/sanity/queries";
 import type { Post } from "@/lib/sanity/types";
-import { urlFor } from "@/lib/sanity/image";
-import CodeBlock from "@/components/blog/CodeBlock";
 
 export const revalidate = 60;
 
@@ -71,12 +72,12 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
       images: [ogImageUrl],
     },
     alternates: {
-      canonical: `https://www.prexia.com/blog/${post.slug}`,
+      canonical: `https://www.prexia.io/blog/${post.slug}`,
     },
   };
 }
 
-export default async function BlogPostPage(props: PageProps) {
+const BlogPostPage = async (props: PageProps) => {
   const { slug } = await props.params;
   const post = await sanityClient.fetch<Post | null>(postBySlugQuery, { slug });
   if (!post) notFound();
@@ -115,9 +116,9 @@ export default async function BlogPostPage(props: PageProps) {
             <Image
               src={coverUrl}
               alt={post.title ?? "Cover"}
-              fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 768px"
+              fill
               priority
             />
           </div>
@@ -125,7 +126,7 @@ export default async function BlogPostPage(props: PageProps) {
 
         <div className="text-white max-w-none pl-4">
           <PortableText
-            value={(post.body as any) || []}
+            value={(post.body as unknown[]) || []}
             components={{
               block: {
                 normal: ({ children }) => (
@@ -152,12 +153,18 @@ export default async function BlogPostPage(props: PageProps) {
                   <ul className="my-6 mr-6 list-disc space-y-2">{children}</ul>
                 ),
                 number: ({ children }) => (
-                  <ol className="my-6 mr-6 list-decimal space-y-2">{children}</ol>
+                  <ol className="my-6 mr-6 list-decimal space-y-2">
+                    {children}
+                  </ol>
                 ),
               },
               listItem: {
-                bullet: ({ children }) => <li className="leading-[1.8]">{children}</li>,
-                number: ({ children }) => <li className="leading-[1.8]">{children}</li>,
+                bullet: ({ children }) => (
+                  <li className="leading-[1.8]">{children}</li>
+                ),
+                number: ({ children }) => (
+                  <li className="leading-[1.8]">{children}</li>
+                ),
               },
               types: {
                 codeSnippet: ({ value }) => {
@@ -174,7 +181,11 @@ export default async function BlogPostPage(props: PageProps) {
                 image: ({ value }) => {
                   const img = value?.asset ? value : null;
                   if (!img) return null;
-                  const src = urlFor(img).width(1600).fit("max").auto("format").url();
+                  const src = urlFor(img)
+                    .width(1600)
+                    .fit("max")
+                    .auto("format")
+                    .url();
                   const alt = value?.alt || post.title || "";
                   return (
                     <figure className="my-12">
@@ -200,6 +211,6 @@ export default async function BlogPostPage(props: PageProps) {
       </article>
     </main>
   );
-}
+};
 
-
+export default BlogPostPage;

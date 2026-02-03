@@ -1,9 +1,10 @@
 import { MetadataRoute } from "next";
+
 import { sanityClient } from "@/lib/sanity/client";
 import { postSlugsQuery } from "@/lib/sanity/queries";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://www.prexia.com";
+  const baseUrl = "https://www.prexia.io";
   const now = new Date();
 
   const staticEntries: MetadataRoute.Sitemap = [
@@ -66,4 +67,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return staticEntries;
   }
 }
-

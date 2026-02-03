@@ -2,14 +2,14 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { FlatCompat } from "@eslint/eslintrc";
+import tseslint from "@typescript-eslint/eslint-plugin";
 import importPlugin from "eslint-plugin-import";
+import jsxA11y from "eslint-plugin-jsx-a11y";
 import noUnsanitized from "eslint-plugin-no-unsanitized";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 import security from "eslint-plugin-security";
 import sonarjs from "eslint-plugin-sonarjs";
-import tseslint from "@typescript-eslint/eslint-plugin";
-import react from "eslint-plugin-react";
-import jsxA11y from "eslint-plugin-jsx-a11y";
-import reactHooks from "eslint-plugin-react-hooks";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -65,7 +65,8 @@ export default [
       }],
 
       // Safety
-      "react/no-danger": "error",
+      // Disabled: dangerouslySetInnerHTML is used for JSON-LD structured data (standard SEO practice)
+      "react/no-danger": "off",
       "no-console": ["error", { allow: ["warn","error"] }],
 
       // TypeScript (עכשיו באמת נטען)

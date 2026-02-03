@@ -2,7 +2,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "מחירון שירותים",
-  description: "חבילות מחירים לפיתוח דיגיטלי - מאתרי תדמית פשוטים ועד פרויקטים מורכבים עם אנימציות תלת-ממד ואינטגרציות מתקדמות. פתרונות מותאמים אישית עם תמיכה שוטפת",
+  description:
+    "חבילות מחירים לפיתוח דיגיטלי - מאתרי תדמית פשוטים ועד פרויקטים מורכבים עם אנימציות תלת-ממד ואינטגרציות מתקדמות. פתרונות מותאמים אישית עם תמיכה שוטפת",
   keywords: [
     "מחירון פיתוח דיגיטלי",
     "עלות בניית אתר",
@@ -11,94 +12,98 @@ export const metadata: Metadata = {
     "מחיר אתר תדמית",
     "עלות פיתוח אפליקציות",
     "מחיר פתרונות דיגיטליים",
-    "שירותים מקצועיים מחירים"
+    "שירותים מקצועיים מחירים",
   ],
   openGraph: {
     title: "מחירון שירותים | PREXIA",
-    description: "חבילות מחירים מותאמות לכל עסק - פתרונות דיגיטליים מותאמים אישית. מאתרי תדמית בסיסיים ועד פרויקטים מורכבים",
-    url: "https://www.prexia.com/pricing",
+    description:
+      "חבילות מחירים מותאמות לכל עסק - פתרונות דיגיטליים מותאמים אישית. מאתרי תדמית בסיסיים ועד פרויקטים מורכבים",
+    url: "https://www.prexia.io/pricing",
     type: "website",
     images: [
       {
         url: "/images/LOGO-AK.png",
         width: 1200,
         height: 630,
-        alt: "מחירון שירותים - PREXIA"
-      }
+        alt: "מחירון שירותים - PREXIA",
+      },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "מחירון שירותים | PREXIA",
-    description: "חבילות מחירים מותאמות לכל עסק - פתרונות דיגיטליים מותאמים אישית",
+    description:
+      "חבילות מחירים מותאמות לכל עסק - פתרונות דיגיטליים מותאמים אישית",
     images: ["/images/LOGO-AK.png"],
   },
   alternates: {
-    canonical: "https://www.prexia.com/pricing",
+    canonical: "https://www.prexia.io/pricing",
   },
 };
 
-export default function PricingLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const PricingLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       {/* Service Schema for Pricing Page */}
+      {}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Service",
-            "name": "פיתוח דיגיטלי מקצועי",
-            "provider": {
+            name: "פיתוח דיגיטלי מקצועי",
+            provider: {
               "@type": "Organization",
-              "name": "PREXIA",
-              "url": "https://www.prexia.com"
+              name: "PREXIA",
+              url: "https://www.prexia.io",
             },
-            "url": "https://www.prexia.com/pricing",
-            "description": "שירותי פיתוח דיגיטלי מותאמים אישית - מאתרי תדמית פשוטים ועד פרויקטים מורכבים עם אנימציות ואינטגרציות מתקדמות",
-            "areaServed": {
+            url: "https://www.prexia.io/pricing",
+            description:
+              "שירותי פיתוח דיגיטלי מותאמים אישית - מאתרי תדמית פשוטים ועד פרויקטים מורכבים עם אנימציות ואינטגרציות מתקדמות",
+            areaServed: {
               "@type": "Place",
-              "name": "ישראל"
+              name: "ישראל",
             },
-            "hasOfferCatalog": {
+            hasOfferCatalog: {
               "@type": "OfferCatalog",
-              "name": "חבילות בניית אתרים",
-              "itemListElement": [
+              name: "חבילות בניית אתרים",
+              itemListElement: [
                 {
                   "@type": "Offer",
-                  "itemOffered": {
+                  itemOffered: {
                     "@type": "Service",
-                    "name": "חבילת בסיס - אתר תדמית פשוט",
-                    "description": "עד 5 עמודים, עיצוב מותאם למובייל, SEO בסיסי, טופס יצירת קשר"
-                  }
+                    name: "חבילת בסיס - אתר תדמית פשוט",
+                    description:
+                      "עד 5 עמודים, עיצוב מותאם למובייל, SEO בסיסי, טופס יצירת קשר",
+                  },
                 },
                 {
                   "@type": "Offer",
-                  "itemOffered": {
+                  itemOffered: {
                     "@type": "Service",
-                    "name": "חבילת מתקדמים - אנימציות ומיקרו אינטראקציות",
-                    "description": "אנימציות מתקדמות, רכיבי Spline/React Three Fiber, אלמנטים אינטראקטיביים"
-                  }
+                    name: "חבילת מתקדמים - אנימציות ומיקרו אינטראקציות",
+                    description:
+                      "אנימציות מתקדמות, רכיבי Spline/React Three Fiber, אלמנטים אינטראקטיביים",
+                  },
                 },
                 {
                   "@type": "Offer",
-                  "itemOffered": {
+                  itemOffered: {
                     "@type": "Service",
-                    "name": "פרויקטים מורכבים + מיתוג",
-                    "description": "חיבור API, אינטגרציות CRM, מיתוג מלא, עיצובי תלת-ממד חדשניים"
-                  }
-                }
-              ]
-            }
-          })
+                    name: "פרויקטים מורכבים + מיתוג",
+                    description:
+                      "חיבור API, אינטגרציות CRM, מיתוג מלא, עיצובי תלת-ממד חדשניים",
+                  },
+                },
+              ],
+            },
+          }),
         }}
       />
       {children}
     </>
   );
-}
+};
 
+export default PricingLayout;

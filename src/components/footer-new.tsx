@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client"
+"use client";
 
-import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
-import Matter from 'matter-js';
-import CookiePreferencesModal from '@/components/shared/CookiePreferencesModal';
+import Matter from "matter-js";
+import Link from "next/link";
+import React, { useEffect, useRef, useState } from "react";
 
-function EmailIcon({ className }: { className?: string }) {
+import CookiePreferencesModal from "@/components/shared/CookiePreferencesModal";
+
+const EmailIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       aria-hidden="true"
@@ -29,9 +30,9 @@ function EmailIcon({ className }: { className?: string }) {
       />
     </svg>
   );
-}
+};
 
-function PhoneIcon({ className }: { className?: string }) {
+const PhoneIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       aria-hidden="true"
@@ -48,9 +49,9 @@ function PhoneIcon({ className }: { className?: string }) {
       />
     </svg>
   );
-}
+};
 
-function ClockIcon({ className }: { className?: string }) {
+const ClockIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       aria-hidden="true"
@@ -72,9 +73,9 @@ function ClockIcon({ className }: { className?: string }) {
       />
     </svg>
   );
-}
+};
 
-function HoverSwapText({ text }: { text: string }) {
+const HoverSwapText = ({ text }: { text: string }) => {
   return (
     <span className="hover-swap">
       <span className="hover-swap__inner">{text}</span>
@@ -83,11 +84,11 @@ function HoverSwapText({ text }: { text: string }) {
       </span>
     </span>
   );
-}
+};
 
-export default function FooterNew() {
+const FooterNew = () => {
   const [showCookieModal, setShowCookieModal] = useState(false);
-  const [israelTime, setIsraelTime] = useState<string>('');
+  const [israelTime, setIsraelTime] = useState<string>("");
   const [isIsraelBusinessOpen, setIsIsraelBusinessOpen] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sceneRef = useRef<{
@@ -100,24 +101,24 @@ export default function FooterNew() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const hasAnimatedRef = useRef(false);
-  const fontFamilyRef = useRef('Arial, sans-serif');
+  const fontFamilyRef = useRef("Arial, sans-serif");
   const canvasSizeRef = useRef({ width: 0, height: 0, dpr: 1 });
 
   // Live clock (Israel time)
   useEffect(() => {
-    const timeFormatter = new Intl.DateTimeFormat('he-IL', {
-      timeZone: 'Asia/Jerusalem',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
+    const timeFormatter = new Intl.DateTimeFormat("he-IL", {
+      timeZone: "Asia/Jerusalem",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
       hour12: false,
     });
 
-    const partsFormatter = new Intl.DateTimeFormat('en-US', {
-      timeZone: 'Asia/Jerusalem',
-      weekday: 'short',
-      hour: '2-digit',
-      minute: '2-digit',
+    const partsFormatter = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Jerusalem",
+      weekday: "short",
+      hour: "2-digit",
+      minute: "2-digit",
       hour12: false,
     });
 
@@ -126,21 +127,24 @@ export default function FooterNew() {
       setIsraelTime(timeFormatter.format(now));
 
       const parts = partsFormatter.formatToParts(now);
-      const weekday = parts.find((p) => p.type === 'weekday')?.value; // Sun..Sat
-      const hour = Number(parts.find((p) => p.type === 'hour')?.value ?? '0');
-      const minute = Number(parts.find((p) => p.type === 'minute')?.value ?? '0');
+      const weekday = parts.find((p) => p.type === "weekday")?.value; // Sun..Sat
+      const hour = Number(parts.find((p) => p.type === "hour")?.value ?? "0");
+      const minute = Number(
+        parts.find((p) => p.type === "minute")?.value ?? "0",
+      );
 
       const isBusinessDay =
-        weekday === 'Sun' ||
-        weekday === 'Mon' ||
-        weekday === 'Tue' ||
-        weekday === 'Wed' ||
-        weekday === 'Thu';
+        weekday === "Sun" ||
+        weekday === "Mon" ||
+        weekday === "Tue" ||
+        weekday === "Wed" ||
+        weekday === "Thu";
 
       const minutesSinceMidnight = hour * 60 + minute;
       const start = 8 * 60; // 08:00
       const end = 17 * 60 + 30; // 17:30
-      const isWithinHours = minutesSinceMidnight >= start && minutesSinceMidnight < end;
+      const isWithinHours =
+        minutesSinceMidnight >= start && minutesSinceMidnight < end;
 
       setIsIsraelBusinessOpen(isBusinessDay && isWithinHours);
     };
@@ -155,11 +159,11 @@ export default function FooterNew() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   useEffect(() => {
@@ -171,30 +175,34 @@ export default function FooterNew() {
 
     const init = async () => {
       if (isDisposed) return;
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
       try {
         await document.fonts.ready;
-      } catch (e) {
-        console.warn('Font loading check failed, using fallback');
+      } catch {
+        console.warn("Font loading check failed, using fallback");
       }
 
       const computedStyle = window.getComputedStyle(canvas);
-      fontFamilyRef.current = computedStyle.fontFamily || 'Arial, sans-serif';
+      fontFamilyRef.current = computedStyle.fontFamily || "Arial, sans-serif";
 
       const canvasParent = canvas.parentElement as HTMLElement | null;
       const setCanvasSize = () => {
         // Calculate width based on letter measurements
-        const letterText = 'PREXIA';
+        const letterText = "PREXIA";
         const fontSize = isMobile ? 56 : 110;
         const tracking = isMobile ? 6 : 10;
         ctx.font = `300 ${fontSize}px ${fontFamilyRef.current}`;
-        const glyphWidths = letterText.split('').map(letter => Math.ceil(ctx.measureText(letter).width));
-        const totalLetterWidth = glyphWidths.reduce((sum, w) => sum + w, 0) + tracking * (glyphWidths.length - 1);
+        const glyphWidths = letterText
+          .split("")
+          .map((letter) => Math.ceil(ctx.measureText(letter).width));
+        const totalLetterWidth =
+          glyphWidths.reduce((sum, w) => sum + w, 0) +
+          tracking * (glyphWidths.length - 1);
         const leftPadding = isMobile ? 20 : 30;
         const rightPadding = isMobile ? 20 : 30;
-        
+
         const width = totalLetterWidth + leftPadding + rightPadding;
         const height = canvasParent?.clientHeight || (isMobile ? 130 : 260);
         const dpr = window.devicePixelRatio || 1;
@@ -211,7 +219,7 @@ export default function FooterNew() {
 
       // Create Matter.js engine with no initial gravity (enable later)
       const engine = Matter.Engine.create({
-        gravity: { x: 0, y: 0, scale: 0.0025 }
+        gravity: { x: 0, y: 0, scale: 0.0025 },
       });
       engine.enableSleeping = true;
       // Increase iterations for better stacking collision detection
@@ -224,10 +232,10 @@ export default function FooterNew() {
         height - 4,
         width * 1.2, // Extra wide to catch everything
         12,
-        { 
+        {
           isStatic: true,
-          render: { fillStyle: 'rgba(0, 0, 0, 0.3)' } // Semi-transparent black for visualization
-        }
+          render: { fillStyle: "rgba(0, 0, 0, 0.3)" }, // Semi-transparent black for visualization
+        },
       );
 
       // Side walls to prevent letters from escaping
@@ -236,33 +244,32 @@ export default function FooterNew() {
         height / 2,
         12,
         height * 2, // Tall enough to catch falling letters
-        { 
+        {
           isStatic: true,
-          render: { fillStyle: 'rgba(0, 0, 0, 0.3)' }
-        }
+          render: { fillStyle: "rgba(0, 0, 0, 0.3)" },
+        },
       );
-      
+
       const rightWall = Matter.Bodies.rectangle(
         width + 6, // Just outside right edge
         height / 2,
         12,
         height * 2, // Tall enough to catch falling letters
-        { 
+        {
           isStatic: true,
-          render: { fillStyle: 'rgba(0, 0, 0, 0.3)' }
-        }
+          render: { fillStyle: "rgba(0, 0, 0, 0.3)" },
+        },
       );
 
       // Create letters for PREXIA using measured glyph widths
-      const letterText = 'PREXIA';
+      const letterText = "PREXIA";
       const letters: Matter.Body[] = [];
       const fontSize = isMobile ? 84 : 165; // 50% larger
-      const tracking = isMobile ? 2 : 4; // Minimal tracking for tight spacing
       ctx.font = `400 ${fontSize}px ${fontFamilyRef.current}`; // 30% thicker (400 vs 300)
-      const glyphWidths = letterText.split('').map(letter => Math.ceil(ctx.measureText(letter).width));
-      const totalWidth =
-        glyphWidths.reduce((sum, w) => sum + w, 0) + tracking * (glyphWidths.length - 1);
-      
+      const glyphWidths = letterText
+        .split("")
+        .map((letter) => Math.ceil(ctx.measureText(letter).width));
+
       // Start letters stacked vertically above canvas - they'll fall into a pile
       const centerX = width / 2;
       const startY = -50; // Start above canvas (invisible)
@@ -271,24 +278,30 @@ export default function FooterNew() {
       const baseHeight = Math.round(fontSize * 0.7); // Base height from font size
       const bodyHeight = baseHeight + paddingY; // Add minimal padding like X axis
 
-      letterText.split('').forEach((letter, index) => {
+      letterText.split("").forEach((letter, index) => {
         const glyphWidth = glyphWidths[index];
         // Letters start from varied horizontal positions - spread across the canvas width
         const horizontalSpread = width * 0.4; // Use 40% of canvas width for spread
         const x = centerX + (Math.random() - 0.5) * horizontalSpread; // Random position left or right of center
-        const y = startY - (index * bodyHeight); // Stacked vertically above canvas
+        const y = startY - index * bodyHeight; // Stacked vertically above canvas
 
-        const body = Matter.Bodies.rectangle(x, y, glyphWidth + paddingX, bodyHeight, {
-          restitution: 0.15, // Low bounce - letters settle quickly
-          friction: 0.6, // Moderate friction allows sliding
-          frictionStatic: 0.7, // Moderate static friction
-          frictionAir: 0.002, // Very low air resistance for fast fall
-          density: 0.01, // Heavy enough to push others when landing
-          render: {
-            fillStyle: 'transparent',
+        const body = Matter.Bodies.rectangle(
+          x,
+          y,
+          glyphWidth + paddingX,
+          bodyHeight,
+          {
+            restitution: 0.15, // Low bounce - letters settle quickly
+            friction: 0.6, // Moderate friction allows sliding
+            frictionStatic: 0.7, // Moderate static friction
+            frictionAir: 0.002, // Very low air resistance for fast fall
+            density: 0.01, // Heavy enough to push others when landing
+            render: {
+              fillStyle: "transparent",
+            },
+            label: letter,
           },
-          label: letter
-        });
+        );
 
         letters.push(body);
       });
@@ -301,22 +314,37 @@ export default function FooterNew() {
       Matter.Runner.run(runner, engine);
 
       // Store references
-      sceneRef.current = { engine, render: null as any, runner, letters, ground };
+      sceneRef.current = {
+        engine,
+        render: null as any,
+        runner,
+        letters,
+        ground,
+      };
 
       // Handle resize
       const handleResize = () => {
         if (container && canvas) {
           const { width: newWidth, height: newHeight } = setCanvasSize();
-          
+
           // Update ground position
-          Matter.Body.setPosition(ground, Matter.Vector.create(newWidth / 2, newHeight - 4));
+          Matter.Body.setPosition(
+            ground,
+            Matter.Vector.create(newWidth / 2, newHeight - 4),
+          );
           // Update wall positions
-          Matter.Body.setPosition(leftWall, Matter.Vector.create(-6, newHeight / 2));
-          Matter.Body.setPosition(rightWall, Matter.Vector.create(newWidth + 6, newHeight / 2));
+          Matter.Body.setPosition(
+            leftWall,
+            Matter.Vector.create(-6, newHeight / 2),
+          );
+          Matter.Body.setPosition(
+            rightWall,
+            Matter.Vector.create(newWidth + 6, newHeight / 2),
+          );
         }
       };
 
-      window.addEventListener('resize', handleResize);
+      window.addEventListener("resize", handleResize);
 
       // Intersection Observer to trigger animation when footer is visible
       const observer = new IntersectionObserver(
@@ -324,11 +352,11 @@ export default function FooterNew() {
           entries.forEach((entry) => {
             if (entry.isIntersecting && !hasAnimatedRef.current) {
               hasAnimatedRef.current = true;
-              
+
               // Very strong gravity for fast fall
               const targetGravity = 4.0; // Increased for faster fall
               const targetScale = 0.001;
-              
+
               // Quick gravity ramp-up over 200ms for immediate response
               const start = performance.now();
               const ramp = (now: number) => {
@@ -346,23 +374,29 @@ export default function FooterNew() {
                 const horizontalForce = (Math.random() - 0.5) * 1.5;
                 Matter.Body.setVelocity(letter, {
                   x: horizontalForce, // Significant horizontal movement for spread
-                  y: 2 + Math.random() * 1 // Increased downward velocity for faster fall
+                  y: 2 + Math.random() * 1, // Increased downward velocity for faster fall
                 });
                 // Strong rotation for tumbling effect like reference images
-                Matter.Body.setAngularVelocity(letter, (Math.random() - 0.5) * 0.15);
+                Matter.Body.setAngularVelocity(
+                  letter,
+                  (Math.random() - 0.5) * 0.15,
+                );
               };
-              
+
               // Drop letters sequentially with slight timing variation
               // Order: P, R, E, X, I, A (one after another with delay)
               letters.forEach((letter, index) => {
-                setTimeout(() => {
-                  dropLetter(letter);
-                }, index * 150 + Math.random() * 50); // 150-200ms between letters for natural timing
+                setTimeout(
+                  () => {
+                    dropLetter(letter);
+                  },
+                  index * 150 + Math.random() * 50,
+                ); // 150-200ms between letters for natural timing
               });
             }
           });
         },
-        { threshold: 0.5 }
+        { threshold: 0.5 },
       );
 
       if (container) {
@@ -371,7 +405,7 @@ export default function FooterNew() {
 
       // Cleanup
       return () => {
-        window.removeEventListener('resize', handleResize);
+        window.removeEventListener("resize", handleResize);
         observer.disconnect();
         if (sceneRef.current) {
           Matter.Runner.stop(sceneRef.current.runner);
@@ -382,7 +416,7 @@ export default function FooterNew() {
     };
 
     let cleanup: (() => void) | undefined;
-    init().then(result => {
+    init().then((result) => {
       cleanup = result;
     });
 
@@ -397,20 +431,20 @@ export default function FooterNew() {
     if (!canvasRef.current) return;
 
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationFrameId: number;
-    let resolvedFontFamily = 'Arial, sans-serif';
+    let resolvedFontFamily = "Arial, sans-serif";
 
     // Wait for fonts to load and get the resolved font family
     const setupFont = async () => {
       try {
         await document.fonts.ready;
         const computedStyle = window.getComputedStyle(canvas);
-        resolvedFontFamily = computedStyle.fontFamily || 'Arial, sans-serif';
-      } catch (e) {
-        console.warn('Font loading check failed, using fallback');
+        resolvedFontFamily = computedStyle.fontFamily || "Arial, sans-serif";
+      } catch {
+        console.warn("Font loading check failed, using fallback");
       }
     };
 
@@ -421,41 +455,51 @@ export default function FooterNew() {
         animationFrameId = requestAnimationFrame(animate);
         return;
       }
-      
-      ctx.clearRect(0, 0, canvasSizeRef.current.width, canvasSizeRef.current.height);
-      
+
+      ctx.clearRect(
+        0,
+        0,
+        canvasSizeRef.current.width,
+        canvasSizeRef.current.height,
+      );
+
       // Draw ground (visualization)
       const ground = sceneRef.current.ground;
       if (ground) {
         ctx.save();
         ctx.translate(ground.position.x, ground.position.y);
         ctx.rotate(ground.angle);
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
-        ctx.fillRect(-ground.bounds.max.x + ground.position.x, -6, ground.bounds.max.x - ground.bounds.min.x, 12);
+        ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+        ctx.fillRect(
+          -ground.bounds.max.x + ground.position.x,
+          -6,
+          ground.bounds.max.x - ground.bounds.min.x,
+          12,
+        );
         ctx.restore();
       }
-      
+
       // Draw each letter with styling
       sceneRef.current.letters.forEach((body) => {
         const pos = body.position;
         const angle = body.angle;
-        const label = body.label || '';
-        
+        const label = body.label || "";
+
         ctx.save();
         ctx.translate(pos.x, pos.y);
         ctx.rotate(angle);
-        
+
         // Draw letter text with resolved ppeiko font - 50% larger, 30% thicker
         const fontSize = window.innerWidth < 768 ? 84 : 165;
         ctx.font = `400 ${fontSize}px ${resolvedFontFamily}`;
-        ctx.fillStyle = '#000000';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'top'; // Use top baseline for tighter letter stacking
+        ctx.fillStyle = "#000000";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top"; // Use top baseline for tighter letter stacking
         ctx.fillText(label, 0, -fontSize * 0.4); // Offset to center within body
-        
+
         ctx.restore();
       });
-      
+
       animationFrameId = requestAnimationFrame(animate);
     };
 
@@ -470,19 +514,18 @@ export default function FooterNew() {
 
   return (
     <>
-      <CookiePreferencesModal 
-        isOpen={showCookieModal} 
-        onClose={() => setShowCookieModal(false)} 
+      <CookiePreferencesModal
+        isOpen={showCookieModal}
+        onClose={() => setShowCookieModal(false)}
       />
-      
+
       {/* Black background wrapper */}
       <div className="w-full bg-black py-3 px-3 md:px-6">
-        <footer 
-          className="relative w-full max-w-[95%] mx-auto bg-white text-black py-4 overflow-hidden rounded-3xl" 
+        <footer
+          className="relative w-full max-w-[95%] mx-auto bg-white text-black py-4 overflow-hidden rounded-3xl"
           dir="rtl"
           ref={containerRef}
         >
-
           {/* Footer Content with Grid Layout */}
           <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
             {/* Flex layout: Links on right, Canvas on left in RTL */}
@@ -490,10 +533,11 @@ export default function FooterNew() {
               {/* Matter.js Canvas for PREXIA - positioned first in RTL (appears right) */}
               <div className="w-full md:w-auto order-1">
                 <div className="h-[130px] md:h-[260px]">
-                  <canvas 
+                  <canvas
                     ref={canvasRef}
+                    aria-label="אנימציית לוגו PREXIA"
                     className="font-ppeiko"
-                    style={{ touchAction: 'none', border: '2px solid black' }}
+                    style={{ touchAction: "none", border: "2px solid black" }}
                   />
                 </div>
               </div>
@@ -502,147 +546,150 @@ export default function FooterNew() {
               <div className="w-full md:w-auto order-2">
                 <div className="h-[130px] md:h-[260px] flex flex-col justify-center">
                   <div className="flex flex-wrap gap-x-12 gap-y-8 justify-end">
-                {/* Quick Links Section */}
-                <div>
-                <h4 className="text-base font-semibold mb-3 text-black">
-                  קישורים
-                </h4>
-                <ul className="space-y-2">
-                  <li>
-                    <Link 
-                      href="/" 
-                      className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200"
-                    >
-                      <HoverSwapText text="עמוד הבית" />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      href="/pricing" 
-                      className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200"
-                    >
-                      <HoverSwapText text="מחירים" />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      href="/contact" 
-                      className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200"
-                    >
-                      <HoverSwapText text="צור קשר" />
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+                    {/* Quick Links Section */}
+                    <div>
+                      <h4 className="text-base font-semibold mb-3 text-black">
+                        קישורים
+                      </h4>
+                      <ul className="space-y-2">
+                        <li>
+                          <Link
+                            href="/"
+                            className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200"
+                          >
+                            <HoverSwapText text="עמוד הבית" />
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/pricing"
+                            className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200"
+                          >
+                            <HoverSwapText text="מחירים" />
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/contact"
+                            className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200"
+                          >
+                            <HoverSwapText text="צור קשר" />
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
 
-              {/* Legal Links */}
-              <div>
-                <h4 className="text-base font-semibold mb-3 text-black">
-                  משפטי
-                </h4>
-                <ul className="space-y-2">
-                  <li>
-                    <Link 
-                      href="/privacy" 
-                      className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200"
-                    >
-                      <HoverSwapText text="מדיניות פרטיות" />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      href="/terms" 
-                      className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200"
-                    >
-                      <HoverSwapText text="תנאי שימוש" />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      href="/accessibility" 
-                      className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200"
-                    >
-                      <HoverSwapText text="הצהרת נגישות" />
-                    </Link>
-                  </li>
-                  <li>
-                    <button 
-                      type="button"
-                      onClick={() => setShowCookieModal(true)}
-                      className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200 text-right"
-                    >
-                      <HoverSwapText text="הגדרות עוגיות" />
-                    </button>
-                  </li>
-                </ul>
-              </div>
+                    {/* Legal Links */}
+                    <div>
+                      <h4 className="text-base font-semibold mb-3 text-black">
+                        משפטי
+                      </h4>
+                      <ul className="space-y-2">
+                        <li>
+                          <Link
+                            href="/privacy"
+                            className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200"
+                          >
+                            <HoverSwapText text="מדיניות פרטיות" />
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/terms"
+                            className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200"
+                          >
+                            <HoverSwapText text="תנאי שימוש" />
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/accessibility"
+                            className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200"
+                          >
+                            <HoverSwapText text="הצהרת נגישות" />
+                          </Link>
+                        </li>
+                        <li>
+                          <button
+                            type="button"
+                            className="hover-swap-trigger text-sm text-gray-600 hover:text-black transition-colors duration-200 text-right"
+                            onClick={() => setShowCookieModal(true)}
+                          >
+                            <HoverSwapText text="הגדרות עוגיות" />
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
 
-                {/* Contact Info */}
-                <div>
-                <h4 className="text-base font-semibold mb-3 text-black">
-                  יצירת קשר
-                </h4>
-                <div className="space-y-2">
-                  <a 
-                    href="mailto:info@prexia.com" 
-                    className="hover-swap-trigger block text-sm text-gray-600 hover:text-black transition-colors duration-200"
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <EmailIcon className="h-4 w-4 text-gray-500" />
-                      <HoverSwapText text="info@prexia.com" />
-                    </span>
-                  </a>
-                  <a 
-                    href="tel:+972505322336" 
-                    className="hover-swap-trigger block text-sm text-gray-600 hover:text-black transition-colors duration-200"
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <PhoneIcon className="h-4 w-4 text-gray-500" />
-                      <HoverSwapText text="050-532-2336" />
-                    </span>
-                  </a>
-                </div>
-              </div>
-                </div>
+                    {/* Contact Info */}
+                    <div>
+                      <h4 className="text-base font-semibold mb-3 text-black">
+                        יצירת קשר
+                      </h4>
+                      <div className="space-y-2">
+                        <a
+                          href="mailto:info@prexia.io"
+                          className="hover-swap-trigger block text-sm text-gray-600 hover:text-black transition-colors duration-200"
+                        >
+                          <span className="inline-flex items-center gap-2">
+                            <EmailIcon className="h-4 w-4 text-gray-500" />
+                            <HoverSwapText text="info@prexia.io" />
+                          </span>
+                        </a>
+                        <a
+                          href="tel:+972505322336"
+                          className="hover-swap-trigger block text-sm text-gray-600 hover:text-black transition-colors duration-200"
+                        >
+                          <span className="inline-flex items-center gap-2">
+                            <PhoneIcon className="h-4 w-4 text-gray-500" />
+                            <HoverSwapText text="050-532-2336" />
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-              {/* Bottom Copyright Section */}
-              <div className="border-t border-black/20 pt-6">
+            {/* Bottom Copyright Section */}
+            <div className="border-t border-black/20 pt-6">
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <p className="text-xs text-gray-500 order-2 md:order-1">
                   ירושלים, ישראל
                 </p>
-                <p className="text-xs text-gray-500 text-center order-1 md:order-2" dir="ltr">
-                  © 2026 Prexia is a technology brand operated by Kinigma Ltd. All rights reserved
+                <p
+                  className="text-xs text-gray-500 text-center order-1 md:order-2"
+                  dir="ltr"
+                >
+                  © 2026 Prexia is a technology brand operated by Kinigma Ltd.
+                  All rights reserved
                 </p>
-                <div className="text-xs text-gray-500 order-3 md:order-3" dir="ltr">
-                  <span
-                    className="relative inline-flex items-center gap-1 group"
-                  >
+                <div
+                  className="text-xs text-gray-500 order-3 md:order-3"
+                  dir="ltr"
+                >
+                  <span className="relative inline-flex items-center gap-1 group">
                     {/* Status dot */}
                     <span
                       className={[
-                        'inline-block h-2 w-2 rounded-full align-middle',
-                        isIsraelBusinessOpen ? 'bg-green-500' : 'bg-gray-400',
-                      ].join(' ')}
+                        "inline-block h-2 w-2 rounded-full align-middle",
+                        isIsraelBusinessOpen ? "bg-green-500" : "bg-gray-400",
+                      ].join(" ")}
                       aria-hidden="true"
                     />
                     {/* Clock icon */}
                     <ClockIcon className="h-4 w-4 text-gray-500" />
                     {/* Time */}
-                    <span className="tabular-nums">
-                      {israelTime}
-                    </span>
+                    <span className="tabular-nums">{israelTime}</span>
 
                     {/* Hover tooltip */}
                     <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-black px-2 py-1 text-[11px] text-white opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100">
-                      {isIsraelBusinessOpen ? 'Open' : 'Closed'}
+                      {isIsraelBusinessOpen ? "Open" : "Closed"}
                     </span>
 
                     <span className="sr-only">
-                      {isIsraelBusinessOpen ? 'Open' : 'Closed'}
+                      {isIsraelBusinessOpen ? "Open" : "Closed"}
                     </span>
                   </span>
                 </div>
@@ -653,4 +700,6 @@ export default function FooterNew() {
       </div>
     </>
   );
-}
+};
+
+export default FooterNew;
