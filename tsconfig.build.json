@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "node_modules",
+    "src/components/webgpu-galaxy",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
+}

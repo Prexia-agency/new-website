@@ -1,9 +1,10 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+
 import { sanityClient } from "@/lib/sanity/client";
+import { urlFor } from "@/lib/sanity/image";
 import { postsListQuery } from "@/lib/sanity/queries";
 import type { PostListItem } from "@/lib/sanity/types";
-import { urlFor } from "@/lib/sanity/image";
 
 export const revalidate = 60;
 
@@ -36,7 +37,7 @@ export default async function BlogPage() {
       <div className="max-w-6xl mx-auto p-2">
         <div className="flex flex-col gap-3 mb-10">
           <h1 className="font-ppeiko text-3xl md:text-5xl font-normal text-white">
-           Our blog
+            Our blog
           </h1>
         </div>
 
@@ -49,8 +50,12 @@ export default async function BlogPage() {
                   // Some documents may have an image object without an asset if the upload wasn't set.
                   // Only build a URL when an asset exists.
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  (post.coverImage as any)?.asset
-                    ? urlFor(post.coverImage).width(960).height(640).fit("crop").url()
+                  (post.coverImage as any)?.asset && post.coverImage
+                    ? urlFor(post.coverImage)
+                        .width(960)
+                        .height(640)
+                        .fit("crop")
+                        .url()
                     : null;
                 const dateText = formatDate(post.publishedAt);
 
@@ -65,7 +70,9 @@ export default async function BlogPage() {
                         <div className="flex-1 flex flex-col gap-6">
                           {/* Meta */}
                           <div className="flex items-center gap-3 flex-wrap">
-                            <span className="text-sm text-white/60">{post.authorName || "PREXIA"}</span>
+                            <span className="text-sm text-white/60">
+                              {post.authorName || "PREXIA"}
+                            </span>
                             {dateText ? (
                               <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/30 text-xs text-white/60">
                                 {dateText}
@@ -113,12 +120,11 @@ export default async function BlogPage() {
           </div>
         ) : (
           <div className="rounded-2xl border border-white/10 bg-white/5 p-8 text-white">
-            עדיין אין פוסטים. הוסיפו פוסט ראשון ב־Sanity Studio ואז רעננו את העמוד.
+            עדיין אין פוסטים. הוסיפו פוסט ראשון ב־Sanity Studio ואז רעננו את
+            העמוד.
           </div>
         )}
       </div>
     </main>
   );
 }
-
-

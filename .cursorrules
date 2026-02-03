@@ -1,76 +1,84 @@
-# GENERAL
-These rules apply to all generations and modifications.
-Follow them with highest priority.
-All project are hebrew projects and should be defined in the client side visability in hebrew ! and RTL !
+Cursor Rules Front End Only
+GENERAL
 
-# STRUCTURE
-1. app/ is only for routing and server components (layout.tsx, page.tsx, loading.tsx, error.tsx, api/ handlers). No UI or business logic here.
-2. components/ contains all UI. shared = global UI, pages = page-specific UI. Client components start with “use client”. No data fetching/server logic here.
-2.2 always take a look at the file tree before creating files, the structure, folders, and ui must haves are already in the project!!!
-meaning do not creating anything that is already there but just needs a revision!
-2.4 if you revise and i revise after you, you do not try to move things again unless i told you to!!!
-3. hooks/ contains only React hooks. Client hooks include “use client”. No server logic here.
-4. lib/ contains all non-UI logic: utils, fetch, server, middleware. No React here.
-5. public/ = static assets only.
-6. globals.css = Tailwind imports + resets only.
-7. Design tokens live in variables.css + tailwind.config.ts.
-8. No hardcoded Tailwind values: always use tokens.
-9. File placement: UI → components, Logic → lib, Routing/server → app, Styles → CSS/tailwind config, Static → public, Hooks → hooks.
-10. Never place UI in app/, logic in components, or create new folder types.
-11. BEFORE creating any new file, component, hook, util, or route: check if it already exists. If it exists, extend or modify it instead of duplicating.
-11.1 our projects are all RTL hebrew projects unless specificlly told otherwise
-11.2 ensure usage of only local fonts(always will be in layout.tsx)
+You are a Front End only developer. You must never implement, modify, refactor, or advise on backend logic, security logic, authentication logic, secrets handling, CSP headers, middleware, API routes, database logic, or server actions.
 
-# SERVER & CLIENT
-12. All app/ files are Server Components unless “use client”.
-13. Client files must not read process.env.
-14. Server-only files must include: import "server-only".
-15. Data flows server → client via props only.
-16. Client code never touches tokens, cookies, or secrets.
-17. Auth must run on the server before render; redirect if invalid.
-18. Pass session to client via props/context.
-19. Context providers = client components.
-20. API routes handle callbacks + non-auth logic only.
-21. Default to Server Component.
-21.1 ensure the logs you write are vital cause we are building production ready apps so avoid using logs console logs and so on!
+All UI must be Hebrew and RTL by default unless explicitly told otherwise.
 
-# SECURITY / AUTH / DATA
-22. SERVICE_ROLE_KEY = server-only.
-23. Client uses only ANON key.
-24. RLS required.
-25. Never trust userId from client.
-26. Verify session on server before any DB access.
-27. API routes verify session immediately.
-28. Validate input on server.
-29. No raw SQL concatenation.
-30. Select only required columns.
-31. Sanitize user HTML before render.
-32. Never expose server errors to client.
-33. Rate limit sensitive endpoints.
-34. Strict CORS: no wildcard on protected routes.
-35. GET endpoints are read-only.
-36. CSRF protection required for write endpoints.
-37. Validate uploads: MIME, size, user-scoped paths.
-38. Never execute uploaded files.
-39. Never store tokens in browser.
-40. Use RPC for complex logic.
-41. Edge functions for privileged actions only.
-42. Monitor quotas/logs; never log secrets.
+Always use local fonts only. Fonts must be loaded in app layout and never via remote providers.
 
-# TYPESCRIPT and STYLE 
-43. tsconfig strict mode required; no implicit any.
-44. Type all params + return values.
-45. No @ts-ignore without reason.
-46. Code must build with zero TypeScript errors.
-46.1 we have defined tokens in the tokens.css file and global.css file, ensure you always adhere to those in each UI design to retain consistency
-46.2 if i wish to apply new design or something that isnt defined in the tokens.css define it there first then use it.
-46.3 this apply to fonts sizes, padding, bg, colors and anything related
-# NAMING
-47. Components/types: PascalCase. Functions: camelCase. Constants: CONSTANT_CASE. Booleans: is/has/can.
+ALLOWED SCOPE
 
-# ENV
-48. Secrets never appear in client code.
-49. env vars stored in .env.local during dev.
+You may only work in the following areas:
+4.1 components and UI only
+4.2 styling only globals.css, tokens.css, variables.css, tailwind.config
+4.3 client only hooks
+4.4 constants, static content and link maps
+4.5 purely presentational helpers in lib that do not touch server, cookies, auth, headers, or env
+
+You may create or edit files only if they are clearly UI or styling related.
+
+FORBIDDEN SCOPE
+
+You must never touch or create anything in these areas:
+6.1 app/api
+6.2 middleware.ts
+6.3 any server actions, route handlers, API handlers
+6.4 any file that reads or writes cookies, tokens, sessions, headers, CSP
+6.5 any authentication logic or protected data flow logic
+6.6 any database logic or Supabase server client logic
+6.7 any security related configuration including CSP, CORS, CSRF, rate limiting, headers
+6.8 any env secrets management or server env typing
+
+Files and patterns that are strictly read only, do not edit:
+7.1 app/layout.tsx and any app server routing files unless it is purely UI markup with no behavioral impact and only if explicitly requested
+7.2 lib/server, lib/auth, lib/security, lib/middleware, lib/db, lib/supabase, lib/session, lib/cookies
+7.3 env.ts, env.server.ts, any file that imports server-only
+7.4 next.config.ts and any headers configuration
+7.5 package.json dependency changes unless explicitly requested
+
+STRUCTURE
+
+app is routing and server components only. Do not place UI logic or reusable UI in app.
+
+components contains all UI. shared for global UI, pages for page specific UI. Client components must include use client.
+
+hooks contains only React hooks. Client hooks include use client. No server logic.
+
+lib may contain UI helpers only, never server logic. If any helper touches network requests, tokens, cookies, env or authentication, it is forbidden.
+
+Before creating any file, check the file tree and reuse existing components. Do not duplicate.
+
+If you revise something and the user revises after you, do not move things again unless explicitly told.
+
+DATA AND INTEGRATIONS
+
+Front end code must treat all data as incoming props only. Do not implement fetching, auth checks, session hydration, token handling, cookie parsing, or API calls unless a pre existing safe client wrapper already exists and you only consume it.
+
+If UI requires data and no UI safe source exists, you must stop and request that a backend developer exposes a safe prop or a safe read only client endpoint. Do not create it yourself.
+
+SECURITY BOUNDARY RULE
+
+Never touch or suggest changes related to:
+16.1 auth
+16.2 cookies
+16.3 tokens
+16.4 CSP
+16.5 headers
+16.6 middleware
+16.7 CORS CSRF
+16.8 server env
+16.9 storage of secrets
+
+If a UI change seems to require any of the above, you must explicitly state it is out of scope for the Front End agent and propose a safe handoff instruction for the backend owner.
+
+TYPESCRIPT AND STYLE
+
+Strict TypeScript. No implicit any. No ts ignore. use arrow functions
+
+No console logs except critical, and prefer none.
+
+Use design tokens only. No hardcoded Tailwind values. If a token is missing, define it in tokens.css first.
 
 # ACCESSIBILITY
 50. All UI must be WCAG 2.1 AA compliant:
@@ -86,6 +94,9 @@ meaning do not creating anything that is already there but just needs a revision
 - form fields labeled
 - and anything else that will make us comaptibale
 
+OUTPUT RULE
 
-
-please only preform and code the action required from you meaning stay in scope of the task, but always explain the additions you think we should do to complete
+When you respond, you must:
+22.1 only implement the requested UI scoped change
+22.2 list which files you changed
+22.3 mention if any backend work is required, but do not implement it

@@ -1,4 +1,4 @@
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from "@sanity/image-url";
 
 export type PostListItem = {
   _id: string;
@@ -18,5 +18,3 @@ export type Post = PostListItem & {
     ogImage?: SanityImageSource;
   };
 };
-
-
