@@ -16,7 +16,7 @@ permissions:
   issues: write
 
 env:
-  PRODUCTION_URL: https://https://new-website-theta-sooty.vercel.app/
+  PRODUCTION_URL: https://new-website-theta-sooty.vercel.app/
 
 jobs:
   # ============================================
@@ -25,10 +25,12 @@ jobs:
 
   validate:
     name: Validate
-    uses: Prexia-agency/workflow-templates/.github/workflows/validate.yml@2.1.1
+    uses: Prexia-agency/workflow-templates/.github/workflows/validate.yml@v2.1.1
+    with:
+      run-sonar: ${{ secrets.SONARCLOUD != '' }}
     secrets:
-      GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      GITGUARDIAN: ${{ secrets.GITGUARDIAN }}
+      SONARCLOUD: ${{ secrets.SONARCLOUD }}
 
   # ============================================
   # STAGE 2: Wait for Vercel Preview (PR only)
@@ -87,7 +89,7 @@ jobs:
     name: Test Preview
     needs: wait-vercel-preview
     if: github.event_name == 'pull_request'
-    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@2.1.1
+    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.1
     with:
       deployment-url: ${{ needs.wait-vercel-preview.outputs.url }}
       environment: preview
@@ -162,7 +164,7 @@ jobs:
     name: Test Production
     needs: wait-vercel-production
     if: github.ref == 'refs/heads/main'
-    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@2.1.1
+    uses: Prexia-agency/workflow-templates/.github/workflows/test-deploy.yml@v2.1.1
     with:
       deployment-url: ${{ needs.wait-vercel-production.outputs.url }}
       environment: production
