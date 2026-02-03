@@ -122,7 +122,7 @@ const Navbar = () => {
               height={32}
               className="w-24 h-24"
               alt=""
-              aria-hidden="true"
+              aria-hidden="false"
               role="presentation"
             />
           </Link>
