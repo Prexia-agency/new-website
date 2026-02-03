@@ -83,10 +83,14 @@ export default [
       "no-restricted-syntax": [
         "error",
         {
-          selector: "JSXAttribute[name.name='alt'][value.value='']",
+          selector: `
+            JSXOpeningElement[name.name=/^(img|Image)$/]
+            > JSXAttribute[name.name="alt"][value.value=""]
+            :not(:has(JSXAttribute[name.name="aria-hidden"][value.value="true"]))
+          `,
           message:
-            "alt must not be empty. Provide meaningful alt text, or (if decorative) remove it from the accessibility tree and ensure the parent control has an accessible name.",
-        },
+            "Empty alt is allowed only for decorative images. Add aria-hidden='true' and role='presentation', or provide meaningful alt text."
+        }
       ],
       "jsx-a11y/anchor-has-content": "error",
       "jsx-a11y/anchor-is-valid": "error",
