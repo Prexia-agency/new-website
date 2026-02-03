@@ -1,0 +1,48 @@
+name: Weekly Maintenance
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-fix:
+    name: Auto Fix
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - uses: actions/setup-node@v4.0.4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint:fix
+        continue-on-error: true
+
+      - run: npm run format
+        continue-on-error: true
+
+      - run: npm run type-check
+
+      - uses: peter-evans/create-pull-request@v7.0.5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: automated fixes"
+          title: "chore: weekly automated fixes"
+          body: |
+            ## 🤖 Weekly Maintenance
+            
+            Auto-fixed by ESLint and Prettier.
+            TypeScript verified.
+            
+            Review and merge if appropriate.
+          branch: weekly-fixes
+          delete-branch: true
+          labels: automated

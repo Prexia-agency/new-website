@@ -29,5 +29,10 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "**/webgpu-galaxy"]
+  "exclude": [
+    "node_modules",
+    "sanity-studio",
+    "src/components/webgpu-galaxy",
+    "src/components/webgpu-galaxy/**/*"
+  ]
 }

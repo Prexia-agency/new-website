@@ -5,6 +5,8 @@
  * These functions run on the GPU and handle particle physics, rotation, and positioning.
  */
 
+import type Node from "three/src/nodes/core/Node.js";
+import type NodeBuilder from "three/src/nodes/core/NodeBuilder.js";
 import { vec3, float, Fn, length, normalize, sin, cos, fract } from "three/tsl";
 
 // ==============================================================================
@@ -18,8 +20,7 @@ import { vec3, float, Fn, length, normalize, sin, cos, fract } from "three/tsl";
  * @param seed - Random seed value
  * @returns Random value between 0 and 1
  */
-export const hash = Fn((inputs) => {
-  const seed = inputs[0];
+export const hash = Fn<[Node]>(([seed], _builder: NodeBuilder) => {
   const p = fract(seed.mul(0.1031));
   const h = p.add(19.19);
   const x = fract(h.mul(h.add(47.43)).mul(p));
@@ -42,17 +43,17 @@ export const hash = Fn((inputs) => {
  * @param angle - Rotation angle in radians (counter-clockwise)
  * @returns Rotated position
  */
-export const rotateXZ = Fn((inputs) => {
-  const position = inputs[0];
-  const angle = inputs[1];
-  const cosTheta = cos(angle);
-  const sinTheta = sin(angle);
+export const rotateXZ = Fn<[Node, Node]>(
+  ([position, angle], _builder: NodeBuilder) => {
+    const cosTheta = cos(angle);
+    const sinTheta = sin(angle);
 
-  const newX = position.x.mul(cosTheta).sub(position.z.mul(sinTheta));
-  const newZ = position.x.mul(sinTheta).add(position.z.mul(cosTheta));
+    const newX = position.x.mul(cosTheta).sub(position.z.mul(sinTheta));
+    const newZ = position.x.mul(sinTheta).add(position.z.mul(cosTheta));
 
-  return vec3(newX, position.y, newZ);
-});
+    return vec3(newX, position.y, newZ);
+  },
+);
 
 /**
  * Applies differential rotation based on distance from center
@@ -66,22 +67,21 @@ export const rotateXZ = Fn((inputs) => {
  * @param deltaTime - Time step
  * @returns Rotated position
  */
-export const applyDifferentialRotation = Fn((inputs) => {
-  const position = inputs[0];
-  const rotationSpeed = inputs[1];
-  const deltaTime = inputs[2];
-  // Calculate rotation factor: inner regions rotate faster
-  const distFromCenter = length(vec3(position.x, 0, position.z));
-  const rotationFactor = float(1.0).div(distFromCenter.mul(0.1).add(1.0));
+export const applyDifferentialRotation = Fn<[Node, Node, Node]>(
+  ([position, rotationSpeed, deltaTime], _builder: NodeBuilder) => {
+    // Calculate rotation factor: inner regions rotate faster
+    const distFromCenter = length(vec3(position.x, 0, position.z));
+    const rotationFactor = float(1.0).div(distFromCenter.mul(0.1).add(1.0));
 
-  // Calculate angular speed and apply rotation
-  const angularSpeed = rotationSpeed
-    .mul(rotationFactor)
-    .mul(deltaTime)
-    .negate();
+    // Calculate angular speed and apply rotation
+    const angularSpeed = rotationSpeed
+      .mul(rotationFactor)
+      .mul(deltaTime)
+      .negate();
 
-  return rotateXZ(position, angularSpeed);
-});
+    return rotateXZ(position, angularSpeed);
+  },
+);
 
 /**
  * Calculates mouse interaction force
@@ -98,25 +98,24 @@ export const applyDifferentialRotation = Fn((inputs) => {
  * @param deltaTime - Time step
  * @returns Force vector to apply
  */
-export const applyMouseForce = Fn((inputs) => {
-  const position = inputs[0];
-  const mouse = inputs[1];
-  const mouseActive = inputs[2];
-  const mouseForce = inputs[3];
-  const mouseRadius = inputs[4];
-  const deltaTime = inputs[5];
-  const toMouse = mouse.sub(position);
-  const distToMouse = length(toMouse);
+export const applyMouseForce = Fn<[Node, Node, Node, Node, Node, Node]>(
+  (
+    [position, mouse, mouseActive, mouseForce, mouseRadius, deltaTime],
+    _builder: NodeBuilder,
+  ) => {
+    const toMouse = mouse.sub(position);
+    const distToMouse = length(toMouse);
 
-  // Calculate influence with distance falloff
-  const mouseInfluence = mouseActive.mul(
-    float(1.0).sub(distToMouse.div(mouseRadius)).max(0.0),
-  );
+    // Calculate influence with distance falloff
+    const mouseInfluence = mouseActive.mul(
+      float(1.0).sub(distToMouse.div(mouseRadius)).max(0.0),
+    );
 
-  // Push particles away from mouse (negate direction)
-  const mouseDir = normalize(toMouse);
-  return mouseDir.mul(mouseForce).mul(mouseInfluence).mul(deltaTime).negate();
-});
+    // Push particles away from mouse (negate direction)
+    const mouseDir = normalize(toMouse);
+    return mouseDir.mul(mouseForce).mul(mouseInfluence).mul(deltaTime).negate();
+  },
+);
 
 /**
  * Applies spring force to restore particle to original position
@@ -128,11 +127,9 @@ export const applyMouseForce = Fn((inputs) => {
  * @param deltaTime - Time step
  * @returns Force vector to apply
  */
-export const applySpringForce = Fn((inputs) => {
-  const currentPos = inputs[0];
-  const targetPos = inputs[1];
-  const strength = inputs[2];
-  const deltaTime = inputs[3];
-  const toTarget = targetPos.sub(currentPos);
-  return toTarget.mul(strength).mul(deltaTime);
-});
+export const applySpringForce = Fn<[Node, Node, Node, Node]>(
+  ([currentPos, targetPos, strength, deltaTime], _builder: NodeBuilder) => {
+    const toTarget = targetPos.sub(currentPos);
+    return toTarget.mul(strength).mul(deltaTime);
+  },
+);
