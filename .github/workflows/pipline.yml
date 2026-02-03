@@ -162,7 +162,7 @@ jobs:
     name: Test Production
     needs: wait-vercel-production
     if: github.ref == 'refs/heads/main'
-    uses: Prexia-agency/workflows-templates/.github/workflows/test-deploy.yml@v2.0.0
+    uses: Prexia-agency/workflows-templates/.github/workflows/test-deploy.yml@v2.1.0
     with:
       deployment-url: ${{ needs.wait-vercel-production.outputs.url }}
       environment: production
