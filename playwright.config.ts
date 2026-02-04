@@ -11,7 +11,7 @@ export default defineConfig({
   reporter: [["html"], ["github"], ["list"]],
 
   use: {
-    baseURL: process.env.BASE_URL,
+    baseURL: process.env.BASE_URL || "http://localhost:3001",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
   },

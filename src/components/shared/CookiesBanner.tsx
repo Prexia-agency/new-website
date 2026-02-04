@@ -115,7 +115,7 @@ const CookiesBanner = () => {
             {/* Buttons */}
             <div className="flex flex-row lg:flex-col gap-2 lg:gap-4 w-full lg:w-auto pb-2 sm:pb-3">
               <button
-                className="flex-1 lg:flex-none bg-black hover:bg-black/80 text-white px-3 py-2 lg:px-5 lg:py-3 rounded-[12px] font-bold text-[12px] lg:text-[14px] transition-all duration-200 text-center lg:min-w-[140px]"
+                className="flex-1 lg:flex-none bg-black hover:bg-black/80 text-gray-50 px-3 py-2 lg:px-5 lg:py-3 rounded-[12px] font-bold text-[12px] lg:text-[14px] transition-all duration-200 text-center lg:min-w-[140px]"
                 onClick={handleAcceptAll}
               >
                 קבל הכל

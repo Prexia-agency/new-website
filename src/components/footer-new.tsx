@@ -692,7 +692,7 @@ const FooterNew = () => {
                     <span className="tabular-nums">{israelTime}</span>
 
                     {/* Hover tooltip */}
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-black px-2 py-1 text-[11px] text-white opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100">
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-black px-2 py-1 text-[11px] text-gray-50 opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100">
                       {isIsraelBusinessOpen ? "Open" : "Closed"}
                     </span>
 

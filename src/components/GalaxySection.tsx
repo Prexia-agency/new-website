@@ -269,7 +269,7 @@ const GalaxySection = () => {
       <div className="absolute top-4 right-4 z-20 pointer-events-auto">
         <button
           type="button"
-          className="rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-4 py-2 text-xs text-white hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-white/40 disabled:opacity-60 disabled:cursor-not-allowed"
+          className="rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-4 py-2 text-xs text-gray-50 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-white/40 disabled:opacity-60 disabled:cursor-not-allowed"
           aria-pressed={isMotionPaused}
           disabled={!settings.animations || prefersReducedMotion}
           title={
@@ -334,13 +334,13 @@ const GalaxySection = () => {
                   }}
                 >
                   {/* Title with PP-Eiko font - Left aligned */}
-                  <h3 className="text-white font-ppeiko text-xl md:text-2xl mb-7 text-left leading-tight">
+                  <h3 className="text-gray-50 font-ppeiko text-xl md:text-2xl mb-7 text-left leading-tight">
                     {currentData.title}
                   </h3>
 
                   {/* Hebrew Content */}
                   <p
-                    className="text-white text-[11px] md:text-sm leading-relaxed text-right mb-6"
+                    className="text-gray-50 text-[11px] md:text-sm leading-relaxed text-right mb-6"
                     dir="rtl"
                   >
                     {currentData.content}
@@ -350,7 +350,7 @@ const GalaxySection = () => {
                   <div className="w-full h-[1px] bg-white/10 mb-5"></div>
 
                   {/* Footer */}
-                  <div className="text-white text-[10px] md:text-xs text-left">
+                  <div className="text-gray-50 text-[10px] md:text-xs text-left">
                     Learn more →
                   </div>
                 </div>
@@ -396,7 +396,7 @@ const GalaxySection = () => {
                     }}
                   >
                     <span
-                      className="text-white/80 font-ppeiko text-lg md:text-xl lg:text-2xl whitespace-nowrap block transition-all duration-300 hover:text-white/80"
+                      className="text-gray-50/80 font-ppeiko text-lg md:text-xl lg:text-2xl whitespace-nowrap block transition-all duration-300 hover:text-gray-50/80"
                       style={{
                         textShadow:
                           "0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.2)",

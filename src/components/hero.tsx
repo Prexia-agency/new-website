@@ -231,7 +231,7 @@ const Hero = () => {
                       ease: [0.33, 1, 0.68, 1],
                       delay: 0.9 * index,
                     }}
-                    className={`${index === 0 ? "text-left" : "text-right"} font-david-libre text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-white font-normal leading-tight tracking-tight pb-4`}
+                    className={`${index === 0 ? "text-left" : "text-right"} font-david-libre text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-gray-50 font-normal leading-tight tracking-tight pb-4`}
                     style={{ fontFamily: "var(--font-david-libre), serif" }}
                   >
                     {phrase}
@@ -266,7 +266,7 @@ const Hero = () => {
                     ease: [0.33, 1, 0.68, 1],
                     delay: 0.09 * (index + 2), // Continue after the 2 heading phrases
                   }}
-                  className="text-md lg:text-lg xl:text-lg text-white/95 leading-relaxed font-normal text-center"
+                  className="text-md lg:text-lg xl:text-lg text-gray-50/95 leading-relaxed font-normal text-center"
                 >
                   {phrase}
                 </motion.p>
@@ -383,7 +383,7 @@ const Hero = () => {
           }}
         >
           <div className="flex flex-col items-center gap-2">
-            <p className="text-white text-base font-semibold tracking-wide whitespace-nowrap bg-black/30 px-3 py-1 rounded-lg backdrop-blur-sm">
+            <p className="text-gray-50 text-base font-semibold tracking-wide whitespace-nowrap bg-black/30 px-3 py-1 rounded-lg backdrop-blur-sm">
               הזז את העכבר
             </p>
             <svg

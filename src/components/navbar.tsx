@@ -78,7 +78,7 @@ const Navbar = () => {
   }, [isHomePage]);
 
   const textColor = isOverDark
-    ? "text-white hover:text-gray-200"
+    ? "text-gray-50 hover:text-gray-200"
     : "text-gray-800 hover:text-gray-600";
 
   const handleIconHover = () => {
@@ -154,7 +154,7 @@ const Navbar = () => {
           `}</style>
           <Link
             href="/contact"
-            className="navbar-contact-button gradient-bg text-white px-5 py-3 rounded-[10px] font-semibold text-[10px] shadow-xl flex items-center gap-2 flex-shrink-0"
+            className="navbar-contact-button gradient-bg text-gray-50 px-5 py-3 rounded-[10px] font-semibold text-[10px] shadow-xl flex items-center gap-2 flex-shrink-0"
             style={{
               backdropFilter: "blur(10px)",
               border: "1px solid transparent",
@@ -162,7 +162,7 @@ const Navbar = () => {
             }}
             onMouseEnter={handleIconHover}
           >
-            <span className="font-semibold text-[14px] text-white">
+            <span className="font-semibold text-[14px] text-gray-50">
               דבר איתנו
             </span>
             <svg

@@ -61,7 +61,7 @@ const Stack = () => {
           <MaskText
             className="max-w-[586px] md:max-w-[470px]"
             lineClassName="overflow-hidden"
-            textClassName="font-noto-hebrew text-[32px] tracking-[-1.12px] text-white font-black leading-snug lg:text-[48px] md:text-4xl sm:text-3xl"
+            textClassName="font-noto-hebrew text-[32px] tracking-[-1.12px] text-gray-50 font-black leading-snug lg:text-[48px] md:text-4xl sm:text-3xl"
             phrases={[
               <>
                 סביבת פיתוח שמציבה את{" "}
@@ -72,7 +72,7 @@ const Stack = () => {
             ]}
           />
           <motion.p
-            className="mt-5 max-w-[410px] text-[12.5px] md:mt-3 md:max-w-[470px] sm:mt-2.5 sm:text-base leading-relaxed text-white"
+            className="mt-5 max-w-[410px] text-[12.5px] md:mt-3 md:max-w-[470px] sm:mt-2.5 sm:text-base leading-relaxed text-gray-50"
             initial="initial"
             animate={descriptionControls}
             variants={descriptionVariants}
