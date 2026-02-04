@@ -433,7 +433,7 @@ const ContactPage = () => {
                   {/* Custom Arrow - positioned on the left for RTL */}
                   <div className="pointer-events-none absolute left-3 top-[38px] sm:top-[42px] sm:left-4">
                     <svg
-                      className="w-4 h-4 text-white/60"
+                      className="w-4 h-4 text-white/90"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -501,14 +501,14 @@ const ContactPage = () => {
                     בשליחת ההודעה אני מאשר/ת שקראתי והבנתי את{" "}
                     <Link
                       href="/privacy"
-                      className="text-white hover:text-white/70 underline font-medium"
+                      className="text-white hover:text-white/90 underline font-medium"
                     >
                       מדיניות הפרטיות
                     </Link>{" "}
                     ואת{" "}
                     <Link
                       href="/terms"
-                      className="text-white hover:text-white/70 underline font-medium"
+                      className="text-white hover:text-white/90 underline font-medium"
                     >
                       תנאי השימוש
                     </Link>

@@ -350,7 +350,7 @@ const GalaxySection = () => {
                   <div className="w-full h-[1px] bg-white/10 mb-5"></div>
 
                   {/* Footer */}
-                  <div className="text-white/50 text-[10px] md:text-xs text-left">
+                  <div className="text-gray-300 text-[10px] md:text-xs text-left">
                     Learn more →
                   </div>
                 </div>
