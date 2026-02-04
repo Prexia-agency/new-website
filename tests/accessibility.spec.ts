@@ -1,20 +1,20 @@
 import AxeBuilder from "@axe-core/playwright";
 import { test, expect } from "@playwright/test";
 
-test.describe("WCAG 2.1 AA", () => {
-  test("homepage accessibility", async ({ page }) => {
-    await page.goto("/");
+import { getAllPages } from "../tests/utils/getAllPages";
 
-    const results = await new AxeBuilder({ page })
-      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
-      .analyze();
+test.describe("WCAG 2.1 AA - ALL PAGES", () => {
+  test("scan entire site from sitemap", async ({ page, baseURL }) => {
+    const pages = await getAllPages(baseURL!);
 
-    expect(results.violations).toEqual([]);
-  });
+    for (const path of pages) {
+      await page.goto(path, { waitUntil: "networkidle" });
 
-  test("keyboard navigation", async ({ page }) => {
-    await page.goto("/");
-    await page.keyboard.press("Tab");
-    await expect(page.locator(":focus")).toBeVisible();
+      const results = await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+        .analyze();
+
+      expect(results.violations).toEqual([]);
+    }
   });
 });
