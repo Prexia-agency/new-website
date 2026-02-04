@@ -24,8 +24,10 @@
     ]
   },
   "dependencies": {
+    "@axe-core/playwright": "^4.11.1",
     "@lottiefiles/dotlottie-react": "^0.17.4",
     "@next/third-parties": "16.0.1",
+    "@playwright/test": "^1.58.1",
     "@portabletext/react": "^6.0.2",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-slot": "^1.2.3",
@@ -39,6 +41,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
+    "fast-xml-parser": "^5.3.4",
     "framer-motion": "^12.27.1",
     "groq": "^5.4.0",
     "gsap": "^3.13.0",
