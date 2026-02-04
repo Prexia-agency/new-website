@@ -38,7 +38,6 @@ const DrawLink = ({ href, children, className = "" }: DrawLinkProps) => {
       // Safe array access with bounds check and extraction
       const safeIndex =
         nextIndex >= 0 && nextIndex < svgVariants.length ? nextIndex : 0;
-      // eslint-disable-next-line security/detect-object-injection
       const selectedVariant = svgVariants[safeIndex];
       const svgHTML = selectedVariant.replace(/{ID}/g, uniqueId);
       // eslint-disable-next-line no-unsanitized/property

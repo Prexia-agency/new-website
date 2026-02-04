@@ -84,7 +84,6 @@ const ContactPage = () => {
     try {
       // Safe field access - guard against dynamic key access
       const safeFieldName = fieldName as keyof typeof contactSchema.shape;
-      // eslint-disable-next-line security/detect-object-injection
       const fieldSchema = contactSchema.shape[safeFieldName];
       fieldSchema.parse(value);
       return null;
@@ -158,9 +157,7 @@ const ContactPage = () => {
         if (field in formData) {
           const errorKey = safeField;
           const touchedKey = safeField;
-          // eslint-disable-next-line security/detect-object-injection
           newErrors[errorKey] = issue.message;
-          // eslint-disable-next-line security/detect-object-injection
           newTouched[touchedKey] = true;
         }
       });

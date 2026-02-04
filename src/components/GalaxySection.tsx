@@ -317,7 +317,6 @@ const GalaxySection = () => {
                 hoveredIndex >= 0 && hoveredIndex < hebrewTextsData.length
                   ? hoveredIndex
                   : 0;
-              // eslint-disable-next-line security/detect-object-injection
               const safeData = hebrewTextsData[safeIndex];
               const currentData = safeData;
 
@@ -374,7 +373,6 @@ const GalaxySection = () => {
                   ref={(el) => {
                     // Safe ref assignment with bounds check
                     if (index >= 0 && index < hebrewTextsData.length) {
-                      // eslint-disable-next-line security/detect-object-injection
                       textRefs.current[index] = el;
                     }
                   }}

@@ -108,8 +108,7 @@ export const HyperText = ({
           letter === " "
             ? letter
             : index <= iterationCount.current
-              ? // eslint-disable-next-line security/detect-object-injection
-                index >= 0 && index < children.length
+              ? index >= 0 && index < children.length
                 ? children[index]
                 : letter
               : characterSet[getRandomInt(characterSet.length)],

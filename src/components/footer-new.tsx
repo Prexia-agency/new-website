@@ -286,7 +286,6 @@ const FooterNew = () => {
 
       letterText.split("").forEach((letter, index) => {
         // Safe array access with bounds check
-        // eslint-disable-next-line security/detect-object-injection
         const glyphWidth =
           index >= 0 && index < glyphWidths.length ? glyphWidths[index] : 50;
         // Letters start from varied horizontal positions - spread across the canvas width

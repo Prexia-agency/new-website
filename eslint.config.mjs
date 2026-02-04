@@ -134,7 +134,7 @@ const eslintConfig = [
       "jsx-a11y/tabindex-no-positive": "error",
 
       // Security
-      "security/detect-object-injection": "warn",
+      "security/detect-object-injection": "off",
       "no-unsanitized/method": "error",
       "no-unsanitized/property": "error",
 

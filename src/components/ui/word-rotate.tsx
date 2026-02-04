@@ -39,7 +39,6 @@ export const WordRotate = ({
       <AnimatePresence mode="wait">
         {(() => {
           // Safe array access with bounds check
-          // eslint-disable-next-line security/detect-object-injection
           const currentWord =
             index >= 0 && index < words.length ? words[index] : words[0];
           return (

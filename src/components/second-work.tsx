@@ -253,12 +253,13 @@ const ServicesSection = () => {
       });
     }, containerRef);
 
+    // Capture refs at effect creation for proper cleanup
+    const cardsSetRef = animatedCardsRef.current;
+
     return () => {
       ctx.revert();
       scrollTriggerRef.current?.kill();
-      // Capture ref for proper cleanup
-      const cardsSet = animatedCardsRef.current;
-      cardsSet.clear();
+      cardsSetRef.clear();
     };
   }, []);
 
@@ -280,7 +281,6 @@ const ServicesSection = () => {
             ref={(el) => {
               // Safe ref assignment with bounds check
               if (index >= 0 && index < services.length) {
-                // eslint-disable-next-line security/detect-object-injection
                 cardRefs.current[index] = el;
               }
             }}
