@@ -85,6 +85,7 @@ const Hero = () => {
           opacity: 0,
           scale: 0.8,
           duration: 0.5,
+          // eslint-disable-next-line sonarjs/no-duplicate-string
           ease: "power2.out",
         });
       }

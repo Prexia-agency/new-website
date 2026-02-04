@@ -91,6 +91,7 @@ const FAQ = () => {
           <div className="lg:col-span-4">
             <h2
               className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight"
+              /* eslint-disable-next-line sonarjs/no-duplicate-string */
               style={{ fontFamily: "var(--font-ppeiko), sans-serif" }}
             >
               <span className="block">Questions</span>

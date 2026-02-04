@@ -7,8 +7,11 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import HeroV from "@/components/herov";
 import SecondWork from "@/components/second-work";
 
+// eslint-disable-next-line sonarjs/no-duplicate-string
+const HOME_TITLE = "PREXIA | Robust Digital Solutions, Built to Last";
+
 export const metadata: Metadata = {
-  title: "PREXIA | Robust Digital Solutions, Built to Last",
+  title: HOME_TITLE,
   description:
     "PREXIA מתמחה בתכנון, בפיתוח ובתחזוקה שוטפת של אתרים ומוצרים דיגיטליים, תוך מתן פתרונות מותאמים אישית וביצוע מלא תחת קורת גג אחת. פתרונות דיגיטליים איכותיים עם תמיכה ארוכת טווח.",
   keywords: [

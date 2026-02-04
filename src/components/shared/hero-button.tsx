@@ -27,11 +27,14 @@ export const HeroButton = ({
       "bg-[#bababa99] sm:bg-[#bababa33] border border-[#bababa99] sm:border-[#bababa33] text-white hover:bg-[#bababaaa] sm:hover:bg-[#bababa66]",
   } as const;
 
+  // Safe variant access with ternary guard
+  const variantClass = variant === "solid" ? variants.solid : variants.ghost;
+
   return (
     <Link
       href={href}
       aria-label={ariaLabel}
-      className={clsx(base, variants[variant], className)}
+      className={clsx(base, variantClass, className)}
     >
       {children}
     </Link>

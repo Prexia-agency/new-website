@@ -5,9 +5,10 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
-import AnimatedCalculator from "@/components/AnimatedCalculator";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import TitleAnimation from "@/components/shared/title-animation";
+
+import AnimatedCalculator from "@/components/AnimatedCalculator";
 
 const titleItems = [
   { value: "מחירון" },

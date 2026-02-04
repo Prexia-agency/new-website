@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 
+const PRICING_URL = "https://www.prexia.io/pricing";
+
 export const metadata: Metadata = {
   title: "מחירון שירותים",
   description:
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
     title: "מחירון שירותים | PREXIA",
     description:
       "חבילות מחירים מותאמות לכל עסק - פתרונות דיגיטליים מותאמים אישית. מאתרי תדמית בסיסיים ועד פרויקטים מורכבים",
-    url: "https://www.prexia.io/pricing",
+    url: PRICING_URL,
     type: "website",
     images: [
       {
@@ -37,7 +39,7 @@ export const metadata: Metadata = {
     images: ["/images/LOGO-AK.png"],
   },
   alternates: {
-    canonical: "https://www.prexia.io/pricing",
+    canonical: PRICING_URL,
   },
 };
 
@@ -58,7 +60,7 @@ const PricingLayout = ({ children }: { children: React.ReactNode }) => {
               name: "PREXIA",
               url: "https://www.prexia.io",
             },
-            url: "https://www.prexia.io/pricing",
+            url: PRICING_URL,
             description:
               "שירותי פיתוח דיגיטלי מותאמים אישית - מאתרי תדמית פשוטים ועד פרויקטים מורכבים עם אנימציות ואינטגרציות מתקדמות",
             areaServed: {

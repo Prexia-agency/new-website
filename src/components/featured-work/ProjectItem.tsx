@@ -65,6 +65,7 @@ const ProjectItem = ({ project }: { project: FeaturedProject }) => {
         initial="initial"
         animate={isActive ? "open" : "closed"}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className={styles.img}
           src={`/images/${src}`}

@@ -98,11 +98,17 @@ const GalaxySection = () => {
   const [isSlowedDown, setIsSlowedDown] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isMotionPaused, setIsMotionPaused] = useState(false);
+  const [isMounted, setIsMounted] = useState(false); // Track client-side mounting
   const textRefs = useRef<(HTMLDivElement | null)[]>([]);
   const animationsRef = useRef<gsap.core.Tween[]>([]);
 
   const isMotionDisabled =
     prefersReducedMotion || !settings.animations || isMotionPaused;
+
+  // Set mounted flag to true on client side to prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     // Respect OS-level reduced-motion preference
@@ -303,89 +309,107 @@ const GalaxySection = () => {
       >
         <div className="relative w-full h-full">
           {/* Centered Hover Card - appears at galaxy center */}
-          {hoveredIndex !== null && (
-            <div
-              className="absolute top-1/2 left-1/2 -translate-y-1/2 px-6 py-7 rounded-2xl shadow-2xl z-[100] min-w-[280px] max-w-[320px] pointer-events-none"
-              style={{
-                background: "rgba(255, 255, 255, 0.08)",
-                backdropFilter: "blur(20px) saturate(180%)",
-                border: "1px solid rgba(255, 255, 255, 0.18)",
-                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
-                animation:
-                  "cardOpenFromBottom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
-                transform: "translateY(-50%) translateX(-30%)",
-              }}
-            >
-              {/* Title with PP-Eiko font - Left aligned */}
-              <h3 className="text-white font-ppeiko text-xl md:text-2xl mb-7 text-left leading-tight">
-                {hebrewTextsData[hoveredIndex].title}
-              </h3>
+          {isMounted &&
+            hoveredIndex !== null &&
+            (() => {
+              // Safe array access with explicit guard and extraction
+              const safeIndex =
+                hoveredIndex >= 0 && hoveredIndex < hebrewTextsData.length
+                  ? hoveredIndex
+                  : 0;
+              // eslint-disable-next-line security/detect-object-injection
+              const safeData = hebrewTextsData[safeIndex];
+              const currentData = safeData;
 
-              {/* Hebrew Content */}
-              <p
-                className="text-white/90 text-[11px] md:text-sm leading-relaxed text-right mb-6"
-                dir="rtl"
-              >
-                {hebrewTextsData[hoveredIndex].content}
-              </p>
-
-              {/* Divider */}
-              <div className="w-full h-[1px] bg-white/10 mb-5"></div>
-
-              {/* Footer */}
-              <div className="text-white/50 text-[10px] md:text-xs text-left">
-                Learn more →
-              </div>
-            </div>
-          )}
-
-          {hebrewTextsData.map((item, index) => {
-            const angle = (index / hebrewTextsData.length) * 360;
-            const radius = isMobile ? 240 : 400;
-
-            // Calculate initial position
-            const angleInRadians = (angle * Math.PI) / 180;
-            const x = Math.cos(angleInRadians) * radius;
-            const y = Math.sin(angleInRadians) * radius;
-
-            return (
-              <div
-                key={index}
-                ref={(el) => {
-                  textRefs.current[index] = el;
-                }}
-                className="absolute top-1/2 left-1/2"
-                style={{
-                  transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
-                  zIndex: hoveredIndex === index ? 100 : 10,
-                }}
-              >
-                {/* Text wrapper with pointer events - larger hover area */}
+              return (
                 <div
-                  className="relative pointer-events-auto cursor-pointer px-6 py-4 -m-4"
-                  role="button"
-                  tabIndex={0}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      setHoveredIndex(index);
-                    }
+                  className="absolute top-1/2 left-1/2 -translate-y-1/2 px-6 py-7 rounded-2xl shadow-2xl z-[100] min-w-[280px] max-w-[320px] pointer-events-none"
+                  style={{
+                    background: "rgba(255, 255, 255, 0.08)",
+                    backdropFilter: "blur(20px) saturate(180%)",
+                    border: "1px solid rgba(255, 255, 255, 0.18)",
+                    boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+                    animation:
+                      "cardOpenFromBottom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
+                    transform: "translateY(-50%) translateX(-30%)",
                   }}
                 >
-                  <span
-                    className="text-white/80 font-ppeiko text-lg md:text-xl lg:text-2xl whitespace-nowrap block transition-all duration-300 hover:text-white/80"
-                    style={{
-                      textShadow:
-                        "0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.2)",
+                  {/* Title with PP-Eiko font - Left aligned */}
+                  <h3 className="text-white font-ppeiko text-xl md:text-2xl mb-7 text-left leading-tight">
+                    {currentData.title}
+                  </h3>
+
+                  {/* Hebrew Content */}
+                  <p
+                    className="text-white/90 text-[11px] md:text-sm leading-relaxed text-right mb-6"
+                    dir="rtl"
+                  >
+                    {currentData.content}
+                  </p>
+
+                  {/* Divider */}
+                  <div className="w-full h-[1px] bg-white/10 mb-5"></div>
+
+                  {/* Footer */}
+                  <div className="text-white/50 text-[10px] md:text-xs text-left">
+                    Learn more →
+                  </div>
+                </div>
+              );
+            })()}
+
+          {isMounted &&
+            hebrewTextsData.map((item, index) => {
+              const angle = (index / hebrewTextsData.length) * 360;
+              const radius = isMobile ? 240 : 400;
+
+              // Calculate initial position
+              const angleInRadians = (angle * Math.PI) / 180;
+              const x = Math.cos(angleInRadians) * radius;
+              const y = Math.sin(angleInRadians) * radius;
+
+              return (
+                <div
+                  key={index}
+                  ref={(el) => {
+                    // Safe ref assignment with bounds check
+                    if (index >= 0 && index < hebrewTextsData.length) {
+                      // eslint-disable-next-line security/detect-object-injection
+                      textRefs.current[index] = el;
+                    }
+                  }}
+                  className="absolute top-1/2 left-1/2"
+                  style={{
+                    transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                    zIndex: hoveredIndex === index ? 100 : 10,
+                  }}
+                >
+                  {/* Text wrapper with pointer events - larger hover area */}
+                  <div
+                    className="relative pointer-events-auto cursor-pointer px-6 py-4 -m-4"
+                    role="button"
+                    tabIndex={0}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        setHoveredIndex(index);
+                      }
                     }}
                   >
-                    {item.text}
-                  </span>
+                    <span
+                      className="text-white/80 font-ppeiko text-lg md:text-xl lg:text-2xl whitespace-nowrap block transition-all duration-300 hover:text-white/80"
+                      style={{
+                        textShadow:
+                          "0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.2)",
+                      }}
+                    >
+                      {item.text}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
 

@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 
+const CONTACT_URL = "https://www.prexia.io/contact";
+
 export const metadata: Metadata = {
   title: "צור קשר",
   description:
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
     title: "צור קשר | PREXIA",
     description:
       "בואו נדבר על הפרויקט הבא שלכם - נבנה יחד פתרונות דיגיטליים איכותיים",
-    url: "https://www.prexia.io/contact",
+    url: CONTACT_URL,
     type: "website",
     images: [
       {
@@ -35,7 +37,7 @@ export const metadata: Metadata = {
     images: ["/images/LOGO-AK.png"],
   },
   alternates: {
-    canonical: "https://www.prexia.io/contact",
+    canonical: CONTACT_URL,
   },
 };
 
@@ -53,7 +55,7 @@ const ContactLayout = ({ children }: { children: React.ReactNode }) => {
             name: "צור קשר",
             description:
               "צור קשר עם PREXIA לקבלת הצעת מחיר ויעוץ מקצועי לפיתוח דיגיטלי",
-            url: "https://www.prexia.io/contact",
+            url: CONTACT_URL,
             mainEntity: {
               "@type": "Organization",
               name: "PREXIA",

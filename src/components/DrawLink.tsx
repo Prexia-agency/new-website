@@ -35,7 +35,12 @@ const DrawLink = ({ href, children, className = "" }: DrawLinkProps) => {
     const handleMouseEnter = () => {
       // Pick random SVG variant and replace {ID} with unique ID
       const uniqueId = `grad-${gradientIdCounter++}`;
-      const svgHTML = svgVariants[nextIndex].replace(/{ID}/g, uniqueId);
+      // Safe array access with bounds check and extraction
+      const safeIndex =
+        nextIndex >= 0 && nextIndex < svgVariants.length ? nextIndex : 0;
+      // eslint-disable-next-line security/detect-object-injection
+      const selectedVariant = svgVariants[safeIndex];
+      const svgHTML = selectedVariant.replace(/{ID}/g, uniqueId);
       // eslint-disable-next-line no-unsanitized/property
       box.innerHTML = svgHTML;
 

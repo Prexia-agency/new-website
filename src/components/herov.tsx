@@ -220,6 +220,8 @@ const HeroV = () => {
       mounted = false;
       window.removeEventListener("resize", updateCanvasSize);
     };
+    // Intentionally mount-only: initialization should not re-run
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 2. GSAP Animation Setup Effect (Runs when ready)
@@ -232,6 +234,7 @@ const HeroV = () => {
       const frameTween = gsap.to(currentFrameRef.current, {
         contents: 1, // Initial value
         duration: 0.25,
+        // eslint-disable-next-line sonarjs/no-duplicate-string
         ease: "power2.out",
         paused: true,
         onUpdate: () => {
@@ -343,6 +346,8 @@ const HeroV = () => {
       clearTimeout(timer);
       ctx.revert(); // Cleans up EVERYTHING: ScrollTriggers, Tweens, etc.
     };
+    // Intentionally only depends on isReady: GSAP setup should not re-run on function changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReady]);
 
   return (

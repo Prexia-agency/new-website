@@ -19,7 +19,7 @@ const __dirname = path.dirname(__filename);
 // `FlatCompat` converts them into ESLint v9+ flat config format.
 const compat = new FlatCompat({ baseDirectory: __dirname });
 
-export default [
+const eslintConfig = [
   {
     ignores: [
       "**/node_modules/**",
@@ -146,4 +146,8 @@ export default [
       "sonarjs/cognitive-complexity": ["warn", 20],
     },
   },
+     
+  
 ];
+
+export default eslintConfig;

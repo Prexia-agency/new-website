@@ -181,6 +181,7 @@ const ServicesSection = () => {
                       y: "0%",
                       duration: 1.5,
                       delay: 0.1,
+                      // eslint-disable-next-line sonarjs/no-duplicate-string
                       ease: "power3.out",
                       stagger: {
                         each: 0.009,
@@ -255,7 +256,9 @@ const ServicesSection = () => {
     return () => {
       ctx.revert();
       scrollTriggerRef.current?.kill();
-      animatedCardsRef.current.clear();
+      // Capture ref for proper cleanup
+      const cardsSet = animatedCardsRef.current;
+      cardsSet.clear();
     };
   }, []);
 
@@ -275,7 +278,11 @@ const ServicesSection = () => {
           <div
             key={service.id}
             ref={(el) => {
-              cardRefs.current[index] = el;
+              // Safe ref assignment with bounds check
+              if (index >= 0 && index < services.length) {
+                // eslint-disable-next-line security/detect-object-injection
+                cardRefs.current[index] = el;
+              }
             }}
             className={`flex flex-col w-[85vw] md:w-[65vw] lg:w-[70vw] max-w-3xl shrink-0 ${index === services.length - 1 ? "mr-16 md:mr-24 lg:mr-32" : ""}`}
           >

@@ -37,13 +37,21 @@ export const WordRotate = ({
   return (
     <div className="overflow-hidden inline-block align-baseline">
       <AnimatePresence mode="wait">
-        <motion.span
-          key={words[index]}
-          className={cn("inline-block", className)}
-          {...motionProps}
-        >
-          {words[index]}
-        </motion.span>
+        {(() => {
+          // Safe array access with bounds check
+          // eslint-disable-next-line security/detect-object-injection
+          const currentWord =
+            index >= 0 && index < words.length ? words[index] : words[0];
+          return (
+            <motion.span
+              key={currentWord}
+              className={cn("inline-block", className)}
+              {...motionProps}
+            >
+              {currentWord}
+            </motion.span>
+          );
+        })()}
       </AnimatePresence>
     </div>
   );

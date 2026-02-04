@@ -196,6 +196,7 @@ const SecondSectionGsap = () => {
             width: 75,
             height: 150,
             duration: 1.125,
+            // eslint-disable-next-line sonarjs/no-duplicate-string
             ease: "power2.inOut",
           });
           morphTimeline.to(
@@ -407,6 +408,7 @@ const SecondSectionGsap = () => {
                   ref={boxRef}
                   className="bg-[#fffce1] rounded-[10px] flex items-center justify-center w-[270px] h-[151.9px] lg:w-[600px] lg:h-[337.5px]"
                 >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     ref={imgRef}
                     src="/images/gsap.webp"

@@ -4,8 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-import Ballpit from "@/components/ballpit";
 import CookiePreferencesModal from "@/components/shared/CookiePreferencesModal";
+
+import Ballpit from "@/components/ballpit";
 
 const Footer = () => {
   const [showCookieModal, setShowCookieModal] = useState(false);

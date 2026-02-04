@@ -41,11 +41,17 @@ const notoSansHebrew = localFont({
   display: "swap",
 });
 
+/* eslint-disable sonarjs/no-duplicate-string */
+const SITE_URL = "https://www.prexia.io";
+const SITE_NAME = "PREXIA";
+const SITE_TITLE = "PREXIA | Robust Digital Solutions, Built to Last";
+/* eslint-enable sonarjs/no-duplicate-string */
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.prexia.io"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "PREXIA | Robust Digital Solutions, Built to Last",
-    template: "%s | PREXIA",
+    default: SITE_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
   description:
     "PREXIA מתמחה בתכנון, בפיתוח ובתחזוקה שוטפת של אתרים ומוצרים דיגיטליים, תוך מתן פתרונות מותאמים אישית וביצוע מלא תחת קורת גג אחת. פתרונות דיגיטליים איכותיים עם תמיכה ארוכת טווח.",

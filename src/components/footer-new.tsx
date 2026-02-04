@@ -7,6 +7,12 @@ import React, { useEffect, useRef, useState } from "react";
 
 import CookiePreferencesModal from "@/components/shared/CookiePreferencesModal";
 
+// Design tokens
+/* eslint-disable sonarjs/no-duplicate-string */
+const FALLBACK_FONT = "Arial, sans-serif";
+const WALL_COLOR = "rgba(0, 0, 0, 0.3)";
+/* eslint-enable sonarjs/no-duplicate-string */
+
 const EmailIcon = ({ className }: { className?: string }) => {
   return (
     <svg
@@ -101,7 +107,7 @@ const FooterNew = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const hasAnimatedRef = useRef(false);
-  const fontFamilyRef = useRef("Arial, sans-serif");
+  const fontFamilyRef = useRef(FALLBACK_FONT);
   const canvasSizeRef = useRef({ width: 0, height: 0, dpr: 1 });
 
   // Live clock (Israel time)
@@ -234,7 +240,7 @@ const FooterNew = () => {
         12,
         {
           isStatic: true,
-          render: { fillStyle: "rgba(0, 0, 0, 0.3)" }, // Semi-transparent black for visualization
+          render: { fillStyle: WALL_COLOR }, // Semi-transparent black for visualization
         },
       );
 
@@ -279,7 +285,10 @@ const FooterNew = () => {
       const bodyHeight = baseHeight + paddingY; // Add minimal padding like X axis
 
       letterText.split("").forEach((letter, index) => {
-        const glyphWidth = glyphWidths[index];
+        // Safe array access with bounds check
+        // eslint-disable-next-line security/detect-object-injection
+        const glyphWidth =
+          index >= 0 && index < glyphWidths.length ? glyphWidths[index] : 50;
         // Letters start from varied horizontal positions - spread across the canvas width
         const horizontalSpread = width * 0.4; // Use 40% of canvas width for spread
         const x = centerX + (Math.random() - 0.5) * horizontalSpread; // Random position left or right of center

@@ -106,12 +106,12 @@ const SiteItem = ({
       },
     );
 
-    observer.observe(itemRef.current);
+    const currentRef = itemRef.current;
+    observer.observe(currentRef);
 
     return () => {
-      if (itemRef.current) {
-        observer.unobserve(itemRef.current);
-      }
+      // Use captured ref value for proper cleanup
+      observer.unobserve(currentRef);
     };
   }, [isMobile, hasAnimated]);
 

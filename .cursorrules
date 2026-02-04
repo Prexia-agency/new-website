@@ -74,10 +74,40 @@ If a UI change seems to require any of the above, you must explicitly state it i
 
 TYPESCRIPT AND STYLE
 
-Strict TypeScript. No implicit any. No ts ignore. use arrow functions
+All TypeScript must follow strict safe access patterns.
 
-No console logs except critical, and prefer none.
+Never access objects with dynamic keys like obj[key].
+Always use explicit property access or guarded conditional access.
 
+When using unions (variants, types, enums), you must narrow the type before access using:
+
+explicit if / switch
+
+in operator
+
+type guards
+
+Never index objects with values coming from props, state, events, or external data.
+
+Never use Record<string, ...> for UI state. Always use explicit typed shapes.
+
+When mapping values, use explicit maps with known keys and cast using as const.
+
+Do not duplicate string literals more than once. Extract them to constants.
+
+React hooks must include all dependencies. Never suppress exhaustive-deps.
+
+Never use <img>. Always use next/image.
+
+Any className composition must be deterministic. Do not compute Tailwind strings dynamically.
+
+Never use dangerouslySetInnerHTML.
+
+Never create objects inline in JSX props. Define them as constants.
+
+Always define component props as explicit types. No implicit children.
+
+Always export components as arrow functions.
 Use design tokens only. No hardcoded Tailwind values. If a token is missing, define it in tokens.css first.
 
 # ACCESSIBILITY
