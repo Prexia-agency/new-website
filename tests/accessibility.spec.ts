@@ -8,7 +8,7 @@ test.describe("WCAG 2.1 AA - ALL PAGES", () => {
     const pages = await getAllPages(baseURL!);
 
     for (const path of pages) {
-      await page.goto(path, { waitUntil: "networkidle" });
+      await page.goto(path, { waitUntil: "domcontentloaded" });
 
       const results = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
