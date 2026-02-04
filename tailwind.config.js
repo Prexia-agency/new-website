@@ -17,6 +17,14 @@ module.exports = {
       },
     },
     extend: {
+      colors: {
+        content: {
+          primary: "var(--text-primary)",
+          secondary: "var(--text-secondary)",
+          muted: "var(--text-muted)",
+          decorative: "var(--text-decorative)",
+        },
+      },
       fontFamily: {
         "noto-hebrew": ["var(--font-noto-hebrew)", "system-ui", "sans-serif"],
         "david-libre": ["var(--font-david-libre)", "serif"],

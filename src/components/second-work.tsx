@@ -323,7 +323,7 @@ const ServicesSection = () => {
               <h3 className="sr-only">{service.descriptionHebrew}</h3>
               <div className="overflow-hidden">
                 <p
-                  className="font-noto-hebrew text-white/90 text-base md:text-lg font-normal leading-relaxed text-right will-change-transform mask-text-initial"
+                  className="font-noto-hebrew text-white text-base md:text-lg font-normal leading-relaxed text-right will-change-transform mask-text-initial"
                   aria-hidden="true"
                   data-mask-line
                 >
@@ -338,7 +338,7 @@ const ServicesSection = () => {
                 <ul className="space-y-2">
                   {service.details.map((detail, detailIndex) => (
                     <li key={detailIndex} className="flex items-start gap-3">
-                      <span className="text-gray-300 mt" aria-hidden="true">
+                      <span className="text-white mt" aria-hidden="true">
                         +
                       </span>
                       <span className="sr-only">{detail}</span>
@@ -348,7 +348,7 @@ const ServicesSection = () => {
                         data-card-bullet
                       >
                         <span
-                          className="font-noto-hebrew text-white/90 text-sm md:text-base leading-relaxed inline-block will-change-transform mask-text-initial"
+                          className="font-noto-hebrew text-white text-sm md:text-base leading-relaxed inline-block will-change-transform mask-text-initial"
                           aria-hidden="true"
                         >
                           {detail}

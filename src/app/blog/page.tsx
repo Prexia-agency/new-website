@@ -70,11 +70,11 @@ const BlogPage = async () => {
                         <div className="flex-1 flex flex-col gap-6">
                           {/* Meta */}
                           <div className="flex items-center gap-3 flex-wrap">
-                            <span className="text-sm text-white/90">
+                            <span className="text-sm text-white">
                               {post.authorName || "PREXIA"}
                             </span>
                             {dateText ? (
-                              <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/30 text-xs text-white/90">
+                              <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/30 text-xs text-white">
                                 {dateText}
                               </div>
                             ) : null}
@@ -87,7 +87,7 @@ const BlogPage = async () => {
 
                           {/* Excerpt */}
                           {post.excerpt ? (
-                            <p className="text-base md:text-[16px] lg:text-[18px] text-white/90 leading-relaxed max-w-xl">
+                            <p className="text-base md:text-[16px] lg:text-[18px] text-white leading-relaxed max-w-xl">
                               {post.excerpt}
                             </p>
                           ) : null}

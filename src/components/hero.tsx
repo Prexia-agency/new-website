@@ -383,7 +383,7 @@ const Hero = () => {
           }}
         >
           <div className="flex flex-col items-center gap-2">
-            <p className="text-gray-300 text-base font-semibold tracking-wide whitespace-nowrap bg-black/30 px-3 py-1 rounded-lg backdrop-blur-sm">
+            <p className="text-white text-base font-semibold tracking-wide whitespace-nowrap bg-black/30 px-3 py-1 rounded-lg backdrop-blur-sm">
               הזז את העכבר
             </p>
             <svg

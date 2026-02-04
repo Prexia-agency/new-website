@@ -95,7 +95,7 @@ const BlogPostPage = async (props: PageProps) => {
     >
       <article className="max-w-3xl mx-auto pb-20">
         <header className="mb-8">
-          <div className="flex items-center justify-between gap-3 text-xs text-white/90 mb-3">
+          <div className="flex items-center justify-between gap-3 text-xs text-white mb-3">
             <span className="truncate">{post.authorName || "PREXIA"}</span>
             {dateText ? <span className="shrink-0">{dateText}</span> : null}
           </div>
@@ -105,7 +105,7 @@ const BlogPostPage = async (props: PageProps) => {
           </h1>
 
           {post.excerpt ? (
-            <p className="mt-4 text-white/90 text-base md:text-lg">
+            <p className="mt-4 text-white text-base md:text-lg">
               {post.excerpt}
             </p>
           ) : null}
@@ -130,7 +130,7 @@ const BlogPostPage = async (props: PageProps) => {
             components={{
               block: {
                 normal: ({ children }) => (
-                  <p className="mb-6 leading-[1.9] text-white/90">{children}</p>
+                  <p className="mb-6 leading-[1.9] text-white">{children}</p>
                 ),
                 h2: ({ children }) => (
                   <h2 className="mt-14 mb-4 text-2xl font-semibold text-white">
@@ -197,7 +197,7 @@ const BlogPostPage = async (props: PageProps) => {
                         className="rounded-xl border border-white/10 bg-white/5 w-full h-auto"
                       />
                       {value?.caption ? (
-                        <figcaption className="mt-3 text-sm text-white/90">
+                        <figcaption className="mt-3 text-sm text-white">
                           {value.caption}
                         </figcaption>
                       ) : null}

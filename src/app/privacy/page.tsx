@@ -22,10 +22,8 @@ const PrivacyPage = () => {
           <h1 className="font-noto-hebrew text-5xl lg:text-6xl font-black mb-4 text-white">
             מדיניות פרטיות
           </h1>
-          <p className="text-white/90 text-sm">
-            עודכנה לאחרונה: 25 בספטמבר 2025
-          </p>
-          <p className="text-white/90 mt-4">
+          <p className="text-white text-sm">עודכנה לאחרונה: 25 בספטמבר 2025</p>
+          <p className="text-white mt-4">
             מדיניות פרטיות זו מהווה חלק בלתי נפרד מתנאי השימוש של PREXIA.
           </p>
         </motion.div>
@@ -42,7 +40,7 @@ const PrivacyPage = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               1. כללי
             </h2>
-            <div className="text-white/90 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 שירותי PREXIA מופעלים ומנוהלים במסגרת המותג PREXIA. מדיניות
                 פרטיות זו מתארת כיצד נאסף, נעשה שימוש, נשמר ומוגן מידע אישי
@@ -72,11 +70,11 @@ const PrivacyPage = () => {
                 <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
                   2.1 מידע מזהה אישי (PII)
                 </h3>
-                <p className="text-white/90 mb-2 text-sm sm:text-base">
+                <p className="text-white mb-2 text-sm sm:text-base">
                   בעת השימוש באתר או שליחת טופס יצירת קשר אנו עשויים לאסוף את
                   הפרטים הבאים:
                 </p>
-                <ul className="list-disc list-inside text-white/90 space-y-1 mr-4 text-sm sm:text-base">
+                <ul className="list-disc list-inside text-white space-y-1 mr-4 text-sm sm:text-base">
                   <li>שם מלא</li>
                   <li>כתובת דוא&quot;ל</li>
                   <li>מספר טלפון</li>
@@ -91,10 +89,10 @@ const PrivacyPage = () => {
                 <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
                   2.2 מידע לא אישי
                 </h3>
-                <p className="text-white/90 mb-2 text-sm sm:text-base">
+                <p className="text-white mb-2 text-sm sm:text-base">
                   מידע טכני ושימושי שנאסף אוטומטית, כגון:
                 </p>
-                <ul className="list-disc list-inside text-white/90 space-y-1 mr-4 text-sm sm:text-base">
+                <ul className="list-disc list-inside text-white space-y-1 mr-4 text-sm sm:text-base">
                   <li>סוג דפדפן, מכשיר ומערכת הפעלה</li>
                   <li>פעילות באתר (עמודים שנצפו, לחיצות)</li>
                   <li>נתוני מיקום גאוגרפי</li>
@@ -113,10 +111,10 @@ const PrivacyPage = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               3. הבסיס החוקי לעיבוד מידע (בהתאם ל-GDPR)
             </h2>
-            <p className="text-white/90 text-sm sm:text-base">
+            <p className="text-white text-sm sm:text-base">
               אנו מעבדים מידע אישי על בסיסים חוקיים אלה:
             </p>
-            <ul className="list-disc list-inside text-white/90 space-y-1 mr-4 text-sm sm:text-base">
+            <ul className="list-disc list-inside text-white space-y-1 mr-4 text-sm sm:text-base">
               <li>הסכמה מפורשת שלך, כאשר אתה מוסר מידע מרצונך</li>
               <li>קיום חוזה או מענה לבקשה שהגשת</li>
               <li>עמידה בחובות חוקיות</li>
@@ -131,10 +129,10 @@ const PrivacyPage = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               4. שימוש במידע שנאסף
             </h2>
-            <p className="text-white/90 text-sm sm:text-base">
+            <p className="text-white text-sm sm:text-base">
               המידע משמש אותנו למטרות הבאות:
             </p>
-            <ul className="list-disc list-inside text-white/90 space-y-1 mr-4 text-sm sm:text-base">
+            <ul className="list-disc list-inside text-white space-y-1 mr-4 text-sm sm:text-base">
               <li>מתן מענה לפניותיך ומתן השירותים שביקשת</li>
               <li>ניהול פניות משתמשים ותקשורת עם לקוחות</li>
               <li>שליחת ניוזלטרים ותוכן שיווקי (רק באישור מראש)</li>
@@ -150,10 +148,10 @@ const PrivacyPage = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               5. שמירת מידע
             </h2>
-            <p className="text-white/90 text-sm sm:text-base">
+            <p className="text-white text-sm sm:text-base">
               אנו שומרים את הנתונים לפרקי זמן הבאים:
             </p>
-            <ul className="list-disc list-inside text-white/90 space-y-1 mr-4 text-sm sm:text-base">
+            <ul className="list-disc list-inside text-white space-y-1 mr-4 text-sm sm:text-base">
               <li>פניות מטפסי יצירת קשר: שנתיים לאחר יצירת הקשר האחרון</li>
               <li>מנויי ניוזלטר: עד לביטול ההרשמה + שנה לצרכי ציות לחוק</li>
               <li>
@@ -161,7 +159,7 @@ const PrivacyPage = () => {
               </li>
               <li>רישומי הסכמה שיווקית: 3 שנים לאחר ביטול ההסכמה</li>
             </ul>
-            <p className="text-white/90 mt-3">
+            <p className="text-white mt-3">
               אנו שומרים מידע רק לצורך המטרות שלשמן נאסף, לרבות צרכים חוקיים
               ועסקיים לגיטימיים. ניתן לבקש מחיקת נתונים בכל עת (ראו סעיף 11).
             </p>
@@ -172,13 +170,13 @@ const PrivacyPage = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               6. אחסון ואבטחת מידע
             </h2>
-            <div className="text-white/90 space-y-3 text-sm sm:text-base">
+            <div className="text-white space-y-3 text-sm sm:text-base">
               <p>
                 המידע שלך עשוי להישמר בשרתים מאובטחים בישראל או מחוצה לה,
                 באמצעות ספקי שירות חיצוניים. בין הספקים העיקריים, בין אם במועד
                 זה ובין אם בעתיד:
               </p>
-              <ul className="list-disc list-inside text-white/90 space-y-1 mr-4 text-sm sm:text-base">
+              <ul className="list-disc list-inside text-white space-y-1 mr-4 text-sm sm:text-base">
                 <li>Google Analytics (לניתוח פעילות האתר)</li>
                 <li>Meta/Facebook Pixel (לניתוח פרסום)</li>
                 <li>Resend (לשליחת הודעות מטפסי יצירת קשר)</li>
@@ -196,12 +194,12 @@ const PrivacyPage = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               7. העברת מידע לצדדים שלישיים
             </h2>
-            <div className="text-white/90 space-y-3 text-sm sm:text-base">
+            <div className="text-white space-y-3 text-sm sm:text-base">
               <p>
                 איננו מוכרים את המידע האישי שלך. מידע עשוי להימסר לצדדים שלישיים
                 רק במקרים הבאים:
               </p>
-              <ul className="list-disc list-inside text-white/90 space-y-1 mr-4 text-sm sm:text-base">
+              <ul className="list-disc list-inside text-white space-y-1 mr-4 text-sm sm:text-base">
                 <li>בהסכמתך המפורשת</li>
                 <li>לשם עמידה בחובה חוקית או בצו בית משפט</li>
                 <li>
@@ -225,7 +223,7 @@ const PrivacyPage = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               8. העברת מידע מחוץ לישראל
             </h2>
-            <p className="text-white/90 text-sm sm:text-base">
+            <p className="text-white text-sm sm:text-base">
               אם נתונים מועברים מחוץ לישראל או לאזור הכלכלי האירופי (EEA), נוודא
               שקיימים מנגנוני הגנה נאותים, כגון Standard Contractual Clauses
               (SCCs), כדי להבטיח את שמירת זכויותיך.
@@ -237,9 +235,9 @@ const PrivacyPage = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               9. שימוש בעוגיות ובכלי מעקב
             </h2>
-            <div className="text-white/90 space-y-3 text-sm sm:text-base">
+            <div className="text-white space-y-3 text-sm sm:text-base">
               <p>אנו משתמשים בעוגיות ובטכנולוגיות מעקב לצורך:</p>
-              <ul className="list-disc list-inside text-white/90 space-y-1 mr-4 text-sm sm:text-base">
+              <ul className="list-disc list-inside text-white space-y-1 mr-4 text-sm sm:text-base">
                 <li>שיפור ביצועי האתר</li>
                 <li>ניתוח תעבורה ודפוסי שימוש</li>
                 <li>התאמת תוכן ופרסומות</li>
@@ -258,12 +256,12 @@ const PrivacyPage = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               10. ניוזלטרים ותקשורת שיווקית
             </h2>
-            <div className="text-white/90 space-y-3 text-sm sm:text-base">
+            <div className="text-white space-y-3 text-sm sm:text-base">
               <p>
                 אנו עשויים לשלוח מיילים, הודעות WhatsApp או SMS רק לאחר קבלת
                 הסכמה מפורשת מראש. תוכל להסיר את עצמך בכל עת באמצעות:
               </p>
-              <ul className="list-disc list-inside text-white/90 space-y-1 mr-4 text-sm sm:text-base">
+              <ul className="list-disc list-inside text-white space-y-1 mr-4 text-sm sm:text-base">
                 <li>לחיצה על הקישור &quot;להסרה&quot; בכל הודעת מייל</li>
                 <li>שליחת תגובה עם המילה STOP (ל-SMS/וואטסאפ)</li>
                 <li>פנייה לכתובת info@prexia.io</li>
@@ -276,9 +274,9 @@ const PrivacyPage = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               11. זכויותיך (בהתאם ל-GDPR ולחוק הישראלי)
             </h2>
-            <div className="text-white/90 space-y-3 text-sm sm:text-base">
+            <div className="text-white space-y-3 text-sm sm:text-base">
               <p>באפשרותך:</p>
-              <ul className="list-disc list-inside text-white/90 space-y-1 mr-4 text-sm sm:text-base">
+              <ul className="list-disc list-inside text-white space-y-1 mr-4 text-sm sm:text-base">
                 <li>לעיין בנתוניך האישיים</li>
                 <li>לבקש תיקון, מחיקה או הגבלת שימוש</li>
                 <li>להתנגד לעיבוד נתוניך</li>
@@ -295,10 +293,10 @@ const PrivacyPage = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               12. דיווח על פגיעה בפרטיות
             </h2>
-            <p className="text-white/90 text-sm sm:text-base">
+            <p className="text-white text-sm sm:text-base">
               אם אתה סבור שפרטיותך נפגעה, פנה אלינו מיד לכתובת: info@prexia.io
             </p>
-            <p className="text-white/90 text-sm sm:text-base">
+            <p className="text-white text-sm sm:text-base">
               ציין את פרטי האירוע, ואנו נבדוק ונטפל בהתאם לחוק.
             </p>
           </section>
@@ -308,7 +306,7 @@ const PrivacyPage = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white">
               13. עדכונים למדיניות
             </h2>
-            <p className="text-white/90 text-sm sm:text-base">
+            <p className="text-white text-sm sm:text-base">
               אנו עשויים לעדכן את מדיניות הפרטיות מעת לעת. כל שינוי מהותי יפורסם
               בעמוד זה בציון תאריך העדכון האחרון.
             </p>

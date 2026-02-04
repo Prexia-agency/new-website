@@ -269,7 +269,7 @@ const GalaxySection = () => {
       <div className="absolute top-4 right-4 z-20 pointer-events-auto">
         <button
           type="button"
-          className="rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-4 py-2 text-xs text-white/90 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-white/40 disabled:opacity-60 disabled:cursor-not-allowed"
+          className="rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-4 py-2 text-xs text-white hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-white/40 disabled:opacity-60 disabled:cursor-not-allowed"
           aria-pressed={isMotionPaused}
           disabled={!settings.animations || prefersReducedMotion}
           title={
@@ -340,7 +340,7 @@ const GalaxySection = () => {
 
                   {/* Hebrew Content */}
                   <p
-                    className="text-white/90 text-[11px] md:text-sm leading-relaxed text-right mb-6"
+                    className="text-white text-[11px] md:text-sm leading-relaxed text-right mb-6"
                     dir="rtl"
                   >
                     {currentData.content}
@@ -350,7 +350,7 @@ const GalaxySection = () => {
                   <div className="w-full h-[1px] bg-white/10 mb-5"></div>
 
                   {/* Footer */}
-                  <div className="text-gray-300 text-[10px] md:text-xs text-left">
+                  <div className="text-white text-[10px] md:text-xs text-left">
                     Learn more →
                   </div>
                 </div>
