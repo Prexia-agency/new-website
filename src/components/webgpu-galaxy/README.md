@@ -30,16 +30,12 @@ npm install three@^0.181.1 tweakpane@^4.0.1
 ### Basic Usage
 
 ```tsx
-import { WebGPUGalaxy } from '@/components/webgpu-galaxy';
+import { WebGPUGalaxy } from "@/components/webgpu-galaxy";
 
 export default function MyPage() {
   return (
     <div className="w-full h-screen">
-      <WebGPUGalaxy 
-        className="w-full h-full"
-        showUI={true}
-        showInfo={true}
-      />
+      <WebGPUGalaxy className="w-full h-full" showUI={true} showInfo={true} />
     </div>
   );
 }
@@ -48,12 +44,12 @@ export default function MyPage() {
 ### Advanced Usage with Custom Configuration
 
 ```tsx
-import { WebGPUGalaxy } from '@/components/webgpu-galaxy';
+import { WebGPUGalaxy } from "@/components/webgpu-galaxy";
 
 export default function MyPage() {
   return (
     <div className="w-full h-screen">
-      <WebGPUGalaxy 
+      <WebGPUGalaxy
         className="w-full h-full"
         showUI={true}
         showInfo={true}
@@ -70,15 +66,15 @@ export default function MyPage() {
           randomness: 2.0,
           particleSize: 0.08,
           starBrightness: 0.5,
-          denseStarColor: '#0088ff',
-          sparseStarColor: '#ff8800',
+          denseStarColor: "#0088ff",
+          sparseStarColor: "#ff8800",
           bloomStrength: 0.3,
           bloomRadius: 0.3,
           bloomThreshold: 0.15,
           cloudCount: 8000,
           cloudSize: 4,
           cloudOpacity: 0.03,
-          cloudTintColor: '#ffccaa'
+          cloudTintColor: "#ffccaa",
         }}
       />
     </div>
@@ -91,14 +87,14 @@ export default function MyPage() {
 Since WebGPU requires client-side rendering, use dynamic import with SSR disabled:
 
 ```tsx
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
 const WebGPUGalaxy = dynamic(
-  () => import('@/components/webgpu-galaxy').then(mod => mod.WebGPUGalaxy),
-  { 
+  () => import("@/components/webgpu-galaxy").then((mod) => mod.WebGPUGalaxy),
+  {
     ssr: false,
-    loading: () => <div>Loading Galaxy...</div>
-  }
+    loading: () => <div>Loading Galaxy...</div>,
+  },
 );
 
 export default function MyPage() {
@@ -114,38 +110,38 @@ export default function MyPage() {
 
 ### WebGPUGalaxyProps
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | `''` | CSS classes for the container |
-| `showUI` | `boolean` | `true` | Show/hide Tweakpane controls |
-| `showInfo` | `boolean` | `true` | Show/hide info panel (FPS, star count) |
-| `config` | `Partial<GalaxyConfig>` | See below | Galaxy configuration options |
+| Prop        | Type                    | Default   | Description                            |
+| ----------- | ----------------------- | --------- | -------------------------------------- |
+| `className` | `string`                | `''`      | CSS classes for the container          |
+| `showUI`    | `boolean`               | `true`    | Show/hide Tweakpane controls           |
+| `showInfo`  | `boolean`               | `true`    | Show/hide info panel (FPS, star count) |
+| `config`    | `Partial<GalaxyConfig>` | See below | Galaxy configuration options           |
 
 ### GalaxyConfig
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `starCount` | `number` | `750000` | Number of star particles |
-| `rotationSpeed` | `number` | `0.1` | Base rotation speed |
-| `spiralTightness` | `number` | `1.75` | How tight the spiral arms wind |
-| `mouseForce` | `number` | `7.0` | Strength of mouse interaction |
-| `mouseRadius` | `number` | `10.0` | Radius of mouse influence |
-| `galaxyRadius` | `number` | `13.0` | Overall radius of the galaxy |
-| `galaxyThickness` | `number` | `3` | Vertical thickness of the galaxy |
-| `armCount` | `number` | `2` | Number of spiral arms (1-4) |
-| `armWidth` | `number` | `2.25` | Width of spiral arms |
-| `randomness` | `number` | `1.8` | Randomness factor for particle distribution |
-| `particleSize` | `number` | `0.06` | Size of star particles |
-| `starBrightness` | `number` | `0.3` | Overall brightness of stars |
-| `denseStarColor` | `string` | `'#1885ff'` | Color of stars in dense regions |
-| `sparseStarColor` | `string` | `'#ffb28a'` | Color of stars in sparse regions |
-| `bloomStrength` | `number` | `0.2` | Strength of bloom effect |
-| `bloomRadius` | `number` | `0.2` | Radius of bloom effect |
-| `bloomThreshold` | `number` | `0.1` | Threshold for bloom effect |
-| `cloudCount` | `number` | `5000` | Number of dust cloud particles |
-| `cloudSize` | `number` | `3` | Size of cloud particles |
-| `cloudOpacity` | `number` | `0.02` | Opacity of clouds |
-| `cloudTintColor` | `string` | `'#ffdace'` | Tint color for clouds |
+| Property          | Type     | Default     | Description                                 |
+| ----------------- | -------- | ----------- | ------------------------------------------- |
+| `starCount`       | `number` | `750000`    | Number of star particles                    |
+| `rotationSpeed`   | `number` | `0.1`       | Base rotation speed                         |
+| `spiralTightness` | `number` | `1.75`      | How tight the spiral arms wind              |
+| `mouseForce`      | `number` | `7.0`       | Strength of mouse interaction               |
+| `mouseRadius`     | `number` | `10.0`      | Radius of mouse influence                   |
+| `galaxyRadius`    | `number` | `13.0`      | Overall radius of the galaxy                |
+| `galaxyThickness` | `number` | `3`         | Vertical thickness of the galaxy            |
+| `armCount`        | `number` | `2`         | Number of spiral arms (1-4)                 |
+| `armWidth`        | `number` | `2.25`      | Width of spiral arms                        |
+| `randomness`      | `number` | `1.8`       | Randomness factor for particle distribution |
+| `particleSize`    | `number` | `0.06`      | Size of star particles                      |
+| `starBrightness`  | `number` | `0.3`       | Overall brightness of stars                 |
+| `denseStarColor`  | `string` | `'#1885ff'` | Color of stars in dense regions             |
+| `sparseStarColor` | `string` | `'#ffb28a'` | Color of stars in sparse regions            |
+| `bloomStrength`   | `number` | `0.2`       | Strength of bloom effect                    |
+| `bloomRadius`     | `number` | `0.2`       | Radius of bloom effect                      |
+| `bloomThreshold`  | `number` | `0.1`       | Threshold for bloom effect                  |
+| `cloudCount`      | `number` | `5000`      | Number of dust cloud particles              |
+| `cloudSize`       | `number` | `3`         | Size of cloud particles                     |
+| `cloudOpacity`    | `number` | `0.02`      | Opacity of clouds                           |
+| `cloudTintColor`  | `string` | `'#ffdace'` | Tint color for clouds                       |
 
 ## Controls
 
@@ -190,18 +186,19 @@ webgpu-galaxy/
 
 ## Browser Compatibility
 
-| Browser | Support |
-|---------|---------|
+| Browser     | Support         |
+| ----------- | --------------- |
 | Chrome 113+ | ✅ Full Support |
-| Edge 113+ | ✅ Full Support |
-| Firefox | ⏳ Coming Soon |
-| Safari | ⏳ Coming Soon |
+| Edge 113+   | ✅ Full Support |
+| Firefox     | ⏳ Coming Soon  |
+| Safari      | ⏳ Coming Soon  |
 
 ## Troubleshooting
 
 ### "WebGPU is not supported" Error
 
 Make sure you're using:
+
 - Chrome 113 or later
 - Edge 113 or later
 - A GPU that supports WebGPU
@@ -219,4 +216,3 @@ Make sure you're using:
 Original WebGPU Galaxy implementation by [dgreenheck](https://github.com/dgreenheck/webgpu-galaxy)
 
 Integrated and adapted for React/Next.js by AK Agency.
-

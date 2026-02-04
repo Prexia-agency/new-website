@@ -57,15 +57,15 @@ jobs:
             const marker = '<!-- prexia-preview -->';
             const url = '${{ steps.vercel.outputs.url }}';
             const body = `${marker}\n## 🚀 Preview Ready\n\n**URL:** ${url}\n\n⏳ Running tests...`;
-            
+
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
             });
-            
+
             const existing = comments.find(c => c.body?.includes(marker));
-            
+
             if (existing) {
               await github.rest.issues.updateComment({
                 owner: context.repo.owner,
@@ -94,7 +94,7 @@ jobs:
     with:
       deployment-url: ${{ needs.wait-vercel-preview.outputs.url }}
       environment: preview
-      enforce-performance: false  
+      enforce-performance: false
 
   # ============================================
   # STAGE 4: Update the PR Commentss
@@ -113,17 +113,17 @@ jobs:
             const url = '${{ needs.wait-vercel-preview.outputs.url }}';
             const result = '${{ needs.test-preview.result }}';
             const emoji = result === 'success' ? '✅' : '❌';
-            
+
             const body = `${marker}\n## 📊 Preview Complete\n\n**URL:** ${url}\n\n${emoji} **Tests:** ${result}\n\n📁 See Actions for reports`;
-            
+
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
             });
-            
+
             const existing = comments.find(c => c.body?.includes(marker));
-            
+
             if (existing) {
               await github.rest.issues.updateComment({
                 owner: context.repo.owner,

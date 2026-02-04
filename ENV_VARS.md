@@ -12,7 +12,6 @@ SANITY_API_READ_TOKEN=YOUR_VIEWER_READ_TOKEN
 ```
 
 Notes:
+
 - `SANITY_API_READ_TOKEN` is required if your dataset is not public.
 - After editing env vars, restart `npm run dev`.
-
-

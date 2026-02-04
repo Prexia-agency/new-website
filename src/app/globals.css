@@ -44,32 +44,32 @@
   --radius-xl: calc(var(--radius) + 4px);
   --animate-aurora: aurora 8s ease-in-out infinite alternate;
   @keyframes aurora {
-  0% {
-    background-position: 0% 50%;
-    transform: rotate(-5deg) scale(0.9);
+    0% {
+      background-position: 0% 50%;
+      transform: rotate(-5deg) scale(0.9);
     }
-  25% {
-    background-position: 50% 100%;
-    transform: rotate(5deg) scale(1.1);
+    25% {
+      background-position: 50% 100%;
+      transform: rotate(5deg) scale(1.1);
     }
-  50% {
-    background-position: 100% 50%;
-    transform: rotate(-3deg) scale(0.95);
+    50% {
+      background-position: 100% 50%;
+      transform: rotate(-3deg) scale(0.95);
     }
-  75% {
-    background-position: 50% 0%;
-    transform: rotate(3deg) scale(1.05);
+    75% {
+      background-position: 50% 0%;
+      transform: rotate(3deg) scale(1.05);
     }
-  100% {
-    background-position: 0% 50%;
-    transform: rotate(-5deg) scale(0.9);
+    100% {
+      background-position: 0% 50%;
+      transform: rotate(-5deg) scale(0.9);
     }
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --herobg: #898FFF;
+    --herobg: #898fff;
   }
 }
 
@@ -79,10 +79,10 @@
 }
 
 /* הסתרה בפיירפוקס */
-html, body {
+html,
+body {
   scrollbar-width: thin;
 }
-
 
 :root {
   --radius: 0.625rem;
@@ -185,12 +185,13 @@ html, body {
 
 /* Custom gradient for text */
 .gradient-text {
-  background: linear-gradient(90deg, 
-    #FF6A00 15%,     /* Orange */
-    #FF00A8 25%,    /* Pink/Magenta */
-    #8B00FF 50%,    /* Purple/Violet */
-    #007BFF 75%,    /* Blue/Cyan */
-    #00D4FF 100%    /* Teal/Aqua */
+  background: linear-gradient(
+    90deg,
+    #ff6a00 15%,
+    /* Orange */ #ff00a8 25%,
+    /* Pink/Magenta */ #8b00ff 50%,
+    /* Purple/Violet */ #007bff 75%,
+    /* Blue/Cyan */ #00d4ff 100% /* Teal/Aqua */
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -199,36 +200,49 @@ html, body {
 
 /* Reusable gradient background matching gradient-text palette */
 .gradient-bg {
-  background: 
-    radial-gradient(at 40% 20%, #FF6A00 0px, transparent 50%),
-    radial-gradient(at 80% 0%, #FF00A8 0px, transparent 50%),
-    radial-gradient(at 0% 50%, #8B00FF 0px, transparent 50%),
-    radial-gradient(at 80% 50%, #007BFF 0px, transparent 50%),
-    radial-gradient(at 80% 100%, #00D4FF 0px, transparent 50%),
-    radial-gradient(at 0% 100%, #FF6A00 0px, transparent 50%),
-    linear-gradient(135deg, #FF6A00 0%, #8B00FF 50%, #00D4FF 100%);
+  background:
+    radial-gradient(at 40% 20%, #ff6a00 0px, transparent 50%),
+    radial-gradient(at 80% 0%, #ff00a8 0px, transparent 50%),
+    radial-gradient(at 0% 50%, #8b00ff 0px, transparent 50%),
+    radial-gradient(at 80% 50%, #007bff 0px, transparent 50%),
+    radial-gradient(at 80% 100%, #00d4ff 0px, transparent 50%),
+    radial-gradient(at 0% 100%, #ff6a00 0px, transparent 50%),
+    linear-gradient(135deg, #ff6a00 0%, #8b00ff 50%, #00d4ff 100%);
   background-blend-mode: screen;
 }
 
 /* Text gradient matching contact button gradient */
 .gradient-text-contact {
-  background: linear-gradient(135deg, #FF6A00 0%, #8B00FF 50%, #00D4FF 100%);
+  background: linear-gradient(135deg, #ff6a00 0%, #8b00ff 50%, #00d4ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 /* Fallback utilities to mirror source design tokens */
-.bg-gray-9 { background-color: #0f0f10; }
-.border-gray-8 { border-color: #2a2a2f; }
-.safe-paddings { padding-left: 1.25rem; padding-right: 1.25rem; }
+.bg-gray-9 {
+  background-color: #0f0f10;
+}
+.border-gray-8 {
+  border-color: #2a2a2f;
+}
+.safe-paddings {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
 
 @media (min-width: 640px) {
-  .safe-paddings { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .safe-paddings {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 
 @media (min-width: 1024px) {
-  .safe-paddings { padding-left: 2rem; padding-right: 2rem; }
+  .safe-paddings {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 /* Galaxy Card Opening Animation */

@@ -47,13 +47,15 @@ export default defineType({
       code: "code",
     },
     prepare({ language, filename, code }) {
-      const firstLine = (code as string | undefined)?.split("\n")[0]?.slice(0, 60);
+      const firstLine = (code as string | undefined)
+        ?.split("\n")[0]
+        ?.slice(0, 60);
       return {
         title: filename || `Code (${language || "text"})`,
-        subtitle: firstLine ? `${firstLine}${firstLine.length >= 60 ? "…" : ""}` : undefined,
+        subtitle: firstLine
+          ? `${firstLine}${firstLine.length >= 60 ? "…" : ""}`
+          : undefined,
       };
     },
   },
 });
-
-

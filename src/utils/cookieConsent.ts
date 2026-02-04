@@ -6,7 +6,7 @@ export type CookiePreferences = {
   timestamp: string;
 };
 
-const COOKIE_CONSENT_KEY = 'cookieConsent';
+const COOKIE_CONSENT_KEY = "cookieConsent";
 
 export const defaultPreferences: CookiePreferences = {
   essential: true,
@@ -18,16 +18,16 @@ export const defaultPreferences: CookiePreferences = {
  * Get current cookie preferences from localStorage
  */
 export const getCookiePreferences = (): CookiePreferences | null => {
-  if (typeof window === 'undefined') return null;
-  
+  if (typeof window === "undefined") return null;
+
   try {
     const stored = localStorage.getItem(COOKIE_CONSENT_KEY);
     if (!stored) return null;
-    
+
     const preferences = JSON.parse(stored) as CookiePreferences;
     return preferences;
   } catch (error) {
-    console.error('Error reading cookie preferences:', error);
+    console.error("Error reading cookie preferences:", error);
     return null;
   }
 };
@@ -36,22 +36,27 @@ export const getCookiePreferences = (): CookiePreferences | null => {
  * Save cookie preferences to localStorage
  */
 export const saveCookiePreferences = (preferences: CookiePreferences): void => {
-  if (typeof window === 'undefined') return;
-  
+  if (typeof window === "undefined") return;
+
   try {
     const preferencesWithTimestamp = {
       ...preferences,
       essential: true, // Always keep essential cookies enabled
       timestamp: new Date().toISOString(),
     };
-    localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(preferencesWithTimestamp));
-    
+    localStorage.setItem(
+      COOKIE_CONSENT_KEY,
+      JSON.stringify(preferencesWithTimestamp),
+    );
+
     // Dispatch custom event for components to listen to preference changes
-    window.dispatchEvent(new CustomEvent('cookiePreferencesChanged', { 
-      detail: preferencesWithTimestamp 
-    }));
+    window.dispatchEvent(
+      new CustomEvent("cookiePreferencesChanged", {
+        detail: preferencesWithTimestamp,
+      }),
+    );
   } catch (error) {
-    console.error('Error saving cookie preferences:', error);
+    console.error("Error saving cookie preferences:", error);
   }
 };
 
@@ -61,9 +66,10 @@ export const saveCookiePreferences = (preferences: CookiePreferences): void => {
  * @param granted - Whether to grant or deny consent
  */
 export const updateGoogleConsentMode = (granted: boolean): void => {
-  if (typeof window === 'undefined') return;
-  
-  const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+  if (typeof window === "undefined") return;
+
+  const gtag = (window as Window & { gtag?: (...args: unknown[]) => void })
+    .gtag;
   if (!gtag) {
     // gtag might not be initialized yet, retry after a short delay
     setTimeout(() => updateGoogleConsentMode(granted), 100);
@@ -71,18 +77,18 @@ export const updateGoogleConsentMode = (granted: boolean): void => {
   }
 
   if (granted) {
-    gtag('consent', 'update', {
-      ad_storage: 'granted',
-      analytics_storage: 'granted',
-      ad_user_data: 'granted',
-      ad_personalization: 'granted',
+    gtag("consent", "update", {
+      ad_storage: "granted",
+      analytics_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted",
     });
   } else {
-    gtag('consent', 'update', {
-      ad_storage: 'denied',
-      analytics_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
+    gtag("consent", "update", {
+      ad_storage: "denied",
+      analytics_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
     });
   }
 };
@@ -96,7 +102,7 @@ export const acceptAllCookies = (): void => {
     analytics: true,
     timestamp: new Date().toISOString(),
   });
-  
+
   // Update Google Consent Mode using centralized function
   updateGoogleConsentMode(true);
 };
@@ -110,7 +116,7 @@ export const rejectAllCookies = (): void => {
     analytics: false,
     timestamp: new Date().toISOString(),
   });
-  
+
   // Update Google Consent Mode using centralized function
   updateGoogleConsentMode(false);
 };
@@ -134,9 +140,9 @@ export const isAnalyticsEnabled = (): boolean => {
  * Clear all cookie preferences (useful for testing)
  */
 export const clearCookiePreferences = (): void => {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
   localStorage.removeItem(COOKIE_CONSENT_KEY);
-  window.dispatchEvent(new Event('cookiePreferencesCleared'));
+  window.dispatchEvent(new Event("cookiePreferencesCleared"));
 };
 
 /**
@@ -149,4 +155,3 @@ export const ensureConsentModeUpdated = (): void => {
     updateGoogleConsentMode(preferences.analytics);
   }
 };
-

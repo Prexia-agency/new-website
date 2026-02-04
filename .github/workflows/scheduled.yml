@@ -38,10 +38,10 @@ jobs:
           title: "chore: weekly automated fixes"
           body: |
             ## 🤖 Weekly Maintenance
-            
+
             Auto-fixed by ESLint and Prettier.
             TypeScript verified.
-            
+
             Review and merge if appropriate.
           branch: weekly-fixes
           delete-branch: true

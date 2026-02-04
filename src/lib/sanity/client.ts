@@ -18,5 +18,3 @@ export const sanityClient = createClient({
 });
 
 export type SanitySlug = { current: string };
-
-

@@ -11,7 +11,6 @@ import reactHooks from "eslint-plugin-react-hooks";
 import security from "eslint-plugin-security";
 import sonarjs from "eslint-plugin-sonarjs";
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -60,37 +59,59 @@ const eslintConfig = [
 
     rules: {
       // Airbnb JSX
-      "import/order": ["error", {
-        groups: ["builtin","external","internal","parent","sibling","index"],
-        "newlines-between": "always",
-        alphabetize: { order: "asc", caseInsensitive: true },
-      }],
+      "import/order": [
+        "error",
+        {
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+          ],
+          "newlines-between": "always",
+          alphabetize: { order: "asc", caseInsensitive: true },
+        },
+      ],
 
-      "react/jsx-sort-props": ["error", {
-        callbacksLast: true,
-        shorthandLast: true,
-        noSortAlphabetically: true,
-      }],
+      "react/jsx-sort-props": [
+        "error",
+        {
+          callbacksLast: true,
+          shorthandLast: true,
+          noSortAlphabetically: true,
+        },
+      ],
 
-      "react/function-component-definition": ["error", {
-        namedComponents: "arrow-function",
-        unnamedComponents: "arrow-function",
-      }],
+      "react/function-component-definition": [
+        "error",
+        {
+          namedComponents: "arrow-function",
+          unnamedComponents: "arrow-function",
+        },
+      ],
 
       // Safety
       // Disabled: dangerouslySetInnerHTML is used for JSON-LD structured data (standard SEO practice)
       "react/no-danger": "off",
-      "no-console": ["error", { allow: ["warn","error"] }],
+      "no-console": ["error", { allow: ["warn", "error"] }],
 
       // TypeScript (עכשיו באמת נטען)
-      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_" },
+      ],
       "@typescript-eslint/no-explicit-any": "error",
 
       // WCAG AA — verified jsx-a11y rules
-      "jsx-a11y/alt-text": ["error", {
-        elements: ["img"],
-        img: ["Image"],
-      }],
+      "jsx-a11y/alt-text": [
+        "error",
+        {
+          elements: ["img"],
+          img: ["Image"],
+        },
+      ],
 
       // Enforce non-empty alt text (ESLint/ jsx-a11y allow alt="" for decorative images).
       // If you truly want to ban blank alt entirely, this is the simplest enforceable rule.
@@ -103,8 +124,8 @@ const eslintConfig = [
             :not(:has(JSXAttribute[name.name="aria-hidden"][value.value="true"]))
           `,
           message:
-            "Empty alt is allowed only for decorative images. Add aria-hidden='true' and role='presentation', or provide meaningful alt text."
-        }
+            "Empty alt is allowed only for decorative images. Add aria-hidden='true' and role='presentation', or provide meaningful alt text.",
+        },
       ],
       "jsx-a11y/anchor-has-content": "error",
       "jsx-a11y/anchor-is-valid": "error",
@@ -146,8 +167,6 @@ const eslintConfig = [
       "sonarjs/cognitive-complexity": ["warn", 20],
     },
   },
-     
-  
 ];
 
 export default eslintConfig;

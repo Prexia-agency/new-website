@@ -18,8 +18,7 @@ npm run deploy
 ```
 
 ### Notes
+
 - Project: `j855mcyw`
 - Dataset: `production`
 - Schema type for blog posts: `post`
-
-

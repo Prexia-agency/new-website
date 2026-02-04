@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const BentoGrid = () => (
   <section className="safe-paddings mt-[200px] lg:mt-36 md:mt-32 sm:mt-20">

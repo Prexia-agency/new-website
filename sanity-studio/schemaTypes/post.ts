@@ -119,7 +119,9 @@ export default defineType({
       subtitle: "publishedAt",
     },
     prepare({ title, media, subtitle }) {
-      const date = subtitle ? new Date(subtitle as string).toLocaleDateString() : "";
+      const date = subtitle
+        ? new Date(subtitle as string).toLocaleDateString()
+        : "";
       return {
         title,
         media,
@@ -128,5 +130,3 @@ export default defineType({
     },
   },
 });
-
-

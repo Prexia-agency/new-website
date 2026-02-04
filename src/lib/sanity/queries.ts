@@ -34,5 +34,3 @@ export const postSlugsQuery = groq`*[
   defined(slug.current) &&
   (!defined(publishedAt) || publishedAt <= now())
 ].slug.current`;
-
-
