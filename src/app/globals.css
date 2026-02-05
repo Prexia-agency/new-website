@@ -195,8 +195,7 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background;
-    color: var(--text-primary);
+    @apply bg-background text-foreground;
   }
 }
 
