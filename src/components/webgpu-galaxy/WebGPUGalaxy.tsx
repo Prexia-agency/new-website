@@ -488,7 +488,7 @@ export const WebGPUGalaxy: React.FC<WebGPUGalaxyProps> = ({
           </div>
           <div>
             Stars:{" "}
-            <span className="text-white font-bold">
+            <span className="text-foreground font-bold">
               {starCount.toLocaleString()}
             </span>
           </div>

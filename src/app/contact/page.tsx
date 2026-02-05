@@ -228,13 +228,13 @@ const ContactPage = () => {
         >
           <TitleAnimation
             tag="h1"
-            className="text-3xl font-bold font-ppeiko text-white mb-4 sm:text-3xl lg:text-4xl xl:text-5xl"
+            className="text-3xl font-bold font-ppeiko text-foreground mb-4 sm:text-3xl lg:text-4xl xl:text-5xl"
             items={titleItems}
             animationName="second"
             controls={titleControls}
           />
           <motion.p
-            className="text-sm text-white max-w-3xl mx-auto leading-relaxed sm:text-sm lg:text-base xl:text-lg"
+            className="text-sm text-foreground max-w-3xl mx-auto leading-relaxed sm:text-sm lg:text-base xl:text-lg"
             initial="initial"
             animate={descriptionControls}
             variants={descriptionVariants}
@@ -259,7 +259,7 @@ const ContactPage = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="bg-transparent p-4 sm:p-6 lg:p-8 xl:p-10">
-              <h2 className="text-lg font-bold font-noto-hebrew text-white mb-4 sm:text-xl lg:text-2xl">
+              <h2 className="text-lg font-bold font-noto-hebrew text-foreground mb-4 sm:text-xl lg:text-2xl">
                 ספרו לנו על הפרויקט שלכם
               </h2>
 
@@ -269,7 +269,7 @@ const ContactPage = () => {
                   <div>
                     <label
                       htmlFor="contact-name"
-                      className="block text-[12px] font-medium text-white mb-1 sm:text-sm sm:mb-2"
+                      className="block text-[12px] font-medium text-foreground mb-1 sm:text-sm sm:mb-2"
                     >
                       שם מלא <span className="text-red-500">*</span>
                     </label>
@@ -279,7 +279,7 @@ const ContactPage = () => {
                       name="name"
                       aria-label="שם מלא"
                       value={formData.name}
-                      className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-white sm:text-sm sm:px-4 sm:py-3 ${
+                      className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-foreground sm:text-sm sm:px-4 sm:py-3 ${
                         touched.name && errors.name
                           ? /* eslint-disable-next-line sonarjs/no-duplicate-string */
                             "border-red-500 focus:ring-red-500"
@@ -299,7 +299,7 @@ const ContactPage = () => {
                   <div>
                     <label
                       htmlFor="contact-email"
-                      className="block text-[12px] font-medium text-white mb-1 sm:text-sm sm:mb-2"
+                      className="block text-[12px] font-medium text-foreground mb-1 sm:text-sm sm:mb-2"
                     >
                       אימייל <span className="text-red-500">*</span>
                     </label>
@@ -310,7 +310,7 @@ const ContactPage = () => {
                       aria-label="אימייל"
                       value={formData.email}
                       dir="ltr"
-                      className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-white sm:text-sm sm:px-4 sm:py-3 ${
+                      className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-foreground sm:text-sm sm:px-4 sm:py-3 ${
                         touched.email && errors.email
                           ? "border-red-500 focus:ring-red-500"
                           : "border-white/30 focus:ring-white"
@@ -332,7 +332,7 @@ const ContactPage = () => {
                   <div>
                     <label
                       htmlFor="contact-company"
-                      className="block text-[12px] font-medium text-white mb-1 sm:text-sm sm:mb-2"
+                      className="block text-[12px] font-medium text-foreground mb-1 sm:text-sm sm:mb-2"
                     >
                       שם החברה
                     </label>
@@ -342,7 +342,7 @@ const ContactPage = () => {
                       name="company"
                       aria-label="שם החברה"
                       value={formData.company || ""}
-                      className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-white sm:text-sm sm:px-4 sm:py-3 ${
+                      className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-foreground sm:text-sm sm:px-4 sm:py-3 ${
                         touched.company && errors.company
                           ? "border-red-500 focus:ring-red-500"
                           : "border-white/30 focus:ring-white"
@@ -360,7 +360,7 @@ const ContactPage = () => {
                   <div>
                     <label
                       htmlFor="contact-phone"
-                      className="block text-[12px] font-medium text-white mb-1 sm:text-sm sm:mb-2"
+                      className="block text-[12px] font-medium text-foreground mb-1 sm:text-sm sm:mb-2"
                     >
                       טלפון <span className="text-red-500">*</span>
                     </label>
@@ -370,7 +370,7 @@ const ContactPage = () => {
                       name="phone"
                       aria-label="טלפון"
                       value={formData.phone}
-                      className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-white sm:text-sm sm:px-4 sm:py-3 ${
+                      className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-foreground sm:text-sm sm:px-4 sm:py-3 ${
                         touched.phone && errors.phone
                           ? "border-red-500 focus:ring-red-500"
                           : "border-white/30 focus:ring-white"
@@ -391,7 +391,7 @@ const ContactPage = () => {
                 <div className="relative">
                   <label
                     htmlFor="contact-projectType"
-                    className="block text-[12px] sm:text-sm font-medium text-white mb-2"
+                    className="block text-[12px] sm:text-sm font-medium text-foreground mb-2"
                   >
                     סוג הפרויקט <span className="text-red-500">*</span>
                   </label>
@@ -400,7 +400,7 @@ const ContactPage = () => {
                     name="projectType"
                     aria-label="סוג הפרויקט"
                     value={formData.projectType}
-                    className={`w-full pl-10 pr-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-white appearance-none sm:text-sm sm:pl-12 sm:pr-4 sm:py-3 ${
+                    className={`w-full pl-10 pr-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 text-[11px] text-foreground appearance-none sm:text-sm sm:pl-12 sm:pr-4 sm:py-3 ${
                       touched.projectType && errors.projectType
                         ? "border-red-500 focus:ring-red-500"
                         : "border-white/30 focus:ring-white"
@@ -408,32 +408,38 @@ const ContactPage = () => {
                     onChange={handleInputChange}
                     onBlur={handleBlur}
                   >
-                    <option value="" className="bg-black text-white">
+                    <option value="" className="bg-black text-foreground">
                       בחרו סוג פרויקט
                     </option>
-                    <option value="website" className="bg-black text-white">
+                    <option
+                      value="website"
+                      className="bg-black text-foreground"
+                    >
                       אתר אינטרנט
                     </option>
-                    <option value="mobile" className="bg-black text-white">
+                    <option value="mobile" className="bg-black text-foreground">
                       אפליקציית נייטיב(למובייל)
                     </option>
-                    <option value="web" className="bg-black text-white">
+                    <option value="web" className="bg-black text-foreground">
                       אפליקציית ווב
                     </option>
-                    <option value="ai" className="bg-black text-white">
+                    <option value="ai" className="bg-black text-foreground">
                       אוטומציה AI
                     </option>
-                    <option value="branding" className="bg-black text-white">
+                    <option
+                      value="branding"
+                      className="bg-black text-foreground"
+                    >
                       Branding
                     </option>
-                    <option value="other" className="bg-black text-white">
+                    <option value="other" className="bg-black text-foreground">
                       אחר
                     </option>
                   </select>
                   {/* Custom Arrow - positioned on the left for RTL */}
                   <div className="pointer-events-none absolute left-3 top-[38px] sm:top-[42px] sm:left-4">
                     <svg
-                      className="w-4 h-4 text-white"
+                      className="w-4 h-4 text-foreground"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -457,7 +463,7 @@ const ContactPage = () => {
                 <div>
                   <label
                     htmlFor="contact-message"
-                    className="block text-[12px] sm:text-sm font-medium text-white mb-2"
+                    className="block text-[12px] sm:text-sm font-medium text-foreground mb-2"
                   >
                     ספרו לנו על הפרויקט <span className="text-red-500">*</span>
                   </label>
@@ -467,7 +473,7 @@ const ContactPage = () => {
                     aria-label="ספרו לנו על הפרויקט"
                     value={formData.message}
                     rows={5}
-                    className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 resize-none text-[11px] text-white sm:text-sm sm:px-4 sm:py-3 ${
+                    className={`w-full px-3 py-2 bg-transparent border rounded-[8px] focus:ring-2 focus:border-transparent transition-all duration-200 resize-none text-[11px] text-foreground sm:text-sm sm:px-4 sm:py-3 ${
                       touched.message && errors.message
                         ? "border-red-500 focus:ring-red-500"
                         : "border-white/30 focus:ring-white"
@@ -490,25 +496,25 @@ const ContactPage = () => {
                     id="acceptTerms"
                     aria-label="אישור תנאי שימוש ומדיניות פרטיות"
                     checked={acceptedTerms}
-                    className="mt-1 w-4 h-4 text-white border-white/30 rounded focus:ring-white focus:ring-2 cursor-pointer bg-transparent"
+                    className="mt-1 w-4 h-4 text-foreground border-white/30 rounded focus:ring-white focus:ring-2 cursor-pointer bg-transparent"
                     required
                     onChange={(e) => setAcceptedTerms(e.target.checked)}
                   />
                   <label
                     htmlFor="acceptTerms"
-                    className="text-[11px] sm:text-sm text-white/80 leading-relaxed cursor-pointer"
+                    className="text-[11px] sm:text-sm text-foreground/80 leading-relaxed cursor-pointer"
                   >
                     בשליחת ההודעה אני מאשר/ת שקראתי והבנתי את{" "}
                     <Link
                       href="/privacy"
-                      className="text-white hover:text-white underline font-medium"
+                      className="text-foreground hover:text-foreground underline font-medium"
                     >
                       מדיניות הפרטיות
                     </Link>{" "}
                     ואת{" "}
                     <Link
                       href="/terms"
-                      className="text-white hover:text-white underline font-medium"
+                      className="text-foreground hover:text-foreground underline font-medium"
                     >
                       תנאי השימוש
                     </Link>
@@ -541,7 +547,7 @@ const ContactPage = () => {
                   {isSubmitting ? (
                     <span className="flex items-center justify-center gap-2">
                       <svg
-                        className="animate-spin h-5 w-5 text-white"
+                        className="animate-spin h-5 w-5 text-foreground"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -608,10 +614,10 @@ const ContactPage = () => {
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-bold font-noto-hebrew text-white mb-2 sm:text-xl">
+                  <h3 className="text-lg font-bold font-noto-hebrew text-foreground mb-2 sm:text-xl">
                     צ&apos;אט איתנו בוואטסאפ
                   </h3>
-                  <p className="text-white/80 text-xs leading-relaxed sm:text-sm">
+                  <p className="text-foreground/80 text-xs leading-relaxed sm:text-sm">
                     מעדיפים לדבר ישירות? אנחנו כאן בשבילכם
                   </p>
                 </div>
@@ -620,19 +626,19 @@ const ContactPage = () => {
                 <div className="space-y-2 mb-4 sm:space-y-3 sm:mb-6">
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span className="text-xs text-white sm:text-sm">
+                    <span className="text-xs text-foreground sm:text-sm">
                       מענה מיידי
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span className="text-xs text-white sm:text-sm">
+                    <span className="text-xs text-foreground sm:text-sm">
                       ייעוץ ללא התחייבות
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span className="text-xs text-white sm:text-sm">
+                    <span className="text-xs text-foreground sm:text-sm">
                       הצעת מחיר תוך 24 שעות
                     </span>
                   </div>
@@ -640,7 +646,7 @@ const ContactPage = () => {
 
                 {/* CTA */}
                 <div className="text-center">
-                  <div className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-semibold text-xs transition-all duration-200 sm:px-6 sm:py-3 sm:text-sm">
+                  <div className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-foreground px-4 py-2 rounded-full font-semibold text-xs transition-all duration-200 sm:px-6 sm:py-3 sm:text-sm">
                     <svg
                       className="w-3 h-3 sm:w-4 sm:h-4"
                       fill="currentColor"

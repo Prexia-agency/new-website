@@ -232,7 +232,7 @@ const CookiePreferencesModal = ({
                 שמור העדפות
               </button>
               <button
-                className="px-5 py-2.5 bg-black hover:bg-black/80 text-white rounded-xl font-bold text-sm transition-colors"
+                className="px-5 py-2.5 bg-black hover:bg-black/80 text-foreground rounded-xl font-bold text-sm transition-colors"
                 onClick={handleAcceptAll}
               >
                 קבל הכל

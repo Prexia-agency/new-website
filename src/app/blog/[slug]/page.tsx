@@ -90,22 +90,22 @@ const BlogPostPage = async (props: PageProps) => {
 
   return (
     <main
-      className="min-h-screen text-white pt-28 md:pt-36 safe-paddings"
+      className="min-h-screen text-foreground pt-28 md:pt-36 safe-paddings"
       dir="rtl"
     >
       <article className="max-w-3xl mx-auto pb-20">
         <header className="mb-8">
-          <div className="flex items-center justify-between gap-3 text-xs text-white mb-3">
+          <div className="flex items-center justify-between gap-3 text-xs text-foreground mb-3">
             <span className="truncate">{post.authorName || "PREXIA"}</span>
             {dateText ? <span className="shrink-0">{dateText}</span> : null}
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-semibold text-white leading-tight">
+          <h1 className="text-3xl md:text-5xl font-semibold text-foreground leading-tight">
             {post.title || "ללא כותרת"}
           </h1>
 
           {post.excerpt ? (
-            <p className="mt-4 text-white text-base md:text-lg">
+            <p className="mt-4 text-foreground text-base md:text-lg">
               {post.excerpt}
             </p>
           ) : null}
@@ -124,26 +124,28 @@ const BlogPostPage = async (props: PageProps) => {
           </div>
         ) : null}
 
-        <div className="text-white max-w-none pl-4">
+        <div className="text-foreground max-w-none pl-4">
           <PortableText
             value={post.body || []}
             components={{
               block: {
                 normal: ({ children }) => (
-                  <p className="mb-6 leading-[1.9] text-white">{children}</p>
+                  <p className="mb-6 leading-[1.9] text-foreground">
+                    {children}
+                  </p>
                 ),
                 h2: ({ children }) => (
-                  <h2 className="mt-14 mb-4 text-2xl font-semibold text-white">
+                  <h2 className="mt-14 mb-4 text-2xl font-semibold text-foreground">
                     {children}
                   </h2>
                 ),
                 h3: ({ children }) => (
-                  <h3 className="mt-10 mb-3 text-xl font-semibold text-white">
+                  <h3 className="mt-10 mb-3 text-xl font-semibold text-foreground">
                     {children}
                   </h3>
                 ),
                 blockquote: ({ children }) => (
-                  <blockquote className="my-8 border-r-2 border-white/20 pr-6 italic text-white/80">
+                  <blockquote className="my-8 border-r-2 border-white/20 pr-6 italic text-foreground/80">
                     {children}
                   </blockquote>
                 ),
@@ -197,7 +199,7 @@ const BlogPostPage = async (props: PageProps) => {
                         className="rounded-xl border border-white/10 bg-white/5 w-full h-auto"
                       />
                       {value?.caption ? (
-                        <figcaption className="mt-3 text-sm text-white">
+                        <figcaption className="mt-3 text-sm text-foreground">
                           {value.caption}
                         </figcaption>
                       ) : null}

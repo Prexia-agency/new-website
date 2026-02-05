@@ -367,7 +367,7 @@ const HeroV = () => {
               key={`${mountId}-title`}
               split="letters"
               lineClassName="overflow-hidden [&:first-child]:pr-[5px] [&>p]:whitespace-nowrap"
-              textClassName="font-ppeiko text-white text-4xl md:text-5xl lg:text-6xl leading-tight"
+              textClassName="font-ppeiko text-foreground text-4xl md:text-5xl lg:text-6xl leading-tight"
               phrases={["Robust Digital Solutions,", "Built to Last"]}
             />
             <div className="mt-6 text-right" dir="rtl">
@@ -379,7 +379,7 @@ const HeroV = () => {
                 key={`${mountId}-subtitle`}
                 split="lines"
                 lineClassName="overflow-hidden"
-                textClassName="font-david-libre text-white text-20px md:text-20px leading-tight"
+                textClassName="font-david-libre text-foreground text-20px md:text-20px leading-tight"
                 delay={1}
                 phrases={[
                   "PREXIA מתמחה בתכנון, בפיתוח ובתחזוקה שוטפת",

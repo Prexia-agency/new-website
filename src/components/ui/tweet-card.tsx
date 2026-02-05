@@ -131,7 +131,7 @@ export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
             href={tweet.user.url}
             target="_blank"
             rel="noreferrer"
-            className="text-sm text-white0 transition-all duration-75"
+            className="text-sm text-foreground0 transition-all duration-75"
           >
             @{truncate(tweet.user.screen_name, 16)}
           </a>
@@ -159,7 +159,7 @@ export const TweetBody = ({ tweet }: { tweet: EnrichedTweet }) => (
               href={entity.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-normal text-white0"
+              className="text-sm font-normal text-foreground0"
             >
               <span>{entity.text}</span>
             </a>
