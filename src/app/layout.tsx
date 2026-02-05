@@ -128,7 +128,7 @@ const RootLayout = ({
   return (
     <html lang="en" dir="ltr">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSansHebrew.variable} ${davidLibre.variable} ${ppeiko.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSansHebrew.variable} ${davidLibre.variable} ${ppeiko.variable}`}
       >
         {/* Organization Schema - Tells Google about your business */}
         {}
