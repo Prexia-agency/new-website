@@ -17,7 +17,8 @@ permissions:
   security-events: write
 
 env:
-  PRODUCTION_URL: https://new-website-2eeiypud9-prexia.vercel.app/
+  PRODUCTION_URL: https://new-website-git-main-prexia.vercel.app
+
 
 jobs:
   # ===========================================
