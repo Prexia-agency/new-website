@@ -316,6 +316,12 @@ body {
   .hover-swap__clone {
     transition: none !important;
   }
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
 
   .hover-swap__clone {
     display: none;
