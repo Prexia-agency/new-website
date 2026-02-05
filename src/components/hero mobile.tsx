@@ -70,14 +70,14 @@ const HeroMobile = () => {
         <div className="flex flex-col items-center">
           <TitleAnimation
             tag="h1"
-            className="font-noto-hebrew text-[40px] lg:text-6xl font-black text-gray-50 mb-1 leading-tight tracking-tight max-w-sm lg:max-w-2xl"
+            className="font-noto-hebrew text-[40px] lg:text-6xl font-black text-white mb-1 leading-tight tracking-tight max-w-sm lg:max-w-2xl"
             items={titleItemsLine1}
             animationName="second"
             controls={titleControls}
           />
           <TitleAnimation
             tag="h1"
-            className="font-noto-hebrew text-[40px] lg:text-6xl font-black text-gray-50 mb-4 leading-tight tracking-tight max-w-sm lg:max-w-2xl"
+            className="font-noto-hebrew text-[40px] lg:text-6xl font-black text-white mb-4 leading-tight tracking-tight max-w-sm lg:max-w-2xl"
             items={titleItemsLine2}
             animationName="second"
             controls={titleControls}
@@ -88,7 +88,7 @@ const HeroMobile = () => {
         <div className="w-46 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent mb-3 opacity-80"></div>
 
         <motion.p
-          className="text-sm lg:text-[18px] text-gray-50/95 mb-8 lg:mb-3 max-w-sm lg:max-w-2xl leading-relaxed font-normal"
+          className="text-sm lg:text-[18px] text-white/95 mb-8 lg:mb-3 max-w-sm lg:max-w-2xl leading-relaxed font-normal"
           initial="initial"
           animate={descriptionControls}
           variants={descriptionVariants}

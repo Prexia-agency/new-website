@@ -76,7 +76,7 @@ const FAQ = () => {
 
   return (
     <section
-      className="bg-black py-20 px-6 lg:px-16 min-h-screen flex items-center"
+      className="py-20 px-6 lg:px-16 min-h-screen flex items-center"
       dir="rtl"
     >
       {/* FAQ Schema - Makes FAQs appear in Google as Rich Snippets */}
@@ -90,7 +90,7 @@ const FAQ = () => {
           {/* Title - Top on all screens, Right side on desktop */}
           <div className="lg:col-span-4">
             <h2
-              className="text-gray-50 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight"
+              className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight"
               /* eslint-disable-next-line sonarjs/no-duplicate-string */
               style={{ fontFamily: "var(--font-ppeiko), sans-serif" }}
             >
@@ -109,13 +109,13 @@ const FAQ = () => {
                     onClick={() => toggleItem(faq.id)}
                   >
                     <span
-                      className="text-gray-50 text-sm sm:text-base lg:text-lg font-light pr-4"
+                      className="text-white text-sm sm:text-base lg:text-lg font-light pr-4"
                       style={{ fontFamily: "var(--font-ppeiko), sans-serif" }}
                     >
                       {faq.question}
                     </span>
                     <span
-                      className="text-gray-50 text-xl sm:text-2xl font-light transition-all duration-1000"
+                      className="text-white text-xl sm:text-2xl font-light transition-all duration-1000"
                       style={{
                         transform:
                           openItem === faq.id
@@ -139,7 +139,7 @@ const FAQ = () => {
                   >
                     <div className="pb-6 pr-4">
                       <p
-                        className="text-gray-50/80 text-xs sm:text-sm leading-relaxed"
+                        className="text-white/80 text-xs sm:text-sm leading-relaxed"
                         style={{ fontFamily: "var(--font-ppeiko), sans-serif" }}
                       >
                         {faq.answer}

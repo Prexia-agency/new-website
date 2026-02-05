@@ -528,7 +528,7 @@ const FooterNew = () => {
       />
 
       {/* Black background wrapper */}
-      <div className="w-full bg-black py-3 px-3 md:px-6">
+      <div className="w-full py-3 px-3 md:px-6">
         <footer
           className="relative w-full max-w-[95%] mx-auto bg-white text-black py-4 overflow-hidden rounded-3xl"
           dir="rtl"
@@ -640,7 +640,7 @@ const FooterNew = () => {
                           className="hover-swap-trigger block text-sm text-gray-600 hover:text-black transition-colors duration-200"
                         >
                           <span className="inline-flex items-center gap-2">
-                            <EmailIcon className="h-4 w-4 text-gray-500" />
+                            <EmailIcon className="h-4 w-4 text-white0" />
                             <HoverSwapText text="info@prexia.io" />
                           </span>
                         </a>
@@ -649,7 +649,7 @@ const FooterNew = () => {
                           className="hover-swap-trigger block text-sm text-gray-600 hover:text-black transition-colors duration-200"
                         >
                           <span className="inline-flex items-center gap-2">
-                            <PhoneIcon className="h-4 w-4 text-gray-500" />
+                            <PhoneIcon className="h-4 w-4 text-white0" />
                             <HoverSwapText text="050-532-2336" />
                           </span>
                         </a>
@@ -663,18 +663,18 @@ const FooterNew = () => {
             {/* Bottom Copyright Section */}
             <div className="border-t border-black/20 pt-6">
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                <p className="text-xs text-gray-500 order-2 md:order-1">
+                <p className="text-xs text-white0 order-2 md:order-1">
                   ירושלים, ישראל
                 </p>
                 <p
-                  className="text-xs text-gray-500 text-center order-1 md:order-2"
+                  className="text-xs text-white0 text-center order-1 md:order-2"
                   dir="ltr"
                 >
                   © 2026 Prexia is a technology brand operated by Kinigma Ltd.
                   All rights reserved
                 </p>
                 <div
-                  className="text-xs text-gray-500 order-3 md:order-3"
+                  className="text-xs text-white0 order-3 md:order-3"
                   dir="ltr"
                 >
                   <span className="relative inline-flex items-center gap-1 group">
@@ -687,12 +687,12 @@ const FooterNew = () => {
                       aria-hidden="true"
                     />
                     {/* Clock icon */}
-                    <ClockIcon className="h-4 w-4 text-gray-500" />
+                    <ClockIcon className="h-4 w-4 text-white0" />
                     {/* Time */}
                     <span className="tabular-nums">{israelTime}</span>
 
                     {/* Hover tooltip */}
-                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-black px-2 py-1 text-[11px] text-gray-50 opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100">
+                    <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-black px-2 py-1 text-[11px] text-white opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100">
                       {isIsraelBusinessOpen ? "Open" : "Closed"}
                     </span>
 

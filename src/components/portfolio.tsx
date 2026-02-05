@@ -58,7 +58,7 @@ const Portfolio = () => {
                     <div className="relative flex h-fit w-full max-w-2xl flex-col gap-2 overflow-hidden rounded-lg border p-4 backdrop-blur-md bg-white">
                       {/* Header Section */}
                       <div className="flex flex-row justify-between tracking-tight">
-                        <div className="text-[10px] md:text-sm text-gray-500">
+                        <div className="text-[10px] md:text-sm text-white0">
                           פרויקט חדש
                         </div>
                         <div className="flex items-center space-x-2 space-x-reverse">
@@ -67,7 +67,7 @@ const Portfolio = () => {
                               סוכנות אתרים
                             </div>
                             <div className="flex items-center space-x-1">
-                              <span className="text-[10px] md:text-sm text-gray-500">
+                              <span className="text-[10px] md:text-sm text-white0">
                                 סוכנות_אתרים@
                               </span>
                             </div>

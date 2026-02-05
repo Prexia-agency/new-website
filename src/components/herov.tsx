@@ -353,15 +353,12 @@ const HeroV = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full bg-black"
+      className="relative w-full"
       style={{
         height: `${250}vh`,
       }}
     >
-      <div
-        ref={pinRef}
-        className="relative w-full h-screen overflow-hidden bg-black"
-      >
+      <div ref={pinRef} className="relative w-full h-screen overflow-hidden">
         {/* Example: GSAP letter-by-letter text animation */}
         <div className="absolute inset-y-0 right-0 flex items-center px-10 text-right z-10 pointer-events-none">
           <div className="max-w-2xl pointer-events-auto" dir="ltr">
@@ -370,7 +367,7 @@ const HeroV = () => {
               key={`${mountId}-title`}
               split="letters"
               lineClassName="overflow-hidden [&:first-child]:pr-[5px] [&>p]:whitespace-nowrap"
-              textClassName="font-ppeiko text-gray-50 text-4xl md:text-5xl lg:text-6xl leading-tight"
+              textClassName="font-ppeiko text-white text-4xl md:text-5xl lg:text-6xl leading-tight"
               phrases={["Robust Digital Solutions,", "Built to Last"]}
             />
             <div className="mt-6 text-right" dir="rtl">
@@ -382,7 +379,7 @@ const HeroV = () => {
                 key={`${mountId}-subtitle`}
                 split="lines"
                 lineClassName="overflow-hidden"
-                textClassName="font-david-libre text-gray-50 text-20px md:text-20px leading-tight"
+                textClassName="font-david-libre text-white text-20px md:text-20px leading-tight"
                 delay={1}
                 phrases={[
                   "PREXIA מתמחה בתכנון, בפיתוח ובתחזוקה שוטפת",
@@ -408,7 +405,7 @@ const HeroV = () => {
         <div className="absolute inset-0 flex items-center justify-start sm:pr-4 md:pl-0 lg:pl-10">
           <div
             ref={canvasWrapperRef}
-            className="relative w-full h-full sm:w-[320px] sm:h-auto md:w-[360px] lg:w-[400px] sm:aspect-[9/19.5] bg-black overflow-hidden shadow-2xl origin-center"
+            className="relative w-full h-full sm:w-[320px] sm:h-auto md:w-[360px] lg:w-[400px] sm:aspect-[9/19.5] overflow-hidden shadow-2xl origin-center"
             style={{
               willChange: "transform",
               transform: "translateZ(0)",

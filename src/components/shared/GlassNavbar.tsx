@@ -20,7 +20,7 @@ const GlassNavbar = () => {
           {/* Prexia Logo/Brand - Right Side (in RTL) */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-gray-50 font-bold text-lg md:text-xl hover:opacity-80 transition-opacity duration-200 focus:outline-none rounded"
+            className="flex items-center gap-2 text-white font-bold text-lg md:text-xl hover:opacity-80 transition-opacity duration-200 focus:outline-none rounded"
             aria-label="Prexia - דף הבית"
           >
             <Image
@@ -37,7 +37,7 @@ const GlassNavbar = () => {
           <div className="hidden md:flex items-center gap-4">
             <Link
               href="/"
-              className="group flex items-center gap-2 text-gray-50 hover:text-gray-50 text-[14px] font-medium transition-all duration-300 ease-out focus:outline-none rounded-md px-3 py-3 hover:bg-white/10 relative overflow-hidden"
+              className="group flex items-center gap-2 text-white hover:text-white text-[14px] font-medium transition-all duration-300 ease-out focus:outline-none rounded-md px-3 py-3 hover:bg-white/10 relative overflow-hidden"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@ const GlassNavbar = () => {
             </Link>
             <Link
               href="/blog"
-              className="group flex items-center gap-2 text-gray-50 hover:text-gray-50 text-[14px] font-medium transition-all duration-300 ease-out focus:outline-none rounded-md px-3 py-3 hover:bg-white/10 relative overflow-hidden"
+              className="group flex items-center gap-2 text-white hover:text-white text-[14px] font-medium transition-all duration-300 ease-out focus:outline-none rounded-md px-3 py-3 hover:bg-white/10 relative overflow-hidden"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ const GlassNavbar = () => {
             </Link>
             <Link
               href="/contact"
-              className="group flex items-center gap-2 text-gray-50 hover:text-gray-50 text-[14px] font-medium transition-all duration-300 ease-out focus:outline-none rounded-md px-3 py-3 hover:bg-white/10 relative overflow-hidden"
+              className="group flex items-center gap-2 text-white hover:text-white text-[14px] font-medium transition-all duration-300 ease-out focus:outline-none rounded-md px-3 py-3 hover:bg-white/10 relative overflow-hidden"
               aria-label="צור קשר"
             >
               <svg
@@ -105,7 +105,7 @@ const GlassNavbar = () => {
 
           {/* Hamburger Menu - Mobile Only */}
           <button
-            className="md:hidden flex items-center justify-center w-7 h-8 text-gray-50 rounded-md transition-all duration-300 ease-out focus:outline-none"
+            className="md:hidden flex items-center justify-center w-7 h-8 text-white rounded-md transition-all duration-300 ease-out focus:outline-none"
             aria-label="תפריט ניווט"
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -150,7 +150,7 @@ const GlassNavbar = () => {
         <div className="p-3 flex flex-col gap-1">
           <Link
             href="/"
-            className="group flex items-center gap-2 text-gray-50 hover:text-gray-50 text-[14px] font-medium transition-all duration-300 ease-out focus:outline-none rounded-lg px-3 py-2.5 hover:bg-white/10"
+            className="group flex items-center gap-2 text-white hover:text-white text-[14px] font-medium transition-all duration-300 ease-out focus:outline-none rounded-lg px-3 py-2.5 hover:bg-white/10"
             onClick={() => setIsMenuOpen(false)}
           >
             <svg
@@ -173,7 +173,7 @@ const GlassNavbar = () => {
           </Link>
           <Link
             href="/blog"
-            className="group flex items-center gap-2 text-gray-50 hover:text-gray-50 text-[14px] font-medium transition-all duration-300 ease-out focus:outline-none rounded-lg px-3 py-2.5 hover:bg-white/10"
+            className="group flex items-center gap-2 text-white hover:text-white text-[14px] font-medium transition-all duration-300 ease-out focus:outline-none rounded-lg px-3 py-2.5 hover:bg-white/10"
             onClick={() => setIsMenuOpen(false)}
           >
             <svg
@@ -196,7 +196,7 @@ const GlassNavbar = () => {
           </Link>
           <Link
             href="/contact"
-            className="group flex items-center gap-2 text-gray-50 hover:text-gray-50 text-[14px] font-medium transition-all duration-300 ease-out focus:outline-none rounded-lg px-3 py-2.5 hover:bg-white/10"
+            className="group flex items-center gap-2 text-white hover:text-white text-[14px] font-medium transition-all duration-300 ease-out focus:outline-none rounded-lg px-3 py-2.5 hover:bg-white/10"
             aria-label="צור קשר"
             onClick={() => setIsMenuOpen(false)}
           >

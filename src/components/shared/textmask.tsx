@@ -137,8 +137,8 @@ export const MaskText = ({
           return (
             <div key={key} className={lineClassName ?? "overflow-hidden"}>
               <p className={textClassName}>
-                {/* WCAG: keep real text for screen readers */}
-                <span className="sr-only">{phrase}</span>
+                {/* WCAG: keep real text for screen readers with proper contrast */}
+                <span className="sr-only text-white">{phrase}</span>
                 {/* Visual letters only */}
                 <span aria-hidden="true" className="inline-block">
                   {phrase.split("").map((char, charIndex) => {
@@ -150,7 +150,7 @@ export const MaskText = ({
                         className="inline-block overflow-hidden align-baseline"
                       >
                         <span
-                          className="inline-block will-change-transform mask-text-initial"
+                          className="inline-block will-change-transform mask-text-initial text-white"
                           data-mask-letter
                         >
                           {printableChar}

@@ -24,7 +24,7 @@ export const HeroButton = ({
   const variants = {
     solid: "bg-white text-black hover:bg-white/70",
     ghost:
-      "bg-[#bababa99] sm:bg-[#bababa33] border border-[#bababa99] sm:border-[#bababa33] text-gray-50 hover:bg-[#bababaaa] sm:hover:bg-[#bababa66]",
+      "bg-[#bababa99] sm:bg-[#bababa33] border border-[#bababa99] sm:border-[#bababa33] text-white hover:bg-[#bababaaa] sm:hover:bg-[#bababa66]",
   } as const;
 
   // Safe variant access with ternary guard

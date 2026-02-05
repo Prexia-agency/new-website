@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const TermsPage = () => {
   return (
     <div
-      className="min-h-screen bg-black text-gray-50 pt-24 pb-12 px-6 sm:pt-24 sm:pb-12 md:px-12 lg:pt-28 lg:pb-16 lg:px-24"
+      className="min-h-screen text-white pt-24 pb-12 px-6 sm:pt-24 sm:pb-12 md:px-12 lg:pt-28 lg:pb-16 lg:px-24"
       dir="rtl"
     >
       <div className="max-w-4xl mx-auto">
@@ -16,10 +16,10 @@ const TermsPage = () => {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h1 className="font-ppeiko text-5xl lg:text-6xl font-light mb-2 mt-15 text-gray-50">
+          <h1 className="font-ppeiko text-5xl lg:text-6xl font-light mb-2 mt-15 text-white">
             Terms of Use
           </h1>
-          <h1 className="font-noto-hebrew text-5xl lg:text-6xl font-black mb-4 text-gray-50">
+          <h1 className="font-noto-hebrew text-5xl lg:text-6xl font-black mb-4 text-white">
             תנאי שימוש
           </h1>
         </motion.div>
@@ -33,10 +33,10 @@ const TermsPage = () => {
         >
           {/* Section 1 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               1. מטרת האתר
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 האתר בכתובת www.prexia.io (להלן: &quot;האתר&quot;) מופעל במסגרת
                 המותג PREXIA ומיועד להציג מידע כללי אודות שירותי עיצוב, פיתוח,
@@ -73,10 +73,10 @@ const TermsPage = () => {
 
           {/* Section 2 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               2. הגדרות
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>לצורך תנאי שימוש אלה:</p>
               <div className="space-y-3">
                 <p>
@@ -125,10 +125,10 @@ const TermsPage = () => {
 
           {/* Section 3 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               3. הוראות כלליות
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 תנאי שימוש אלה מהווים הסכם מחייב בין המשתמש לבין החברה. כל שימוש
                 באתר מהווה הסכמה מפורשת ומלאה לכל האמור בהם. מי שאינו מסכים
@@ -156,10 +156,10 @@ const TermsPage = () => {
 
           {/* Section 4 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               4. פרטיות ואיסוף נתונים
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 החברה מכבדת את פרטיות המשתמשים ופועלת בהתאם לחוק הגנת הפרטיות,
                 תשמ&quot;א–1981, לתקנות הגנת הפרטיות (אבטחת מידע),
@@ -189,10 +189,10 @@ const TermsPage = () => {
 
           {/* Section 5 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               5. קניין רוחני
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 כל זכויות הקניין הרוחני באתר ובתוכנו, לרבות עיצובים, גרפיקות,
                 קוד מקור, תמונות, לוגו, טקסטים, סרטונים, תוכנות, מאגרי נתונים
@@ -216,10 +216,10 @@ const TermsPage = () => {
 
           {/* Section 6 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               6. השימוש באתר
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 השימוש באתר מותר למטרות חוקיות ואישיות בלבד. החברה רשאית לשנות,
                 לעדכן, להוסיף או להסיר שירותים או תכנים באתר בכל עת, לפי שיקול
@@ -235,10 +235,10 @@ const TermsPage = () => {
 
           {/* Section 7 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               7. הגבלת אחריות
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 החברה מספקת שירותי עיצוב ופיתוח בלבד, ואינה מתחייבת לתוצאה
                 עסקית, שיווקית או כלכלית כלשהי. כל שימוש בתוכן, במידע או
@@ -254,10 +254,10 @@ const TermsPage = () => {
 
           {/* Section 8 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               8. זמינות האתר והפרעות
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 החברה עושה מאמצים להבטיח שהאתר יהיה זמין ובטוח לשימוש, אך ייתכנו
                 הפרעות עקב תקלות טכניות או תחזוקה. החברה רשאית להשבית את האתר או
@@ -268,15 +268,15 @@ const TermsPage = () => {
 
           {/* Section 9 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               9. יצירת קשר
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 ניתן לפנות לחברה בכל עניין הנוגע לשירות, למדיניות הפרטיות או
                 לתנאי השימוש באחת מהדרכים הבאות:
               </p>
-              <ul className="list-none text-gray-50 text-sm sm:text-base space-y-2 mr-4">
+              <ul className="list-none text-white text-sm sm:text-base space-y-2 mr-4">
                 <li>📧 info@prexia.io</li>
                 <li>📞 050-5322336</li>
                 <li>📝 טופס יצירת קשר באתר.</li>
@@ -290,12 +290,12 @@ const TermsPage = () => {
 
           {/* Section 10 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               10. שימושים אסורים
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>חל איסור לבצע את הפעולות הבאות:</p>
-              <ul className="list-disc list-inside text-gray-50 text-sm sm:text-base space-y-1 mr-4">
+              <ul className="list-disc list-inside text-white text-sm sm:text-base space-y-1 mr-4">
                 <li>חדירה לא מורשית למערכות החברה.</li>
                 <li>עקיפת מנגנוני אבטחה.</li>
                 <li>שימוש בתוכן האתר לצרכים מסחריים ללא אישור.</li>
@@ -311,10 +311,10 @@ const TermsPage = () => {
 
           {/* Section 11 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               11. אחריות המשתמש
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 המשתמש אחראי באופן בלעדי לכל פעולה שביצע באתר. הוא מתחייב לשפות
                 את החברה בגין כל נזק, הוצאה או תביעה שתוגש נגדה עקב פעולה שביצע
@@ -325,10 +325,10 @@ const TermsPage = () => {
 
           {/* Section 12 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               12. שינויים בתנאים
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 החברה רשאית לעדכן את תנאי השימוש מעת לעת. הגרסה המעודכנת תפורסם
                 באתר ותיכנס לתוקף עם פרסומה. המשך שימוש באתר מהווה הסכמה לגרסה
@@ -339,10 +339,10 @@ const TermsPage = () => {
 
           {/* Section 13 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               13. התקשרות חוזית עם לקוחות
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 במקרה שבו נוצר שיתוף פעולה עסקי בין הלקוח לבין החברה, תיחתם
                 הסכמת התקשרות מפורטת בכתב. חוזה זה יהווה את המסמך המחייב היחיד
@@ -357,10 +357,10 @@ const TermsPage = () => {
 
           {/* Section 14 */}
           <section className="space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-50">
+            <h2 className="text-xl sm:text-2xl font-bold text-white">
               14. דין וסמכות שיפוט
             </h2>
-            <div className="text-gray-50 leading-relaxed space-y-3 text-sm sm:text-base">
+            <div className="text-white leading-relaxed space-y-3 text-sm sm:text-base">
               <p>
                 תנאים אלה כפופים לדיני מדינת ישראל בלבד. סמכות השיפוט הבלעדית
                 בכל מחלוקת הקשורה לתנאים אלה נתונה לבתי המשפט המוסמכים בירושלים
