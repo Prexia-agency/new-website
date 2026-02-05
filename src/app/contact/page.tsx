@@ -646,7 +646,7 @@ const ContactPage = () => {
 
                 {/* CTA */}
                 <div className="text-center">
-                  <div className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-foreground px-4 py-2 rounded-full font-semibold text-xs transition-all duration-200 sm:px-6 sm:py-3 sm:text-sm">
+                  <div className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-slate-950 px-4 py-2 rounded-full font-semibold text-xs transition-all duration-200 sm:px-6 sm:py-3 sm:text-sm">
                     <svg
                       className="w-3 h-3 sm:w-4 sm:h-4"
                       fill="currentColor"
